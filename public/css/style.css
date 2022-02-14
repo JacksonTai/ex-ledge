@@ -1,0 +1,31 @@
+:root {
+    position: relative;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.headerBar{
+    width: 98%; max-width: 100%;
+    float: center;
+    position: fixed;
+    top: 0;
+    text-align: center;
+    padding: 1rem;
+
+}
+
+.footerBar{
+    background-color: black;
+    height: 30vh;
+    float: center;
+}
+
+
+/*ELEM*/
+
+.__icon{
+    float: left;
+    object-fit: scale-down;
+    width: 80px;
+    height: 80px;
+}
