@@ -1,0 +1,41 @@
+:root {
+    overflow: hidden;
+}
+
+.pagectnr {
+    height: 100vh;
+    max-height: 100%;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.dialog {
+    box-shadow: 10px 10px 20px grey;
+    height: 40vh;
+    width: 20vw;
+    transform: translate(0%, -5vh);
+
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.layout-footer {
+    position: absolute;
+}
+
+input[type=text] {
+    margin: 0.2rem;
+    border: none;
+    border-bottom: 0.2rem solid grey;
+}
+
+form > button {
+    background-color: white;
+    color: black;
+    border: 2px solid var(--clr-primary);
+    margin: 0.8rem;
+    transform: translate(50%, 0%);
+
+}
