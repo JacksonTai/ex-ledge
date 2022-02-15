@@ -1,0 +1,183 @@
+/* A global file that will be included in all pages:
+   - To reset browser default stylesheet  
+   - To set base styling for HTML elements.  
+   - To set base styling for footer and header layout.
+  */
+
+/* ############## 1. Reset ############# */
+/* Note: reset browser default stylesheet */
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}
+
+/* ############## 2. Base  ############# */
+/* Note: set base styling for basic HTML elements. */
+
+/* --------- [Variables] ---------- */
+:root {
+  /* Theme colors */
+  --clr-primary: #0066ff;
+  --clr-secondary: #ec6f25;
+  --clr-shadow-grey: #bfbfbf;
+  --clr-link-color: #2893f6;
+  /* Theme font-family */
+  --ff-montserrat-title: "montserrat-bold";
+  --ff-montserrat-text: "montserrat-medium";
+  /* Custom size */
+  --layout-header-height: 60px;
+  --layout-footer-height: 120px;
+}
+
+/* --------- [Fonts] ---------- */
+@font-face {
+  font-family: "montserrat-bold";
+  src: url(../fonts/Montserrat-Bold.ttf);
+}
+
+@font-face {
+  font-family: "montserrat-medium";
+  src: url(../fonts/Montserrat-Medium.ttf);
+}
+
+@font-face {
+  font-family: "montserrat-light";
+  src: url(../fonts/Montserrat-Light.ttf);
+}
+
+/* ---------- [Typography] ----------- */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--ff-montserrat-title);
+}
+
+span,
+a,
+p {
+  font-family: var(--ff-montserrat-text);
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+li {
+  list-style: none;
+}
+
+/* ---------- [layout] ----------- */
+main {
+  min-height: 90vh;
+  margin: var(--layout-header-height) auto 0;
+}
+
+section {
+  padding: 4em;
+}
+
+/* ---------- [Table] ----------- */
+table {
+  border-collapse: collapse;
+}
+
+table,
+th {
+  padding: 1em;
+}
+
+th,
+tr {
+  font-family: var(--ff-montserrat-text);
+}
+
+/* ---------- [Form] ----------- */
+label,
+input,
+textarea,
+select,
+button {
+  font-family: var(--ff-montserrat-text);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+input,
+textarea,
+select,
+button {
+  padding: 0.5em 1em;
+}
+
+label {
+  margin: 0.3rem 0;
+}
+
+input,
+textarea {
+  width: fit-content;
+}
+
+textarea {
+  resize: none;
+}
+
+select,
+button {
+  outline: none;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+button {
+  display: block;
+  padding: 0.5em 2em;
+  border: none;
+  border-radius: 0.5em;
+  color: #f1f1f1;
+  background-color: var(--clr-primary);
+}
+
+/* ---------- [Button] ----------- */
+
+/* ############## 3. Media Queries  ############# */
+/* Note: Font-size grow as the screen size grow. */
+
+@media (min-width: 520px) {
+  html {
+    font-size: 17px;
+  }
+}

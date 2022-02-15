@@ -1,0 +1,218 @@
+.layout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  height: var(--layout-header-height);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 8%;
+  background-color: #ffffff;
+  box-shadow: 0 0.1em 1em #c5c1c1;
+}
+
+.layout-header__logo-img {
+  display: inline-block;
+  margin: 0 1rem;
+}
+
+.layout-header__logo-link {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.layout-header__logo-text {
+  font-size: 70%;
+  font-family: var(--ff-montserrat-link);
+}
+
+.layout-header__nav {
+  position: fixed;
+  inset: 0 0 0 -100%;
+  width: 0;
+  margin-right: auto;
+  background-color: #ffffff;
+  border-right: 1px solid #c5c1c1;
+  transition: all 0.5s ease-in-out;
+}
+
+.layout-header__btn-container {
+  display: flex;
+  flex-direction: column;
+  margin: var(--layout-header-height) 0 0;
+}
+
+.layout-header__btn {
+  margin: 0.5rem 3rem;
+  padding: 0.35em 1.5em;
+  color: var(--clr-primary);
+  border: 1px solid var(--clr-primary);
+  border-radius: 2em;
+  text-align: center;
+}
+
+.layout-header__btn:hover {
+  background-color: var(--clr-primary);
+  color: #ffffff;
+}
+
+/* Mobile view: hamburger menu */
+.layout-header__hamburger-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  order: -1;
+  position: relative;
+  height: 1rem;
+  aspect-ratio: 1.5 / 1;
+  cursor: pointer;
+}
+
+.layout-header__hamburger-bar {
+  content: "";
+  height: 12%;
+  width: 100%;
+  background-color: #000000;
+  transition: all 0.3s ease-in-out;
+}
+
+.open .layout-header__hamburger-bar:nth-child(1) {
+  transform: translateY(0.43em) rotate(45deg);
+}
+
+.open .layout-header__hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.open .layout-header__hamburger-bar:nth-child(3) {
+  transform: translateY(-0.43em) rotate(-45deg);
+}
+
+.fade-in {
+  width: 18rem;
+  left: 0;
+}
+
+.fade-out {
+  width: 0;
+  left: -100%;
+}
+
+@media (min-width: 1100px) {
+  .index-header__nav,
+  .index-header__btn {
+    transition: none;
+  }
+}
+
+@media (min-width: 1245px) {
+  .layout-header__hamburger-menu {
+    display: none;
+  }
+
+  .layout-header__logo,
+  .layout-header__logo-link,
+  .layout-header__logo-img {
+    margin: 0;
+  }
+
+  .layout-header {
+    padding: 0.2em 3% 0.2em 10%;
+  }
+
+  .layout-header__nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    inset: 0;
+    width: 70%;
+    margin: 0;
+    border: none;
+    transition: none;
+  }
+
+  .layout-header__nav-list {
+    display: flex;
+    margin: 0;
+  }
+
+  .layout-header__nav-item {
+    position: relative;
+    width: max-content;
+    padding: 0;
+    margin: 0 1em;
+    text-align: left;
+    border: none;
+  }
+
+  .layout-header__nav-item:nth-child(1) {
+    border: none;
+  }
+
+  .layout-header__nav-link {
+    padding: 0.5em 0.6em;
+  }
+
+  .layout-header__nav-link::after {
+    content: "";
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    background-color: #000000;
+    transform: scaleX(0);
+    transition: all 0.5s ease-in-out;
+  }
+
+  .layout-header__nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .layout-header__btn-container {
+    display: block;
+    position: relative;
+    margin: 0;
+  }
+
+  .layout-header__btn {
+    transition: all 0.3s ease-in-out;
+    margin: 0;
+  }
+
+  .layout-header__btn--signin {
+    margin: 0 1rem 0 0;
+    padding: 0;
+    border: none;
+    color: #61646d;
+  }
+
+  .layout-header__btn--signin:hover {
+    background-color: #ffffff;
+    color: var(--clr-primary);
+  }
+
+  .layout-header__btn--cart,
+  .layout-header__btn--profile {
+    padding: 0.5em;
+    border-radius: 0;
+    border: none;
+  }
+
+  .layout-header__btn--cart:hover,
+  .layout-header__btn--profile:hover {
+    background-color: #ffffff;
+    color: var(--clr-primary);
+  }
+
+  .layout-header__btn--cart:hover > img,
+  .layout-header__btn--profile:hover > img {
+    transform: scale(1.2);
+  }
+}
