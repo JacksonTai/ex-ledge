@@ -3,8 +3,8 @@
 
 <head>
      <?php include '../../public/layout/head.php' ?>
-     <link rel="stylesheet" href="../../public/css/signin.css">
-     <title>Sign in | Ex-Ledge</title>
+     <link rel="stylesheet" href="../../public/css/signup.css">
+     <title>Sign up | Ex-Ledge</title>
 </head>
 
 <body>
@@ -12,7 +12,7 @@
      <?php include '../../public/layout/header.php'; ?>
 
      <main>
-
+          
      </main>
 
      <?php include '../../public/layout/footer.php'; ?>
