@@ -7,7 +7,7 @@
 
     <?php include 'layout/head.php' ?>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/signin.css">
+    <link rel="stylesheet" href="css/verificationpages.css">
 
     <title>Ex-Ledge | Sign-in</title>
 </head>
