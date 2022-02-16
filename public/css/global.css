@@ -50,7 +50,8 @@ html {
   --clr-primary: #0066ff;
   --clr-secondary: #ec6f25;
   --clr-shadow-grey: #bfbfbf;
-  --clr-link-color: #2893f6;
+  --clr-font-grey: #7A7A7A;
+  --clr-link: #2893f6;
   /* Theme font-family */
   --ff-montserrat-title: "montserrat-bold";
   --ff-montserrat-text: "montserrat-medium";
@@ -149,6 +150,8 @@ label {
 input,
 textarea {
   width: fit-content;
+  outline: none;
+  font-weight: 100;
 }
 
 textarea {
@@ -167,11 +170,19 @@ button {
   padding: 0.5em 2em;
   border: none;
   border-radius: 0.5em;
+  font-weight: 100;
   color: #f1f1f1;
   background-color: var(--clr-primary);
 }
 
-/* ---------- [Button] ----------- */
+/* ---------- [Dialog] ----------- */
+.dialog {
+  width: fit-content;
+  padding: 2em 2.5em;
+  box-shadow: 0.5em 0.5em 2.5em var(--clr-shadow-grey);
+  border-radius: 0.5em;
+}
+
 
 /* ############## 3. Media Queries  ############# */
 /* Note: Font-size grow as the screen size grow. */
