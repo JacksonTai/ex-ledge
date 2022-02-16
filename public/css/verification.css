@@ -1,0 +1,73 @@
+/* Styling for signin.php and signup.php */
+.signin--main,
+.signup--main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signin--dialog,
+.signup--dialog {
+  margin: 4.8rem auto;
+}
+
+.signin__title,
+.signup__title {
+  margin: 2rem auto 1.5rem;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.signin__input,
+.signup__input {
+  margin: 0.8rem auto;
+  border: none;
+  border-bottom: 3px solid var(--clr-shadow-grey);
+}
+
+.signin__btn,
+.signup__btn {
+  margin: 2rem auto;
+  background-color: #ffffff;
+  color: var(--clr-primary);
+  border: 1px solid var(--clr-primary);
+  border-radius: 3em;
+  transition: 0.3s all ease-in-out;
+}
+
+.signin__btn:hover,
+.signup__btn:hover {
+  background-color: var(--clr-primary);
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 3em;
+}
+
+.signin__msg,
+.signup__msg,
+.signin__link,
+.signup__link {
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.signin__link,
+.signup__link {
+  display: block;
+  text-decoration: underline;
+  color: var(--clr-link);
+}
+
+/* --- signin.php --- */
+.signin__title {
+  margin-bottom: 0;
+}
+
+.signin__sub-title {
+  margin: 1rem auto 2rem;
+  text-align: center;
+}
+
+.signin__link {
+    margin: 0 auto 0.2rem;
+}

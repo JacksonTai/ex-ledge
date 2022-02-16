@@ -7,6 +7,14 @@
      <title>Ex-Ledge | Forum - Malaysia</title>
 </head>
 
+<style>
+
+:root {
+     position: relative;
+}
+
+</style>
+
 <body>
 
      <?php include 'layout/header.php'; ?>
@@ -63,7 +71,6 @@
                </div>
           </section>
      </main>
-
      <?php include 'layout/footer.php'; ?>
      <script src="js/script.js"></script>
 </body>
