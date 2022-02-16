@@ -19,13 +19,14 @@
 <?php include 'layout/header.php'; ?>
 
     <div class="dialog __signupform">
+        <h2>Create account</h2>
         <form action="../app/model/signup.php" method="POST">
             <input type="text" id="email" name="email" placeholder="preferred username"><br>
             <input type="text" id="username" name="username" placeholder="preferred username"><br>
 
             <!--todo input verification-->
             <input type="password" id="password" name="password" pattern=".{8,}" title="Your entry must exceed 8 characters" placeholder="password"><br>
-            <input type="password" id="password" name="password" pattern=".{8,}" title="Your password does not match" placeholder="confirm password">
+            <input type="password" id="password" name="password" pattern=".{8,}" title="Your password does not matc" placeholder="confirm password">
             <button>submit</button>
         </form>
     </div>

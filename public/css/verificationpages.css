@@ -8,6 +8,14 @@
     overflow: hidden;
 }
 
+h2 {
+    margin-bottom: 0.2rem;
+}
+
+p {
+    margin-bottom: 0.4rem;
+}
+
 .pagectnr {
     height: 100vh;
     max-height: 100%;
@@ -21,6 +29,7 @@
     height: 40vh;
     width: 20vw;
     transform: translate(0%, -5vh);
+    text-align: center;
 
     display: grid;
     grid-template-columns: 10%, 80%, 10%;
