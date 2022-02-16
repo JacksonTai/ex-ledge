@@ -19,7 +19,7 @@
 <?php include 'layout/header.php'; ?>
 
     <div class="dialog __signupform">
-        <form action="../app/model/signup.php">
+        <form action="../app/model/signup.php" method="POST">
             <input type="text" id="email" name="email" placeholder="preferred username"><br>
             <input type="text" id="username" name="username" placeholder="preferred username"><br>
 

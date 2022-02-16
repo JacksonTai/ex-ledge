@@ -19,7 +19,7 @@
 <?php include 'layout/header.php'; ?>
 
     <div class="dialog">
-        <form action="../app/model/signin.php">
+        <form action="../app/model/signin.php" method="POST">
             <input type="text" id="username" name="username" placeholder="username"><br>
             <input type="text" id="password" name="password" placeholder="password">
             <button>submit</button>
