@@ -21,7 +21,7 @@
     <div class="dialog">
         <form action="../app/model/signin.php" method="POST">
             <input type="text" id="username" name="username" placeholder="username"><br>
-            <input type="text" id="password" name="password" placeholder="password">
+            <input type="text" id="password" name="password" pattern=".{8,}" title="Your entry must exceed 8 characters" placeholder="password">
             <button>submit</button>
         </form>
     </div>

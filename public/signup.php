@@ -24,8 +24,8 @@
             <input type="text" id="username" name="username" placeholder="preferred username"><br>
 
             <!--todo input verification-->
-            <input type="password" id="password" name="password" placeholder="password"><br>
-            <input type="password" id="password" name="password" placeholder="confirm password">
+            <input type="password" id="password" name="password" pattern=".{8,}" title="Your entry must exceed 8 characters" placeholder="password"><br>
+            <input type="password" id="password" name="password" pattern=".{8,}" title="Your password does not match" placeholder="confirm password">
             <button>submit</button>
         </form>
     </div>
