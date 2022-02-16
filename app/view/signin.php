@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include 'layout/head.php' ?>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/verificationpages.css">
+    <?php include '../../public/layout/head.php' ?>
+    <link rel="stylesheet" href="../../public/css/style.css">
+    <link rel="stylesheet" href="../../public/css/verificationpages.css">
 
     <title>Ex-Ledge | Sign-in</title>
 </head>
 <body>
-<script src="js/script.js"></script>
+<script src="../../public/js/script.js"></script>
 
 
 <div class="pagectnr">
-<?php include 'layout/header.php'; ?>
+<?php include '../../public/layout/header.php'; ?>
 
     <div class="dialog">
         <h2>Welcome back!</h2>
@@ -24,7 +24,7 @@
         </form>
     </div>
 </div>
-<?php include 'layout/footer.php'; ?>
+<?php include '../../public/layout/footer.php'; ?>
 
     
 </body>
