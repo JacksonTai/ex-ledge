@@ -5,7 +5,6 @@
           <i class="layout-footer__social-icon fa-brands fa-facebook"></i>
           <i class="layout-footer__social-icon fa-brands fa-instagram"></i>
      </div>
-
      <div class="layout-footer__content">
           <a class="layout-footer__text" href="#">About Us</a>
           <p class="layout-footer__copyright">Copyright &copy;
