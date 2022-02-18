@@ -12,7 +12,51 @@
   text-align: center;
 }
 
+
+.layout-footer__text{
+  margin: 3rem auto 0;
+  width: max-content;
+  position: absolute;
+  color: white;
+  text-decoration: none;
+}
+
 .layout-footer__copyright {
   margin: 3rem auto 0;
   width: max-content;
+  position: relative;
+}
+
+.fa-brands{
+  color: white;
+}
+
+.social-media{
+  display: flex;
+  justify-content: center;
+}
+
+.footer-content{
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-text{
+  display: flex;
+}
+
+@media only screen and (max-width: 1150px) {
+  .layout-footer__copyright{
+    margin-top: 2rem;
+    position:static ;
+  }
+
+  .layout-footer__text{
+    margin-top: 2rem;
+    position:static ;
+  }
+
+  .footer-text{
+    flex-direction: column;
+  }
 }

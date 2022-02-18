@@ -14,3 +14,4 @@ strpos($url, 'app/view') ? $path = '../../public/' : $path = '';
 <link rel="stylesheet" href="<?php echo $path ?>css/global.css">
 <link rel="stylesheet" href="<?php echo $path ?>css/layout/header.css">
 <link rel="stylesheet" href="<?php echo $path ?>css/layout/footer.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
