@@ -58,6 +58,7 @@
   .layout-footer__copyright {
     margin-top: 2rem;
     position: static;
+    order: 1;
   }
 
   .layout-footer__text {
