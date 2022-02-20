@@ -10,6 +10,7 @@ strpos($url, 'app/view') ? $path = '../../public/' : $path = '';
 <meta name="copyright" content="Copyright <?php echo date('Y'); ?> - Ex-Ledge">
 <meta name="description" content="Welcome to Ex-Ledge! A forum-based educational system that aids Malaysian high school students in their studies.">
 <meta name="author" content="Chua E Heng | Ho Chang Yong | Jackson Tai | Lim Jun Yao">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="shortcut icon" href="<?php echo $path ?>img/icons/logo.ico" type="image/x-icon">
 <link rel="stylesheet" href="<?php echo $path ?>css/global.css">
 <link rel="stylesheet" href="<?php echo $path ?>css/layout/header.css">
