@@ -1,4 +1,37 @@
 :root {
-
+    --firstplace: #E7BC18;
+    --firstrunnerup: #A3A3A3;
+    --secondrunnerup: #C5853C;
 }
 
+.ctnr {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+.sidebar {
+    border-right: 2px solid gainsboro;
+}
+
+/*partition: contestant display*/
+
+.podium {
+    margin: 2rem;
+    height: 30vh;
+    display: flex;
+}
+
+.contestant_ctnr {
+    flex: 1;
+    margin: 1.5rem;
+    border-radius: 1rem;
+    border: 2px solid gainsboro;
+    text-align: center;
+}
+
+/*cropping to circular picture div*/
+.picture {
+    border-radius: 50%;
+}
