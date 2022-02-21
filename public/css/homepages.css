@@ -21,6 +21,7 @@
     margin: 2rem;
     height: 30vh;
     display: flex;
+    --picture-dim: calc(30vh/4);
 }
 
 .contestant_ctnr {
@@ -29,9 +30,24 @@
     border-radius: 1rem;
     border: 2px solid gainsboro;
     text-align: center;
+    
 }
 
 /*cropping to circular picture div*/
 .picture {
+    display: inline-block;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+    z-index: 200;
+
+    width: var(--picture-dim);
+    height: var(--picture-dim);
     border-radius: 50%;
+    background-color: var(--firstplace);
 }
+
+.contestant_ctnr:first-of-type > .picture {background-color: var(--firstrunnerup);}
+.contestant_ctnr:last-of-type > .picture {background-color: var(--secondrunnerup);}

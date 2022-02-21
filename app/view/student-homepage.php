@@ -16,9 +16,15 @@
         <div class="main_scrollable">
             <h1>Leaderboard</h1>
             <div class="podium">
-                <div class="contestant_ctnr">2</div>
-                <div class="contestant_ctnr">1</div>
-                <div class="contestant_ctnr">3</div>
+                <div class="contestant_ctnr">
+                    <div class="picture"></div>
+                </div>
+                <div class="contestant_ctnr">
+                    <div class="picture"></div>
+                </div>
+                <div class="contestant_ctnr">
+                    <div class="picture"></div>
+                </div>
             </div>
 
         </div>
