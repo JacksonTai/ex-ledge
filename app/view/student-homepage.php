@@ -13,7 +13,6 @@
 
     <div class="ctnr">
     <!--ugly div nesting needed to allow configuration as show in prototype-->
-        <div class="sidebar"></div>
         <div class="main_scrollable">
             <h1>Leaderboard</h1>
             <div class="podium">
@@ -32,6 +31,8 @@
             </div>
 
         </div>
+
+        
 
     </div>
 
