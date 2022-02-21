@@ -12,18 +12,22 @@
     <?php include '../../public/layout/header.php'; ?>
 
     <div class="ctnr">
+    <!--ugly div nesting needed to allow configuration as show in prototype-->
         <div class="sidebar"></div>
         <div class="main_scrollable">
             <h1>Leaderboard</h1>
             <div class="podium">
                 <div class="contestant_ctnr">
                     <div class="picture"></div>
+                    <div class="podium-label"><p>sadads</p></div>
                 </div>
                 <div class="contestant_ctnr">
                     <div class="picture"></div>
+                    <div class="podium-label"><p>sadads</p></div>
                 </div>
                 <div class="contestant_ctnr">
                     <div class="picture"></div>
+                    <div class="podium-label"><p>sadads</p></div>
                 </div>
             </div>
 
