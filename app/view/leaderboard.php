@@ -3,7 +3,7 @@
 
 <head>
     <?php include '../../public/layout/head.php' ?>
-    <link rel="stylesheet" href="../../public/css/homepages.css">
+    <link rel="stylesheet" href="../../public/css/leaderboard.css">
     <title>Ex-Ledge | Sign-in</title>
 </head>
 
