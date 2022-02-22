@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,14 +7,6 @@
      <link rel="stylesheet" href="css/style.css">
      <title>Ex-Ledge | Forum - Malaysia</title>
 </head>
-
-<style>
-
-:root {
-     position: relative;
-}
-
-</style>
 
 <body>
 
@@ -30,6 +23,7 @@
                     <p class="section--home__content">
                          Ex-Ledge is a forum-based educational system that aids Malaysia high
                          school students in their studies.
+                         <?= $_SESSION['userId'] ?? ''; ?>
                     </p>
                     <button class="section--home-cta-btn" onclick="window.location.href='../app/view/signup.php'">
                          Get started

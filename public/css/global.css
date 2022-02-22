@@ -97,6 +97,7 @@ a {
 }
 
 li {
+  font-family: var(--ff-montserrat-text);
   list-style: none;
 }
 
@@ -183,6 +184,11 @@ button {
   border-radius: 0.5em;
 }
 
+/* ---------- [Invalid Input] ----------- */
+.invalid-input {
+  font-size: 0.88rem;
+  color: #f8606a;
+}
 
 /* ############## 3. Media Queries  ############# */
 /* Note: Font-size grow as the screen size grow. */
