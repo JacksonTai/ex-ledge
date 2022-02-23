@@ -16,8 +16,11 @@
             <h2 class="signin__title">Welcome back!</h2>
             <p class="signin__sub-title">Sign into your account</p>
             <form class="signin__form" method="POST">
-                <input class="signin__input" type="email" id="email" name="email" size="25" placeholder="Email Address"><br>
+                <p class="signin__err-msg signin__err-msg--email invalid-input"></p>
+                <input class="signin__input" type="text" id="email" name="email" size="25" placeholder="Email Address"><br>
+                <p class="signin__err-msg signin__err-msg--password invalid-input"></p>
                 <input class="signin__input" type="password" id="password" name="password" size="25" placeholder="Password"><br>
+                <p class="signin__err-msg signin__err-msg--invalid-credential invalid-input"></p>
                 <button class="signin__btn" type="submit">Sign in</button>
             </form>
             <p class="signin__msg">Don't have an account yet?</p>

@@ -36,6 +36,7 @@ class DbConn
                } else {
                     $stmt->execute();
                }
+               return $stmt;
           } catch (PDOException $e) {
                die("<h2>SQL statement execution failed.</h2> Error: " . $e->getMessage());
           }

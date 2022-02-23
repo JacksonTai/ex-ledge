@@ -19,7 +19,11 @@ class Signup extends \config\DbConn
           $this->postData = $postData;
 
           // Check if there is any error field.
-          $this->checkInput();
+          $this->validateInput();
+
+          if ($this->checkEmptyInput()) {
+               $this->checkDuplicateEmail();
+          }
 
           if (array_filter($this->errMsg)) {
                return $this->errMsg;
@@ -48,7 +52,7 @@ class Signup extends \config\DbConn
           return $userId;
      }
 
-     private function checkInput()
+     private function validateInput()
      {
           // Validate email address.
           if (!filter_var($this->postData['email'], FILTER_VALIDATE_EMAIL)) {
@@ -72,16 +76,35 @@ class Signup extends \config\DbConn
           if ($this->postData['password'] != $this->postData['passwordRepeat']) {
                $this->errMsg['passwordRepeat'] = "&#9888; Those passwords didn't match.";
           }
+     }
 
+     private function checkEmptyInput()
+     {
+          $result = true;
           foreach ($this->postData as $field => $data) {
 
                // Check if any input is empty.
-               if (empty(trim($data)) && array_key_exists($field, $this->postData)) {
+               if (empty(trim($data))) {
                     $this->errMsg[$field] = '* ' . ucfirst($field) . ' is a required field';
                     if ($field == 'passwordRepeat') {
                          $this->errMsg[$field] = '* Please repeat your password.';
                     }
+                    if ($field == 'email') {
+                         $result = false;
+                    }
                }
+          }
+          return $result;
+     }
+
+     private function checkDuplicateEmail()
+     {
+          $sql = "SELECT email FROM user WHERE email = ?;";
+
+          $stmt = $this->executeQuery($sql, [$this->postData['email']]);
+
+          if ($stmt->rowCount() > 0) {
+               $this->errMsg['email'] = '&#9888; This email is already in use.';
           }
      }
 }

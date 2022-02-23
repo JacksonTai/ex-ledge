@@ -4,7 +4,6 @@ signupForm.addEventListener("submit", async function (e) {
   e.preventDefault();
 
   let formData = new FormData(this);
-  formData.append("action", "signup");
 
   try {
     const res = await fetch("../controller/signup.php", {

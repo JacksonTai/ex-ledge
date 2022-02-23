@@ -17,4 +17,4 @@ class Signup extends \Model\Signup
      }
 }
 
-$user = new \Controller\Signup($_POST);
+new \Controller\Signup($_POST);

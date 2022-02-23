@@ -60,11 +60,13 @@
                          <p class="section--features__card-content">
                               Wondering how much the community trusts you? Start gaining your
                               reputation by posting good questions and useful answers.
+                              <?= uniqid('A') ?>
                          </p>
                     </div>
                </div>
           </section>
      </main>
+
      <?php include 'layout/footer.php'; ?>
      <script src="js/script.js"></script>
 </body>
