@@ -1,0 +1,96 @@
+:root {
+
+}
+
+.ctnr {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    height: 100vh; max-height: 100%;
+
+    margin: 80px 1vw 1vw 2vw;
+
+}
+
+
+.post-view {
+    margin: 3rem;
+    border-right: 2px solid black;
+}
+
+hr {margin: 1em}
+
+.title-ctnr {display: grid; grid-template-columns: 80% 20%;}
+
+div > button {margin: 1.5rem;}
+
+.vote-arrow {
+    width: 1rem; height: 1rem;
+    padding: 0.3rem;
+    border: solid black;
+    border-width: 0 0.3rem 0.3rem 0;
+}
+
+.rotate-up {transform: rotate(-135deg);}
+.rotate-down {transform: rotate(45deg);}
+
+.vote-tab {
+    display: grid; grid-template-rows: 20% 30% 20%;
+    text-align: center;
+    border-right: 1px dotted black;
+}
+
+.post-ctnr {
+    display: grid; grid-template-columns: 2% 98%;
+    margin: 0.8rem; padding: 1rem;
+    border-radius: 0.5rem; border: 1px solid grey;
+}
+
+.post-ctnt {
+    display: grid; grid-template-rows: 15% 55% 15% 15%;
+    min-height: 20vh;
+
+}
+
+.post-title {
+    display: grid; grid-template-columns: 80% 20%;
+}
+
+.post-preview {
+
+}
+
+.post-tags {
+    display: inline;
+}
+
+.post-tags > * {
+    margin: 0.08rem; padding: 0.5rem;
+    color: white;
+    background-color: orangered;
+}
+
+
+
+
+
+
+
+
+.trending {
+    display: grid;
+    grid-template-rows: 35% 35%;
+}
+
+.trending {
+    display: grid;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+.trending-tab {
+    border: 1px solid black; border-radius: 1rem;
+    margin: 1rem; padding: 1rem;
+}
+
+.trending-tab > div {
+    border-bottom: 1px dotted black;
+}
