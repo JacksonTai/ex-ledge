@@ -1,4 +1,3 @@
-<!--TODO: ADAPTIVE HOMEPAGE FOR EITHER STUDENT AND ADMIN-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,5 +77,4 @@
     <script src="../../public/js/script.js"></script>        
 
 </body>
-
 </html>
