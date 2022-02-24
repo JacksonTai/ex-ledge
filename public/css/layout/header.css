@@ -11,7 +11,8 @@
   margin-right: auto;
   padding: 0 8%;
   background-color: #ffffff;
-  box-shadow: 0 0.1em 1em #c5c1c1;
+  border-bottom: 0.15em solid var(--clr-shadow-grey);
+  box-shadow: 0 0.1em 0.3em #c7c7c7;
 }
 
 .layout-header__logo-img {
@@ -102,8 +103,6 @@
   left: -100%;
 }
 
-
-
 @media (min-width: 1100px) {
   .index-header__nav,
   .index-header__btn {
@@ -123,7 +122,7 @@
   }
 
   .layout-header {
-    padding: 0.2em 3% 0.2em 10%;
+    padding: 0.2em 5%;
   }
 
   .layout-header__nav {
@@ -218,21 +217,20 @@
     transform: scale(1.2);
   }
 
-  .layout-header__btn--admin{
+  .layout-header__btn--admin {
     display: none;
   }
 
-  .profile_img{
+  .profile_img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-	  margin: 5px 0px 0px 1000px;
+    margin: 5px 0px 0px 1000px;
   }
-
 }
 
 @media (max-width: 1245px) {
-  .layout-header__btn--admin{
+  .layout-header__btn--admin {
     margin: 0 1rem 0 0;
     padding: 0;
     border: none;
@@ -240,7 +238,7 @@
     margin: 0.5rem 3rem;
     padding: 0.35em 1.5em;
     text-align: center;
-    border-bottom: 1px solid #D4D4D4;
+    border-bottom: 1px solid #d4d4d4;
   }
 
   .layout-header__btn--admin:hover {
@@ -248,7 +246,7 @@
     color: var(--clr-primary);
   }
 
-  .layout-header__btn--admin:last-of-type{
+  .layout-header__btn--admin:last-of-type {
     margin: 0.5rem 3rem;
     padding: 0.35em 1.5em;
     color: var(--clr-primary);
@@ -256,5 +254,4 @@
     border-radius: 2em;
     text-align: center;
   }
-
 }
