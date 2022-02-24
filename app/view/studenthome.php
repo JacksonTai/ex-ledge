@@ -25,30 +25,28 @@
             </div>
             <hr>
 
-            <div class="post-ctnr">
 
+            <!-- DUPLICATE AS NEEDED -->
+            <div class="post-ctnr">
                 <div class="vote-tab">
                     <i class="vote-arrow rotate-up"></i>
-                    <div class="">1</div>
+                    <p>1</p>
                     <i class="vote-arrow rotate-down"></i>
                 </div>
-
                 <div class="post-ctnt">
-                    <div class="post-title">hgfgf <i>dsasd</i></div>
-                    <div class="post-preview">kjhsdfhkjfsdkhjfvsdkjnhfhjsdkhkjdfgkhjdfgshj</div>
+                    <div class="post-title"><h2 style="font-weight: 400;">what is the</h2><p>clickable button</p></div>
+                    <div class="post-preview"><p>ksdhjfskhfjdhjkfsdhjk</p></div>
                     <div class="post-tags">
                         <span>asdasdasd</span><span>asdassad</span><span>asdsdaasdasd</span><span>adsasdsda</span><span>asdasdasdasd</span>
                     </div>
-                    <div class="post-info">posted by sdfkljsjfljlfsdfsdj</div>
+                    <div class="post-info"><p>posted by</p></div>
                 </div>
-
             </div>
-
-
-
-
+            <!-- DUPLICATE END   -->
         </div> 
 
+
+        <!-- SIDEBAR -->
         <div class="sidebar">
             <div class="trending">
                 <button>Ask questions</button>

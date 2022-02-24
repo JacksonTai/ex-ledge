@@ -6,9 +6,7 @@
     display: grid;
     grid-template-columns: 80% 20%;
     height: 100vh; max-height: 100%;
-
     margin: 80px 1vw 1vw 2vw;
-
 }
 
 
@@ -18,9 +16,7 @@
 }
 
 hr {margin: 1em}
-
 .title-ctnr {display: grid; grid-template-columns: 80% 20%;}
-
 div > button {margin: 1.5rem;}
 
 .vote-arrow {
@@ -30,12 +26,12 @@ div > button {margin: 1.5rem;}
     border-width: 0 0.3rem 0.3rem 0;
 }
 
-.rotate-up {transform: rotate(-135deg);}
-.rotate-down {transform: rotate(45deg);}
+.rotate-up {transform: translate(-25%, 50%) rotate(-135deg);}
+.rotate-down {transform: translate(-25%,25%) rotate(45deg);}
 
 .vote-tab {
-    display: grid; grid-template-rows: 20% 30% 20%;
-    text-align: center;
+    display: grid; grid-template-rows: 10% 10% 10%;
+    text-align: left;
     border-right: 1px dotted black;
 }
 
@@ -47,50 +43,30 @@ div > button {margin: 1.5rem;}
 
 .post-ctnt {
     display: grid; grid-template-rows: 15% 55% 15% 15%;
-    min-height: 20vh;
-
+    min-height: 15vh;
+    margin: 0.7rem; 
 }
 
 .post-title {
     display: grid; grid-template-columns: 80% 20%;
+    border-bottom: 1px solid grey;
 }
 
-.post-preview {
-
-}
-
-.post-tags {
-    display: inline;
-}
+.post-preview {margin: 0.4rem;}
+.post-tags {display: inline;}
 
 .post-tags > * {
     margin: 0.08rem; padding: 0.5rem;
-    color: white;
-    background-color: orangered;
+    color: white; background-color: orangered;
 }
 
+.post-info {margin: 0.2rem;}
 
-
-
-
-
-
-
-.trending {
-    display: grid;
-    grid-template-rows: 35% 35%;
-}
-
-.trending {
-    display: grid;
-    grid-template-rows: 20% 20% 20% 20% 20%;
-}
+.trending {display: grid; grid-template-rows: 20% 20% 20% 20% 20%;}
 
 .trending-tab {
     border: 1px solid black; border-radius: 1rem;
     margin: 1rem; padding: 1rem;
 }
 
-.trending-tab > div {
-    border-bottom: 1px dotted black;
-}
+.trending-tab > div {border-bottom: 1px dotted black;}
