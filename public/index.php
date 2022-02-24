@@ -1,3 +1,5 @@
+<?php error_reporting(0); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +8,14 @@
      <link rel="stylesheet" href="css/style.css">
      <title>Ex-Ledge | Forum - Malaysia</title>
 </head>
+
+<style>
+
+:root {
+     position: relative;
+}
+
+</style>
 
 <body>
 
@@ -63,7 +73,6 @@
                </div>
           </section>
      </main>
-
      <?php include 'layout/footer.php'; ?>
      <script src="js/script.js"></script>
 </body>
