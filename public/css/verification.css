@@ -28,17 +28,10 @@
   border-bottom: 3px solid var(--clr-shadow-grey);
 }
 
+.signin__err-msg,
 .signup__err-msg {
   width: 100%;
   white-space: initial;
-}
-
-.signup__rules {
-  display: none;
-}
-
-.signup__rules-show {
-  display: block;
 }
 
 .signin__btn,
@@ -84,6 +77,23 @@
   text-align: center;
 }
 
+.signin__input[type='password'] {
+  margin: 0 0 0.5rem;
+}
+
+.signin__err-msg--invalid-credential {
+  text-align: center;
+}
+
 .signin__link {
   margin: 0 auto 0.2rem;
+}
+
+/* --- signup.php --- */
+.signup__rules {
+  display: none;
+}
+
+.signup__rules-show {
+  display: block;
 }

@@ -50,7 +50,7 @@ html {
   --clr-primary: #0066ff;
   --clr-secondary: #ec6f25;
   --clr-shadow-grey: #bfbfbf;
-  --clr-font-grey: #7A7A7A;
+  --clr-font-grey: #7a7a7a;
   --clr-link: #2893f6;
   /* Theme font-family */
   --ff-montserrat-title: "montserrat-bold";
@@ -102,8 +102,12 @@ li {
 }
 
 /* ---------- [layout] ----------- */
-main {
+main,
+aside {
   min-height: 90vh;
+}
+
+main {
   margin: var(--layout-header-height) auto 0;
 }
 
@@ -176,6 +180,10 @@ button {
   background-color: var(--clr-primary);
 }
 
+input:-webkit-autofill {
+  box-shadow: 0 0 0 2rem #ffffff inset;
+}
+
 /* ---------- [Dialog] ----------- */
 .dialog {
   width: fit-content;
@@ -188,6 +196,16 @@ button {
 .invalid-input {
   font-size: 0.88rem;
   color: #f8606a;
+}
+
+/* ---------- [Main] ----------- */
+.main-content {
+  width: 86vw;
+  padding: 2rem;
+}
+
+.main-sidebar-wrapper {
+  display: flex;
 }
 
 /* ############## 3. Media Queries  ############# */

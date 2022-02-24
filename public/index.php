@@ -3,14 +3,14 @@
 <html lang="en">
 
 <head>
-     <?php include 'layout/head.php' ?>
+     <?php include '../app/config/head.php' ?>
      <link rel="stylesheet" href="css/style.css">
      <title>Ex-Ledge | Forum - Malaysia</title>
 </head>
 
 <body>
 
-     <?php include 'layout/header.php'; ?>
+     <?php include '../app/view/layout/header.php'; ?>
 
      <main>
           <section class="section--home">
@@ -25,7 +25,7 @@
                          school students in their studies.
                          <?= $_SESSION['userId'] ?? ''; ?>
                     </p>
-                    <button class="section--home-cta-btn" onclick="window.location.href='../app/view/signup.php'">
+                    <button class="section--home-cta-btn" onclick="window.location.href='../app/view/verification/signup.php'">
                          Get started
                     </button>
                </div>
@@ -65,7 +65,8 @@
                </div>
           </section>
      </main>
-     <?php include 'layout/footer.php'; ?>
+
+     <?php include '../app/view/layout/footer.php'; ?>
      <script src="js/script.js"></script>
 </body>
 

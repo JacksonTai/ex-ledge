@@ -27,14 +27,16 @@ class DbConn
      }
 
      // Error handler for statement execution.
-     protected function execute($stmt, $values = null)
+     protected function executeQuery($sql, $values = null)
      {
           try {
+               $stmt = $this->connect()->prepare($sql);
                if ($values) {
                     $stmt->execute($values);
                } else {
                     $stmt->execute();
                }
+               return $stmt;
           } catch (PDOException $e) {
                die("<h2>SQL statement execution failed.</h2> Error: " . $e->getMessage());
           }
