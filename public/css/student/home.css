@@ -110,3 +110,12 @@ div > button {
 .trending-tab > div {
   border-bottom: 1px dotted black;
 }
+
+@media (max-width: 1245px) {
+  .home--main  {
+    width: 100vw;
+  }
+  .home--sidebar {
+    display: none;
+  }
+}
