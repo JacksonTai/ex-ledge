@@ -6,19 +6,21 @@ signinForm.addEventListener("submit", async function (e) {
   let formData = new FormData(this);
 
   try {
-    const res = await fetch("../controller/signin.php", {
+    const res = await fetch("../../controller/signin.php", {
       method: "POST",
       body: formData,
     });
 
-    let errMsg = await res.json();
+    let result = await res.json();
 
     // Redirect to user page once there is no error messages.
-    if (!errMsg) {
-      window.location.href = "student.php";
+    if (result[0] == "U") {
+      window.location.href = "../student/home.php";
+    } else if (result[0] == "A") {
+      window.location.href = "../admin/dashboard.php";
     } else {
-      // Destruct the errMsg object.
-      let { email, password, invalidCredential } = errMsg;
+      // Destruct the result object.
+      let { email, password, invalidCredential } = result;
 
       // Add error messages to the respective HTML element.
       let emailErrMsg = document.querySelector(".signin__err-msg--email");

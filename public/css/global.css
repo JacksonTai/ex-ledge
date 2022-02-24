@@ -102,8 +102,12 @@ li {
 }
 
 /* ---------- [layout] ----------- */
-main {
+main,
+aside {
   min-height: 90vh;
+}
+
+main {
   margin: var(--layout-header-height) auto 0;
 }
 
@@ -192,6 +196,16 @@ input:-webkit-autofill {
 .invalid-input {
   font-size: 0.88rem;
   color: #f8606a;
+}
+
+/* ---------- [Main] ----------- */
+.main-content {
+  width: 86vw;
+  padding: 2rem;
+}
+
+.main-sidebar-wrapper {
+  display: flex;
 }
 
 /* ############## 3. Media Queries  ############# */

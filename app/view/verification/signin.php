@@ -1,15 +1,16 @@
+<?php $path = '../../../' ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include '../../public/layout/head.php' ?>
-    <link rel="stylesheet" href="../../public/css/verification.css">
+    <?php include '../../config/head.php' ?>
+    <link rel="stylesheet" href="<?php echo $path; ?>public/css/verification.css">
     <title>Ex-Ledge | Sign-in</title>
 </head>
 
 <body>
 
-    <?php include '../../public/layout/header.php'; ?>
+    <?php include '../layout/header.php'; ?>
 
     <main class="signin--main">
         <div class="signin--dialog dialog">
@@ -28,10 +29,10 @@
         </div>
     </main>
 
-    <?php include '../../public/layout/footer.php'; ?>
+    <?php include '../layout/footer.php'; ?>
 
-    <script src="../../public/js/script.js"></script>
-    <script src="../../public/js/signin.js"></script>
+    <script src="<?php echo $path; ?>public/js/script.js"></script>
+    <script src="<?php echo $path; ?>public/js/signin.js"></script>
 </body>
 
 </html>

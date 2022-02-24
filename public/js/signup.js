@@ -6,7 +6,7 @@ signupForm.addEventListener("submit", async function (e) {
   let formData = new FormData(this);
 
   try {
-    const res = await fetch("../controller/signup.php", {
+    const res = await fetch("../../controller/signup.php", {
       method: "POST",
       body: formData,
     });
@@ -15,7 +15,7 @@ signupForm.addEventListener("submit", async function (e) {
 
     // Redirect to user page once there is no error messages.
     if (!errMsg) {
-      window.location.href = "student.php";
+      window.location.href = "../student/home.php";
     } else {
       // Destruct the errMsg object.
       let { email, fullName, password, passwordRepeat } = errMsg;

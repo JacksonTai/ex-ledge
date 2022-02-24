@@ -27,6 +27,7 @@ class Signin extends \config\DbConn
           } else {
                session_start();
                $_SESSION['userId'] = $userId;
+               return $userId;
           }
      }
 
