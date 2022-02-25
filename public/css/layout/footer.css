@@ -1,7 +1,4 @@
 .layout-footer {
-  position: absolute;
-  bottom: - var(--layout-header-height);
-  width: 100%;
   padding: 3em;
   background-color: #000000;
   color: #ffffff;

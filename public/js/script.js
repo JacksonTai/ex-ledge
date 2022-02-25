@@ -1,5 +1,5 @@
-let hamburgerMenu = document.querySelector(".layout-header__hamburger-menu");
-let nav = document.querySelector(".layout-header__nav");
+const hamburgerMenu = document.querySelector(".layout-header__hamburger-menu");
+const nav = document.querySelector(".layout-header__nav");
 
 hamburgerMenu.addEventListener("click", () => {
   if (hamburgerMenu.classList.contains("open")) {
