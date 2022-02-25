@@ -1,3 +1,6 @@
+/*Importing Roboto font*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
 
 body{
   height: 100vh;
@@ -8,9 +11,8 @@ p{
 }
 
 .panel {
-    position: relative;
     display: flex;
-    padding: 67px 10px 65px 10px;
+    padding: 30px 50px 30px 10px;
     margin-bottom: 61px;
     box-sizing: border-box;
     border-radius: 18px;
@@ -19,6 +21,7 @@ p{
     justify-content: flex-start;
     align-items: center;
     width: 100%;
+    border: solid 1px #777171;
 }
 
 .vote-container{
@@ -28,8 +31,16 @@ p{
     align-items: center;
     font-size: 20px;
     color: #9F9F9F;
-    margin: 0 1em 0 1em;
+    margin: 0 1.5em 0 1em;
+    font-size: 25px;
 }
+
+
+.question{
+    display: flex;
+    flex-direction: column;
+}
+
 
 .question-headers{
     width: 100%;
@@ -40,10 +51,13 @@ p{
 
 .question-caption, .button{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
 }
 
 .question-title{
-    font-size: 20px;
+    font-size: 21px;
     font-weight: bold;
     color: #5A5A5A;
     margin-right: 1em;
@@ -65,14 +79,44 @@ p{
 }
 
 .button-answer, .button-remove{
-    display: flex;
     margin-right: 1em;
     height: 40px;
     width: 130px;
     padding: 0.2rem ;
     border-radius: 15px;
-    align-items: center;
-    justify-content: center;
     background-color: transparent;
     font-weight: bold;
+}
+
+.question-body{
+    font-size: 19px;
+    color: #909090;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #D7D5D5;
+}
+
+.question-footer{
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.profile-picture{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 0.5em;
+}
+
+.owner{
+    color: #0066ff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+}
+
+.posted-by{
+    font-family: 'Roboto', sans-serif;
+    color: #909090;
+    font-size: 15px;
+
 }
