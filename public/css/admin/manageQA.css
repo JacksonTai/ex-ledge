@@ -133,10 +133,7 @@ p{
     display: none;
 }
 
-.clear{
-    clear: both; 
-    height: 60px;
-}
+
 
 @media (max-width: 870px) {
     .question-caption, .button{
@@ -180,8 +177,8 @@ p{
         padding: 30px 15px 20px 10px;
     }
 
-    .main-content{
-        padding: 0;
+    .manageQA--main{
+        padding: 20px 0 60px 0;
     }
 
     .fa-arrow-up, .fa-arrow-down, .vote-container{
@@ -196,6 +193,10 @@ p{
 
     .question-title{
         font-size: 15px;
+    }
+
+    .question-caption{
+        margin-bottom: 0.5em;
     }
 
     .question-age{

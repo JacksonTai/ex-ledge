@@ -204,7 +204,6 @@ $path = '../../../';
                     
                </div>
 
-               <div class="clear"></div>
           </main>
 
           
