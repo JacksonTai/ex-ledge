@@ -1,0 +1,25 @@
+.layout-side-navbar {
+  width: 14vw;
+  min-height: 90vh;
+  margin: var(--layout-header-height) auto 0;
+  padding-top: 1.5rem;
+  border-right: 0.15em solid var(--clr-shadow-grey);
+}
+
+.layout-side-navbar__link {
+  display: block;
+  padding: 0.8em 2em;
+  text-align: center;
+}
+
+.layout-side-navbar__link:hover {
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #0066ff;
+}
+
+@media (max-width: 1245px) {
+  .layout-side-navbar {
+    display: none;
+  }
+}

@@ -33,6 +33,7 @@
   margin: 3rem auto 0;
   width: max-content;
   position: relative;
+  pointer-events: none;
 }
 
 .layout-footer__social-media {

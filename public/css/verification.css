@@ -9,20 +9,29 @@
 .signin--dialog,
 .signup--dialog {
   margin: 4.8rem auto;
+  width: 85%;
+  max-width: fit-content;
 }
 
 .signin__title,
 .signup__title {
-  margin: 2rem auto 1.5rem;
+  margin: 2rem auto;
   text-align: center;
   font-size: 1.8rem;
 }
 
 .signin__input,
 .signup__input {
-  margin: 0.8rem auto;
+  width: 100%;
+  margin: 0 auto 1.8rem;
   border: none;
   border-bottom: 3px solid var(--clr-shadow-grey);
+}
+
+.signin__err-msg,
+.signup__err-msg {
+  width: 100%;
+  white-space: initial;
 }
 
 .signin__btn,
@@ -68,6 +77,23 @@
   text-align: center;
 }
 
+.signin__input[type='password'] {
+  margin: 0 0 0.5rem;
+}
+
+.signin__err-msg--invalid-credential {
+  text-align: center;
+}
+
 .signin__link {
-    margin: 0 auto 0.2rem;
+  margin: 0 auto 0.2rem;
+}
+
+/* --- signup.php --- */
+.signup__rules {
+  display: none;
+}
+
+.signup__rules-show {
+  display: block;
 }

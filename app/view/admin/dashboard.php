@@ -1,33 +1,31 @@
-<?php $user="admin"?>
+<?php
+session_start();
+require '../../helper/redirector.php';
+$path = '../../../';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <?php include '../../public/layout/head.php'?>
-    <title>Admin | Ex-Ledge</title>
-    <link rel="stylesheet" href="../../public/css/admin.css">
+    <?php include '../../config/head.php' ?>
+    <title>Dashboard | Ex-Ledge</title>
+    <link rel="stylesheet" href="<?php echo $path; ?>public/css/admin/dashboard.css">
 </head>
+
 <body>
-    <?php include '../../public/layout/header.php'; ?>
+
+    <?php include '../layout/header.php'; ?>
 
     <div class="container">
-        <div class="sidebar">
+        <div class="main-sidebar-wrapper">
 
-            <div class="sidebar-column">
-                <a href="#" class="text">Dashboard</a>
-                <a href="#" class="text">Manage Q&A</a>
-                <a href="#" class="text">Manage user</a>
-                <a href="#" class="text">User verification</a>
-                <a href="#" class="text">Log out</a>
-            </div>
-            
-        </div>
+            <?php include '../layout/sidebar.php' ?>
 
-        <div class="admin-dashboard">
-    
-            <div class="admin-container">
-                <p class="txt-3110">Admin Dashboard</p>
-
+            <main class="dashboard--main main-content">
+                <h2 class="dashboard__title">Admin Dashboard</h2>
+                <p><?= $_SESSION['userId']; ?></p>
+                
                 <div class="panel">
                     <div class="panel-card-stats">
                         <p class="panel-title">Total visits</p>
@@ -65,12 +63,14 @@
                         </div>
                     </div>
                 </div>
+            </main>
 
-            </div>
         </div>
     </div>
 
+    <?php include '../layout/footer.php'; ?>
 
-    <script src="../../public/js/script.js"></script>
+    <script src="<?php echo $path; ?>public/js/script.js"></script>
 </body>
+
 </html>
