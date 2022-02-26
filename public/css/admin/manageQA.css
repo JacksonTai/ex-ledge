@@ -10,10 +10,11 @@ p{
     margin: 0;
 }
 
+
 .panel {
     display: flex;
     padding: 30px 50px 30px 10px;
-    margin-bottom: 61px;
+    margin-bottom: 1.5em;
     box-sizing: border-box;
     border-radius: 18px;
     background-color: rgba(255, 255, 255, 1);
@@ -23,6 +24,7 @@ p{
     width: 100%;
     border: solid 1px #777171;
 }
+
 
 .vote-container{
     display: flex;
@@ -99,6 +101,12 @@ p{
     margin-top: 1em;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+.question-owner{
+    display: flex;
+    align-items: center;
 }
 
 .profile-picture{
@@ -119,4 +127,97 @@ p{
     color: #909090;
     font-size: 15px;
 
+}
+
+.remove-button-mobile{
+    display: none;
+}
+
+.clear{
+    clear: both; 
+    height: 60px;
+}
+
+@media (max-width: 870px) {
+    .question-caption, .button{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .button-remove{
+        display: none;
+    }
+
+    .remove-button-mobile{
+        display: flex;
+        color: #909090;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .remove-text{
+        margin-left: 0.5em;
+        margin-right: 2em;
+        font-family: 'Roboto', sans-serif;
+        font-size: 15px;
+        color: #909090;
+    }
+}
+
+@media (max-width: 700px) {
+    .question-body{
+        height: 70px;
+        overflow: hidden;
+        font-size: 14px;
+    }
+    
+    .panel{
+        border-radius: 0;
+        border: 0;
+        border-top: 1px solid #767676;
+        margin-bottom: 0;
+        align-items: unset;
+        padding: 30px 15px 20px 10px;
+    }
+
+    .main-content{
+        padding: 0;
+    }
+
+    .fa-arrow-up, .fa-arrow-down, .vote-container{
+        font-size: 20px;
+    }
+
+    .vote-container{
+        position: relative;
+        height: 100%;
+        margin: 0 1em 0 0.5em;
+    }
+
+    .question-title{
+        font-size: 15px;
+    }
+
+    .question-age{
+        font-size: 10px;
+    }
+
+    .button-answer{
+        width: 80px;
+        height: 23px;
+        font-size: 8px;
+    }
+
+    .question-headers{
+        display: block;
+    }
+
+    .profile-picture{
+        height: 22px;
+        width: 22px;
+    }
+
+    .posted-by, .owner, .remove-text, .fa-trash-can{
+        font-size: 11px;
+    }
 }
