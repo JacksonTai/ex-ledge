@@ -93,8 +93,6 @@ p{
 .question-body{
     font-size: 19px;
     color: #909090;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #D7D5D5;
 }
 
 .question-footer{
@@ -102,6 +100,8 @@ p{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-top: 1px solid #D7D5D5;
+    padding-top: 1rem;
 }
 
 .question-owner{
@@ -162,12 +162,26 @@ p{
 }
 
 @media (max-width: 700px) {
+
+    .question{
+        position: relative;
+    }
+
     .question-body{
         height: 70px;
         overflow: hidden;
         font-size: 14px;
     }
     
+    .question-body:before {
+        content:'';
+        width:100%;
+        height:100%;    
+        position:absolute;
+        bottom:3.4rem;
+        background:linear-gradient(transparent 150px, white);
+    }
+
     .panel{
         border-radius: 0;
         border: 0;
