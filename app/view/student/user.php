@@ -21,7 +21,7 @@ $path = '../../../';
           <?php include '../layout/sidebar.php' ?>
 
           <main class="user--main main-content">
-               <h2 class="user__title">Users</h2>
+               <h2 class="user__title main-title">Users</h2>
                <p><?= $_SESSION['userId']; ?></p>
           </main>
 

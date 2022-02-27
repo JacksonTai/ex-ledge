@@ -23,10 +23,9 @@ $path = '../../../';
             <?php include '../layout/sidebar.php' ?>
 
             <main class="dashboard--main main-content">
-                <h2 class="dashboard__title">Admin Dashboard</h2>
-                <p><?= $_SESSION['userId']; ?></p>
-                
-                <div class="panel">
+                <h2 class="dashboard__title main-title">Admin Dashboard</h2>
+ 
+                <div class="panel dialog">
                     <div class="panel-card-stats">
                         <p class="panel-title">Total visits</p>
                         <p class="panel-title-stat">12089</p>
@@ -45,7 +44,7 @@ $path = '../../../';
                     </div>
                 </div>
 
-                <div class="panel">
+                <div class="panel dialog">
                     <div class="panel-card-stats">
                         <p class="panel-title">Total answered</p>
                         <p class="panel-title-stat">79%</p>

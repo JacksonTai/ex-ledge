@@ -199,19 +199,23 @@ input:-webkit-autofill {
 }
 
 /* ---------- [Main] ----------- */
+.main-sidebar-wrapper {
+  display: flex;
+  width: 100%;
+}
+
 .main-content {
   position: relative;
   top: var(--layout-header-height);
   left: 0;
   width: 100vw;
   margin: 0;
-  padding: 2rem;
+  padding: 3rem 2rem;
   padding-bottom: calc(2rem + 60px);
 }
 
-.main-sidebar-wrapper {
-  display: flex;
-  width: 100%;
+.main-title {
+  margin: 0 0 2rem;
 }
 
 /* ############## 3. Media Queries  ############# */
@@ -227,5 +231,6 @@ input:-webkit-autofill {
   .main-content {
     left: 14vw;
     width: 85vw;
+    padding: 3rem 5rem;
   }
 }

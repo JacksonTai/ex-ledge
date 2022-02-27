@@ -23,7 +23,7 @@ $path = '../../../';
         <main class="home--main main-content">
             <div class="title-ctnr">
                 <!-- h1 is not being used as it's being used for logo. (Delete once readed) -->
-                <h2 class="home__title">Question Ask: </h2>
+                <h2 class="home__title main-title">Question Ask: </h2>
                 <div><button>Filter</button></div>
             </div>
             <!-- DUPLICATE AS NEEDED -->

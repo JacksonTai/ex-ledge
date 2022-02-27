@@ -21,9 +21,8 @@ $path = '../../../';
           <?php include '../layout/sidebar.php' ?>
 
           <main class="manageQA--main main-content">
-               <h2 class="manageQA__title">Manage Q&A</h2>
-               <p><?= $_SESSION['userId']; ?></p>
-
+               <h2 class="manageQA__title main-title">Manage Q&A</h2>
+           
                <div class="panel">
                     <div class="vote-container">
                          <i class="fa-solid fa-arrow-up fa-lg"></i>
