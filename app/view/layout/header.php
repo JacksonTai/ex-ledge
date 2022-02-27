@@ -33,6 +33,13 @@ strpos($url, 'app/view') ? $imgPath = '../../../public/img/icons/' : $imgPath = 
                     <a class="layout-header__btn--admin" href="../admin/manageUser.php">Manage user</a>
                     <a class="layout-header__btn--admin" href="../admin/userVerification.php">User Verification</a>
                 <?php elseif ($_SESSION['userId'][0] == "U") : ?>
+                    <form method="POST">
+                        <div class="search_container">
+                            <input class="search_box" type="text" name="search_key" placeholder="   Seach...." >
+                            <button class="search_button" type="submit" name="search_btn">SEARCH</button>
+                        </div>
+                    </form>
+                    <!-- <div class="profile_img"></div> -->
                     <a class="layout-header__btn--admin" href="../student/home.php">Home</a>
                     <a class="layout-header__btn--admin" href="../student/user.php">Users</a>
                     <a class="layout-header__btn--admin" href="../student/leaderboard.php">Leaderboard</a>
