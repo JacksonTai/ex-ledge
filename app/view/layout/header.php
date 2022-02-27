@@ -27,10 +27,10 @@ strpos($url, 'app/view') ? $imgPath = '../../../public/img/icons/' : $imgPath = 
     <nav class="layout-header__nav">
         <?php if (isset($_SESSION['userId'])) : ?>
             <ul class="layout-header__nav-list">
-                <!-- <a class="layout-header__nav-link layout-header__nav-link--profile" href="profile.php">
+                <a class="layout-header__nav-link layout-header__nav-link--profile" href="profile.php">
                     <img class="layout-header__profile-img" src="../../../public/img/profile.jpg" alt="Profile Image">
                     <span class="layout-header__profile-name">Username</span>
-                </a> -->
+                </a>
                 <?php if ($_SESSION['userId'][0] == "A") : ?>
                     <li><a class="layout-header__nav-link" href="../admin/dashboard.php">Dashboard</a></li>
                     <li><a class="layout-header__nav-link" href="../admin/manageQA.php">Manage Q&A</a></li>
