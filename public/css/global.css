@@ -49,7 +49,7 @@ html {
   /* Theme colors */
   --clr-primary: #0066ff;
   --clr-secondary: #ec6f25;
-  --clr-shadow-grey: #bfbfbf;
+  --clr-shadow-grey: rgba(0, 0, 0, 0.25);
   --clr-font-grey: #7a7a7a;
   --clr-link: #2893f6;
   /* Theme font-family */
@@ -188,8 +188,8 @@ input:-webkit-autofill {
 .dialog {
   width: fit-content;
   padding: 2em 2.5em;
-  box-shadow: 0.5em 0.5em 2.5em var(--clr-shadow-grey);
-  border-radius: 0.5em;
+  box-shadow: 0.15rem 0.3rem 0.8rem var(--clr-shadow-grey);
+  border-radius: 0.5rem;
 }
 
 /* ---------- [Invalid Input] ----------- */

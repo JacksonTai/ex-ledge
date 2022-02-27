@@ -23,20 +23,18 @@ $path = '../../../';
           <main class="manageQA--main main-content">
                <h2 class="manageQA__title main-title">Manage Q&A</h2>
            
-               <div class="panel">
+               <div class="panel dialog">
                     <div class="vote-container">
                          <i class="fa-solid fa-arrow-up fa-lg"></i>
                          <p>95</p>
                          <i class="fa-solid fa-arrow-down fa-lg"></i>
                     </div>
-
                     <div class="question">
                        <div class="question-headers">
                               <div class="question-caption">
                                    <p class="question-title">Is Ex-Ledge the best?</p>
                                    <p class="question-age">19 mins ago</p>
                               </div>
-                              
                               <div class="button">
                                    <button class="button-answer">
                                         <p>12 Answers</p>
@@ -47,11 +45,9 @@ $path = '../../../';
                                    </button>
                               </div>
                          </div>
-
                          <div class="question-body">
                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
                          </div>
-
                          <div class="question-footer">
                               <div class="question-owner">
                                    <img class="profile-picture" src="https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc" alt="profile-picture">
@@ -65,23 +61,20 @@ $path = '../../../';
                               
                          </div>
                     </div>
-                    
                </div>
 
-               <div class="panel">
+               <div class="panel dialog">
                     <div class="vote-container">
                          <i class="fa-solid fa-arrow-up fa-lg"></i>
                          <p>95</p>
                          <i class="fa-solid fa-arrow-down fa-lg"></i>
                     </div>
-
                     <div class="question">
                        <div class="question-headers">
                               <div class="question-caption">
                                    <p class="question-title">Is Ex-Ledge the best?</p>
                                    <p class="question-age">19 mins ago</p>
                               </div>
-                              
                               <div class="button">
                                    <button class="button-answer">
                                         <p>12 Answers</p>
@@ -92,11 +85,9 @@ $path = '../../../';
                                    </button>
                               </div>
                          </div>
-
                          <div class="question-body">
                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
                          </div>
-
                          <div class="question-footer">
                               <div class="question-owner">
                                    <img class="profile-picture" src="https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc" alt="profile-picture">
@@ -107,41 +98,34 @@ $path = '../../../';
                                    <i class="fa-solid fa-trash-can"></i>
                                    <p class="remove-text">Remove</p>
                               </div>
-                              
                          </div>
                     </div>
-                    
                </div>
 
-               <div class="panel">
+               <div class="panel dialog">
                     <div class="vote-container">
                          <i class="fa-solid fa-arrow-up fa-lg"></i>
                          <p>95</p>
                          <i class="fa-solid fa-arrow-down fa-lg"></i>
                     </div>
-
                     <div class="question">
                        <div class="question-headers">
                               <div class="question-caption">
                                    <p class="question-title">Is Ex-Ledge the best?</p>
                                    <p class="question-age">19 mins ago</p>
                               </div>
-                              
                               <div class="button">
                                    <button class="button-answer">
                                         <p>12 Answers</p>
                                    </button>
-
                                    <button class="button-remove">
                                         <p>Remove</p>
                                    </button>
                               </div>
                          </div>
-
                          <div class="question-body">
                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
                          </div>
-
                          <div class="question-footer">
                               <div class="question-owner">
                                    <img class="profile-picture" src="https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc" alt="profile-picture">
@@ -152,41 +136,34 @@ $path = '../../../';
                                    <i class="fa-solid fa-trash-can"></i>
                                    <p class="remove-text">Remove</p>
                               </div>
-                              
                          </div>
                     </div>
-                    
                </div>
 
-               <div class="panel">
+               <div class="panel dialog">
                     <div class="vote-container">
                          <i class="fa-solid fa-arrow-up fa-lg"></i>
                          <p>95</p>
                          <i class="fa-solid fa-arrow-down fa-lg"></i>
                     </div>
-
                     <div class="question">
                        <div class="question-headers">
                               <div class="question-caption">
                                    <p class="question-title">Is Ex-Ledge the best?</p>
                                    <p class="question-age">19 mins ago</p>
                               </div>
-                              
                               <div class="button">
                                    <button class="button-answer">
                                         <p>12 Answers</p>
                                    </button>
-
                                    <button class="button-remove">
                                         <p>Remove</p>
                                    </button>
                               </div>
                          </div>
-
                          <div class="question-body">
                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
                          </div>
-
                          <div class="question-footer">
                               <div class="question-owner">
                                    <img class="profile-picture" src="https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc" alt="profile-picture">
@@ -197,14 +174,11 @@ $path = '../../../';
                                    <i class="fa-solid fa-trash-can"></i>
                                    <p class="remove-text">Remove</p>
                               </div>
-                              
                          </div>
                     </div>
-                    
                </div>
 
           </main>
-
           
      </div>
 
