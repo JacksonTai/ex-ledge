@@ -9,7 +9,7 @@
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 8%;
+  padding: 0 8% 0 2em;
   background-color: #ffffff;
   border-bottom: 0.15em solid var(--clr-shadow-grey);
   box-shadow: 0 0.1em 0.3em #c7c7c7;
@@ -35,10 +35,44 @@
   position: fixed;
   inset: 0 0 0 -100%;
   width: 0;
-  margin-right: auto;
   background-color: #ffffff;
   border-right: 1px solid #c5c1c1;
   transition: all 0.5s ease-in-out;
+}
+
+.layout-header__nav-list {
+  margin: var(--layout-header-height) 0 0;
+}
+
+.layout-header__nav-link {
+  display: block;
+  margin: 0 auto;
+  padding: 1em 2em;
+  text-align: center;
+}
+
+.layout-header__nav-link--profile {
+  display: flex;
+  align-items: center;
+  width: min-content;
+  margin: 0.5rem 2rem;
+  padding: 0;
+}
+
+.layout-header__profile-name {
+  margin-left: 0.5rem;
+}
+
+.layout-header__nav-link:hover {
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #0066ff;
+}
+
+.layout-header__nav-link--profile:hover {
+  font-weight: 100;
+  color: #000000;
+  background-color: #ffffff;
 }
 
 .layout-header__btn-container {
@@ -143,37 +177,15 @@
     margin: 0;
   }
 
-  .layout-header__nav-item {
-    position: relative;
-    width: max-content;
-    padding: 0;
-    margin: 0 1em;
-    text-align: left;
-    border: none;
-  }
-
-  .layout-header__nav-item:nth-child(1) {
-    border: none;
-  }
-
   .layout-header__nav-link {
-    padding: 0.5em 0.6em;
+    display: none;
   }
 
-  .layout-header__nav-link::after {
-    content: "";
-    height: 1px;
-    width: 100%;
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    background-color: #000000;
-    transform: scaleX(0);
-    transition: all 0.5s ease-in-out;
-  }
-
-  .layout-header__nav-link:hover::after {
-    transform: scaleX(1);
+  .layout-header__nav-link--profile {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
   }
 
   .layout-header__btn-container {
@@ -231,12 +243,10 @@
 
 @media (max-width: 1245px) {
   .layout-header__btn--admin {
-    margin: 0 1rem 0 0;
     padding: 0;
     border: none;
     color: #61646d;
-    margin: 0.5rem 3rem;
-    padding: 0.35em 1.5em;
+    padding: 1em 2em;
     text-align: center;
     border-bottom: 1px solid #d4d4d4;
   }

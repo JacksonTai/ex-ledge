@@ -200,12 +200,18 @@ input:-webkit-autofill {
 
 /* ---------- [Main] ----------- */
 .main-content {
-  width: 86vw;
+  position: relative;
+  top: var(--layout-header-height);
+  left: 0;
+  width: 100vw;
+  margin: 0;
   padding: 2rem;
+  padding-bottom: calc(2rem + 60px);
 }
 
 .main-sidebar-wrapper {
   display: flex;
+  width: 100%;
 }
 
 /* ############## 3. Media Queries  ############# */
@@ -214,5 +220,12 @@ input:-webkit-autofill {
 @media (min-width: 520px) {
   html {
     font-size: 17px;
+  }
+}
+
+@media (min-width: 1245px) {
+  .main-content {
+    left: 14vw;
+    width: 85vw;
   }
 }
