@@ -21,7 +21,7 @@ $path = '../../../';
           <?php include '../layout/sidebar.php' ?>
           <!-- Note: Every main content goes inside main tag, except for the sidebar on right side. (Delete once readed) -->
           <main class="leaderboard--main main-content">
-               <h2 class="leaderboard__title">Leaderboard</h2>
+               <h2 class="leaderboard__title main-title">Leaderboard</h2>
                <div class="podium">
                     <div class="contestant_ctnr">
                          <div class="picture"></div>

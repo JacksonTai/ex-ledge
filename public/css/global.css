@@ -49,7 +49,7 @@ html {
   /* Theme colors */
   --clr-primary: #0066ff;
   --clr-secondary: #ec6f25;
-  --clr-shadow-grey: #bfbfbf;
+  --clr-shadow-grey: rgba(0, 0, 0, 0.25);
   --clr-font-grey: #7a7a7a;
   --clr-link: #2893f6;
   /* Theme font-family */
@@ -188,8 +188,8 @@ input:-webkit-autofill {
 .dialog {
   width: fit-content;
   padding: 2em 2.5em;
-  box-shadow: 0.5em 0.5em 2.5em var(--clr-shadow-grey);
-  border-radius: 0.5em;
+  box-shadow: 0.15rem 0.3rem 0.8rem var(--clr-shadow-grey);
+  border-radius: 0.5rem;
 }
 
 /* ---------- [Invalid Input] ----------- */
@@ -199,20 +199,25 @@ input:-webkit-autofill {
 }
 
 /* ---------- [Main] ----------- */
+.main-sidebar-wrapper {
+  display: flex;
+  width: 100%;
+}
+
 .main-content {
   position: relative;
   top: var(--layout-header-height);
   left: 0;
   width: 100vw;
   margin: 0;
-  padding: 2rem;
+  padding: 3rem 2rem;
   padding-bottom: calc(2rem + 60px);
 }
 
-.main-sidebar-wrapper {
-  display: flex;
-  width: 100%;
+.main-title {
+  margin: 0 0 2rem;
 }
+
 
 /* ############## 3. Media Queries  ############# */
 /* Note: Font-size grow as the screen size grow. */
@@ -227,5 +232,6 @@ input:-webkit-autofill {
   .main-content {
     left: 14vw;
     width: 85vw;
+    padding: 3rem 5rem;
   }
 }

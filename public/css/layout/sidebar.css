@@ -3,7 +3,7 @@
   top: var(--layout-header-height);
   left: 0;
   width: 14vw;
-  min-height: 90vh;
+  min-height: 100vh;
   margin: 0;
   padding-top: 1.5rem;
   border-right: 0.15em solid var(--clr-shadow-grey);
