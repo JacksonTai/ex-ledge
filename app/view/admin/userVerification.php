@@ -21,7 +21,7 @@ $path = '../../../';
           <?php include '../layout/sidebar.php' ?>
 
           <main class="user-verification--main main-content">
-               <h2 class="user-verification__title">User Verification</h2>
+               <h2 class="user-verification__title main-title">User Verification</h2>
                <p><?= $_SESSION['userId']; ?></p>
           </main>
 
