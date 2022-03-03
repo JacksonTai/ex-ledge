@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2022 at 04:56 AM
+-- Generation Time: Mar 03, 2022 at 04:14 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `answer` (
-  `answer_id` varchar(255) NOT NULL,
-  `question_id` varchar(255) NOT NULL,
-  `user_id` varchar(255) NOT NULL,
-  `content` varchar(10000) NOT NULL,
-  `point` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL
+  `answer_id` varchar(20) NOT NULL,
+  `question_id` varchar(20) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
+  `content` mediumtext NOT NULL,
+  `point` int(11) NOT NULL DEFAULT 0,
+  `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -43,8 +43,8 @@ CREATE TABLE `answer` (
 --
 
 CREATE TABLE `bookmark_answer` (
-  `user_id` varchar(255) NOT NULL,
-  `answer_id` varchar(255) NOT NULL
+  `user_id` varchar(20) NOT NULL,
+  `answer_id` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -54,8 +54,8 @@ CREATE TABLE `bookmark_answer` (
 --
 
 CREATE TABLE `bookmark_question` (
-  `user_id` varchar(255) NOT NULL,
-  `question_id` varchar(255) NOT NULL
+  `user_id` varchar(20) NOT NULL,
+  `question_id` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -65,10 +65,10 @@ CREATE TABLE `bookmark_question` (
 --
 
 CREATE TABLE `comment` (
-  `comment_id` varchar(255) NOT NULL,
-  `user_id` varchar(255) NOT NULL,
-  `reply_id` varchar(255) NOT NULL,
-  `content` varchar(1000) NOT NULL
+  `comment_id` varchar(20) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
+  `reply_id` varchar(20) NOT NULL,
+  `content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -78,10 +78,10 @@ CREATE TABLE `comment` (
 --
 
 CREATE TABLE `message` (
-  `message_id` varchar(255) NOT NULL,
-  `sender_id` varchar(255) NOT NULL,
-  `receiver_id` varchar(255) NOT NULL,
-  `content` varchar(1000) NOT NULL
+  `message_id` varchar(20) NOT NULL,
+  `sender_id` varchar(20) NOT NULL,
+  `receiver_id` varchar(20) NOT NULL,
+  `content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -91,11 +91,11 @@ CREATE TABLE `message` (
 --
 
 CREATE TABLE `question` (
-  `question_id` varchar(255) NOT NULL,
-  `user_id` varchar(255) NOT NULL,
+  `question_id` varchar(20) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
   `title` varchar(100) NOT NULL,
-  `content` varchar(10000) NOT NULL,
-  `point` int(11) NOT NULL
+  `content` mediumtext NOT NULL,
+  `point` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -105,23 +105,21 @@ CREATE TABLE `question` (
 --
 
 CREATE TABLE `user` (
-  `user_id` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `username` varchar(50) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
+  `email` varchar(319) NOT NULL,
+  `username` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `verify` tinyint(1) NOT NULL,
-  `status` tinyint(1) NOT NULL
+  `verification` tinyint(1) NOT NULL DEFAULT 0,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `point` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `email`, `username`, `password`, `verify`, `status`) VALUES
-('A6214d5dbb1305', 'admin@gmail.com', 'admin', '$2y$10$WZkAFhFYfkHVnMPx2rFH3OI19eMHAaX8OHg5v5gx/tuLofgzH9NS2', 0, 0),
-('U6216f0cc9ac96', 'johndoe123@gmail.com', 'Johndoeee', '$2y$10$bpNEshOksRkE2./1VfyMheCR5KhoxzzbVc81Q.HT3cOOcNbupsXCe', 0, 0),
-('U621755eaa43da', 'changyong@gmail.com', 'changyong', '$2y$10$YhyAJf7BlDR4dL0QMC.bDuy3BPqywmbc0owTVUVvoF4LJJvzcks86', 0, 0),
-('U6218a2e18c79a', 'johndoe1234@gmail.comd', 'Joooooooo', '$2y$10$pgppciyf/BvHHJXYboth2uBfuMO05wJludaBQwZgN5FKNbV70IcK.', 0, 0);
+INSERT INTO `user` (`user_id`, `email`, `username`, `password`, `verification`, `status`, `point`) VALUES
+('A6214d5dbb1305', 'admin@gmail.com', 'Admin', '$2y$10$WZkAFhFYfkHVnMPx2rFH3OI19eMHAaX8OHg5v5gx/tuLofgzH9NS2', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -130,23 +128,20 @@ INSERT INTO `user` (`user_id`, `email`, `username`, `password`, `verify`, `statu
 --
 
 CREATE TABLE `user_detail` (
-  `user_id` varchar(255) NOT NULL,
-  `nric_no` int(12) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
+  `nric_no` int(12) DEFAULT NULL,
   `bio` varchar(3000) NOT NULL,
   `gender` varchar(5) NOT NULL,
-  `contact_no` varchar(11) NOT NULL,
   `age` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `verify_queue`
---
 
-CREATE TABLE `verify_queue` (
+CREATE TABLE `verification_queue` (
   `nric_no` int(12) NOT NULL,
-  `user_id` varchar(255) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
   `full_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -157,8 +152,8 @@ CREATE TABLE `verify_queue` (
 --
 
 CREATE TABLE `vote_answer` (
-  `answer_id` varchar(255) NOT NULL,
-  `user_id` varchar(255) NOT NULL,
+  `answer_id` varchar(20) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
   `vote` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -169,8 +164,8 @@ CREATE TABLE `vote_answer` (
 --
 
 CREATE TABLE `vote_question` (
-  `question_id` varchar(255) NOT NULL,
-  `user_id` varchar(255) NOT NULL,
+  `question_id` varchar(20) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
   `vote` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -190,8 +185,8 @@ ALTER TABLE `answer`
 -- Indexes for table `bookmark_answer`
 --
 ALTER TABLE `bookmark_answer`
-  ADD PRIMARY KEY (`user_id`,`answer_id`),
-  ADD KEY `fk_bookmark_answer__answer` (`answer_id`);
+  ADD PRIMARY KEY (`answer_id`,`user_id`),
+  ADD KEY `fk_bookmark_answer__user` (`user_id`);
 
 --
 -- Indexes for table `bookmark_question`
@@ -212,7 +207,9 @@ ALTER TABLE `comment`
 -- Indexes for table `message`
 --
 ALTER TABLE `message`
-  ADD PRIMARY KEY (`message_id`);
+  ADD PRIMARY KEY (`message_id`),
+  ADD KEY `fk_message-sender__user` (`sender_id`),
+  ADD KEY `fk_message-receiver__user` (`receiver_id`);
 
 --
 -- Indexes for table `question`
@@ -234,25 +231,25 @@ ALTER TABLE `user_detail`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Indexes for table `verify_queue`
+-- Indexes for table `verification_queue`
 --
-ALTER TABLE `verify_queue`
+ALTER TABLE `verification_queue`
   ADD PRIMARY KEY (`nric_no`),
-  ADD KEY `fk_verify_queue__user` (`user_id`);
+  ADD KEY `fk_verification_queue__user` (`user_id`);
 
 --
 -- Indexes for table `vote_answer`
 --
 ALTER TABLE `vote_answer`
-  ADD PRIMARY KEY (`answer_id`,`user_id`),
-  ADD KEY `fk_vote_answer__user` (`user_id`);
+  ADD PRIMARY KEY (`user_id`,`answer_id`),
+  ADD KEY `fk_vote_answer__answer` (`answer_id`);
 
 --
 -- Indexes for table `vote_question`
 --
 ALTER TABLE `vote_question`
-  ADD PRIMARY KEY (`question_id`,`user_id`),
-  ADD KEY `fk_vote_question__user` (`user_id`);
+  ADD PRIMARY KEY (`user_id`,`question_id`),
+  ADD KEY `fk_vote_question__question` (`question_id`);
 
 --
 -- Constraints for dumped tables
@@ -288,6 +285,13 @@ ALTER TABLE `comment`
   ADD CONSTRAINT `fk_comment__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
+-- Constraints for table `message`
+--
+ALTER TABLE `message`
+  ADD CONSTRAINT `fk_message-receiver__user` FOREIGN KEY (`receiver_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `fk_message-sender__user` FOREIGN KEY (`sender_id`) REFERENCES `user` (`user_id`);
+
+--
 -- Constraints for table `question`
 --
 ALTER TABLE `question`
@@ -300,10 +304,10 @@ ALTER TABLE `user_detail`
   ADD CONSTRAINT `fk_user_detail__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
--- Constraints for table `verify_queue`
+-- Constraints for table `verification_queue`
 --
-ALTER TABLE `verify_queue`
-  ADD CONSTRAINT `fk_verify_queue__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+ALTER TABLE `verification_queue`
+  ADD CONSTRAINT `fk_verification_queue__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
 -- Constraints for table `vote_answer`
