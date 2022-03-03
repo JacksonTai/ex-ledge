@@ -132,7 +132,6 @@ CREATE TABLE `user_detail` (
   `nric_no` int(12) DEFAULT NULL,
   `bio` varchar(3000) NOT NULL,
   `gender` varchar(5) NOT NULL,
-  `contact_no` varchar(11) NOT NULL,
   `age` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
