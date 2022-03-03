@@ -139,8 +139,6 @@ CREATE TABLE `user_detail` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `verification_queue`
---
 
 CREATE TABLE `verification_queue` (
   `nric_no` int(12) NOT NULL,
