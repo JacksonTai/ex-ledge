@@ -9,7 +9,7 @@ class Signup extends \config\DbConn
      private $postData = [];
      private $errMsg = [
           'email' => '',
-          'fullName' => '',
+          'username' => '',
           'password' => '',
           'passwordRepeat' => '',
      ];
@@ -39,13 +39,13 @@ class Signup extends \config\DbConn
           $userId = uniqid('U');
           $hashedPassword = password_hash($this->postData['password'], PASSWORD_DEFAULT);
 
-          $sql = "INSERT INTO user (`user_id`, email, full_name, `password`)
+          $sql = "INSERT INTO user (`user_id`, email, username, `password`)
                   VALUES (?, ?, ?, ?);";
 
           $this->executeQuery($sql, [
                $userId,
                $this->postData['email'],
-               $this->postData['fullName'],
+               $this->postData['username'],
                $hashedPassword
           ]);
 
@@ -59,9 +59,9 @@ class Signup extends \config\DbConn
                $this->errMsg['email'] = '&#9888; Invalid email address.';
           }
 
-          // Validate full name.
-          if (!preg_match("/^[a-z]{8,30}$/i", $this->postData['fullName'])) {
-               $this->errMsg['fullName'] = '&#9888; Full name must: ';
+          // Validate username.
+          if (!preg_match("/^[a-z]{8,30}$/i", $this->postData['username'])) {
+               $this->errMsg['username'] = '&#9888; Username must: ';
           }
 
           // Validate password.
