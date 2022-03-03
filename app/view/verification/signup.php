@@ -18,16 +18,16 @@
                <form class="signup__form" method="POST">
                     <p class="signup__err-msg signup__err-msg--email invalid-input"></p>
                     <input class="signup__input" type="text" name="email" size="25" placeholder="Email Address"><br>
-                    <p class="signup__err-msg signup__err-msg--full-name invalid-input"></p>
+                    <p class="signup__err-msg signup__err-msg--username invalid-input"></p>
                     <ul>
-                         <li class="signup__rules signup__rules--full-name invalid-input">
-                              &#8226; Be at least 8 characters long.
+                         <li class="signup__rules signup__rules--username invalid-input">
+                              &#8226; Be between 8 to 30 characters long.
                          </li>
-                         <li class="signup__rules signup__rules--full-name invalid-input">
+                         <li class="signup__rules signup__rules--username invalid-input">
                               &#8226; Be containing alphabet only.
                          </li>
                     </ul>
-                    <input class="signup__input" type="text" name="fullName" size="25" placeholder="Full Name"><br>
+                    <input class="signup__input" type="text" name="username" size="25" placeholder="Username"><br>
                     <p class="signup__err-msg signup__err-msg--password invalid-input"></p>
                     <ul>
                          <li class="signup__rules signup__rules--password invalid-input">
