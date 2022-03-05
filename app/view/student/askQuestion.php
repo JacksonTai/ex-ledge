@@ -25,7 +25,7 @@ $path = '../../../';
                <div class="panel dialog">
                     <div class="section title">
                          <p class="input-header">Title</p>
-                         <input type="text" id="title" name="title" placeholder="e.g. How to solve question ..." class="input-box question">
+                         <input type="text" id="title" name="title" placeholder="e.g. How to solve question ..." class="input-box question" maxlength="100">
                     </div>
                     <div class="section body">
                          <p class="input-header">Body</p>
