@@ -29,7 +29,7 @@ $path = '../../../';
                     </div>
                     <div class="section body">
                          <p class="input-header">Body</p>
-                         <textarea id="content" name="content" rows="4" placeholder="Description of the question ..." class="input-box content"></textarea>
+                         <textarea id="content" name="content" placeholder="Description of the question ..." class="input-box content"></textarea>
                     </div>
                     <div class="btn-container">
                          <button type="submit" class="post_question_btn">Post Question</button>  
