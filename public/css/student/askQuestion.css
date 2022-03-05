@@ -23,7 +23,7 @@
 }
 
 .content{
-    height: 355px;
+    height: 210px;
 }
 
 .btn-container{
@@ -48,6 +48,14 @@
         padding: 3rem 2rem 8rem;
     }
     
+    .section{
+        margin-bottom: 1em;
+    }
+
+    .tag{
+        margin-bottom: 2em;
+    }
+
     .input-header{
         font-size: 20px;
     }
@@ -59,7 +67,6 @@
     .post_question_btn{
         font-size: 13px;
     }
-
 }
 
 

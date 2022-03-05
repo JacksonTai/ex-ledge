@@ -31,6 +31,10 @@ $path = '../../../';
                          <p class="input-header">Body</p>
                          <textarea id="content" name="content" placeholder="Description of the question ..." class="input-box content"></textarea>
                     </div>
+                    <div class="section tag">
+                         <p class="input-header">Tags</p>
+                         <input type="text" id="title" name="title" placeholder="e.g. Physics, Mathematics, Science, ..." class="input-box ">
+                    </div>
                     <div class="btn-container">
                          <button type="submit" class="post_question_btn">Post Question</button>  
                     </div>
