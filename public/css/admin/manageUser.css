@@ -1,0 +1,65 @@
+.main-title{
+    margin: 0;
+}
+
+.card-container{
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(340px, 1fr) );
+    margin: 0 auto;
+}
+
+.user-card{
+    width: 100%;
+    max-width: 20rem;
+    margin: 2.5rem 0;
+    padding: 2em;
+    border-radius: 1em;
+    background-color: #ffffff;
+    box-shadow: 0.5rem 0.5rem 2.5rem var(--clr-shadow-grey);
+}
+
+.user-card-content{
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    word-wrap: break-word;
+}
+
+.profile-picture{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0.5em;
+}
+
+.content-details{
+    margin-bottom: 1em;
+}
+
+.detail-title{
+    color: #B7BACB;
+    font-size: 20px;
+}
+
+.ban-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.ban-button{
+    border: solid 2px #ff0000;
+    color: #ff0000;
+    background-color: transparent;
+    font-weight: bold;
+}
+
+.ban-button:hover{
+    color: white;
+    background-color: #ff0000;
+}
+
+
+
