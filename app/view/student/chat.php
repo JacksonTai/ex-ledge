@@ -9,8 +9,8 @@ $path = '../../../';
 
 <head>
      <?php include '../../config/head.php' ?>
-     <title>User | Ex-Ledge</title>
-     <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/question.css">
+     <title>Chat | Ex-Ledge</title>
+     <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/chat.css">
 </head>
 
 <body>
@@ -21,8 +21,8 @@ $path = '../../../';
 
           <?php include '../layout/sidebar.php' ?>
 
-          <main class="question--main main-content">
-               <h2 class="question__title main-title">Put 'question title' as title</h2>
+          <main class="chat--main main-content">
+               <h2 class="chat__title main-title">Chat</h2>
           </main>
 
      </div>
