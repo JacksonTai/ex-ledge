@@ -4,8 +4,9 @@
 
 .card-container{
     display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(340px, 1fr) );
+    grid-template-columns: repeat( auto-fit, minmax(360px, 1fr) );
     margin: 0 auto;
+    justify-content: center;
 }
 
 .user-card{
@@ -61,3 +62,12 @@
     background-color: #ff0000;
 }
 
+@media (max-width: 795px) {
+    .main-title{
+        text-align: center;
+    }
+
+    .user-card{
+        margin: 1.5em auto;
+    }
+}
