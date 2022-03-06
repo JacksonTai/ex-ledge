@@ -100,7 +100,7 @@ div > button {
 
 .trending {
   display: grid;
-  grid-template-rows: 20% 20% 20% 20% 20%;
+  grid-template-rows: fit-content(20%) fit-content(20%);
 }
 
 .trending-tab {
