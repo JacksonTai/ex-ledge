@@ -23,10 +23,9 @@
                     <p class="section--home__content">
                          Ex-Ledge is a forum-based educational system that aids Malaysia high
                          school students in their studies.
-                         <?= $_SESSION['userId'] ?? ''; ?>
                     </p>
-                    <button class="section--home-cta-btn" onclick="window.location.href='../app/view/verification/signup.php'">
-                         Get started
+                    <button class="section--home-cta-btn">
+                         <a class="section--home-cta-link" href="../app/view/verification/signup.php">Get started</a>
                     </button>
                </div>
           </section>
@@ -36,7 +35,7 @@
                     <span class="highlighted-title">Features</span>
                </h2>
                <div class="section--features__card-container">
-                    <div class="section--features__card">
+                    <div class="section--features__card dialog">
                          <img class="section--features__card-icon" src="img/q&a.jpg" alt=" Q&A Icon">
                          <h3 class="section--features__card-title">Clear your doubts</h3>
                          <p class="section--features__card-content">
@@ -45,7 +44,7 @@
                               and answers.
                          </p>
                     </div>
-                    <div class="section--features__card">
+                    <div class="section--features__card dialog">
                          <img class="section--features__card-icon" src="img/chat.jpg" alt=" Chat Icon">
                          <h3 class="section--features__card-title">Chat among peers</h3>
                          <p class="section--features__card-content">
@@ -54,7 +53,7 @@
                               system.
                          </p>
                     </div>
-                    <div class="section--features__card">
+                    <div class="section--features__card dialog">
                          <img class="section--features__card-icon" src="img/podium.jpg" alt=" Podium IconF">
                          <h3 class="section--features__card-title">Gain reputation</h3>
                          <p class="section--features__card-content">
