@@ -27,7 +27,7 @@ $path = '../../../';
                <div class="card-container">
                     <div class="user-card">
                          <div class="user-card-content">
-                              <img class="profile-picture" src="https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc" alt="profile-picture">
+                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
                               <div class="content-details">
                                    <p class="detail-title">User ID:</p>
                                    <p>FNDKNSFLFND</p>
@@ -45,14 +45,14 @@ $path = '../../../';
                                    <p>UNVERIFIED</p>
                               </div>
                               <div class="ban-container">
-                                   <button class="ban-button"><p>BAN</p></button>
+                                   <button class="ban-button">Ban</button>
                               </div>
                          </div>
                     </div>
 
                     <div class="user-card">
                          <div class="user-card-content">
-                              <img class="profile-picture" src="https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc" alt="profile-picture">
+                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
                               <div class="content-details">
                                    <p class="detail-title">User ID:</p>
                                    <p>FNDKNSFLFND</p>
@@ -70,14 +70,14 @@ $path = '../../../';
                                    <p>UNVERIFIED</p>
                               </div>
                               <div class="ban-container">
-                                   <button class="ban-button"><p>BAN</p></button>
+                                   <button class="ban-button">Ban</button>
                               </div>
                          </div>
                     </div>
 
                     <div class="user-card">
                          <div class="user-card-content">
-                              <img class="profile-picture" src="https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc" alt="profile-picture">
+                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
                               <div class="content-details">
                                    <p class="detail-title">User ID:</p>
                                    <p>FNDKNSFLFND</p>
@@ -95,14 +95,14 @@ $path = '../../../';
                                    <p>UNVERIFIED</p>
                               </div>
                               <div class="ban-container">
-                                   <button class="ban-button"><p>BAN</p></button>
+                                   <button class="ban-button">Ban</button>
                               </div>
                          </div>
                     </div>
 
                     <div class="user-card">
                          <div class="user-card-content">
-                              <img class="profile-picture" src="https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc" alt="profile-picture">
+                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
                               <div class="content-details">
                                    <p class="detail-title">User ID:</p>
                                    <p>FNDKNSFLFND</p>
@@ -120,14 +120,14 @@ $path = '../../../';
                                    <p>UNVERIFIED</p>
                               </div>
                               <div class="ban-container">
-                                   <button class="ban-button"><p>BAN</p></button>
+                                   <button class="ban-button">Ban</button>
                               </div>
                          </div>
                     </div>
 
                     <div class="user-card">
                          <div class="user-card-content">
-                              <img class="profile-picture" src="https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc" alt="profile-picture">
+                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
                               <div class="content-details">
                                    <p class="detail-title">User ID:</p>
                                    <p>FNDKNSFLFND</p>
@@ -145,14 +145,14 @@ $path = '../../../';
                                    <p>UNVERIFIED</p>
                               </div>
                               <div class="ban-container">
-                                   <button class="ban-button"><p>BAN</p></button>
+                                   <button class="ban-button">Ban</button>
                               </div>
                          </div>
                     </div>
 
                     <div class="user-card">
                          <div class="card-content">
-                              <img class="profile-picture" src="https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc" alt="profile-picture">
+                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
                               <div class="content-details">
                                    <p class="detail-title">User ID:</p>
                                    <p>FNDKNSFLFND</p>
@@ -170,14 +170,14 @@ $path = '../../../';
                                    <p>UNVERIFIED</p>
                               </div>
                               <div class="ban-container">
-                                   <button class="ban-button"><p>BAN</p></button>
+                                   <button class="ban-button">Ban</button>
                               </div>
                          </div>
                     </div>
 
                     <div class="user-card">
                          <div class="user-card-content">
-                              <img class="profile-picture" src="https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc" alt="profile-picture">
+                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
                               <div class="content-details">
                                    <p class="detail-title">User ID:</p>
                                    <p>FNDKNSFLFND</p>
@@ -195,7 +195,7 @@ $path = '../../../';
                                    <p>UNVERIFIED</p>
                               </div>
                               <div class="ban-container">
-                                   <button class="ban-button"><p>BAN</p></button>
+                                   <button class="ban-button">Ban</button>
                               </div>
                          </div>
                     </div>
