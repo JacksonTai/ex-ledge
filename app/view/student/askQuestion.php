@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '../../helper/redirector.php';
+include '../../helper/autoloader.php';
 $path = '../../../';
 ?>
 <!DOCTYPE html>
@@ -22,7 +23,6 @@ $path = '../../../';
 
           <main class="ask-question--main main-content">
                <h2 class="ask-question__title main-title">Ask Question</h2>
-               <p><?= $_SESSION['userId']; ?></p>
           </main>
 
      </div>
