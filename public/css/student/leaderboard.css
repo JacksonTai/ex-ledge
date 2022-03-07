@@ -1,92 +1,56 @@
 
-/* ---------------Leaderboard Dashboard----------------- */
 body{
 	overflow-x: hidden;
 }
-h1{
-	font-size: 36px;
-	color: #000000;
-	margin: 100px 0 0 -400px;
-}
-.container{
+.leaderboard_dashboard{
+	margin: 0;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.leaderboard-dashboard {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+.leaderboard_container{
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	grid-gap: 4rem;
 }
-.leaderboard-container{
-	display: flex;
-	gap: 3%;
-	margin: 50px 0px -250px -150px;
-	padding: 0 0 0 80px;
-}
-.allranking-container{
-	display: flex;
-	flex-direction: column;
-	margin: 0 0 0 150px;
-	padding: 0 0 0px 50px;
-	width: 70rem;
-}
-.long_box{
-	width: 60rem;
-	margin: 10px 0px 20px 0px;
-}
-.l_box{
-	width: 90%;
-	height: 60px;
-	background-color: #ffffff;
-    box-shadow: 0 5px 10px #e1e5ee;
-	padding: 7px 10px 0px 20px; /* top paading size 7px, left right 10px, bottom 0px */
-    border-radius: 20px;
-}
-.s_box{
-	width: 18rem;
+.top_box{
+	width: 23rem;
 	height: 220px;
 	background-color: #ffffff;
     box-shadow: 0 5px 10px #e1e5ee;
-	margin-left: 20px; /*the left of the item will have spaces about 20px*/
-	padding: 7px 10px 0px; /* top paading size 7px, left right 10px, bottom 0px */
-    border-radius: 20px;
+	border-radius: 20px;
 }
 .top2-s_half_box{
-	width: 18rem;
+	width: 23rem;
 	height: 100px;
 	background-color: #A3A3A3;
     box-shadow: 0 5px 10px #e1e5ee;
-	margin-left: 20px; /*the left of the item will have spaces about 20px*/
-	padding: 10px 20px 0px; /* top paading size 7px, left right 10px, bottom 0px */
-	margin: -8px 0px 0px -10px;
     border-radius: 20px 20px 0px 0px;
+	position: relative;
 }
 .top1-s_half_box{
-	width: 18rem;
+	width: 23rem;
 	height: 100px;
 	background-color: #E7BC18;
     box-shadow: 0 5px 10px #e1e5ee;
-	margin-left: 20px; /*the left of the item will have spaces about 20px*/
-	padding: 10px 20px 0px; /* top paading size 7px, left right 10px, bottom 0px */
-	margin: -8px 0px 0px -10px;
     border-radius: 20px 20px 0px 0px;
+	position: relative;
 }
 .top3-s_half_box{
-	width: 18rem;
+	width: 23rem;
 	height: 100px;
 	background-color: #C5853C;
     box-shadow: 0 5px 10px #e1e5ee;
-	margin-left: 20px; /*the left of the item will have spaces about 20px*/
-	padding: 10px 20px 0px; /* top paading size 7px, left right 10px, bottom 0px */
-	margin: -8px 0px 0px -10px;
     border-radius: 20px 20px 0px 0px;
+	position: relative;
 }
 .top_img{
 	border: 1px solid black;
 	width: 80px;
     height: 80px;
     border-radius: 50%;
-	margin: 60px 0px 0px 95px;
+	margin: 0 0 0 9rem;
 }
 h3, .pt{
 	text-align: center;
@@ -94,159 +58,123 @@ h3, .pt{
 .pt{
 	font-size: 32px;
 	color: white;
-	margin: 5px 0px -40px 0px; /* top paading size 7px, left right 10px, bottom 0px */
+	margin: 5px 0px 0px 0px; 
+}
+
+/* ------------------------------------------------------------------------ */
+.all-ranking_dashboard{
+	margin: 0;
+	margin-top: -70px;
+	margin-bottom: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.all-ranking_container{
+	margin-top: 100px;
+	width: 100%;
+	display: grid;
+	grid-template-rows: repeat(auto-fit, minmax(60px, 1fr));
+	grid-gap: 20px;
+}
+.l_box{
+	height: 60px;
+	background-color: #ffffff;
+    box-shadow: 0 5px 10px #e1e5ee;
+    border-radius: 20px;
+}
+.rank-tag_container{
+	width: 100%;
+	display: grid;
+	grid-template-rows: repeat(auto-fit, minmax(60px, 1fr));
+	grid-gap: 20px;
 }
 .rank_tag{
+	margin-top: 70px;
 	font-size: 16px;
 	color: #000000;
-	margin: 340px 0px 0px 45px;
+	width: 60%;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
 .no_tag{
 	font-weight: bold;
-	margin: 0 0 -1.5rem 0;
+	margin: 0rem 2rem;
 }
 .user_tag{
 	font-weight: bold;
-	margin: 0 0 -1.3rem 7rem;
+	margin: 0rem -2rem;
 }
 .point_tag{
+	justify-content: right;
+	align-items: right;
+	display: flex;
 	font-weight: bold;
-	margin: 0 0 0 33.7rem;
+	margin: 0rem 2rem;
+	width: 115%;
+}
+.user_info{
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
 .rank_no{
 	font-size: 20px;
-	padding: 65px 30px 10px;
-	margin: -55px 0px -20px 0px;
+	margin: 1rem 2rem;
 }
 .rank_img{
 	width: 50px;
     height: 50px;
     border-radius: 50%;
-	margin: -30px 0px 0px 140px;
+	margin: 0.3rem -2rem;
 }
 .rank_name{
 	font-size: 20px;
-	padding: 8px 230px 10px;
-	margin: -57px 0px -105px 0px;
+	margin: 1rem -5rem;
 }
 .rank_pt{
 	font-size: 20px;
-	padding: 65px 66.5% 10px;
-	margin: 0 0 -50px 11px;
+	margin: 1rem 2rem;
 }
 .view_profile_btn{
+	margin: 0.7rem -2rem;
 	text-decoration: none;
 	color: 	#008000;
 	border-color: 008000;
-	margin: 0px 0px 0px 80%;
-	line-height: 35px;
+	line-height: 25px;
 	background-color: white;
 	border-radius: 10px;
-	width: 200px;
-	height: 50px;
-	font-size: 16px;
-	cursor: pointer;;
+	width: 150px;
+	height: 40px;
+	font-size: 14px;
+	cursor: pointer;
 }
 .view_profile_btn:hover {
 	background-color: #008000;
 	color: white;
 }
 
-@media (max-width: 1245px) {
-	.sidenav{
-		display: none;
-	}
-	.layout-header__logo-link{
-		font-size: 34px;
-		margin: -4.1rem 0 1.5rem 0;
-		padding: 0 1rem 0 -2rem;
-	}
-}
-
-@media (max-width: 1050px) {
-	.layout-header__logo-link{
-		font-size: 34px;
-		margin: -4.1rem 0 1.5rem 0;
-		padding: 0 1rem 0 -2rem;
-	}
-	.search_container{
-		margin: 1rem 0rem 0rem 1rem;
-	}
-	.search_box{
-		width: 190px;
-	}
-	.search_button{
-		width: 70px;
-		font-size: 12px;
-		padding: 0.6rem 2rem 0 0.5rem;
-	}
-
-	/* -------------------------------------------- */
-	.container{
-		justify-content: center;
-		align-items: center;
-	}
-	h1{
-		margin: 100px 0px 0px 0px;
-	}
-	.leaderboard-container{
-		flex-direction: column;
-		gap: 30px;
-		justify-content: center;
-		align-items: center;
-		margin: 50px 0px -250px -95px;
-		padding: 0 0 0 80px;
-	}
-	.allranking-container{
+@media (max-width: 1595px){
+	.leaderboard_container{
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-  		align-items: center;
-		margin: 0 0 0 20px;
-		padding: 0 0 0 50px;
-		width: 50px;
-	}
-	.long_box{
-		width: 40rem;
-		margin: 10px 0px 20px 0px;
 	}
 	.top2-s_half_box{
 		position: relative;
-		margin: 240px 0px 0px -10px;
+		margin: 290px 0px 0px 0px;
 	}
 	.top1-s_half_box{
-		margin: -260px 0px 0px -10px;
+		position:relative;
+		margin: -290px 0px 0px 0px;
 	}
+	.top_box{
+		margin: 0 auto;
+	}
+}
 
-	/* -------------------------------------------- */
-	.rank_tag{
-		margin: 340px 0px 0px 85px;
-	}
-	.no_tag{
-		margin: 0 0 -1.4rem -19rem;
-	}
-	.user_tag{
-		margin: 0 0 -1.3rem -15.5rem;
-	}
+
+@media (max-width: 1050px){
 	.point_tag{
-		margin: 0 0 0 2rem;
-	}
-	.rank_no{
-		margin: -55px 0px -20px -20px;
-	}
-	.rank_img{
-		margin: -30px 0px 0px 60px;
-	}
-	.rank_name{
-		margin: -57px 0px -105px -80px;
-	}
-	.rank_pt{
-		margin: 0 0 -50px -24px;
-	}
-	.view_profile_btn{
-		font-size: 15px;
-		margin: 0 0 0 25rem;
-		width: 160px;
-		height: 50px;
+		margin: 0 3rem;
 	}
 }
