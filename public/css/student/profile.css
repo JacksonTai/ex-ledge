@@ -1,0 +1,150 @@
+.profile--main {
+  background-color: #f5f5f5;
+}
+
+.profile__banner {
+  width: 100%;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+.profile__banner-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+}
+
+.profile__edit-btn {
+  padding: 0;
+  background-color: #ffffff;
+  align-self: flex-end;
+}
+
+.profile__img {
+  display: block;
+  margin: 0 auto;
+  min-width: 65%;
+}
+
+.profile__username {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.profile__banner-body {
+  align-self: flex-start;
+}
+
+.profile__banner-content {
+  margin: 0.7rem 0;
+}
+
+.profile__content-label {
+  color: #757575;
+}
+
+.profile__banner-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background-color: #f7f7fc;
+}
+
+.profile__banner-navbar-btn {
+  min-width: 40%;
+  margin: 0.6rem 0.2rem;
+  font-weight: 700;
+  color: #757575;
+  background-color: #f7f7fc;
+}
+
+.profile-btn-selected {
+  color: #ffffff;
+  background-color: var(--clr-primary);
+}
+
+.profile-section {
+  display: none;
+}
+
+.profile-section-selected {
+  display: block;
+}
+
+.profile-section-selected--flex {
+  display: flex;
+}
+
+.profile-section--overview {
+  margin-bottom: 3rem;
+  padding: 0;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.profile-section__overview--about,
+.profile-section__overview--stats {
+  width: 100%;
+  margin: 2rem 0 0;
+  border-bottom: 5px solid var(--clr-primary);
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.edit-profile-form,
+.edit-profile-form__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.edit-profile-form__item {
+  margin-top: 1rem;
+}
+
+.edit-profile-form__btn {
+  margin-top: 3rem;
+}
+
+@media (min-width: 900px) {
+  .profile__banner-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 2em;
+  }
+
+  .profile__edit-btn {
+    order: 1;
+    margin-left: auto;
+    align-self: flex-start;
+  }
+
+  .profile__banner-header {
+    min-width: 20%;
+    margin: 0 2rem;
+  }
+
+  .profile__banner-header,
+  .profile__banner-body {
+    margin-top: 2rem;
+  }
+
+  .profile-section__overview--about {
+    max-width: 65%;
+  }
+
+  .profile-section__overview--stats {
+    max-width: 30%;
+  }
+}
+
+@media (min-width: 1245px) {
+  .profile__banner-navbar-btn {
+    min-width: 20%;
+  }
+}

@@ -112,7 +112,7 @@ main {
 }
 
 section {
-  padding: 4em;
+  padding: 1em;
 }
 
 /* ---------- [Table] ----------- */
@@ -137,7 +137,7 @@ textarea,
 select,
 button {
   font-family: var(--ff-montserrat-text);
-  font-weight: 700;
+  /* font-weight: 700; */
   font-size: 0.9rem;
 }
 
@@ -190,6 +190,46 @@ input:-webkit-autofill {
   padding: 2em 2.5em;
   box-shadow: 0.15rem 0.3rem 0.8rem var(--clr-shadow-grey);
   border-radius: 0.5rem;
+  background-color: #ffffff;
+}
+
+/* ---------- [Modal] ----------- */
+.modal {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  width: fit-content;
+  max-width: 90%;
+  height: fit-content;
+  max-height: 80vh;
+  padding: 2em;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  border: 2px solid var(--clr-shadow-grey);
+  overflow: auto;
+}
+
+.modal-overlay {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.modal__close-btn {
+  margin-left: auto;
+  padding: 0;
+  font-size: 1.5rem;
+  color: #000000;
+  background-color: #ffffff;
 }
 
 /* ---------- [Invalid Input] ----------- */
@@ -217,7 +257,6 @@ input:-webkit-autofill {
 .main-title {
   margin: 0 0 2rem;
 }
-
 
 /* ############## 3. Media Queries  ############# */
 /* Note: Font-size grow as the screen size grow. */

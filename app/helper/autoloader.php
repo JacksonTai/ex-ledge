@@ -1,9 +1,13 @@
 <?php
 
 spl_autoload_register(function ($classname) {
-  
-     $file = '../' . $classname . '.php';
-   
+
+     $url = $_SERVER['REQUEST_URI'];
+
+     strpos($url, 'app/view') ?  $path = '../../' : $path = '../';
+     
+     $file = $path . $classname . '.php';
+
      if (file_exists($file)) {
           try {
                require_once $file;

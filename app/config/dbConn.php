@@ -11,6 +11,7 @@ class DbConn
      private $database = 'ex_ledge';
      private $username = 'root';
      private $password = '';
+     private $options = [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC];
 
      protected function connect()
      {
@@ -18,7 +19,8 @@ class DbConn
                $pdo = new Pdo(
                     'mysql:host=' . $this->hostname . ';dbname=' . $this->database,
                     $this->username,
-                    $this->password
+                    $this->password,
+                    $this->options
                );
                return $pdo;
           } catch (PDOException $e) {

@@ -7,6 +7,7 @@
                <li><a class="layout-side-navbar__link" href="../admin/userVerification.php">User verification</a></li>
           <?php else : ?>
                <li><a class="layout-side-navbar__link" href="../student/home.php">Home</a></li>
+               <li><a class="layout-side-navbar__link" href="../student/chat.php">Chat</a></li>
                <li><a class="layout-side-navbar__link" href="../student/user.php">Users</a></li>
                <li><a class="layout-side-navbar__link" href="../student/leaderboard.php">Leaderboard</a></li>
           <?php endif; ?>

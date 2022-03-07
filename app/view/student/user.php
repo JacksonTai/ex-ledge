@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '../../helper/redirector.php';
+include '../../helper/autoloader.php';
 $path = '../../../';
 ?>
 <!DOCTYPE html>
@@ -21,6 +22,7 @@ $path = '../../../';
           <?php include '../layout/sidebar.php' ?>
 
           <main class="user--main main-content">
+<<<<<<< HEAD
                <h2 class="user__title">Users</h2>
                <!-- <p><?= $_SESSION['userId']; ?></p> -->
                
@@ -102,6 +104,9 @@ $path = '../../../';
                     </div>
                     
                </div>
+=======
+               <h2 class="user__title main-title">Users</h2>
+>>>>>>> 3ac939fe988ef772799295c7e43f17593624bf59
           </main>
 
      </div>
