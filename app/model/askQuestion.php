@@ -2,16 +2,27 @@
 
 namespace Model;
 
-include '../../helper/autoloader.php';
+include '../helper/autoloader.php';
 
 class AskQuestion extends \config\DbConn
 {
     private $postData = [];
+    private $errMsg = [
+        'title' => '',
+        'content' => '',
+        'tag' => '',
+    ];
 
     protected function __construct($postData)
     {
         $this->postData = $postData;
-        $this->createQuestion();
+        $this->checkEmptyInput();
+        
+        if (array_filter($this->errMsg)) {
+            return $this -> errMsg;
+        } else {
+            $this->createQuestion();
+        }
     } 
 
     protected function createQuestion()
@@ -23,14 +34,25 @@ class AskQuestion extends \config\DbConn
 
         $this->executeQuery($sql, [
             $questionId,
-            $_SESSION['userId'],
+            "U622622cfcdfac",
             $this->postData['title'],
             $this->postData['content'],
             $this->postData['tag'],
             0
         ]);
+    }
 
+    private function checkEmptyInput()
+    {
+        $result = true;
+        foreach ($this->postData as $field => $data) {
 
+            // Check if any input is empty.
+            if (empty(trim($data))) {
+                $this->errMsg[$field] = '* ' . ucfirst($field) . ' is a required field';
+            }
+        }
+        return $result;
     }
 
 }
