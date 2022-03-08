@@ -95,6 +95,7 @@ CREATE TABLE `question` (
   `user_id` varchar(20) NOT NULL,
   `title` varchar(100) NOT NULL,
   `content` mediumtext NOT NULL,
+  `tag` varchar(100) NOT NULL,
   `point` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
