@@ -12,7 +12,7 @@ class AskQuestion extends \config\DbConn
         'content' => '',
         'tag' => '',
     ];
-
+    
     protected function __construct($postData)
     {
         $this->postData = $postData;
@@ -25,6 +25,7 @@ class AskQuestion extends \config\DbConn
         }
     } 
 
+    // Insert input into database
     protected function createQuestion()
     {   
         session_start();
@@ -42,17 +43,15 @@ class AskQuestion extends \config\DbConn
         ]);
     }
 
+    // Check for empty inputs
     private function checkEmptyInput()
     {
-        $result = true;
         foreach ($this->postData as $field => $data) {
-
             // Check if any input is empty.
             if (empty(trim($data))) {
                 $this->errMsg[$field] = '* ' . ucfirst($field) . ' is a required field';
             }
         }
-        return $result;
     }
 
 }

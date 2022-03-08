@@ -21,11 +21,13 @@ questionForm.addEventListener("submit", async function (e){
   let formData = new FormData(this);
 
     try {
+        // Start fetch request
         const res = await fetch("../../controller/askQuestion.php", {
             method: "POST",
             body: formData,
         });
-
+        
+        // Waits for a response, and treat it as a json object
         let errMsg = await res.json();
 
         // Redirect to user page once there is no error messages.
