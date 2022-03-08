@@ -4,7 +4,7 @@ namespace Controller;
 
 include '../helper/autoloader.php';
 
-class AskQuestion extends \Model\AskQuestion
+class Question extends \Model\Question
 {
     public function __construct($postData)
     {
@@ -17,4 +17,4 @@ class AskQuestion extends \Model\AskQuestion
     }
 }
 
-new \Controller\AskQuestion($_POST);
+new \Controller\Question($_POST);
