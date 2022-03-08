@@ -1,3 +1,18 @@
+// Pop Up Alert After a successful post submission
+function pop_up_success(){
+    Swal.fire({
+        icon:'success',
+        title: 'Success', 
+        text: 'Question Successfully Posted!',
+        showDenyButton: false,
+        showCancelButton: false,
+        confirmButtonText: '<p class="alert_text">Continue</p>'
+    }).then(function() {
+        window.location = "../student/home.php";
+    });
+}
+
+
 let questionForm = document.querySelector(".question__form");
 
 questionForm.addEventListener("submit", async function (e){
@@ -15,7 +30,7 @@ questionForm.addEventListener("submit", async function (e){
 
         // Redirect to user page once there is no error messages.
         if (!errMsg) {
-            window.location.href = "../student/home.php";
+            pop_up_success();
         } else {
             // Destruct the errMsg object.
             let { title, content, tag } = errMsg;

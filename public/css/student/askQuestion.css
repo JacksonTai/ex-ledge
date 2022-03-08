@@ -39,6 +39,20 @@
     bottom: 0;
 }
 
+/* JS styles for alert box */
+.swal2-styled.swal2-confirm{
+    background-color: #0066ff;
+}
+
+.alert_text{
+    color: white;
+}
+
+.swal2-popup .swal2-styled:focus {
+    box-shadow: none !important;
+}
+
+/* Phone resolution styles */
 @media (max-width: 510px) {
     ::placeholder{
         font-size: 15px;
