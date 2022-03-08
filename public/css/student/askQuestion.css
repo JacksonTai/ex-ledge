@@ -52,6 +52,10 @@
     box-shadow: none !important;
 }
 
+.swal2-html-container{
+    font-family: "montserrat-medium";
+}
+
 /* Phone resolution styles */
 @media (max-width: 510px) {
     ::placeholder{
