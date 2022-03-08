@@ -4,7 +4,7 @@ namespace Model;
 
 include '../helper/autoloader.php';
 
-class AskQuestion extends \config\DbConn
+class Question extends \config\DbConn
 {
     private $postData = [];
     private $errMsg = [
@@ -12,22 +12,24 @@ class AskQuestion extends \config\DbConn
         'content' => '',
         'tag' => '',
     ];
-    
+
     protected function __construct($postData)
     {
-        $this->postData = $postData;
-        $this->checkEmptyInput();
-        
-        if (array_filter($this->errMsg)) {
-            return $this -> errMsg;
-        } else {
-            $this->createQuestion();
+        if (!empty($postData)) {
+            $this->postData = $postData;
+            $this->checkEmptyInput();
+
+            if (array_filter($this->errMsg)) {
+                return $this->errMsg;
+            } else {
+                $this->createQuestion();
+            }
         }
-    } 
+    }
 
     // Insert input into database
     protected function createQuestion()
-    {   
+    {
         session_start();
         $questionId = uniqid('Q');
         $sql = "INSERT INTO question
@@ -53,5 +55,4 @@ class AskQuestion extends \config\DbConn
             }
         }
     }
-
 }
