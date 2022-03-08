@@ -27,14 +27,14 @@ class AskQuestion extends \config\DbConn
 
     protected function createQuestion()
     {   
-
+        session_start();
         $questionId = uniqid('Q');
         $sql = "INSERT INTO question
                 VALUES (?, ?, ?, ?, ?, ?);";
 
         $this->executeQuery($sql, [
             $questionId,
-            "U622622cfcdfac",
+            $_SESSION['userId'],
             $this->postData['title'],
             $this->postData['content'],
             $this->postData['tag'],
