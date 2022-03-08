@@ -34,10 +34,21 @@
 
 .section--home-cta-btn {
   margin: 0 auto;
+  padding: 0;
+}
+
+.section--home-cta-link {
+  display: block;
+  padding: 0.5em 2em;
+  color: #ffffff;
 }
 
 /* --- Features section --- */
 .section--features {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
   background-color: #f9f9f9;
 }
 
@@ -45,6 +56,7 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -52,10 +64,7 @@
   width: 85%;
   max-width: 20rem;
   margin: 2.5rem;
-  padding: 2em;
-  border-radius: 3em;
   background-color: #ffffff;
-  box-shadow: 0.5rem 0.5rem 2.5rem var(--clr-shadow-grey);
 }
 
 .section--features__card-icon {

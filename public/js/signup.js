@@ -12,7 +12,7 @@ signupForm.addEventListener("submit", async function (e) {
     });
 
     let errMsg = await res.json();
-
+    
     // Redirect to user page once there is no error messages.
     if (!errMsg) {
       window.location.href = "../student/home.php";
@@ -22,7 +22,9 @@ signupForm.addEventListener("submit", async function (e) {
 
       // Add error messages to the respective HTML element.
       let emailErrMsg = document.querySelector(".signup__err-msg--email");
-      let usernameErrMsg = document.querySelector(".signup__err-msg--username");
+      let usernameErrMsg = document.querySelector(
+        ".signup__err-msg--username"
+      );
       let passwordErrMsg = document.querySelector(".signup__err-msg--password");
       let passwordRepeatErrMsg = document.querySelector(
         ".signup__err-msg--password-repeat"
@@ -33,7 +35,9 @@ signupForm.addEventListener("submit", async function (e) {
       passwordRepeatErrMsg.textContent = decodeEntity(passwordRepeat);
 
       // Display field rules when the input is invalid.
-      let usernameRules = document.querySelectorAll(".signup__rules--username");
+      let usernameRules = document.querySelectorAll(
+        ".signup__rules--username"
+      );
       for (let usernameRule of usernameRules) {
         if (username.includes("&#9888;")) {
           usernameRule.classList.add("signup__rules-show");
