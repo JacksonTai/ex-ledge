@@ -33,7 +33,7 @@ $path = '../../../';
                          <div class="section body">
                               <p class="input-header">Content</p>
                               <p class="askquestion__err-msg--content invalid-input"></p>
-                              <textarea class="input-box content" id="content" name="content" placeholder="Description of the question ..."></textarea>
+                              <textarea class="input-box content" id="content" name="content" placeholder="Description of the question ..." maxlength="10000"></textarea>
                          </div>
                          <div class="section tag">
                               <p class="input-header">Tags</p>
