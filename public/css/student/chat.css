@@ -3,10 +3,6 @@
   --chat-typing-area-height: 75px;
 }
 
-::-webkit-scrollbar {
-  width: 0.3rem;
-}
-
 .chat--main,
 .chat-section__user-search-wrapper,
 .chat-section__user-list,
@@ -53,10 +49,6 @@
   margin: 0 1rem;
 }
 
-/* .chat-section__chatting-username {
-  margin-left: 1rem;
-} */
-
 .chat-section__chat-box {
   min-height: calc(
     100vh - var(--layout-header-height) - var(--chat-header-height) -
@@ -65,6 +57,10 @@
   max-height: 70vh;
   padding: 1.5rem;
   overflow: auto;
+}
+
+.chat-section__chat-box::-webkit-scrollbar {
+  width: 0.3rem;
 }
 
 .chat-section__chat {
@@ -207,7 +203,6 @@
     display: block;
     width: 68vw;
   }
-
 
   .chat-section__typing-area {
     padding: 0 2.3rem 0 4.3rem;
