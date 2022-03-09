@@ -19,41 +19,89 @@ $path = '../../../';
     <div class="main-sidebar-wrapper">
 
         <?php include '../layout/sidebar.php' ?>
-        <!-- Note: Every main content goes inside main tag, except for the sidebar on right side. (Delete once readed) -->
         <main class="home--main main-content">
             <div class="title-ctnr">
-                <!-- h1 is not being used as it's being used for logo. (Delete once readed) -->
-                <h2 class="home__title main-title">Question Ask: </h2>
-                <div><button>Filter</button></div>
+                <h2 class="home__title main-title">Question Asked: </h2>
+                <div class="button"><button class="button-filter">Filter</button></div>
             </div>
-            <!-- DUPLICATE AS NEEDED -->
-            <div class="post-ctnr">
-                <div class="vote-tab">
-                    <i class="vote-arrow rotate-up"></i>
-                    <p>1</p>
-                    <i class="vote-arrow rotate-down"></i>
+
+            <div class="panel dialog">
+                <div class="vote-container">
+                    <i class="fa-solid fa-arrow-up fa-lg"></i>
+                    <p>95</p>
+                    <i class="fa-solid fa-arrow-down fa-lg"></i>
                 </div>
-                <div class="post-ctnt">
-                    <div class="post-title">
-                        <!-- Try to aVoid inline styling. (Delete once readed)
-                            Reference: 
-                            https://dev.to/alim1496/avoid-using-inline-css-styles-5b6p
-                        -->
-                        <h2 style="font-weight: 400;">what is the</h2>
-                        <p>clickable button</p>
+                <div class="question">
+                    <div class="question-headers">
+                        <div class="question-caption">
+                            <p class="question-title">Is Ex-Ledge the best?</p>
+                            <p class="question-age">19 mins ago</p>
+                        </div>
+
+                        <div class="button">
+                            <button class="button-answer">
+                                <p>12 Answers</p>
+                            </button>
+                        </div>
                     </div>
-                    <div class="post-preview">
-                        <p>ksdhjfskhfjdhjkfsdhjk</p>
+
+                    <div class="question-body">
+                        <div class="fade"></div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
                     </div>
+
                     <div class="post-tags">
-                        <span>asdasdasd</span><span>asdassad</span><span>asdsdaasdasd</span><span>adsasdsda</span><span>asdasdasdasd</span>
+                        <span>#Maths</span>
                     </div>
-                    <div class="post-info">
-                        <p>posted by</p>
+
+                    <div class="question-footer">
+                        <div class="question-owner">
+                            <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
+                            <p class="posted-by">Posted by&nbsp</p>
+                            <p class="owner">Mike Wazowski</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- DUPLICATE END   -->
+
+            <div class="panel dialog">
+                <div class="vote-container">
+                    <i class="fa-solid fa-arrow-up fa-lg"></i>
+                    <p>95</p>
+                    <i class="fa-solid fa-arrow-down fa-lg"></i>
+                </div>
+                <div class="question">
+                    <div class="question-headers">
+                        <div class="question-caption">
+                            <p class="question-title">Is Ex-Ledge the best?</p>
+                            <p class="question-age">19 mins ago</p>
+                        </div>
+
+                        <div class="button">
+                            <button class="button-answer">
+                                <p>12 Answers</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="question-body">
+                        <div class="fade"></div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
+                    </div>
+
+                    <div class="post-tags">
+                        <span>#Maths</span>
+                    </div>
+
+                    <div class="question-footer">
+                        <div class="question-owner">
+                            <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
+                            <p class="posted-by">Posted by&nbsp</p>
+                            <p class="owner">Mike Wazowski</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
 
         <!-- SIDEBAR -->

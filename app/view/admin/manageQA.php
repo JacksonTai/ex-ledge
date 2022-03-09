@@ -35,13 +35,10 @@ $path = '../../../';
                                    <p class="question-title">Is Ex-Ledge the best?</p>
                                    <p class="question-age">19 mins ago</p>
                               </div>
+
                               <div class="button">
                                    <button class="button-answer">
                                         <p>12 Answers</p>
-                                   </button>
-
-                                   <button class="button-remove">
-                                        <p>Remove</p>
                                    </button>
                               </div>
                          </div>
