@@ -60,6 +60,10 @@ $path = '../../../';
                             <p class="posted-by">Posted by&nbsp</p>
                             <p class="owner">Mike Wazowski</p>
                         </div>
+                        <div class="remove-button-mobile">
+                            <i class="fa-solid fa-bookmark"></i>
+                            <p class="remove-text">Bookmark</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -98,6 +102,10 @@ $path = '../../../';
                             <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
                             <p class="posted-by">Posted by&nbsp</p>
                             <p class="owner">Mike Wazowski</p>
+                        </div>
+                        <div class="remove-button-mobile">
+                            <i class="fa-solid fa-bookmark"></i>
+                            <p class="remove-text">Bookmark</p>
                         </div>
                     </div>
                 </div>
