@@ -55,7 +55,7 @@
             <?php elseif ($_SESSION['userId'][0] == "U") : ?>
                 <div class="button-mobile">
                     <i class="fa-solid fa-bookmark"></i>
-                    <p class="remove-text">Bookmark</p>
+                    <p class="bookmark-text">Bookmark</p>
                 </div>
             <?php endif; ?>
 

@@ -33,6 +33,12 @@
     justify-content: space-between;
 }
 
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+}
 
 .button-answer {
     border: solid 2px #3d8f58;
@@ -124,8 +130,10 @@
     align-items: center;
 }
 
-.remove-text {
+.remove-text,
+.bookmark-text {
     margin-left: 0.5em;
+    margin-right: 2em;
     font-family: "Roboto", sans-serif;
     font-size: 15px;
     color: #909090;
@@ -223,6 +231,7 @@
     .posted-by,
     .owner,
     .remove-text,
+    .bookmark-text,
     .fa-bookmark,
     .fa-trash-can {
         font-size: 11px;
