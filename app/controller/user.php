@@ -3,8 +3,10 @@
 namespace Controller;
 
 if (!empty($_GET)) {
-     session_start();
-     include '../helper/autoloader.php';
+     if (!isset($_GET['id'])) {
+          session_start();
+          include '../helper/autoloader.php';
+     }
 }
 
 class User extends \Model\User

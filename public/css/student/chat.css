@@ -1,3 +1,4 @@
+/* -- Layout and general styling -- */
 :root {
   --chat-header-height: 80px;
   --chat-typing-area-height: 75px;
@@ -15,7 +16,7 @@
   min-width: 86vw;
 }
 
-/* -- Chatbox -- */
+/* -- Chatarea -- */
 .chat-section__chat-area {
   display: none;
 }
@@ -59,8 +60,8 @@
   overflow: auto;
 }
 
-.chat-section__chat-box::-webkit-scrollbar {
-  width: 0.3rem;
+.chat-section__chat-box::-webkit-scrollbar-thumb {
+  background: #b6b6b6;
 }
 
 .chat-section__chat {
@@ -155,14 +156,6 @@
   margin: 0 auto;
 }
 
-.hide-chat {
-  display: none;
-}
-
-.display-chat {
-  display: block;
-}
-
 .chat-section__user {
   display: flex;
   align-items: center;
@@ -189,12 +182,21 @@
   color: #acacac;
 }
 
+/* -- Classes to be added on HTML element through JS -- */
+.hide-chat-element {
+  display: none;
+}
+
+.display-chat-element {
+  display: block;
+}
+
 @media (min-width: 1245px) {
   .chat--main {
     display: flex;
   }
 
-  /* -- Chatbox -- */
+  /* -- Chatarea -- */
   .chat-section__back-btn {
     display: none;
   }

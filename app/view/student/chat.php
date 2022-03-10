@@ -5,7 +5,6 @@ include '../../helper/autoloader.php';
 $path = '../../../';
 
 $user = new Controller\User();
-$userList = $user->read();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,8 +111,9 @@ $userList = $user->read();
                          </button>
                     </div>
                     <div class="chat-section__user-container">
+                         <?php $userList = $user->read(); ?>
                          <?php foreach ($userList as $user) : ?>
-                              <div class="chat-section__user" data-user-id=<?php echo htmlspecialchars($user['user_id']) ?>>
+                              <div class="chat-section__user" id="<?php echo htmlspecialchars($user['user_id']) ?>" data-user-id=<?php echo htmlspecialchars($user['user_id']) ?>>
                                    <img class="chat-section__user-img chat-profile-img" src="<?php echo $path; ?>public/img/profile1.jpg">
                                    <div class="chat-section__user-content">
                                         <p class="chat-section__username"><?php echo htmlspecialchars($user['username']) ?></p>
