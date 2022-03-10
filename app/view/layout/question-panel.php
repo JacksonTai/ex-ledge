@@ -11,16 +11,29 @@
                 <p class="question-age">19 mins ago</p>
             </div>
 
-            <div class="button">
-                <button class="button-answer">
-                    <p>12 Answers</p>
-                </button>
-            </div>
+            <?php if ($_SESSION['userId'][0] == "A") : ?>
+                <div class="button">
+                    <button class="button-answer">
+                        <p>12 Answers</p>
+                    </button>
+
+                    <button class="button-remove">
+                        <p>Remove</p>
+                    </button>
+                </div>
+            <?php elseif ($_SESSION['userId'][0] == "U") : ?>
+                <div class="button">
+                    <button class="button-answer">
+                        <p>12 Answers</p>
+                    </button>
+                </div>
+            <?php endif; ?>
+
         </div>
 
         <div class="question-body">
-            <div class="fade"></div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
         </div>
 
         <div class="post-tags">
@@ -33,10 +46,20 @@
                 <p class="posted-by">Posted by&nbsp</p>
                 <p class="owner">Mike Wazowski</p>
             </div>
-            <div class="remove-button-mobile">
-                <i class="fa-solid fa-bookmark"></i>
-                <p class="remove-text">Bookmark</p>
-            </div>
+
+            <?php if ($_SESSION['userId'][0] == "A") : ?>
+                <div class="button-mobile">
+                    <i class="fa-solid fa-trash-can"></i>
+                    <p class="remove-text">Remove</p>
+                </div>
+            <?php elseif ($_SESSION['userId'][0] == "U") : ?>
+                <div class="button-mobile">
+                    <i class="fa-solid fa-bookmark"></i>
+                    <p class="remove-text">Bookmark</p>
+                </div>
+            <?php endif; ?>
+
+
         </div>
     </div>
 </div>
