@@ -1,0 +1,229 @@
+/* -- Layout and general styling -- */
+:root {
+  --chat-header-height: 80px;
+  --chat-typing-area-height: 75px;
+}
+
+.chat--main,
+.chat-section__user-search-wrapper,
+.chat-section__user-list,
+.chat-section__chat-area {
+  padding: 0;
+}
+
+.chat--main {
+  max-height: 100vh;
+  min-width: 86vw;
+}
+
+/* -- Chatarea -- */
+.chat-section__chat-area {
+  display: none;
+}
+
+.chat-section__chat-area-header {
+  align-items: center;
+  height: var(--chat-header-height);
+  padding: 0 1.5rem;
+  box-shadow: 0 0.2rem 0.3rem -0.1rem var(--clr-shadow-grey);
+}
+
+.chat-section__chat-area-header,
+.chat-section__chat {
+  display: flex;
+}
+
+.chat-section__back-btn {
+  padding: 0;
+  color: #acacac;
+  background-color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.chat-section__back-btn:hover {
+  color: var(--clr-primary);
+}
+
+.chat-section__chat-area-header-img {
+  display: block;
+  margin: 0 1rem;
+}
+
+.chat-section__chat-box {
+  min-height: calc(
+    100vh - var(--layout-header-height) - var(--chat-header-height) -
+      var(--chat-typing-area-height)
+  );
+  max-height: 70vh;
+  padding: 1.5rem;
+  overflow: auto;
+}
+
+.chat-section__chat-box::-webkit-scrollbar-thumb {
+  background: #b6b6b6;
+}
+
+.chat-section__chat {
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.chat-section__chat-msg {
+  max-width: 60%;
+  padding: 0.5em 1em;
+  color: #ffffff;
+}
+
+.incoming-msg {
+  margin-left: 0.8rem;
+  border-radius: 0 1em 1em 1em;
+  background-color: var(--clr-primary);
+}
+
+.outgoing-msg {
+  margin-left: auto;
+  margin-right: 0.8rem;
+  border-radius: 1em 1em 0 1em;
+  color: #000000;
+  background-color: #f4f5f7;
+}
+
+.chat-section__typing-area {
+  display: flex;
+  align-items: center;
+  height: var(--chat-typing-area-height);
+  padding: 0 1.5rem;
+  box-shadow: 0 -0.2rem 0.3rem -0.1rem var(--clr-shadow-grey);
+  z-index: 2;
+}
+
+.chat-section__typing-box {
+  width: 100%;
+  padding: 0.6rem 1.5rem;
+  border: 0;
+  background-color: #f5f5f5;
+}
+
+.chat-section__send-msg-btn {
+  display: inline;
+  padding: 0 0.8rem;
+  border-radius: 0;
+  font-size: 1.6rem;
+  color: #f5f5f5;
+  background-color: #acacac;
+  pointer-events: none;
+}
+
+.chat-typed {
+  color: #ffffff;
+  background-color: var(--clr-primary);
+  pointer-events: auto;
+}
+
+/* -- User list -- */
+.chat-section__user-search-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 1.5rem auto;
+}
+
+.chat-section__user-search-bar,
+.chat-section__user-search-btn {
+  padding: 0.7em 1em;
+  background-color: #f5f5f5;
+}
+
+.chat-section__user-search-bar {
+  width: 100%;
+  border: none;
+}
+
+.chat-section__user-search-btn {
+  display: inline;
+  margin: 0;
+  border-radius: 0;
+  color: #acacac;
+}
+
+.chat-section__user-list {
+  padding-top: 1.5rem;
+}
+
+.chat-section__user-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.chat-section__user {
+  display: flex;
+  align-items: center;
+  padding: 0.7em 1em;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.user-selected,
+.chat-section__user:hover {
+  background-color: #f5f5f5;
+}
+
+.chat-profile-img {
+  border-radius: 50%;
+  max-width: 2.1rem;
+}
+
+.chat-section__user-content {
+  margin-left: 1rem;
+}
+
+.chat-section__user-msg {
+  color: #acacac;
+}
+
+/* -- Classes to be added on HTML element through JS -- */
+.hide-chat-element {
+  display: none;
+}
+
+.display-chat-element {
+  display: block;
+}
+
+@media (min-width: 1245px) {
+  .chat--main {
+    display: flex;
+  }
+
+  /* -- Chatarea -- */
+  .chat-section__back-btn {
+    display: none;
+  }
+
+  .chat-section__chat-area {
+    display: block;
+    width: 68vw;
+  }
+
+  .chat-section__typing-area {
+    padding: 0 2.3rem 0 4.3rem;
+  }
+
+  /* -- User list -- */
+  .chat-section__user-list {
+    min-height: calc(100vh - var(--layout-header-height));
+    width: 18vw;
+    border-left: 0.1rem solid var(--clr-shadow-grey);
+  }
+
+  .chat-section__user-search-wrapper {
+    margin-top: 0;
+  }
+
+  .chat-section__user-container {
+    max-height: calc(100vh - var(--layout-header-height) - 5.7rem);
+    width: 100%;
+    overflow: auto;
+  }
+}
