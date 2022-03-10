@@ -62,7 +62,8 @@ hr {
 }
 
 .question-caption,
-.button {
+.button,
+.button-header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,6 +95,10 @@ hr {
   font-weight: bold;
 }
 
+.button-askQuestion{
+  display: none;
+}
+
 .question-title {
   font-size: 21px;
   font-weight: bold;
@@ -120,7 +125,7 @@ hr {
   width: 100%;
   height: 100%;
   position: absolute;
-  bottom: 6rem;
+  bottom: 6em;
   background: linear-gradient(transparent 150px, white);
 }
 
@@ -203,5 +208,107 @@ hr {
   }
   .home--sidebar {
     display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .home__title {
+    display: none;
+  }
+
+  .button-header{
+    padding: 0 2rem 2rem 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .button-askQuestion,
+  .button-filter{
+    border-radius: 10px;
+    font-size: 12px;
+    height: 35px;
+  }
+
+  .button-askQuestion{
+    display: block;
+    width: 138px;
+  }
+
+  .button-filter{
+    width: 75px;
+  }
+
+  .question-body {
+    height: 70px;
+    font-size: 14px;
+  }
+
+  .post-tags{
+    font-size: 10px;
+  }
+
+  .panel {
+    width: 100%;
+    margin: 0;
+    padding: 30px 15px 20px 10px;
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+    border-top: 1px solid #767676;
+    align-items: unset;
+  }
+
+  .manageQA--main,
+  .home--main {
+    padding: 2rem 0 10rem;
+  }
+
+  .fa-arrow-up,
+  .fa-arrow-down,
+  .vote-container {
+    font-size: 20px;
+  }
+
+  .vote-container {
+    position: relative;
+    height: 100%;
+    margin: 0 1em 0 0.5em;
+  }
+
+  .question-title {
+    font-size: 15px;
+  }
+
+  .question-caption,
+  .button {
+    display: block;
+    margin-bottom: 0.5em;
+  }
+
+  .question-age {
+    font-size: 10px;
+  }
+
+  .button-answer {
+    width: 80px;
+    height: 23px;
+    font-size: 8px;
+  }
+
+  .question-headers {
+    display: block;
+  }
+
+  .profile-picture {
+    height: 22px;
+    width: 22px;
+  }
+
+  .posted-by,
+  .owner,
+  .remove-text,
+  .fa-bookmark {
+    font-size: 11px;
   }
 }

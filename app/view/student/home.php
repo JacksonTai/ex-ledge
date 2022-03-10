@@ -22,7 +22,10 @@ $path = '../../../';
         <main class="home--main main-content">
             <div class="title-ctnr">
                 <h2 class="home__title main-title">Question Asked: </h2>
-                <div class="button"><button class="button-filter">Filter</button></div>
+                <div class="button-header">
+                    <button class="button-askQuestion">Ask Question</button>
+                    <button class="button-filter">Filter</button>
+                </div>
             </div>
 
             <div class="panel dialog">
@@ -46,8 +49,8 @@ $path = '../../../';
                     </div>
 
                     <div class="question-body">
-                        <div class="fade"></div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. 
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
                     </div>
 
                     <div class="post-tags">
@@ -89,7 +92,6 @@ $path = '../../../';
                     </div>
 
                     <div class="question-body">
-                        <div class="fade"></div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
                     </div>
 
