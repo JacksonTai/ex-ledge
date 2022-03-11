@@ -4,8 +4,6 @@ namespace Model;
 
 use PDOException;
 
-include '../../helper/autoloader.php';
-
 class User extends \config\DbConn
 {
      private $userId;
@@ -15,17 +13,17 @@ class User extends \config\DbConn
           $this->userId = $userId;
      }
 
-     protected function getUser()
+     protected function getUser($userId)
      {
-          // Query for selecting specific user based on given user ID. 
-          if ($this->userId) {
+          if ($userId) {
+               // Query for selecting specific user based on the given user ID. 
                try {
-                    $sql = "SELECT * FROM user WHERE `user_id` = ?;";
-                    $stmt = $this->executeQuery($sql, [$this->userId]);
+                    $sql = "SELECT * FROM user WHERE `user_id` = ? AND `user_id` LIKE 'U%';";
+                    $stmt = $this->executeQuery($sql, [$userId]);
                     $userInfo = $stmt->fetch();
 
-                    $sql = "SELECT * FROM user_detail WHERE `user_id` = ?;";
-                    $stmt = $this->executeQuery($sql, [$this->userId]);
+                    $sql = "SELECT * FROM user_detail WHERE `user_id` = ? AND `user_id` LIKE 'U%';";
+                    $stmt = $this->executeQuery($sql, [$userId]);
                     $userDetail = $stmt->fetch();
 
                     /* Return a merged array of user detail and user record 
@@ -40,18 +38,44 @@ class User extends \config\DbConn
           }
 
           // Default query for selecting all user's info and detail. 
-          $sql = "SELECT * FROM user u
-                    INNER JOIN user_detail ud ON u.user_id = ud.user_id;";
-
           try {
+               $result = [];
+               $sql = "SELECT * FROM user WHERE `user_id` LIKE 'U%';";
                $stmt = $this->executeQuery($sql);
-               // Error handling for more than one user being fetched from the entire record.
-               if ($stmt->rowCount() > 1) {
-                    return $stmt->fetchAll();
+               $userInfos = $stmt->fetchAll();
+
+               foreach ($userInfos as $userInfo) {
+                    try {
+                         $sql = "SELECT * FROM user_detail WHERE `user_id` = ?;";
+                         $stmt = $this->executeQuery($sql, [$userInfo['user_id']]);
+                         $userDetail = $stmt->fetch();
+
+                         if (is_array($userDetail)) {
+                              $userInfo = array_merge($userInfo, $userDetail);
+                         }
+                         array_push($result, $userInfo);
+                    } catch (PDOException $e) {
+                         die('Error: ' . $e->getMessage());
+                    }
                }
-               return $stmt->fetch();
+               return $result;
           } catch (PDOException $e) {
                die('Error: ' . $e->getMessage());
           }
      }
+
+     protected function searchUser($searchTerm)
+     {
+          $sql = "SELECT * FROM user
+                    WHERE NOT `user_id` = ? 
+                    AND `user_id` NOT LIKE ?
+                    ";
+          // AND username LIKE ?
+          $stmt = $this->executeQuery($sql, [$this->userId, '%' . $searchTerm   . '%']);
+
+          // $stmt->rowCount() > 1 ? $userList = $stmt->fetchAll() : $userList = $stmt->fetch();
+          $userList = $stmt->fetch();
+          return $userList;
+     }
+ 
 }
