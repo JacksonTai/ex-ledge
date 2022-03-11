@@ -1,2 +1,2 @@
 # Ex-Ledge
-A forum-based educational system that aids Malaysian high school students in their studies.
+The Ex-Ledge is an educational web application system that highly focuses on aiding Malaysian secondary students’ studies. This system is being named over the abbreviation of Exchange Knowledge. As its name implies, this system strives to provide a reliable platform for students to exchange their knowledge by featuring questions and answers on a wide range of topics in the Malaysian high school academic syllabus.
