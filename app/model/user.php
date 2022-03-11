@@ -18,12 +18,12 @@ class User extends \config\DbConn
           if ($userId) {
                // Query for selecting specific user based on the given user ID. 
                try {
-                    $sql = "SELECT * FROM user WHERE `user_id` = ? AND `user_id` LIKE 'U%';";
-                    $stmt = $this->executeQuery($sql, [$userId]);
+                    $sql = "SELECT * FROM user WHERE `user_id` = ? AND `user_id` LIKE ?;";
+                    $stmt = $this->executeQuery($sql, [$userId, 'U%']);
                     $userInfo = $stmt->fetch();
 
-                    $sql = "SELECT * FROM user_detail WHERE `user_id` = ? AND `user_id` LIKE 'U%';";
-                    $stmt = $this->executeQuery($sql, [$userId]);
+                    $sql = "SELECT * FROM user_detail WHERE `user_id` = ? AND `user_id` LIKE ?;";
+                    $stmt = $this->executeQuery($sql, [$userId, 'U%']);
                     $userDetail = $stmt->fetch();
 
                     /* Return a merged array of user detail and user record 
@@ -40,10 +40,10 @@ class User extends \config\DbConn
           // Default query for selecting all user's info and detail. 
           try {
                $result = [];
-               $sql = "SELECT * FROM user WHERE `user_id` LIKE 'U%';";
-               $stmt = $this->executeQuery($sql);
+               $sql = "SELECT * FROM user WHERE `user_id` LIKE ?;";
+               $stmt = $this->executeQuery($sql, ['U%']);
                $userInfos = $stmt->fetchAll();
-
+               // []
                foreach ($userInfos as $userInfo) {
                     try {
                          $sql = "SELECT * FROM user_detail WHERE `user_id` = ?;";
@@ -66,16 +66,30 @@ class User extends \config\DbConn
 
      protected function searchUser($searchTerm)
      {
-          $sql = "SELECT * FROM user
-                    WHERE NOT `user_id` = ? 
-                    AND `user_id` NOT LIKE ?
-                    ";
-          // AND username LIKE ?
-          $stmt = $this->executeQuery($sql, [$this->userId, '%' . $searchTerm   . '%']);
+          $sql = "SELECT * FROM user 
+                    WHERE `user_id` <> ? -- avoid user from searching him/herself.
+                    AND username LIKE ? 
+                    AND `user_id` LIKE ? -- avoid seaching admin.
+                    ORDER BY username";
 
-          // $stmt->rowCount() > 1 ? $userList = $stmt->fetchAll() : $userList = $stmt->fetch();
-          $userList = $stmt->fetch();
-          return $userList;
+          $stmt = $this->executeQuery($sql, [
+               $this->userId,
+               '%' . $searchTerm . '%',
+               'U%'
+          ]);
+
+          return $stmt->fetchAll();
      }
- 
+
+     protected function getMessagedUser()
+     {
+          $sql = "SELECT u.* FROM user u
+                    INNER JOIN message m ON u.user_id = m.incoming_msg_id
+                    WHERE u.user_id <> ? -- avoid choosing the user him/herself. 
+                    AND (m.incoming_msg_id = ? OR m.outgoing_msg_id = ?)
+                    GROUP BY u.user_id;";
+
+          $stmt = $this->executeQuery($sql, [$this->userId, $this->userId, $this->userId]);
+          return $stmt->fetchAll();
+     }
 }

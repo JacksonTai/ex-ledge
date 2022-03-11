@@ -89,7 +89,7 @@
   background-color: #f4f5f7;
 }
 
-.chat-section__typing-area {
+.chat-section__typing-form {
   display: flex;
   align-items: center;
   height: var(--chat-typing-area-height);
@@ -206,7 +206,7 @@
     width: 68vw;
   }
 
-  .chat-section__typing-area {
+  .chat-section__typing-form {
     padding: 0 2.3rem 0 4.3rem;
   }
 
