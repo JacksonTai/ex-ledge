@@ -1,7 +1,10 @@
 <?php
 session_start();
 require '../../helper/redirector.php';
+include '../../helper/autoloader.php';
 $path = '../../../';
+
+$questions = new \Controller\Question;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,15 +31,15 @@ $path = '../../../';
                     <button class="button-filter">Filter</button>
                 </div>
             </div>
-
-            <?php include '../layout/question-panel.php'; ?>
+            
+            <?php $allQuestions = $questions->read(); ?>
             <?php include '../layout/question-panel.php'; ?>
         </main>
 
         <!-- SIDEBAR -->
         <aside class="home--sidebar">
             <div class="trending">
-                <button>Ask questions</button>
+                <a href="askQuestion.php">Ask questions</a>
                 <div class="trending-tab">
                     <h3>Top Users</h3>
                     <hr>
