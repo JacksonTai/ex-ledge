@@ -1,7 +1,6 @@
 const url = new URL(window.location);
 const originalUrl = url.href.split("?")[0];
 let userList = document.querySelector(".chat-section__user-list");
-let users = document.querySelectorAll(".chat-section__user");
 let chattingUsername = document.querySelector(
   ".chat-section__chatting-username"
 );
@@ -35,21 +34,16 @@ async function getData(url) {
 
 // Style chat box and user list.
 async function styleChat(user) {
-  let users = document.querySelectorAll(".chat-section__user");
-  for (let user of users) {
-    if (user.classList.contains("user-selected")) {
-      user.classList.remove("user-selected");
-    }
-  }
-  if (!user.classList.contains("user-selected")) {
-    user.classList.add("user-selected");
-  }
-
-  let userData = await getData(
-    `../../controller/user.php?userId=${user.dataset.userId}`
-  );
-  chattingUsername.textContent = "";
-  chattingUsername.append(userData.username);
+  // let previousMessagedUsers = await getData(
+  //   `../../controller/user.php?senderId=${sendMsgBtn.dataset.senderId}`
+  // );
+  // console.log(users);
+  // for (let previousMessagedUser of previousMessagedUsers) {
+  // console.log(previousMessagedUser);
+  // if (previousMessagedUser.classList.contains("user-selected")) {
+  //   previousMessagedUser.classList.remove("user-selected");
+  // }
+  // }
 }
 
 // Comprehensive helper to update page status when user is being clicked.
@@ -61,7 +55,11 @@ async function updateStatus(user) {
   // Open chat area in small screen size when page URL parameter has user ID.
   window.innerWidth < 1245 ? showChatArea() : "";
 
-  styleChat(user);
+  let userData = await getData(
+    `../../controller/user.php?userId=${user.dataset.userId}`
+  );
+  chattingUsername.textContent = "";
+  chattingUsername.append(userData.username);
 }
 
 // Add chatting messages to chat box.
@@ -97,17 +95,21 @@ async function addUser(user) {
 
   // Add event listener for user that is being searched.
   searchingUser.addEventListener("click", () => {
-    // Clear all searching user when user click on one of it.
-    removeUser();
-    addPreviousMessagedUser();
-
     // Clear search bar when user click on one of the searching user.
     userSearchBar.value = "";
-    updateStatus(searchingUser);
+
+    // Clear all searching user when user click on one of it.
+    removeUser();
+
+    // Add back the removed previously messaged user.
+    addPreviousMessagedUser();
+
+    // Refresh message in chat box.
     chatBox.textContent = "";
     addMsg();
-  });
 
+    updateStatus(searchingUser);
+  });
   userContainer.append(searchingUser);
 }
 
@@ -125,6 +127,15 @@ async function addPreviousMessagedUser() {
   );
   for (let previousMessagedUser of previousMessagedUsers) {
     addUser(previousMessagedUser);
+  }
+
+  for (let user of userContainer.children) {
+    if (
+      !user.classList.contains("user-selected") &&
+      user.dataset.userId == url.searchParams.get("id")
+    ) {
+      user.classList.add("user-selected");
+    }
   }
 }
 
@@ -196,7 +207,9 @@ userSearchBar.addEventListener("input", async function () {
     }
   }
 
-  !userContainer.firstChild ? addPreviousMessagedUser() : null;
+  if (!userContainer.firstChild) {
+    addPreviousMessagedUser();
+  }
 });
 
 /* -- Message handling -- */
@@ -215,29 +228,31 @@ typingBox.addEventListener("input", function () {
 typingForm.addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  let formData = new FormData(this);
-  formData.append("senderId", sendMsgBtn.dataset.senderId);
-  formData.append("receiverId", url.searchParams.get("id"));
+  if (typingBox.value.trim()) {
+    let formData = new FormData(this);
+    formData.append("senderId", sendMsgBtn.dataset.senderId);
+    formData.append("receiverId", url.searchParams.get("id"));
 
-  try {
-    await fetch("../../controller/message.php", {
-      method: "POST",
-      body: formData,
-    });
+    try {
+      await fetch("../../controller/message.php", {
+        method: "POST",
+        body: formData,
+      });
 
-    // Disable send message button when message is being sent.
-    if (sendMsgBtn.classList.contains("chat-typed")) {
-      sendMsgBtn.classList.remove("chat-typed");
+      // Disable send message button when message is being sent.
+      if (sendMsgBtn.classList.contains("chat-typed")) {
+        sendMsgBtn.classList.remove("chat-typed");
+      }
+
+      // Clear typing box when message is being sent.
+      if (typingBox.value) {
+        typingBox.value = "";
+      }
+      removeUser();
+      addPreviousMessagedUser();
+    } catch (e) {
+      console.log("Error: ", e);
     }
-
-    // Clear typing box when message is being sent.
-    if (typingBox.value) {
-      typingBox.value = "";
-    }
-    removeUser();
-    addPreviousMessagedUser();
-  } catch (e) {
-    console.log("Error: ", e);
   }
 });
 

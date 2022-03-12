@@ -83,11 +83,13 @@ class User extends \config\DbConn
 
      protected function getMessagedUser()
      {
-          $sql = "SELECT u.* FROM user u
+          $sql = "SELECT u.*, m.msg_id FROM user u
                     INNER JOIN message m ON u.user_id = m.incoming_msg_id
                     WHERE u.user_id <> ? -- avoid choosing the user him/herself. 
                     AND (m.incoming_msg_id = ? OR m.outgoing_msg_id = ?)
-                    GROUP BY u.user_id;";
+                    GROUP BY u.user_id
+                    ORDER BY m.msg_id DESC -- order by the latest message 
+                    ;";
 
           $stmt = $this->executeQuery($sql, [$this->userId, $this->userId, $this->userId]);
           return $stmt->fetchAll();
