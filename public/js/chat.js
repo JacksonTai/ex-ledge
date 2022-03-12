@@ -32,34 +32,21 @@ async function getData(url) {
   }
 }
 
-// Style chat box and user list.
-async function styleChat(user) {
-  // let previousMessagedUsers = await getData(
-  //   `../../controller/user.php?senderId=${sendMsgBtn.dataset.senderId}`
-  // );
-  // console.log(users);
-  // for (let previousMessagedUser of previousMessagedUsers) {
-  // console.log(previousMessagedUser);
-  // if (previousMessagedUser.classList.contains("user-selected")) {
-  //   previousMessagedUser.classList.remove("user-selected");
-  // }
-  // }
-}
-
 // Comprehensive helper to update page status when user is being clicked.
 async function updateStatus(user) {
   // Set URL parameter with the value of selected user ID.
   url.searchParams.set("id", user.dataset.userId);
   window.history.replaceState({}, "", url);
 
-  // Open chat area in small screen size when page URL parameter has user ID.
-  window.innerWidth < 1245 ? showChatArea() : "";
-
+  // Update chatting username in header of chat area.
   let userData = await getData(
     `../../controller/user.php?userId=${user.dataset.userId}`
   );
   chattingUsername.textContent = "";
   chattingUsername.append(userData.username);
+
+  // Open chat area in small screen size when page URL parameter has user ID.
+  window.innerWidth < 1245 ? showChatArea() : "";
 }
 
 // Add chatting messages to chat box.
@@ -72,70 +59,20 @@ async function addMsg() {
   chatBox.innerHTML = msgInfos;
 }
 
-// Add user to user container.
-async function addUser(user) {
-  // Create HTML element of searching user.
-  let username = document.createElement("p");
-  username.classList.add("chat-section__username");
-  username.textContent = user.username;
-
-  let userContent = document.createElement("div");
-  userContent.classList.add("chat-section__user-content");
-  userContent.append(username);
-
-  let userImg = document.createElement("img");
-  userImg.classList.add(...["chat-section__user-img", "chat-profile-img"]);
-  userImg.src = "../../../public/img/profile1.jpg";
-
-  let searchingUser = document.createElement("div");
-  searchingUser.classList.add("chat-section__user");
-  searchingUser.id = user.user_id;
-  searchingUser.dataset.userId = user.user_id;
-  searchingUser.append(userImg, userContent);
-
-  // Add event listener for user that is being searched.
-  searchingUser.addEventListener("click", () => {
-    // Clear search bar when user click on one of the searching user.
-    userSearchBar.value = "";
-
-    // Clear all searching user when user click on one of it.
-    removeUser();
-
-    // Add back the removed previously messaged user.
-    addPreviousMessagedUser();
-
-    // Refresh message in chat box.
-    chatBox.textContent = "";
-    addMsg();
-
-    updateStatus(searchingUser);
-  });
-  userContainer.append(searchingUser);
-}
-
-// Remove all user in user container.
-function removeUser() {
-  while (userContainer.firstChild) {
-    userContainer.removeChild(userContainer.firstChild);
-  }
-}
-
 // Add previously messaged user.
 async function addPreviousMessagedUser() {
   let previousMessagedUsers = await getData(
-    `../../controller/user.php?senderId=${sendMsgBtn.dataset.senderId}`
+    `../../controller/user.php?
+    senderId=${sendMsgBtn.dataset.senderId}&
+    receiverId=${url.searchParams.get("id")}`
   );
-  for (let previousMessagedUser of previousMessagedUsers) {
-    addUser(previousMessagedUser);
-  }
+  userContainer.innerHTML = previousMessagedUsers;
 
+  // Add event listener for messaged user in user container.
   for (let user of userContainer.children) {
-    if (
-      !user.classList.contains("user-selected") &&
-      user.dataset.userId == url.searchParams.get("id")
-    ) {
-      user.classList.add("user-selected");
-    }
+    user.addEventListener("click", () => {
+      updateStatus(user);
+    });
   }
 }
 
@@ -192,28 +129,26 @@ let userSearchBar = document.querySelector(".chat-section__user-search-bar");
 let userContainer = document.querySelector(".chat-section__user-container");
 
 userSearchBar.addEventListener("input", async function () {
-  // Clear searching user everytime user type.
-  removeUser();
-
   if (this.value.trim()) {
     // Use helper function to get users search result.
-    var searchingUsers = await getData(
+    let searchingUser = await getData(
       `../../controller/user.php?searchTerm=${this.value.trim()}`
     );
-
-    // Use helper function to add user in HTML.
-    for (let searchingUser of searchingUsers) {
-      addUser(searchingUser);
+    userContainer.innerHTML = searchingUser;
+    for (let user of userContainer.children) {
+      user.addEventListener("click", () => {
+        updateStatus(user);
+        // Clear search bar input once searching user is clicked.
+        addPreviousMessagedUser();
+        userSearchBar.value = "";
+      });
     }
-  }
-
-  if (!userContainer.firstChild) {
+  } else {
     addPreviousMessagedUser();
   }
 });
 
 /* -- Message handling -- */
-let previousChatUser = [];
 let typingForm = document.querySelector(".chat-section__typing-form");
 let typingBox = document.querySelector(".chat-section__typing-box");
 let sendMsgBtn = document.querySelector(".chat-section__send-msg-btn");
@@ -248,15 +183,31 @@ typingForm.addEventListener("submit", async function (e) {
       if (typingBox.value) {
         typingBox.value = "";
       }
-      removeUser();
       addPreviousMessagedUser();
+      scrollToBottom();
     } catch (e) {
       console.log("Error: ", e);
     }
   }
 });
 
+let chatAreaFocus = false;
+chatArea.addEventListener("mouseenter", () => {
+  chatAreaFocus = true;
+});
+chatArea.addEventListener("mouseleave", () => {
+  chatAreaFocus = false;
+});
+
 setInterval(() => {
+  // Constantly updating new messages within specify time interval.
   addMsg();
-  scrollToBottom();
-}, 500);
+
+  // Stop updating user in user container if the user is searching for other user.
+  if (!userSearchBar.value) {
+    addPreviousMessagedUser();
+  }
+
+  // Stop scrolling to bottom if user's cursor is focusing on the chat area.
+  chatAreaFocus ? null : scrollToBottom();
+}, 350);

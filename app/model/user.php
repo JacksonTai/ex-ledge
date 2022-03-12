@@ -43,7 +43,7 @@ class User extends \config\DbConn
                $sql = "SELECT * FROM user WHERE `user_id` LIKE ?;";
                $stmt = $this->executeQuery($sql, ['U%']);
                $userInfos = $stmt->fetchAll();
-               // []
+          
                foreach ($userInfos as $userInfo) {
                     try {
                          $sql = "SELECT * FROM user_detail WHERE `user_id` = ?;";
@@ -69,7 +69,7 @@ class User extends \config\DbConn
           $sql = "SELECT * FROM user 
                     WHERE `user_id` <> ? -- avoid user from searching him/herself.
                     AND username LIKE ? 
-                    AND `user_id` LIKE ? -- avoid seaching admin.
+                    AND `user_id` LIKE ? -- avoid searching admin.
                     ORDER BY username";
 
           $stmt = $this->executeQuery($sql, [
@@ -77,21 +77,71 @@ class User extends \config\DbConn
                '%' . $searchTerm . '%',
                'U%'
           ]);
-
-          return $stmt->fetchAll();
+          $users = $stmt->fetchAll();
+          $userInfo = '';
+          foreach ($users as $user) {
+               $userInfo .= '<div class="chat-section__user" id="' . $user['user_id'] . '" data-user-id=' . $user['user_id'] . '>
+                                   <img class="chat-section__user-img chat-profile-img" src="../../../public/img/profile1.jpg">
+                                   <div class="chat-section__user-content">
+                                        <p class="chat-section__username">' . $user['username'] . '</p>
+                                        <p class="chat-section__user-msg"></p>
+                                   </div>
+                              </div>';
+          }
+          return $userInfo;
      }
 
-     protected function getMessagedUser()
+     protected function getMessagedUser($receiverId)
      {
-          $sql = "SELECT u.*, m.msg_id FROM user u
-                    INNER JOIN message m ON u.user_id = m.incoming_msg_id
-                    WHERE u.user_id <> ? -- avoid choosing the user him/herself. 
-                    AND (m.incoming_msg_id = ? OR m.outgoing_msg_id = ?)
-                    GROUP BY u.user_id
-                    ORDER BY m.msg_id DESC -- order by the latest message 
-                    ;";
+          // Select all user except the currently logged in user.
+          $sql = "SELECT * FROM user WHERE 
+                    `user_id` <> ? 
+                    AND `user_id` LIKE ?
+                    ORDER BY `user_id` DESC";
+          $stmt = $this->executeQuery($sql, [$this->userId, 'U%']);
+          $receivers = $stmt->fetchAll();
 
-          $stmt = $this->executeQuery($sql, [$this->userId, $this->userId, $this->userId]);
-          return $stmt->fetchAll();
+          $userInfo = '';
+
+          foreach ($receivers as $receiver) {
+               // for each of other user, check if there's any incoming or outgoing message with current user.
+               $sql = "SELECT * FROM `message` 
+                         WHERE (incoming_msg_id = ? OR outgoing_msg_id = ?) 
+                         AND (incoming_msg_id  = ? OR outgoing_msg_id = ?) 
+                         ORDER BY msg_id DESC LIMIT 1";
+
+               $stmt = $this->executeQuery($sql, [
+                    $receiver['user_id'],
+                    $receiver['user_id'],
+                    $this->userId,
+                    $this->userId
+               ]);
+
+               $msg = $stmt->fetch();
+
+               // Only include user that has conversation.
+               if (is_array($msg)) {
+                    // Add additional text to signify sending side.
+                    $content = $msg['content'];
+                    if ($msg['outgoing_msg_id'] == $this->userId) {
+                         $content = 'You: ' . $msg['content'];
+                    }
+
+                    // Style selected user in user container.
+                    $receiverId == $receiver['user_id'] ? $class = 'user-selected' :  $class = '';
+
+                    // Cutting down content length to prevent overflow. 
+                    strlen($content) > 20 ? $content = substr($content, 0, 23) . ' ...' : null;
+
+                    $userInfo .= '<div class="chat-section__user ' . $class . '" id="' . $receiver['user_id'] . '" data-user-id=' . $receiver['user_id'] . '>
+                                        <img class="chat-section__user-img chat-profile-img" src="../../../public/img/profile1.jpg">
+                                        <div class="chat-section__user-content">
+                                             <p class="chat-section__username">' . $receiver['username'] . '</p>
+                                             <p class="chat-section__user-msg">' . $content . '</p>
+                                        </div>
+                                   </div>';
+               }
+          }
+          return $userInfo;
      }
 }

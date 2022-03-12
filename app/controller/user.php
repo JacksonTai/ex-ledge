@@ -26,9 +26,9 @@ class User extends \Model\User
           return $this->searchUser($searchTerm);
      }
 
-     public function readMessagedUser()
+     public function readMessagedUser($receiverId = null)
      {
-          return $this->getMessagedUser();
+          return $this->getMessagedUser($receiverId);
      }
 }
 
@@ -36,22 +36,19 @@ class User extends \Model\User
 
 if (isset($_GET['userId'])) {
      $user = new \Controller\User();
-     $result = $user->read($_GET['userId']);
-     echo json_encode($result);
-     // if ($_GET['userId'] == 'all') {
-     //      $result = $user->read();
-     //      echo json_encode($result);
-     // }  
+     echo json_encode($user->read($_GET['userId']));
 }
 
 if (isset($_GET['searchTerm'])) {
      $user = new \Controller\User($_SESSION['userId']);
-     $result = $user->search($_GET['searchTerm']);
-     echo json_encode($result);
+     echo json_encode($user->search($_GET['searchTerm']));
 }
 
 if (isset($_GET['senderId'])) {
      $user = new \Controller\User($_GET['senderId']);
-     $result = $user->readMessagedUser();
-     echo json_encode($result);
+     if (isset($_GET['receiverId'])) {
+          echo json_encode($user->readMessagedUser($_GET['receiverId']));
+          exit();
+     }
+     echo json_encode($user->readMessagedUser());
 }

@@ -32,9 +32,9 @@ class Message extends \config\DbConn
      {
           // Query for selecting specific chat message between two users.
           $sql = "SELECT * FROM `message`
-                         LEFT JOIN user ON user.user_id = message.outgoing_msg_id
-                         WHERE outgoing_msg_id = ? AND incoming_msg_id = ?
-                         OR outgoing_msg_id = ? AND incoming_msg_id = ? ";
+                    LEFT JOIN user ON user.user_id = message.outgoing_msg_id
+                    WHERE (outgoing_msg_id = ? AND incoming_msg_id = ?)
+                    OR (outgoing_msg_id = ? AND incoming_msg_id = ?);";
 
           $stmt = $this->executeQuery($sql, [
                $getData['senderId'],
