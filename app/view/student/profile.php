@@ -26,9 +26,11 @@ $user = new Controller\User();
           <main class="profile--main main-content">
                <section class="profile__banner dialog">
                     <div class="profile__banner-wrapper">
-                         <button class="profile__edit-btn">
-                              <img src="<?php echo $path ?>public/img/icons/edit.jpg" alt="edit">
-                         </button>
+                         <?php if (!isset($_GET['id'])) : ?>
+                              <button class="profile__edit-btn">
+                                   <img src="<?php echo $path ?>public/img/icons/edit.jpg" alt="edit">
+                              </button>
+                         <?php endif; ?>
                          <div class="profile__banner-header">
                               <?php $userInfo = $user->read($_SESSION['userId']); ?>
                               <img class="profile__img" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">

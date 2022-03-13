@@ -10,6 +10,7 @@ $path = '../../../';
     <?php include '../../config/head.php' ?>
     <title>Home | Ex-Ledge</title>
     <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/home.css">
+    <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/question.css">
 </head>
 
 <body>
@@ -19,65 +20,64 @@ $path = '../../../';
     <div class="main-sidebar-wrapper">
 
         <?php include '../layout/sidebar.php' ?>
-        <!-- Note: Every main content goes inside main tag, except for the sidebar on right side. (Delete once readed) -->
+
         <main class="home--main main-content">
-            <div class="title-ctnr">
-                <!-- h1 is not being used as it's being used for logo. (Delete once readed) -->
-                <h2 class="home__title main-title">Question Ask: </h2>
-                <div><button>Filter</button></div>
-            </div>
-            <!-- DUPLICATE AS NEEDED -->
-            <div class="post-ctnr">
-                <div class="vote-tab">
-                    <i class="vote-arrow rotate-up"></i>
-                    <p>1</p>
-                    <i class="vote-arrow rotate-down"></i>
-                </div>
-                <div class="post-ctnt">
-                    <div class="post-title">
-                        <!-- Try to aVoid inline styling. (Delete once readed)
-                            Reference: 
-                            https://dev.to/alim1496/avoid-using-inline-css-styles-5b6p
-                        -->
-                        <h2 style="font-weight: 400;">what is the</h2>
-                        <p>clickable button</p>
-                    </div>
-                    <div class="post-preview">
-                        <p>ksdhjfskhfjdhjkfsdhjk</p>
-                    </div>
-                    <div class="post-tags">
-                        <span>asdasdasd</span><span>asdassad</span><span>asdsdaasdasd</span><span>adsasdsda</span><span>asdasdasdasd</span>
-                    </div>
-                    <div class="post-info">
-                        <p>posted by</p>
-                    </div>
+            <div class="home__header">
+                <h2 class="home__header-title main-title">Question Asked:
+                    <span class="home__quetion-asked">1289</span>
+                </h2>
+                <div class="home__header-btn-container">
+                    <button class="home__header-btn home__header-btn--filter dialog">Filter</button>
+                    <button class="home__header-btn home__header-btn--ask-question dialog">
+                        <a class="home__header-link" href="askQuestion.php">Ask Question</a>
+                    </button>
                 </div>
             </div>
-            <!-- DUPLICATE END   -->
+            <div class="home__body">
+                <?php include '../layout/question.php'; ?>
+            </div>
+            <nav class="home__main-nav">
+                <button class="home__main-nav-btn">
+                    <a class="home__main-nav-link dialog" href="<?php echo $_SERVER['PHP_SELF'] . '?page=#'; ?>">Back</a>
+                </button>
+                <p class="home__main-nav-page">1</p>
+                <button class="home__main-nav-btn">
+                    <a class="home__main-nav-link dialog" href="<?php echo $_SERVER['PHP_SELF'] . '?page=#'; ?>">Next</a>
+                </button>
+            </nav>
         </main>
 
-        <!-- SIDEBAR -->
         <aside class="home--sidebar">
-            <div class="trending">
-                <button>Ask questions</button>
-                <div class="trending-tab">
-                    <h3>Top Users</h3>
-                    <hr>
-                    <div>ds</div>
-                    <div>sdf</div>
-                    <div>fdsdf</div>
-                    <div>sdfsdf</div>
-                    <div>refwe</div>
-                </div>
-                <div class="trending-tab">
-                    <h3>Hot Topics</h3>
-                    <hr>
-                    <div>ds</div>
-                    <div>sdf</div>
-                    <div>fdsdf</div>
-                    <div>sdfsdf</div>
-                    <div>refwe</div>
-                </div>
+            <div class="home--sidebar__content home--sidebar__content--top-user dialog">
+                <h3 class="home--sidebar__content-title">Top Users</h3>
+                <a class="home--sidebar__top-user" href="profile.php?id=#">
+                    <img class="sidebar-top-user__profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
+                    <p class="sidebar-top-user__username">Username</p>
+                </a>
+                <a class="home--sidebar__top-user" href="profile.php?id=#">
+                    <img class="sidebar-top-user__profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
+                    <p class="sidebar-top-user__username">Username</p>
+                </a>
+                <a class="home--sidebar__top-user" href="profile.php?id=#">
+                    <img class="sidebar-top-user__profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
+                    <p class="sidebar-top-user__username">Username</p>
+                </a>
+                <a class="home--sidebar__top-user" href="profile.php?id=#">
+                    <img class="sidebar-top-user__profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
+                    <p class="sidebar-top-user__username">Username</p>
+                </a>
+                <a class="home--sidebar__top-user" href="profile.php?id=#">
+                    <img class="sidebar-top-user__profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
+                    <p class="sidebar-top-user__username">Username</p>
+                </a>
+            </div>
+            <div class="home--sidebar__content home--sidebar__content--hot-topic dialog">
+                <h3 class="home--sidebar__content-title">Hot Topics</h3>
+                <a class="home--sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
+                <a class="home--sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
+                <a class="home--sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
+                <a class="home--sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
+                <a class="home--sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
             </div>
         </aside>
 

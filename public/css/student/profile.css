@@ -114,7 +114,7 @@
   .profile__banner-wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 2em;
   }
 

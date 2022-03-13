@@ -10,7 +10,7 @@ html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: 14px;
   scroll-behavior: smooth;
 }
 
@@ -55,6 +55,7 @@ html {
   /* Theme font-family */
   --ff-montserrat-title: "montserrat-bold";
   --ff-montserrat-text: "montserrat-medium";
+  --ff-montserrat-light: "montserrat-light";
   /* Custom size */
   --layout-header-height: 60px;
 }
@@ -136,7 +137,6 @@ textarea,
 select,
 button {
   font-family: var(--ff-montserrat-text);
-  /* font-weight: 700; */
   font-size: 0.9rem;
 }
 
@@ -169,18 +169,49 @@ button {
   cursor: pointer;
 }
 
+input:-webkit-autofill {
+  box-shadow: 0 0 0 2rem #ffffff inset;
+}
+
+/* ---------- [Button] ----------- */
 button {
   display: block;
   padding: 0.5em 2em;
   border: none;
   border-radius: 0.5em;
   font-weight: 100;
-  color: #f1f1f1;
   background-color: var(--clr-primary);
 }
 
-input:-webkit-autofill {
-  box-shadow: 0 0 0 2rem #ffffff inset;
+button,
+button > a {
+  color: #ffffff;
+}
+
+/* ---------- [Invalid Input] ----------- */
+.invalid-input {
+  font-size: 0.88rem;
+  color: #f8606a;
+}
+
+/* ---------- [Main] ----------- */
+.main-sidebar-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.main-content {
+  position: relative;
+  top: var(--layout-header-height);
+  left: 0;
+  width: 100vw;
+  margin: 0;
+  padding: 3rem 2rem;
+  padding-bottom: calc(2rem + 60px);
+}
+
+.main-title {
+  margin: 0 0 2rem;
 }
 
 /* ---------- [Dialog] ----------- */
@@ -231,30 +262,9 @@ input:-webkit-autofill {
   background-color: #ffffff;
 }
 
-/* ---------- [Invalid Input] ----------- */
-.invalid-input {
-  font-size: 0.88rem;
-  color: #f8606a;
-}
-
-/* ---------- [Main] ----------- */
-.main-sidebar-wrapper {
-  display: flex;
-  width: 100%;
-}
-
-.main-content {
-  position: relative;
-  top: var(--layout-header-height);
-  left: 0;
-  width: 100vw;
-  margin: 0;
-  padding: 3rem 2rem;
-  padding-bottom: calc(2rem + 60px);
-}
-
-.main-title {
-  margin: 0 0 2rem;
+/* ---------- [Profile image - icon size] ----------- */
+.profile-icon {
+  max-width: 2rem;
 }
 
 /* ############## 3. Media Queries  ############# */
@@ -262,7 +272,13 @@ input:-webkit-autofill {
 
 @media (min-width: 520px) {
   html {
-    font-size: 17px;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 780px) {
+  html {
+    font-size: 16px;
   }
 }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2022 at 01:48 PM
+-- Generation Time: Mar 13, 2022 at 11:04 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ex_ledge`
+-- Database: `testing`
 --
 
 -- --------------------------------------------------------
@@ -94,9 +94,10 @@ CREATE TABLE `question` (
   `question_id` varchar(20) NOT NULL,
   `user_id` varchar(20) NOT NULL,
   `title` varchar(100) NOT NULL,
-  `content` mediumtext NOT NULL,
+  `content` varchar(10000) NOT NULL,
   `tag` varchar(30) NOT NULL,
-  `point` int(11) NOT NULL DEFAULT 0
+  `point` int(11) NOT NULL DEFAULT 0,
+  `time_posted` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
