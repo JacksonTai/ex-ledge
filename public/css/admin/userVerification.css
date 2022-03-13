@@ -21,3 +21,17 @@
 .pendinguser-ctnr > .userinfo {
     padding: 0.3vh;
 }
+
+.pendinguser-ctnr > button{
+    margin: 1rem;
+}
+
+.pendinguser-ctnr > button:first-of-type{
+    background-color: white; border: 0.1rem solid green;
+    color: green;
+}
+
+.pendinguser-ctnr > button:last-of-type{
+    background-color: white; border: 0.1rem solid red;
+    color: red;
+}
