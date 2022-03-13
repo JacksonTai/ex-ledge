@@ -3,10 +3,9 @@
 }
 
 .leaderboard__podium-wrapper,
-.leaderboard__podium,
-.leaderboard__podium-bottom {
+.leaderboard__podium {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   align-items: center;
   justify-content: center;
 }
@@ -21,11 +20,12 @@
 
 .leaderboard__podium {
   flex-direction: column;
-  margin: 1rem 1rem;
+  margin: 1rem;
 }
 
 .leaderboard__podium--1 {
   background: linear-gradient(180deg, #e7bc18 50%, #ffffff 50%);
+  order: 1;
 }
 
 .leaderboard__podium--2 {
@@ -117,5 +117,14 @@
 @media (min-width: 780px) {
   .leaderboard__podium {
     margin: 1rem 2rem;
+  }
+}
+
+@media (min-width: 904px) {
+  .leaderboard__podium--2 {
+    order: 0;
+  }
+  .leaderboard__podium--3 {
+    order: 2;
   }
 }

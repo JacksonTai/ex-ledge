@@ -29,18 +29,16 @@ $path = '../../../';
                          <img class="leaderboard__podium-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="">
                          <p>Username</p>
                     </a>
-                    <div class="leaderboard__podium-bottom">
-                         <a class="leaderboard__podium leaderboard__podium--2 dialog" href="profile.php?id=#">
-                              <h3 class="leaderboard__podium-point">1123</h3>
-                              <img class="leaderboard__podium-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="">
-                              <p>Username</p>
-                         </a>
-                         <a class="leaderboard__podium leaderboard__podium--3 dialog" href="profile.php?id=#">
-                              <h3 class="leaderboard__podium-point">1123</h3>
-                              <img class="leaderboard__podium-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="">
-                              <p>Username</p>
-                         </a>
-                    </div>
+                    <a class="leaderboard__podium leaderboard__podium--2 dialog" href="profile.php?id=#">
+                         <h3 class="leaderboard__podium-point">1123</h3>
+                         <img class="leaderboard__podium-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="">
+                         <p>Username</p>
+                    </a>
+                    <a class="leaderboard__podium leaderboard__podium--3 dialog" href="profile.php?id=#">
+                         <h3 class="leaderboard__podium-point">1123</h3>
+                         <img class="leaderboard__podium-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="">
+                         <p>Username</p>
+                    </a>
                </div>
                <div class="leaderboard__runner-up-wrapper">
                     <div class="leaderboard__runner-up-field">
