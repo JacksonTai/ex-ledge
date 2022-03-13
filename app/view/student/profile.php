@@ -4,7 +4,7 @@ require '../../helper/redirector.php';
 include '../../helper/autoloader.php';
 $path = '../../../';
 
-$user = new Controller\User($_SESSION['userId']);
+$user = new Controller\User();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +30,7 @@ $user = new Controller\User($_SESSION['userId']);
                               <img src="<?php echo $path ?>public/img/icons/edit.jpg" alt="edit">
                          </button>
                          <div class="profile__banner-header">
-                              <?php $userInfo = $user->read(); ?>
+                              <?php $userInfo = $user->read($_SESSION['userId']); ?>
                               <img class="profile__img" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
                               <h2 class="profile__username">
                                    <?php echo htmlspecialchars($userInfo['username']); ?>
