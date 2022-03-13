@@ -1,0 +1,120 @@
+.layout__question {
+  display: grid;
+  grid-template-columns: 0.1fr 2fr;
+  column-gap: 1em;
+  width: 100%;
+  margin-bottom: 2.3rem;
+  padding: 1.5rem;
+}
+
+.layout__question-vote-container {
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.layout__question-body,
+.layout__question-footer {
+  grid-column: 2 / -1;
+  max-width: 100%;
+}
+
+.layout__question-vote,
+.layout__question-point {
+  color: var(--clr-font-grey);
+  font-weight: 700;
+}
+
+.layout__question-vote:hover {
+  cursor: pointer;
+}
+
+.layout__question-header {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.layout__question-title {
+  margin: 0.5rem 0;
+}
+
+.layout__question-answer {
+  max-width: fit-content;
+  padding: 0.2em 1.5em;
+  font-size: 0.9rem;
+  color: #3d8f58;
+  border: 1px solid #3d8f58;
+  border-radius: 0.8em;
+}
+
+.layout__question-tag {
+  width: fit-content;
+  margin-top: 1rem;
+  padding: 0.3em 1em;
+  color: #ffffff;
+  background-color: var(--clr-secondary);
+}
+
+.layout__question-footer,
+.layout__question-poster {
+  display: flex;
+}
+
+.layout__question-footer {
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 1em;
+  border-top: 2px solid var(--clr-shadow-grey);
+}
+
+.layout__question-poster {
+  align-items: center;
+}
+
+.layout__question-posted-by,
+.layout__question-posted-time {
+  color: var(--clr-font-grey);
+}
+
+.layout__question-post-info {
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.layout__question-username {
+  color: var(--clr-link);
+}
+
+.layout__question-username:hover {
+  text-decoration: 1px underline var(--clr-link);
+}
+
+.layout__question-bookmark-btn {
+  width: fit-content;
+  margin-top: 1rem;
+}
+
+@media (min-width: 720px) {
+  .layout__question-header {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+  }
+
+  .layout__question-answer {
+    order: 1;
+  }
+
+  .layout__question-title {
+    max-width: 75%;
+    margin: 0;
+  }
+
+  .layout__question-footer {
+    flex-direction: row;
+  }
+}
