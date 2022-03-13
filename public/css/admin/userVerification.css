@@ -1,0 +1,23 @@
+.pendinguser-ctnr {
+    border: 0.15rem solid grey;
+    border-radius: 2rem;
+    max-height: 8vh;
+    max-width: 100%;
+
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 5% 15% 60% 10% 10%;
+}
+
+
+.pendinguser-ctnr > .image {
+
+    width: 5vh; height: 5vh;
+    border: 0.15rem solid grey;
+    border-radius: 50%;
+    
+}
+
+.pendinguser-ctnr > .userinfo {
+    padding: 0.3vh;
+}

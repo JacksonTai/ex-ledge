@@ -22,10 +22,23 @@ $path = '../../../';
 
           <main class="user-verification--main main-content">
                <h2 class="user-verification__title main-title">User Verification</h2>
+
+               <div class="pendinguser-ctnr">
+                    <div class="numbering">1</div>
+                    <div class="image"></div>
+                    <div class="userinfo">Username: <br>I.C. Number:</div>
+                    <button>Accept</button>
+                    <button>Reject</button>
+
+               </div>
+
+
                <p><?= $_SESSION['userId']; ?></p>
           </main>
 
      </div>
+
+     .
 
      <?php include '../layout/footer.php'; ?>
 
