@@ -10,7 +10,7 @@ html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font-size: 12px;
+  font-size: 13px;
   scroll-behavior: smooth;
 }
 
@@ -272,19 +272,19 @@ button > a {
 
 @media (min-width: 520px) {
   html {
-    font-size: 13px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 780px) {
   html {
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 
 @media (min-width: 1245px) {
   html {
-    font-size: 15px;
+    font-size: 16px;
   }
   .main-content {
     left: 14vw;
