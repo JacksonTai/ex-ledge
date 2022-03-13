@@ -23,78 +23,96 @@ $path = '../../../';
 
           <main class="leaderboard--main main-content">
                <h2 class="leaderboard__title">Leaderboard</h2>
-               <div class="leaderboard_dashboard">
-                    <div class="leaderboard_container">
-                         <div class="top_box top2_box">
-                              <div class="top2-s_half_box">
-                                   <p class="pt">1123 pt</p>
-                                   <img class="top_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="top img">
-                                   <h3>changyongg</h3>
-                              </div>
-                         </div>
-                         <div class="top_box top1_box">
-                              <div class="top1-s_half_box">
-                                   <p class="pt">1123 pt</p>
-                                   <img class="top_img" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="top img">
-                                   <h3>changyongg</h3>
-                              </div>
-                         </div>
-                         <div class="top_box top3_box">
-                              <div class="top3-s_half_box">
-                                   <p class="pt">1123 pt</p>
-                                   <img class="top_img" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="top img">
-                                   <h3>changyongg</h3>
-                              </div>
-                         </div>
+               <div class="leaderboard__podium-wrapper">
+                    <div class="leaderboard__podium dialog">
+                         <h3>1123</h3>
+                         <img class="profile-icon" src="../../../public/img/profile1.jpg" alt="">
                     </div>
                </div>
-               <div class="rank-tag_container">
-                    <div class="rank_tag">
-                         <p class="no_tag">No</p>
-                         <p class="user_tag">Users</p>
-                         <p class="point_tag">Point</p>
+               <div class="leaderboard__runner-up-wrapper">
+                    <div class="leaderboard__runner-up-field">
+                         <h3 class="leaderboard__runner-up-field--no">No</h3>
+                         <h3 class="leaderboard__runner-up-field--user">Users</h3>
+                         <h3 class="leaderboard__runner-up-field--point">Point</h3>
+                    </div>
+                    <div class="leaderboard__runner-up dialog">
+                         <p class="leaderboard__runner-up--no">4</p>
+                         <div class="leaderboard__runner-up--user">
+                              <img class="leaderboard__runner-up--img profile-icon" src="../../../public/img/profile1.jpg" alt="">
+                              <p class="leaderboard__runner-up--username">username</p>
+                         </div>
+                         <p class="leaderboard__runner-up--point">1252</p>
+                         <button class="leaderboard__runner-up-btn">
+                              <a class="leaderboard__runner-up-link" href="profile.php?id=#">View Profile</a>
+                         </button>
+                    </div>
+                    <div class="leaderboard__runner-up dialog">
+                         <p class="leaderboard__runner-up--no">5</p>
+                         <div class="leaderboard__runner-up--user">
+                              <img class="leaderboard__runner-up--img profile-icon" src="../../../public/img/profile1.jpg" alt="">
+                              <p class="leaderboard__runner-up--username">username</p>
+                         </div>
+                         <p class="leaderboard__runner-up--point">1252</p>
+                         <button class="leaderboard__runner-up-btn">
+                              <a class="leaderboard__runner-up-link" href="profile.php?id=#">View Profile</a>
+                         </button>
+                    </div>
+                    <div class="leaderboard__runner-up dialog">
+                         <p class="leaderboard__runner-up--no">6</p>
+                         <div class="leaderboard__runner-up--user">
+                              <img class="leaderboard__runner-up--img profile-icon" src="../../../public/img/profile1.jpg" alt="">
+                              <p class="leaderboard__runner-up--username">username</p>
+                         </div>
+                         <p class="leaderboard__runner-up--point">1252</p>
+                         <button class="leaderboard__runner-up-btn">
+                              <a class="leaderboard__runner-up-link" href="profile.php?id=#">View Profile</a>
+                         </button>
+                    </div>
+                    <div class="leaderboard__runner-up dialog">
+                         <p class="leaderboard__runner-up--no">7</p>
+                         <div class="leaderboard__runner-up--user">
+                              <img class="leaderboard__runner-up--img profile-icon" src="../../../public/img/profile1.jpg" alt="">
+                              <p class="leaderboard__runner-up--username">username</p>
+                         </div>
+                         <p class="leaderboard__runner-up--point">1252</p>
+                         <button class="leaderboard__runner-up-btn">
+                              <a class="leaderboard__runner-up-link" href="profile.php?id=#">View Profile</a>
+                         </button>
+                    </div>
+                    <div class="leaderboard__runner-up dialog">
+                         <p class="leaderboard__runner-up--no">8</p>
+                         <div class="leaderboard__runner-up--user">
+                              <img class="leaderboard__runner-up--img profile-icon" src="../../../public/img/profile1.jpg" alt="">
+                              <p class="leaderboard__runner-up--username">username</p>
+                         </div>
+                         <p class="leaderboard__runner-up--point">1252</p>
+                         <button class="leaderboard__runner-up-btn">
+                              <a class="leaderboard__runner-up-link" href="profile.php?id=#">View Profile</a>
+                         </button>
+                    </div>
+                    <div class="leaderboard__runner-up dialog">
+                         <p class="leaderboard__runner-up--no">9</p>
+                         <div class="leaderboard__runner-up--user">
+                              <img class="leaderboard__runner-up--img profile-icon" src="../../../public/img/profile1.jpg" alt="">
+                              <p class="leaderboard__runner-up--username">username</p>
+                         </div>
+                         <p class="leaderboard__runner-up--point">1252</p>
+                         <button class="leaderboard__runner-up-btn">
+                              <a class="leaderboard__runner-up-link" href="profile.php?id=#">View Profile</a>
+                         </button>
+                    </div>
+                    <div class="leaderboard__runner-up dialog">
+                         <p class="leaderboard__runner-up--no">10</p>
+                         <div class="leaderboard__runner-up--user">
+                              <img class="leaderboard__runner-up--img profile-icon" src="../../../public/img/profile1.jpg" alt="">
+                              <p class="leaderboard__runner-up--username">username</p>
+                         </div>
+                         <p class="leaderboard__runner-up--point">1252</p>
+                         <button class="leaderboard__runner-up-btn">
+                              <a class="leaderboard__runner-up-link" href="profile.php?id=#">View Profile</a>
+                         </button>
                     </div>
                </div>
-               <div class="all-ranking_dashboard">
-                    <div class="all-ranking_container">
-                         <div class="l_box">
-                              <div class="user_info">
-                                   <p class="rank_no">1</p>
-                                   <img class="rank_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlIy4kRyqQYE-eyQQEMvkgyyDv0IEHECKuNQ&usqp=CAU" alt="top img">
-                                   <p class="rank_name">changyongg</p>
-                                   <p class="rank_pt">1123</p>
-                                   <button class="view_profile_btn">View Profile</button>
-                              </div>
-                         </div>
-                         <div class="l_box">
-                              <div class="user_info">
-                                   <p class="rank_no">1</p>
-                                   <img class="rank_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlIy4kRyqQYE-eyQQEMvkgyyDv0IEHECKuNQ&usqp=CAU" alt="top img">
-                                   <p class="rank_name">changyongg</p>
-                                   <p class="rank_pt">1123</p>
-                                   <button class="view_profile_btn">View Profile</button>
-                              </div>
-                         </div>
-                         <div class="l_box">
-                              <div class="user_info">
-                                   <p class="rank_no">1</p>
-                                   <img class="rank_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlIy4kRyqQYE-eyQQEMvkgyyDv0IEHECKuNQ&usqp=CAU" alt="top img">
-                                   <p class="rank_name">changyongg</p>
-                                   <p class="rank_pt">1123</p>
-                                   <button class="view_profile_btn">View Profile</button>
-                              </div>
-                         </div>
-                         <div class="l_box">
-                              <div class="user_info">
-                                   <p class="rank_no">1</p>
-                                   <img class="rank_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlIy4kRyqQYE-eyQQEMvkgyyDv0IEHECKuNQ&usqp=CAU" alt="top img">
-                                   <p class="rank_name">changyongg</p>
-                                   <p class="rank_pt">1123</p>
-                                   <button class="view_profile_btn">View Profile</button>
-                              </div>
-                         </div>
-                    </div>
-               <div>
           </main>
 
      </div>

@@ -16,7 +16,6 @@ body {
   min-height: 90vh;
   width: 21vw;
   padding: 3rem 3rem 3rem 1rem;
-  /* border-left: 0.15em solid var(--clr-shadow-grey); */
 }
 
 .home__header-title {
