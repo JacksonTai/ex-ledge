@@ -13,7 +13,10 @@
 
 .leaderboard__podium-wrapper {
   margin: 2rem 0;
+  padding: 3em 0;
   font-size: 1.3rem;
+  background-image: url(../../../public/img/leaderboard_background.jpg);
+  border-radius: 1em;
 }
 
 .leaderboard__podium {
