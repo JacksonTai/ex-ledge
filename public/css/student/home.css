@@ -96,10 +96,6 @@ body {
   margin-top: 1rem;
 }
 
-.home--sidebar__top-user:hover {
-  opacity: 0.6;
-}
-
 .sidebar-top-user__username {
   margin-left: 0.3rem;
 }
