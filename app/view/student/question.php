@@ -71,7 +71,6 @@ $path = '../../../';
                          </div>
                          <!--best answer marker can be addded by just appending an empty span with class best-answer-->
                          <span class="best-answer"></span>
-
                     </div>
 
                     <div class="answer-content">asdhjjhasdjdjkhsadjkh</div>
@@ -84,6 +83,27 @@ $path = '../../../';
                          <button class="reply">Reply</button>
                          <button class="report">Report</button>
                     </div>
+
+                    <div class="reply-box">
+
+                         <div class="reply-ctnr">
+                              <div class="replier-pic"></div>
+                              <div class="reply-info">
+                                   <div class="name">name</div>
+                                   <div class="reply">sdfjkjklsdfjklsfdjklsdfjsdfljkhjkl</div>
+                              </div>
+                         </div>
+
+                         <div class="reply-ctnr">
+                              <div class="replier-pic"></div>
+                              <div class="reply-info">
+                                   <div class="name">name</div>
+                                   <div class="reply">sdfjkjklsdfjklsfdjklsdfjsdfljkhjkl</div>
+                              </div>
+                         </div>
+                    </div>
+
+
                </div>
 
 

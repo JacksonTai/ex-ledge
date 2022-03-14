@@ -124,9 +124,10 @@ hr {margin: 1rem;}
 
 
 .best-answer {
-    margin: 0.2rem; padding: 0.8rem;
-    max-height: 90%; max-width: 50%;
-    text-align: center;
+    display: flex;
+    margin: 0.2rem; padding: 0.4rem;
+    max-height: 70%; max-width: 50%;
+    justify-content: center; align-items: center;
     background-color: rgb(235, 249, 233);
     color: green; border: 1px solid green;
     /*arbitrarily large value to create semicircular corners*/
@@ -134,3 +135,33 @@ hr {margin: 1rem;}
 }
 
 .best-answer:after {content: "Best answer";}
+
+
+.reply-box {
+    margin: 1.2rem;
+    border-left: 2px solid gainsboro;
+}
+
+.reply-ctnr {
+    display: grid; grid-template-columns: minmax(auto, 9%) auto;
+    padding: 0.8rem;
+}
+
+.replier-pic{
+    width: 2.5rem; height: 2.5rem;
+    border-radius: 50%; border: 1px solid black;
+    margin: auto;
+}
+
+.reply-info {
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+.reply-info > .name {
+    font-family: var(--ff-montserrat-text); font-size: 1.05rem;
+}
+
+.reply-info > .reply {
+    font-family: var(--ff-montserrat-text); font-size: 0.8rem;
+}
