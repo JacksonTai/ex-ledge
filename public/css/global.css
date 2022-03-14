@@ -279,6 +279,7 @@ button > a {
 /* ---------- [Profile image - icon size] ----------- */
 .profile-icon {
   max-width: 2rem;
+  border-radius: 50%;
 }
 
 /* ############## 3. Media Queries  ############# */
