@@ -2,6 +2,38 @@
 
 hr {margin: 1rem;}
 
+.question--main {
+    width: 100vw;
+}
+
+@media (min-width: 1245px) {
+    .question--main {
+      min-height: 120vh;
+      width: 65vw;
+      padding-right: 3rem;
+      padding-bottom: 8rem;
+    }
+  
+    .home__header {
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .home__header-title {
+      display: inline;
+    }
+  
+    .home__header-btn-container {
+      display: inline-flex;
+      justify-content: flex-end;
+    }
+  
+    .home__header-btn {
+      height: fit-content;
+    }
+  
+  }
+
 .question-poster {
     height: 8vh; max-height: 8vh; max-width: 100%;
     display: grid; grid-template-columns: 20% auto;

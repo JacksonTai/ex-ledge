@@ -8,7 +8,7 @@
 
 
 .pendinguser-ctnr > .image {
-    max-width: 7vw;width: 5vw; height: 5vw;
+    max-width: 7vw; width: 5vw; height: 5vw;
     border: 0.15rem solid grey;
     border-radius: 50%;
 }
