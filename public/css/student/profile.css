@@ -90,6 +90,61 @@
   background-color: var(--clr-primary);
 }
 
+/* -- Modal -- */
+.modal {
+  width: 28rem;
+}
+
+.modal__title {
+  text-align: center;
+}
+
+.edit-profile-form,
+.edit-profile-form__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.edit-profile-form__item {
+  margin-top: 1rem;
+}
+
+.edit-profile__input {
+  width: 100%;
+}
+
+.edit-profile-form__btn {
+  margin-top: 3rem;
+}
+
+.modal__content--delete-account {
+  margin: 1rem;
+}
+
+.modal__delete--txt,
+.modal__delete-account-input {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.delete__user-id,
+.delete__username {
+  font-weight: 700;
+}
+
+.modal__delete-account-input,
+.modal__delete-account-btn {
+  width: 100%;
+}
+
+.modal__delete-account-btn--disabled {
+  color: rgba(207, 34, 46, 0.5);
+  border: 1px solid rgba(207, 34, 46, 0.5);
+  pointer-events: none;
+}
+
+/* -- Section -- */
 .profile-section {
   display: none;
 }
@@ -118,21 +173,6 @@
 
 .no-scroll {
   overflow: hidden;
-}
-
-.edit-profile-form,
-.edit-profile-form__item {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.edit-profile-form__item {
-  margin-top: 1rem;
-}
-
-.edit-profile-form__btn {
-  margin-top: 3rem;
 }
 
 @media (min-width: 900px) {
@@ -184,14 +224,14 @@
   }
 
   .profile__delete-btn {
-    border: 1px solid #fa2230;
     color: #fa2230;
+    border: 1px solid #fa2230;
   }
 
   .profile__delete-btn:hover {
-    border: 1px solid #fa2230;
-    background-color: #fa2230;
     color: #ffffff;
+    background-color: #fa2230;
+    border: 1px solid #fa2230;
     transition: 0.3s ease-in-out;
   }
 

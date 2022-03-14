@@ -68,7 +68,7 @@ $user = new Controller\User();
                                         <?php if ($userInfo['verification']) : ?>
                                              Verified
                                         <?php elseif (!$userInfo['verification']) : ?>
-                                             Unverified 
+                                             Unverified
                                              <a class="profile__banner-verify-link">(Verify)</a>
                                         <?php endif; ?>
                                    <?php else : ?>
@@ -105,6 +105,9 @@ $user = new Controller\User();
                               <div class="edit-profile-form__item">
                                    <label for="gender">Gender</label>
                                    <select class="edit-profile__input" name="gender" id="gender">
+                                        <?php if (!$userInfo['gender']) : ?>
+                                             <option selected disabled>Select gender</option>
+                                        <?php endif; ?>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                    </select>
@@ -117,8 +120,26 @@ $user = new Controller\User();
                     <div class="modal modal--delete-account">
                          <header class="modal__header modal__header--delete-account">
                               <button class="modal__close-btn">&#10006;</button>
-                              <h2 class="modal__title">Delete Account</h2>
+                              <h2 class="modal__title">Are you absolutely sure?</h2>
                          </header>
+                         <div class="modal__content--delete-account">
+                              <p class="modal__delete--txt">This action cannot be redone.
+                                   This will permanently delete the
+                                   <span class="delete__username">
+                                        <?php echo htmlspecialchars($userInfo['username']); ?>
+                                   </span>
+                                   questions, answers, comments, chatting history and remove all related information.
+                              </p>
+                              <p class="modal__delete--txt">Please type
+                                   <span class="delete__user-id">
+                                        <?php echo htmlspecialchars($userInfo['user_id']); ?>
+                                   </span>
+                                   to confirm.
+                              </p>
+                              <input class="modal__delete-account-input" type="text" data-user-id="<?php echo htmlspecialchars($userInfo['user_id']); ?>">
+                              <button class="modal__delete-account-btn btn--red modal__delete-account-btn--disabled">Delete Account</button>
+                              <?php  ?>
+                         </div>
                     </div>
                </div>
                <div class="modal-overlay modal-overlay--verify-account">

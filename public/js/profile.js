@@ -38,7 +38,7 @@ function switchSection(section) {
     .classList.add(showSection);
 }
 
-/* -- Modal -- */
+/* -- Modal opening and closing -- */
 let editProfileBtn = document.querySelector(".profile__edit-btn");
 let deleteAccountBtn = document.querySelector(".profile__delete-btn");
 let verifyLink = document.querySelector(".profile__banner-verify-link");
@@ -79,4 +79,16 @@ function closeModal() {
   this.closest(".modal").style.display = "none";
   this.closest(".modal-overlay").style.display = "none";
   document.body.classList.remove("no-scroll");
+  window.location.href = "profile.php";
 }
+
+/* -- Delete account modal -- */
+let deleteAccountInput = document.querySelector(".modal__delete-account-input");
+let deletAccountbtn = document.querySelector(".modal__delete-account-btn");
+
+deleteAccountInput.addEventListener("input", () => {
+  deletAccountbtn.classList.add("modal__delete-account-btn--disabled");
+  if (deleteAccountInput.value == deleteAccountInput.dataset.userId) {
+    deletAccountbtn.classList.remove("modal__delete-account-btn--disabled");
+  }
+});
