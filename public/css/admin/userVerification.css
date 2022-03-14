@@ -1,28 +1,45 @@
 .pendinguser-ctnr {
     border: 0.15rem solid grey; border-radius: 2rem;
-    min-height: 8vw; max-width: 100%;
+    min-height: 12vw;  max-height: 20vw; height: 100%;
+    max-width: 100%;
     padding: 1rem;
     
-    display: grid; grid-template-columns: 5% 10% 60% auto auto;
+    display: grid; grid-template-columns: 5% 10% 60%;
 }
 
 
 .pendinguser-ctnr > .image {
-    max-width: 7vw; width: 5vw; height: 5vw;
+    max-width: 7vw; min-height: 4vw; width: 5vw; height: 5vw;
     border: 0.15rem solid grey;
     border-radius: 50%;
 }
 
 .pendinguser-ctnr > .userinfo {padding: 0.3vw;}
 
-.pendinguser-ctnr > button{margin: auto; padding: 0.5vw 2vw;}
+.approval-ctnr {
+    display: grid;
+    grid-template-columns: 20% 20%;
+}
 
-.pendinguser-ctnr > button:first-of-type{
+.approval-ctnr > button{margin: auto; padding: 0.5vw 2vw;}
+
+.approval-ctnr > button:first-of-type{
     background-color: white; border: 0.1rem solid green;
     color: green;
 }
 
-.pendinguser-ctnr > button:last-of-type{
+.approval-ctnr > button:last-of-type{
     background-color: white; border: 0.1rem solid red;
     color: red;
 }
+
+@media (min-width: 1245px) {
+    .pendinguser-ctnr {
+        border: 0.15rem solid grey; border-radius: 2rem;
+        min-height: 12vw;  max-height: 20vw; height: 100%;
+        max-width: 100%;
+        padding: 1rem;
+        
+        display: grid; grid-template-columns: 5% 10% 60% auto;
+    }
+  }

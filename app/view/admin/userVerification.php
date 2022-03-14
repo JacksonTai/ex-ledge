@@ -27,13 +27,15 @@ $path = '../../../';
                     <div class="numbering">1</div>
                     <div class="image"></div>
                     <div class="userinfo">Username: <br>I.C. Number:</div>
-                    <button>Accept</button>
-                    <button>Reject</button>
+
+                    <div class="approval-ctnr">
+                         <button>Accept</button>
+                         <button>Reject</button>
+                    </div>
 
                </div>
 
 
-               <p><?= $_SESSION['userId']; ?></p>
           </main>
 
      </div>
