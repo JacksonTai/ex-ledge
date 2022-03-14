@@ -1,15 +1,14 @@
 /* FORCED OVERRIDE TO GLOBAL CTNR WIDTH, UNIDENTIFIED ISSUE WILL REMOVE */
-.main-content {width: 64vw;}
 
 hr {margin: 1rem;}
 
 .question-poster {
     height: 8vh; max-height: 8vh; max-width: 100%;
-    display: grid; grid-template-columns: 12% 88%;
+    display: grid; grid-template-columns: 20% auto;
 }
 
 .question-poster > .picture {
-    width: 4vw; height: 4vw;
+    width: 4rem; height: 4rem;
     border-radius: 50%; border: 1px solid black;
     margin: auto;
 }
@@ -75,11 +74,11 @@ hr {margin: 1rem;}
 
 .answer-poster {
     height: 30%; max-width: 100%;
-    display: grid; grid-template-columns: 12% auto auto;
+    display: grid; grid-template-columns: 20% 40% auto;
 }
 
 .answer-poster > .picture {
-    width: 3vw; height: 3vw;
+    width: 3rem; height: 3rem;
     border-radius: 50%; border: 1px solid black;
     margin: auto;
 }
@@ -93,7 +92,7 @@ hr {margin: 1rem;}
 
 
 .best-answer {
-    margin: 0.3rem; padding: 0.5rem;
+    margin: 0.2rem; padding: 0.4rem;
     max-height: 100%; max-width: 50%;
     text-align: center;
     background-color: rgb(235, 249, 233);
