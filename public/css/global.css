@@ -52,6 +52,7 @@ html {
   --clr-shadow-grey: rgba(0, 0, 0, 0.25);
   --clr-font-grey: #7a7a7a;
   --clr-link: #2893f6;
+  --clr-delete-red: #fa2230;
   /* Theme font-family */
   --ff-montserrat-title: "montserrat-bold";
   --ff-montserrat-text: "montserrat-medium";
@@ -186,6 +187,19 @@ button {
 button,
 button > a {
   color: #ffffff;
+}
+
+.btn--red {
+  color: var(--clr-delete-red);
+  background-color: #ffffff;
+  border: 1px solid var(--clr-delete-red);
+}
+
+.btn--red:hover {
+  color: #ffffff;
+  border: 1px solid var(--clr-delete-red);
+  background-color: var(--clr-delete-red);
+  transition: 0.3s ease-in-out;
 }
 
 /* ---------- [Invalid Input] ----------- */
