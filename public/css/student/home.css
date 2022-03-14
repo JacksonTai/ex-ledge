@@ -18,47 +18,6 @@ body {
   padding: 3rem 3rem 3rem 1rem;
 }
 
-<<<<<<< HEAD
-hr {
-  margin: 1em;
-}
-
-.post-view {
-  margin: 3rem;
-  border-right: 2px solid black;
-}
-.title-ctnr {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.question-caption,
-.button,
-.button-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1em;
-}
-
-.button-filter{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 15px;
-  height: 50px;
-  width: 125px;
-  background-color: transparent;
-  border: solid 2px #909090;
-  color: #5A5A5A;
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.button-askQuestion{
-  display: none;
-=======
 .home__header-title {
   margin-bottom: 1.2rem;
 }
@@ -115,7 +74,6 @@ hr {
 .home__main-nav-link {
   padding: 0.7em 1.5em;
   color: var(--clr-font-grey);
->>>>>>> 2ca17b38af91ef9fb1f2702ae9c0208273f95bba
 }
 
 .home__main-nav-page {
