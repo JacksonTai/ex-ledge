@@ -1,6 +1,8 @@
 /* FORCED OVERRIDE TO GLOBAL CTNR WIDTH, UNIDENTIFIED ISSUE WILL REMOVE */
 .main-content {width: 64vw;}
 
+hr {margin: 1rem;}
+
 .question-poster {
     height: 8vh; max-height: 8vh; max-width: 100%;
     display: grid; grid-template-columns: 12% 88%;
@@ -18,6 +20,8 @@
     grid-template-rows: 50% 50%; grid-gap: 0.5rem;
 }
 
+
+
 .details > .name {font-family: var(--ff-montserrat-text); font-size: 1.5rem;}
 
 .question-ctnt {
@@ -30,4 +34,72 @@
 .ui-grid {
     display: grid; max-width: 55%;
     grid-template-columns: 30% auto auto; grid-gap: 1rem;
+    margin: 1rem;
 }
+
+.ui-grid > .votebox {display: grid; grid-template-columns: 3fr 3fr 3fr;}
+
+.ui-grid > button {
+    background-color: white;
+    color: grey;
+    text-size-adjust: auto;
+}
+
+.ui-grid > .score {text-align: center;}
+
+.answerbox {
+    width: 100%; height: 20vh;
+    border-radius: 0.4rem;
+    margin: 1rem;
+}
+
+.post-grid {
+    display: grid;
+    grid-template-columns: 50% auto;
+}
+
+.post-answer {
+    grid-column: -1;
+}
+
+
+
+.answer-count {
+    margin: 1.2rem;
+    font-family: var(--ff-montserrat-text); font-size: 1.3rem;
+}
+
+.answer-ctnr {
+    padding: 1.7rem;
+}
+
+.answer-poster {
+    height: 30%; max-width: 100%;
+    display: grid; grid-template-columns: 12% auto auto;
+}
+
+.answer-poster > .picture {
+    width: 4vh; height: 4vh;
+    border-radius: 50%; border: 1px solid black;
+    margin: auto;
+}
+
+.answer-poster > .details > .name {font-family: var(--ff-montserrat-text); font-size: 1.2rem;}
+
+.answer-content {
+    margin: 1.3rem;
+    font-family: var(--ff-montserrat-light); font-size: 1rem;
+}
+
+
+.best-answer {
+    margin: 0.3rem; padding: 0.5rem;
+    max-height: 100%; max-width: 50%;
+    text-align: center;
+    background-color: rgb(235, 249, 233);
+    color: green; border: 1px solid green;
+    /*arbitrarily large value to create semicircular corners*/
+    border-radius: 1400vh;
+}
+
+.best-answer:after {content: "Best answer";}
