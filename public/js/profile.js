@@ -43,9 +43,15 @@ let editProfileBtn = document.querySelector(".profile__edit-btn");
 let deleteAccountBtn = document.querySelector(".profile__delete-btn");
 let verifyLink = document.querySelector(".profile__banner-verify-link");
 
-editProfileBtn.addEventListener("click", openModal);
-deleteAccountBtn.addEventListener("click", openModal);
-verifyLink.addEventListener("click", openModal);
+if (editProfileBtn) {
+  editProfileBtn.addEventListener("click", openModal);
+}
+if (deleteAccountBtn) {
+  deleteAccountBtn.addEventListener("click", openModal);
+}
+if (verifyLink) {
+  verifyLink.addEventListener("click", openModal);
+}
 
 let modals = document.querySelectorAll(".modal");
 let modalsOverlay = document.querySelectorAll(".modal-overlay");
