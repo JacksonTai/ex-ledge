@@ -8,9 +8,8 @@ body {
   width: 100vw;
 }
 
-hr {
-  margin: 1em;
-}
+
+hr {margin: 1em;}
 
 .home__header-title {
   margin-bottom: 1.2rem;
@@ -73,7 +72,6 @@ hr {
 .home__main-nav-page {
   margin: 0 2rem;
 }
-
 
 
 @media (min-width: 1245px) {
