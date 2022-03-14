@@ -36,7 +36,7 @@ hr {margin: 1rem;}
 
 .question-poster {
     height: 8vh; max-height: 8vh; max-width: 100%;
-    display: grid; grid-template-columns: 20% auto;
+    display: grid; grid-template-columns: minmax(auto, 10%) auto;
 }
 
 .question-poster > .picture {
@@ -106,11 +106,11 @@ hr {margin: 1rem;}
 
 .answer-poster {
     height: 30%; max-width: 100%;
-    display: grid; grid-template-columns: 20% 40% auto;
+    display: grid; grid-template-columns: minmax(5%, 10%) 40% 45%;
 }
 
 .answer-poster > .picture {
-    width: 3rem; height: 3rem;
+    width: 2.6rem; height: 2.6rem;
     border-radius: 50%; border: 1px solid black;
     margin: auto;
 }
@@ -124,8 +124,8 @@ hr {margin: 1rem;}
 
 
 .best-answer {
-    margin: 0.2rem; padding: 0.4rem;
-    max-height: 100%; max-width: 50%;
+    margin: 0.2rem; padding: 0.8rem;
+    max-height: 90%; max-width: 50%;
     text-align: center;
     background-color: rgb(235, 249, 233);
     color: green; border: 1px solid green;
