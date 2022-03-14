@@ -64,17 +64,21 @@ $user = new Controller\User();
                               </p>
                               <p class="profile__banner-content">
                                    <span class="profile__content-label">Verification Status: </span>
-                                   <?php if (isset($userInfo['verification'])) : ?>
-                                        <?php if ($userInfo['verification']) : ?>
-                                             Verified
-                                        <?php elseif (!$userInfo['verification']) : ?>
-                                             Unverified
-                                             <a class="profile__banner-verify-link">(Verify)</a>
-                                        <?php endif; ?>
-                                   <?php else : ?>
-                                        N/A
-                                   <?php endif; ?>
-
+                                   <?php
+                                   if (isset($userInfo['verification'])) {
+                                        if ($userInfo['verification']) {
+                                             echo 'Verified';
+                                        }
+                                        if (!$userInfo['verification']) {
+                                             echo 'Unverified';
+                                             if (!isset($_GET['id'])) {
+                                                  echo '<a class="profile__banner-verify-link">(Verify)</a>';
+                                             }
+                                        }
+                                   } else {
+                                        echo 'N/A';
+                                   }
+                                   ?>
                               </p>
                          </div>
                     </div>
@@ -93,7 +97,7 @@ $user = new Controller\User();
                               <button class="modal__close-btn">&#10006;</button>
                               <h2 class="modal__title">Edit Profile</h2>
                          </header>
-                         <form class="edit-profile-form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+                         <form class="edit-profile-form" method="POST">
                               <div class="edit-profile-form__item">
                                    <label for="username">Username</label>
                                    <input class="edit-profile__input" type="text" name="username" id="username" placeholder="Enter new username" value="<?php echo htmlspecialchars($userInfo['username']); ?>">
@@ -112,7 +116,7 @@ $user = new Controller\User();
                                         <option value="female">Female</option>
                                    </select>
                               </div>
-                              <button class="edit-profile-form__btn" type="submit" name="edit-profile">Update</button>
+                              <button class="edit-profile-form__btn">Update</button>
                          </form>
                     </div>
                </div>
@@ -143,8 +147,16 @@ $user = new Controller\User();
                               <button class="modal__close-btn">&#10006;</button>
                               <h2 class="modal__title">Verify Account</h2>
                          </header>
-                         <form method="POST">
-
+                         <form class="verify-form" method="POST">
+                              <div class="verify-form__item">
+                                   <label for="fullaName">Full Name (as per IC)</label>
+                                   <input class="verify__input" type="text" name="fullaName" id="fullaName" placeholder="Enter your full name">
+                              </div>
+                              <div class="verify-form__item">
+                                   <label for="NRIC">NRIC Number</label>
+                                   <input class="verify__input" type="text" name="NRIC" id="NRIC" placeholder="Enter your NRIC number">
+                              </div>
+                              <button class="verify-form__btn">Send Request</button>
                          </form>
                     </div>
                </div>
