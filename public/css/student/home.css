@@ -16,7 +16,6 @@ body {
   min-height: 90vh;
   width: 21vw;
   padding: 3rem 3rem 3rem 1rem;
-  /* border-left: 0.15em solid var(--clr-shadow-grey); */
 }
 
 .home__header-title {
@@ -95,10 +94,6 @@ body {
   display: flex;
   align-items: center;
   margin-top: 1rem;
-}
-
-.home--sidebar__top-user:hover {
-  opacity: 0.6;
 }
 
 .sidebar-top-user__username {
