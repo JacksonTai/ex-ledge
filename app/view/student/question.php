@@ -28,10 +28,16 @@ $path = '../../../';
                     <div class="picture"></div>
                     <div class="details">
                          <div class="name">ch</div>
-                         <div class="date">69 second ago</div>
+                         <p class="date">69 second ago</p>
                     </div>
                </div>
 
+               <div class="question-ctnt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </div>
+               <div class="ui-grid">
+                    <div class="votebox"></div>
+                    <button class="report">Report</button>
+                    <button class="bookmark">Bookmark</button>
+               </div>
 
           </main>
 

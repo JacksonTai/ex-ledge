@@ -14,9 +14,20 @@
 
 .question-poster > .details {
     margin: 0.5rem;
-    display: grid; grid-template-rows: 50% 50%;
+    display: grid; 
+    grid-template-rows: 50% 50%; grid-gap: 0.5rem;
 }
 
-.details:first-child {
-    font-size: large;
+.details > .name {font-family: var(--ff-montserrat-text); font-size: 1.5rem;}
+
+.question-ctnt {
+    margin: 0.2rem; padding: 0.5rem;
+    font-family: var(--ff-montserrat-light); font-size: 1.3rem;
+}
+
+
+
+.ui-grid {
+    display: grid; max-width: 55%;
+    grid-template-columns: 30% auto auto; grid-gap: 1rem;
 }
