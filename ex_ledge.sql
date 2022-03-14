@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2022 at 04:14 AM
+-- Generation Time: Mar 13, 2022 at 11:04 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ex_ledge`
+-- Database: `testing`
 --
 
 -- --------------------------------------------------------
@@ -78,9 +78,9 @@ CREATE TABLE `comment` (
 --
 
 CREATE TABLE `message` (
-  `message_id` varchar(20) NOT NULL,
-  `sender_id` varchar(20) NOT NULL,
-  `receiver_id` varchar(20) NOT NULL,
+  `msg_id` varchar(20) NOT NULL,
+  `outgoing_msg_id` varchar(20) NOT NULL,
+  `incoming_msg_id` varchar(20) NOT NULL,
   `content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -95,8 +95,9 @@ CREATE TABLE `question` (
   `user_id` varchar(20) NOT NULL,
   `title` varchar(100) NOT NULL,
   `content` varchar(10000) NOT NULL,
-  `tag` varchar(100) NOT NULL,
-  `point` int(11) NOT NULL DEFAULT 0
+  `tag` varchar(30) NOT NULL,
+  `point` int(11) NOT NULL DEFAULT 0,
+  `time_posted` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -138,6 +139,8 @@ CREATE TABLE `user_detail` (
 
 -- --------------------------------------------------------
 
+--
+-- Table structure for table `verification_queue`
 --
 
 CREATE TABLE `verification_queue` (
@@ -208,9 +211,9 @@ ALTER TABLE `comment`
 -- Indexes for table `message`
 --
 ALTER TABLE `message`
-  ADD PRIMARY KEY (`message_id`),
-  ADD KEY `fk_message-sender__user` (`sender_id`),
-  ADD KEY `fk_message-receiver__user` (`receiver_id`);
+  ADD PRIMARY KEY (`msg_id`),
+  ADD KEY `fk_message-outgoing__user` (`outgoing_msg_id`),
+  ADD KEY `fk_message-incoming__user` (`incoming_msg_id`);
 
 --
 -- Indexes for table `question`
@@ -289,8 +292,8 @@ ALTER TABLE `comment`
 -- Constraints for table `message`
 --
 ALTER TABLE `message`
-  ADD CONSTRAINT `fk_message-receiver__user` FOREIGN KEY (`receiver_id`) REFERENCES `user` (`user_id`),
-  ADD CONSTRAINT `fk_message-sender__user` FOREIGN KEY (`sender_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_message-incoming__user` FOREIGN KEY (`incoming_msg_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `fk_message-outgoing__user` FOREIGN KEY (`outgoing_msg_id`) REFERENCES `user` (`user_id`);
 
 --
 -- Constraints for table `question`
