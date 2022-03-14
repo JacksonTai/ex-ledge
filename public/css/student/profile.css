@@ -15,10 +15,26 @@
   padding: 2em;
 }
 
-.profile__edit-btn {
-  padding: 0;
-  background-color: #ffffff;
+.profile__banner-btn-container {
+  display: flex;
   align-self: flex-end;
+}
+
+.profile__edit-btn,
+.profile__delete-btn {
+  padding: 0;
+  color: #000000;
+  font-size: 1.5rem;
+  background-color: #ffffff;
+}
+
+.profile__edit-btn {
+  margin-right: 0.5em;
+}
+
+.profile__edit-txt,
+.profile__delete-txt {
+  display: none;
 }
 
 .profile__img {
@@ -44,6 +60,16 @@
   color: #757575;
 }
 
+.profile__banner-verify-link {
+  margin-left: 0.2rem;
+  color: var(--clr-link);
+  cursor: pointer;
+}
+
+.profile__banner-verify-link:hover {
+  border-bottom: 1px solid var(--clr-link);
+}
+
 .profile__banner-navbar {
   display: flex;
   align-items: center;
@@ -65,6 +91,66 @@
   background-color: var(--clr-primary);
 }
 
+/* -- Modal -- */
+.modal {
+  width: 28rem;
+}
+
+.modal__title {
+  text-align: center;
+}
+
+.verify-form,
+.edit-profile-form,
+.verify-form__item,
+.edit-profile-form__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.verify-form__item,
+.edit-profile-form__item {
+  margin-top: 1rem;
+}
+
+.verify__input,
+.edit-profile__input {
+  width: 100%;
+}
+
+.verify-form__btn,
+.edit-profile-form__btn {
+  width: 50%;
+  margin: 2rem auto 0;
+}
+
+.modal__content--delete-account {
+  margin: 1rem;
+}
+
+.modal__delete--txt,
+.modal__delete-account-password {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.delete__username {
+  font-weight: 700;
+}
+
+.modal__delete-account-password,
+.modal__delete-account-btn {
+  width: 100%;
+}
+
+.modal__delete-account-btn--disabled {
+  color: rgba(207, 34, 46, 0.5);
+  border: 1px solid rgba(207, 34, 46, 0.5);
+  pointer-events: none;
+}
+
+/* -- Section -- */
 .profile-section {
   display: none;
 }
@@ -95,21 +181,6 @@
   overflow: hidden;
 }
 
-.edit-profile-form,
-.edit-profile-form__item {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.edit-profile-form__item {
-  margin-top: 1rem;
-}
-
-.edit-profile-form__btn {
-  margin-top: 3rem;
-}
-
 @media (min-width: 900px) {
   .profile__banner-wrapper {
     display: flex;
@@ -118,7 +189,7 @@
     padding: 2em;
   }
 
-  .profile__edit-btn {
+  .profile__banner-btn-container {
     order: 1;
     margin-left: auto;
     align-self: flex-start;
@@ -146,5 +217,39 @@
 @media (min-width: 1245px) {
   .profile__banner-navbar-btn {
     min-width: 20%;
+  }
+
+  .profile__banner-btn-container {
+    flex-direction: column;
+  }
+
+  .profile__edit-btn,
+  .profile__delete-btn {
+    padding: 0.5em 2em;
+    font-size: 0.9rem;
+  }
+
+  .profile__delete-btn {
+    color: #fa2230;
+    border: 1px solid #fa2230;
+  }
+
+  .profile__delete-btn:hover {
+    color: #ffffff;
+    background-color: #fa2230;
+    border: 1px solid #fa2230;
+    transition: 0.3s ease-in-out;
+  }
+
+  .profile__edit-btn {
+    color: #ffffff;
+    background-color: var(--clr-primary);
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .profile__edit-txt,
+  .profile__delete-txt {
+    display: inline;
   }
 }

@@ -77,5 +77,9 @@ class User extends \config\DbConn
           $userList = $stmt->fetch();
           return $userList;
      }
- 
+
+     protected function deleteUser($userId)
+     {
+          
+     }
 }
