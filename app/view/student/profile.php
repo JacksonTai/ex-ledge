@@ -130,15 +130,10 @@ $user = new Controller\User();
                                    </span>
                                    questions, answers, comments, chatting history and remove all related information.
                               </p>
-                              <p class="modal__delete--txt">Please type
-                                   <span class="delete__user-id">
-                                        <?php echo htmlspecialchars($userInfo['user_id']); ?>
-                                   </span>
-                                   to confirm.
-                              </p>
-                              <input class="modal__delete-account-input" type="text" data-user-id="<?php echo htmlspecialchars($userInfo['user_id']); ?>">
+                              <p class="modal__delete--txt">Please enter password to confirm.</p>
+                              <input class="modal__delete-account-password" type="password" data-email="
+                                   <?php echo htmlspecialchars($userInfo['email']); ?>" autocomplete="off">
                               <button class="modal__delete-account-btn btn--red modal__delete-account-btn--disabled">Delete Account</button>
-                              <?php  ?>
                          </div>
                     </div>
                </div>
@@ -148,6 +143,9 @@ $user = new Controller\User();
                               <button class="modal__close-btn">&#10006;</button>
                               <h2 class="modal__title">Verify Account</h2>
                          </header>
+                         <form method="POST">
+
+                         </form>
                     </div>
                </div>
 

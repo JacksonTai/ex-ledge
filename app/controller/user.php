@@ -25,6 +25,11 @@ class User extends \Model\User
      {
           return $this->searchUser($searchTerm);
      }
+
+     public function delete($userId)
+     {
+          return $this->deleteUser($userId);
+     }
 }
 
 if (isset($_GET['searchTerm'])) {

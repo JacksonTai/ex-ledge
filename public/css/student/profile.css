@@ -123,17 +123,16 @@
 }
 
 .modal__delete--txt,
-.modal__delete-account-input {
+.modal__delete-account-password {
   text-align: center;
   margin-bottom: 1rem;
 }
 
-.delete__user-id,
 .delete__username {
   font-weight: 700;
 }
 
-.modal__delete-account-input,
+.modal__delete-account-password,
 .modal__delete-account-btn {
   width: 100%;
 }

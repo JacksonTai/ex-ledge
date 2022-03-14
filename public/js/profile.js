@@ -83,12 +83,22 @@ function closeModal() {
 }
 
 /* -- Delete account modal -- */
-let deleteAccountInput = document.querySelector(".modal__delete-account-input");
+let deleteAccountPassword = document.querySelector(
+  ".modal__delete-account-password"
+);
 let deletAccountbtn = document.querySelector(".modal__delete-account-btn");
 
-deleteAccountInput.addEventListener("input", () => {
+deleteAccountPassword.addEventListener("input", async function () {
   deletAccountbtn.classList.add("modal__delete-account-btn--disabled");
-  if (deleteAccountInput.value == deleteAccountInput.dataset.userId) {
-    deletAccountbtn.classList.remove("modal__delete-account-btn--disabled");
+  try {
+    let res = await fetch(
+      `../../controller/signin.php?email=${deleteAccountPassword.dataset.email.trim()}&
+      password=${deleteAccountPassword.value}`
+    );
+    if (await res.json()) {
+      deletAccountbtn.classList.remove("modal__delete-account-btn--disabled");
+    }
+  } catch (e) {
+    console.log(e);
   }
 });
