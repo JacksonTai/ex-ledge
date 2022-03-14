@@ -26,7 +26,10 @@ $path = '../../../';
 
                <div class="question-poster">
                     <div class="picture"></div>
-                    <div class="details">asdasdsd</div>
+                    <div class="details">
+                         <div class="name">ch</div>
+                         <div class="date">69 second ago</div>
+                    </div>
                </div>
 
 
