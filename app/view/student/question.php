@@ -23,8 +23,18 @@ $path = '../../../';
 
           <main class="question--main main-content">
                <h2 class="question__title main-title">Put 'question title' as title</h2>
+
+               <div class="question-poster">
+                    <div class="picture"></div>
+                    <div class="details">asdasdsd</div>
+               </div>
+
+
           </main>
 
+
+          <?php include '../layout/trending-sidebar.php'; ?>
+          
      </div>
 
      <?php include '../layout/footer.php'; ?>

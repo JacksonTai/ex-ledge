@@ -1,0 +1,11 @@
+.main-content {
+    width: 64vw;
+}
+
+.question-poster {
+    max-width: 100%;
+    display: grid; grid-template-columns: 5% 95%;
+    min-height: 5vh;
+
+    border: 1px solid black;
+}

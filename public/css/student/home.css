@@ -5,9 +5,7 @@
 hr {
   margin: 1em;
 }
-div > button {
-  margin: 1.5rem;
-}
+
 
 .ctnr {
   display: grid;
