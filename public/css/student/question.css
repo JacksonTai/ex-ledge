@@ -1,6 +1,5 @@
-.main-content {
-    width: 64vw;
-}
+/* FORCED OVERRIDE TO GLOBAL CTNR WIDTH, UNIDENTIFIED ISSUE WILL REMOVE */
+.main-content {width: 64vw;}
 
 .question-poster {
     max-width: 100%;
