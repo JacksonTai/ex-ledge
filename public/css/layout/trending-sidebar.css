@@ -1,0 +1,26 @@
+.trending-sidebar {
+    position: absolute;
+    top: var(--layout-header-height);
+    right: 0;
+    width: 21vw;
+    min-height: 90vh;
+    padding-top: 1.5rem;
+    border-left: 0.15em solid var(--clr-shadow-grey);
+  }
+  
+  .trending {
+    display: grid;
+    grid-template-rows: fit-content(20%) fit-content(20%);
+  }
+  
+  .trending-tab {
+    border: 1px solid black;
+    border-radius: 1rem;
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .trending-tab > div {
+    border-bottom: 1px dotted black;
+  }
+  
