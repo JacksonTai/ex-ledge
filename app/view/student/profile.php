@@ -27,9 +27,16 @@ $user = new Controller\User();
                <section class="profile__banner dialog">
                     <div class="profile__banner-wrapper">
                          <?php if (!isset($_GET['id'])) : ?>
-                              <button class="profile__edit-btn">
-                                   <img src="<?php echo $path ?>public/img/icons/edit.jpg" alt="edit">
-                              </button>
+                              <div class="profile__banner-btn-container">
+                                   <button class="profile__edit-btn">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                        <span class="profile__edit-txt">Edit Profile</span>
+                                   </button>
+                                   <button class="profile__delete-btn">
+                                        <i class="fa-solid fa-trash"></i>
+                                        <span class="profile__delete-txt">Delete Account</span>
+                                   </button>
+                              </div>
                          <?php endif; ?>
                          <div class="profile__banner-header">
                               <?php $userInfo = $user->read($_SESSION['userId']); ?>
@@ -57,10 +64,17 @@ $user = new Controller\User();
                               </p>
                               <p class="profile__banner-content">
                                    <span class="profile__content-label">Verification Status: </span>
-                                   <?php
-                                   $userInfo['verification'] ? $status = 'Verified' : $status = 'Unverified';
-                                   echo $status;
-                                   ?>
+                                   <?php if (isset($userInfo['verification'])) : ?>
+                                        <?php if ($userInfo['verification']) : ?>
+                                             Verified
+                                        <?php elseif (!$userInfo['verification']) : ?>
+                                             Unverified 
+                                             <a class="profile__banner-verify-link">(Verify)</a>
+                                        <?php endif; ?>
+                                   <?php else : ?>
+                                        N/A
+                                   <?php endif; ?>
+
                               </p>
                          </div>
                     </div>
@@ -72,6 +86,7 @@ $user = new Controller\User();
                     </nav>
                </section>
 
+               <!-- Modal -->
                <div class="modal-overlay modal-overlay--edit-profile">
                     <div class="modal modal--edit-profile">
                          <header class="modal__header modal__header--edit-profile">
@@ -98,13 +113,30 @@ $user = new Controller\User();
                          </form>
                     </div>
                </div>
+               <div class="modal-overlay modal-overlay--delete-account">
+                    <div class="modal modal--delete-account">
+                         <header class="modal__header modal__header--delete-account">
+                              <button class="modal__close-btn">&#10006;</button>
+                              <h2 class="modal__title">Delete Account</h2>
+                         </header>
+                    </div>
+               </div>
+               <div class="modal-overlay modal-overlay--verify-account">
+                    <div class="modal modal--verify-account">
+                         <header class="modal__header modal__header--verify-account">
+                              <button class="modal__close-btn">&#10006;</button>
+                              <h2 class="modal__title">Verify Account</h2>
+                         </header>
+                    </div>
+               </div>
 
+               <!-- Section -->
                <section class="profile-section profile-section--overview profile-section-selected--flex">
                     <div class="profile-section__overview--about dialog">
                          <h2>About</h2>
                          <p>
                               <?php echo htmlspecialchars($userInfo['bio'] ??
-                                   "Your about me section is currently blank")
+                                   ucfirst($userInfo['username']) . "'s about me section is currently empty.")
                               ?>
                          </p>
                     </div>

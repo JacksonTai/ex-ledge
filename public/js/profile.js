@@ -38,22 +38,45 @@ function switchSection(section) {
     .classList.add(showSection);
 }
 
-/* -- Edit profile modal -- */
+/* -- Modal -- */
 let editProfileBtn = document.querySelector(".profile__edit-btn");
-let editProfileModal = document.querySelector(".modal--edit-profile");
-let editProfileModalOverlay = document.querySelector(
-  ".modal-overlay--edit-profile"
-);
+let deleteAccountBtn = document.querySelector(".profile__delete-btn");
+let verifyLink = document.querySelector(".profile__banner-verify-link");
 
-editProfileBtn.addEventListener("click", function () {
-  editProfileModal.style.display = "block";
-  editProfileModalOverlay.style.display = "flex";
+editProfileBtn.addEventListener("click", openModal);
+deleteAccountBtn.addEventListener("click", openModal);
+verifyLink.addEventListener("click", openModal);
+
+let modals = document.querySelectorAll(".modal");
+let modalsOverlay = document.querySelectorAll(".modal-overlay");
+let modalsCloseBtn = document.querySelectorAll(".modal__close-btn");
+
+function openModal() {
+  // Check if btn classname contains extracted modifier name in modal classname.
+  for (let modal of modals) {
+    if (this.className.includes(modal.className.split("-")[2])) {
+      modal.style.display = "block";
+    }
+  }
+
+  // Check if btn classname contains extracted modifier name in modal overlay classname.
+  for (let modalOverlay of modalsOverlay) {
+    if (this.className.includes(modalOverlay.className.split("-")[4])) {
+      modalOverlay.style.display = "flex";
+    }
+  }
+
+  // Avoid user scrolling the browser if modal is being opened.
   document.body.classList.add("no-scroll");
-});
+}
 
-let modalCloseBtn = document.querySelector(".modal__close-btn");
-modalCloseBtn.addEventListener("click", () => {
+for (let modalCloseBtn of modalsCloseBtn) {
+  modalCloseBtn.addEventListener("click", closeModal);
+}
+
+function closeModal() {
+  // closest() - ref: https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
+  this.closest(".modal").style.display = "none";
+  this.closest(".modal-overlay").style.display = "none";
   document.body.classList.remove("no-scroll");
-  editProfileModal.style.display = "none";
-  editProfileModalOverlay.style.display = "none";
-});
+}
