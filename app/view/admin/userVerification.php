@@ -23,16 +23,32 @@ $path = '../../../';
           <main class="user-verification--main main-content">
                <h2 class="user-verification__title main-title">User Verification</h2>
 
-               <div class="pendinguser-ctnr">
-                    <div class="numbering">1</div>
-                    <div class="image"></div>
-                    <div class="userinfo">Username: <br>I.C. Number:</div>
 
-                    <div class="approval-ctnr">
-                         <button>Accept</button>
-                         <button>Reject</button>
+               <div class="pending-user">
+                    <div class="pendinguser-ctnr">
+                         <div class="numbering">1</div>
+                         <div class="image"></div>
+                         <div class="userinfo">Username: johndoe<br>I.C. Number: 123456-78-9100</div>
+
                     </div>
+                    <div class="approval-ctnr">
+                              <button>Accept</button>
+                              <button>Reject</button>
+                    </div>
+               </div>
 
+               
+               <div class="pending-user">
+                    <div class="pendinguser-ctnr">
+                         <div class="numbering">1</div>
+                         <div class="image"></div>
+                         <div class="userinfo">Username: johndoe<br>I.C. Number: 123456-78-9100</div>
+
+                    </div>
+                    <div class="approval-ctnr">
+                              <button>Accept</button>
+                              <button>Reject</button>
+                    </div>
                </div>
 
 
