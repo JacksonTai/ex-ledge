@@ -12,37 +12,37 @@ signupForm.addEventListener("submit", async function (e) {
     });
 
     let errMsg = await res.json();
-    
+
     // Redirect to user page once there is no error messages.
     if (!errMsg) {
       window.location.href = "../student/home.php";
     } else {
       // Destruct the errMsg object.
-      let { email, username, password, passwordRepeat } = errMsg;
+      let { email, fullName, password, passwordRepeat } = errMsg;
 
       // Add error messages to the respective HTML element.
       let emailErrMsg = document.querySelector(".signup__err-msg--email");
-      let usernameErrMsg = document.querySelector(
-        ".signup__err-msg--username"
+      let fullNameErrMsg = document.querySelector(
+        ".signup__err-msg--full-name"
       );
       let passwordErrMsg = document.querySelector(".signup__err-msg--password");
       let passwordRepeatErrMsg = document.querySelector(
         ".signup__err-msg--password-repeat"
       );
       emailErrMsg.textContent = decodeEntity(email);
-      usernameErrMsg.textContent = decodeEntity(username);
+      fullNameErrMsg.textContent = decodeEntity(fullName);
       passwordErrMsg.textContent = decodeEntity(password);
       passwordRepeatErrMsg.textContent = decodeEntity(passwordRepeat);
 
       // Display field rules when the input is invalid.
-      let usernameRules = document.querySelectorAll(
-        ".signup__rules--username"
+      let fullNameRules = document.querySelectorAll(
+        ".signup__rules--full-name"
       );
-      for (let usernameRule of usernameRules) {
-        if (username.includes("&#9888;")) {
-          usernameRule.classList.add("signup__rules-show");
+      for (let fullNameRule of fullNameRules) {
+        if (fullName.includes("&#9888;")) {
+          fullNameRule.classList.add("signup__rules-show");
         } else {
-          usernameRule.classList.remove("signup__rules-show");
+          fullNameRule.classList.remove("signup__rules-show");
         }
       }
 

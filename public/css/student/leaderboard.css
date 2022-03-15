@@ -21,6 +21,13 @@
 .leaderboard__podium {
   flex-direction: column;
   margin: 1rem;
+  width: 290px;
+}
+
+.leaderboard-name{
+  width: 140px;
+  overflow: hidden;
+  text-align: center;
 }
 
 .leaderboard__podium--1 {

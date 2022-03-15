@@ -2,7 +2,7 @@
 
 namespace Model;
 
-include '../helper/autoloader.php';
+use PDOException;
 
 class Question extends \config\DbConn
 {
@@ -54,5 +54,22 @@ class Question extends \config\DbConn
                 $this->errMsg[$field] = '* ' . ucfirst($field) . ' is a required field';
             }
         }
+    }
+
+    protected function getQuestion()
+    {
+        try {
+            $result = [];
+            $sql = "SELECT * FROM question q
+                    INNER JOIN user u ON
+                    q.user_id = u.user_id";
+            $stmt = $this->executeQuery($sql);
+            $allQuestions = $stmt->fetchAll();
+
+        } catch (PDOException $e) {
+            die('Error: ' . $e->getMessage());
+        }
+
+        return $allQuestions;
     }
 }

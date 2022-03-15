@@ -30,6 +30,16 @@ class User extends \Model\User
      {
           return $this->deleteUser($userId);
      }
+
+     public function readTopThree()
+     {
+          return $this->topThree();
+     }
+
+     public function readTopTen()
+     {
+          return $this->topTen();
+     }
 }
 
 if (isset($_GET['searchTerm'])) {

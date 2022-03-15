@@ -2,11 +2,13 @@
 
 namespace Controller;
 
-include '../helper/autoloader.php';
+if (!empty($_GET) || !empty($_POST)) {
+    include '../helper/autoloader.php';
+}
 
 class Question extends \Model\Question
 {
-    public function __construct($postData)
+    public function __construct($postData = null)
     {
         $errMsg = parent::__construct($postData);
         if (is_array($errMsg)) {
@@ -15,6 +17,11 @@ class Question extends \Model\Question
             echo json_encode(false);
         }
     }
+
+    public function read()
+    {
+        return $this->getQuestion();
+    }
 }
 
-new \Controller\Question($_POST);
+!empty($_POST) ? new \Controller\Question($_POST) : null;

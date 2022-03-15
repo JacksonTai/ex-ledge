@@ -1,7 +1,10 @@
 <?php
 session_start();
 require '../../helper/redirector.php';
+include '../../helper/autoloader.php';
 $path = '../../../';
+
+$questions = new \Controller\Question;
 ?>
 <!DOCTYPE html>
 <html lang="en">
