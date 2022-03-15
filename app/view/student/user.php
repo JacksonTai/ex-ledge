@@ -44,13 +44,15 @@ $user = new Controller\User();
                          
                     </div>  
                </div>
-               <div class="page-nav_container">
-                    <div class="page_nav">
-                         <button class="pre_nav_btn">Prev</button>
-                         <p class="nav_num">2</p>
-                         <button class="next_nav_btn">Next</button>
-                    </div>
-               </div>
+               <nav class="home__main-nav">
+                    <button class="home__main-nav-btn">
+                         <a class="home__main-nav-link dialog" href="#">Back</a>
+                    </button>
+                    <p class="home__main-nav-page">1</p>
+                    <button class="home__main-nav-btn">
+                         <a class="home__main-nav-link dialog" href="#">Next</a>
+                    </button>
+               </nav>
           </main>
 
      </div>

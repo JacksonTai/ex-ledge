@@ -51,33 +51,24 @@ body{
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 }
-.page_nav{
-	width: 30%;
+.home__main-nav {
 	display: flex;
-	flex-direction: row;
 	justify-content: center;
-	align-items: center;
-	margin: 0 auto;
+	margin-bottom: 8rem;
 }
-.pre_nav_btn{
-	margin: 0 2rem 0;
-	background-color: rgb(255, 255, 255);
-	color: #000000;
-	cursor: pointer;
-	border-right: 3px solid #e1e5ee;
-	border-bottom: 3px solid #e1e5ee;
+  
+.home__main-nav-btn {
+	padding: 0;
+	background-color: #ffffff;
 }
-.nav_num{
-	color: #000000;
-	font-size: 22px;
+  
+.home__main-nav-link {
+	padding: 0.7em 1.5em;
+	color: var(--clr-font-grey);
 }
-.next_nav_btn{
+  
+.home__main-nav-page {
 	margin: 0 2rem;
-	background-color: rgb(255, 255, 255);
-	color: #000000;
-	cursor: pointer;
-	border-right: 3px solid #e1e5ee;
-	border-bottom: 3px solid #e1e5ee;
 }
 
 @media (max-width: 1050px){
