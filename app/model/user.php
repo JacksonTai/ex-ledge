@@ -40,7 +40,7 @@ class User extends \config\DbConn
           // Default query for selecting all user's info and detail. 
           try {
                $result = [];
-               $sql = "SELECT * FROM user WHERE `user_id` LIKE ?;";
+               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY user_id ASC LIMIT 9;";
                $stmt = $this->executeQuery($sql, ['U%']);
                $userInfos = $stmt->fetchAll();
           

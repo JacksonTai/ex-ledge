@@ -3,6 +3,8 @@ session_start();
 require '../../helper/redirector.php';
 include '../../helper/autoloader.php';
 $path = '../../../';
+
+$user = new Controller\User();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,68 +25,24 @@ $path = '../../../';
 
           <main class="user--main main-content">
                <h2 class="user__title">Users</h2>
-               <!-- <p><?= $_SESSION['userId']; ?></p> -->
-
+               
                <div class="user_dashboard">
-                    <div class="user_container">
-                         <div class="user_box">
-                              <div class="user_info">
-                                   <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="top img">
-                                   <p class="user_name">changyongg</p>
-                                   <p class="RP">RP: 213</p>
-                              </div>
-                         </div>
-                         <div class="user_box">
-                              <div class="user_info">
-                                   <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="top img">
-                                   <p class="user_name">changyongg</p>
-                                   <p class="RP">RP: 213</p>
-                              </div>
-                         </div>
-                         <div class="user_box">
-                              <div class="user_info">
-                                   <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="top img">
-                                   <p class="user_name">changyongg</p>
-                                   <p class="RP">RP: 213</p>
-                              </div>
-                         </div>
-                         <div class="user_box">
-                              <div class="user_info">
-                                   <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="top img">
-                                   <p class="user_name">changyongg</p>
-                                   <p class="RP">RP: 213</p>
-                              </div>
-                         </div>
-                         <div class="user_box">
-                              <div class="user_info">
-                                   <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="top img">
-                                   <p class="user_name">changyongg</p>
-                                   <p class="RP">RP: 213</p>
-                              </div>
-                         </div>
-                         <div class="user_box">
-                              <div class="user_info">
-                                   <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="top img">
-                                   <p class="user_name">changyongg</p>
-                                   <p class="RP">RP: 213</p>
-                              </div>
-                         </div>
-                         <div class="user_box">
-                              <div class="user_info">
-                                   <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="top img">
-                                   <p class="user_name">changyongg</p>
-                                   <p class="RP">RP: 213</p>
-                              </div>
-                         </div>
-                         <div class="user_box">
-                              <div class="user_info">
-                                   <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="top img">
-                                   <p class="user_name">changyongg</p>
-                                   <p class="RP">RP: 213</p>
-                              </div>
-                         </div>
-                    </div>
+                    <div class="user_container"> 
 
+                         <?php $userList = $user->read(); ?>
+                         <?php foreach ($userList as $user) : ?>
+                              <div class="user_box" id="<?php echo htmlspecialchars($user['user_id']) ?>" data-user-id=<?php echo htmlspecialchars($user['user_id']) ?>>
+                                   <a class="user_info" href="profile.php?id=#">
+                                        <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="user_img">
+                                        <div class="user_info-detail">    
+                                             <p class="user_name"><?php echo htmlspecialchars($user['username']) ?></p>
+                                             <p class="RP">RP: <?php echo $user['point'] ?></p>
+                                        </div>
+                                   </a>
+                              </div>
+                         <?php endforeach; ?>
+                         
+                    </div>  
                </div>
                <div class="page-nav_container">
                     <div class="page_nav">

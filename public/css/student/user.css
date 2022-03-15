@@ -27,6 +27,9 @@ body{
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
+.user_info-detail{
+	margin: 1rem -3rem;
+}
 .user_img{
 	width: 60px;
     height: 60px;
@@ -34,11 +37,13 @@ body{
 	margin: 1rem 3rem;
 }
 .user_name{
-	margin: 1rem;
+	color: #000000;
+	font-size: 18px;
 }
 .RP{
+	color: #000000;
 	font-weight: bold;
-	margin: 3rem -6.5rem;
+	margin: 0.5rem 0;
 }
 .page-nav_container{
 	margin-bottom: 4rem;
