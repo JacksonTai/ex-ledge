@@ -6,7 +6,7 @@
   min-height: 100vh;
   margin: 0;
   padding-top: 1.5rem;
-  border-right: 0.15em solid var(--clr-shadow-grey);
+  border-right: 0.1em solid var(--clr-shadow-grey);
 }
 
 .layout-side-navbar__link {

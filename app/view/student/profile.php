@@ -4,7 +4,7 @@ require '../../helper/redirector.php';
 include '../../helper/autoloader.php';
 $path = '../../../';
 
-$user = new Controller\User($_SESSION['userId']);
+$user = new Controller\User();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,11 +26,20 @@ $user = new Controller\User($_SESSION['userId']);
           <main class="profile--main main-content">
                <section class="profile__banner dialog">
                     <div class="profile__banner-wrapper">
-                         <button class="profile__edit-btn">
-                              <img src="<?php echo $path ?>public/img/icons/edit.jpg" alt="edit">
-                         </button>
+                         <?php if (!isset($_GET['id'])) : ?>
+                              <div class="profile__banner-btn-container">
+                                   <button class="profile__edit-btn">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                        <span class="profile__edit-txt">Edit Profile</span>
+                                   </button>
+                                   <button class="profile__delete-btn">
+                                        <i class="fa-solid fa-trash"></i>
+                                        <span class="profile__delete-txt">Delete Account</span>
+                                   </button>
+                              </div>
+                         <?php endif; ?>
                          <div class="profile__banner-header">
-                              <?php $userInfo = $user->read(); ?>
+                              <?php $userInfo = $user->read($_SESSION['userId']); ?>
                               <img class="profile__img" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
                               <h2 class="profile__username">
                                    <?php echo htmlspecialchars($userInfo['username']); ?>
@@ -56,8 +65,19 @@ $user = new Controller\User($_SESSION['userId']);
                               <p class="profile__banner-content">
                                    <span class="profile__content-label">Verification Status: </span>
                                    <?php
-                                   $userInfo['verification'] ? $status = 'Verified' : $status = 'Unverified';
-                                   echo $status;
+                                   if (isset($userInfo['verification'])) {
+                                        if ($userInfo['verification']) {
+                                             echo 'Verified';
+                                        }
+                                        if (!$userInfo['verification']) {
+                                             echo 'Unverified';
+                                             if (!isset($_GET['id'])) {
+                                                  echo '<a class="profile__banner-verify-link">(Verify)</a>';
+                                             }
+                                        }
+                                   } else {
+                                        echo 'N/A';
+                                   }
                                    ?>
                               </p>
                          </div>
@@ -70,13 +90,14 @@ $user = new Controller\User($_SESSION['userId']);
                     </nav>
                </section>
 
+               <!-- Modal -->
                <div class="modal-overlay modal-overlay--edit-profile">
                     <div class="modal modal--edit-profile">
                          <header class="modal__header modal__header--edit-profile">
                               <button class="modal__close-btn">&#10006;</button>
                               <h2 class="modal__title">Edit Profile</h2>
                          </header>
-                         <form class="edit-profile-form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+                         <form class="edit-profile-form" method="POST">
                               <div class="edit-profile-form__item">
                                    <label for="username">Username</label>
                                    <input class="edit-profile__input" type="text" name="username" id="username" placeholder="Enter new username" value="<?php echo htmlspecialchars($userInfo['username']); ?>">
@@ -88,21 +109,65 @@ $user = new Controller\User($_SESSION['userId']);
                               <div class="edit-profile-form__item">
                                    <label for="gender">Gender</label>
                                    <select class="edit-profile__input" name="gender" id="gender">
+                                        <?php if (!$userInfo['gender']) : ?>
+                                             <option selected disabled>Select gender</option>
+                                        <?php endif; ?>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                    </select>
                               </div>
-                              <button class="edit-profile-form__btn" type="submit" name="edit-profile">Update</button>
+                              <button class="edit-profile-form__btn">Update</button>
+                         </form>
+                    </div>
+               </div>
+               <div class="modal-overlay modal-overlay--delete-account">
+                    <div class="modal modal--delete-account">
+                         <header class="modal__header modal__header--delete-account">
+                              <button class="modal__close-btn">&#10006;</button>
+                              <h2 class="modal__title">Are you absolutely sure?</h2>
+                         </header>
+                         <div class="modal__content--delete-account">
+                              <p class="modal__delete--txt">This action cannot be redone.
+                                   This will permanently delete the
+                                   <span class="delete__username">
+                                        <?php echo htmlspecialchars($userInfo['username']); ?>
+                                   </span>
+                                   questions, answers, comments, chatting history and remove all related information.
+                              </p>
+                              <p class="modal__delete--txt">Please enter password to confirm.</p>
+                              <input class="modal__delete-account-password" type="password" data-email="
+                                   <?php echo htmlspecialchars($userInfo['email']); ?>" autocomplete="off">
+                              <button class="modal__delete-account-btn btn--red modal__delete-account-btn--disabled">Delete Account</button>
+                         </div>
+                    </div>
+               </div>
+               <div class="modal-overlay modal-overlay--verify-account">
+                    <div class="modal modal--verify-account">
+                         <header class="modal__header modal__header--verify-account">
+                              <button class="modal__close-btn">&#10006;</button>
+                              <h2 class="modal__title">Verify Account</h2>
+                         </header>
+                         <form class="verify-form" method="POST">
+                              <div class="verify-form__item">
+                                   <label for="fullaName">Full Name (as per IC)</label>
+                                   <input class="verify__input" type="text" name="fullaName" id="fullaName" placeholder="Enter your full name">
+                              </div>
+                              <div class="verify-form__item">
+                                   <label for="NRIC">NRIC Number</label>
+                                   <input class="verify__input" type="text" name="NRIC" id="NRIC" placeholder="Enter your NRIC number">
+                              </div>
+                              <button class="verify-form__btn">Send Request</button>
                          </form>
                     </div>
                </div>
 
+               <!-- Section -->
                <section class="profile-section profile-section--overview profile-section-selected--flex">
                     <div class="profile-section__overview--about dialog">
                          <h2>About</h2>
                          <p>
                               <?php echo htmlspecialchars($userInfo['bio'] ??
-                                   "Your about me section is currently blank")
+                                   ucfirst($userInfo['username']) . "'s about me section is currently empty.")
                               ?>
                          </p>
                     </div>

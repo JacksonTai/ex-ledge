@@ -10,7 +10,7 @@ html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: 14px;
   scroll-behavior: smooth;
 }
 
@@ -52,12 +52,13 @@ html {
   --clr-shadow-grey: rgba(0, 0, 0, 0.25);
   --clr-font-grey: #7a7a7a;
   --clr-link: #2893f6;
+  --clr-delete-red: #fa2230;
   /* Theme font-family */
   --ff-montserrat-title: "montserrat-bold";
   --ff-montserrat-text: "montserrat-medium";
+  --ff-montserrat-light: "montserrat-light";
   /* Custom size */
   --layout-header-height: 60px;
-  --layout-footer-height: 120px;
 }
 
 /* --------- [Fonts] ---------- */
@@ -137,7 +138,6 @@ textarea,
 select,
 button {
   font-family: var(--ff-montserrat-text);
-  /* font-weight: 700; */
   font-size: 0.9rem;
 }
 
@@ -170,18 +170,62 @@ button {
   cursor: pointer;
 }
 
+input:-webkit-autofill {
+  box-shadow: 0 0 0 2rem #ffffff inset;
+}
+
+/* ---------- [Button] ----------- */
 button {
   display: block;
   padding: 0.5em 2em;
   border: none;
   border-radius: 0.5em;
   font-weight: 100;
-  color: #f1f1f1;
   background-color: var(--clr-primary);
 }
 
-input:-webkit-autofill {
-  box-shadow: 0 0 0 2rem #ffffff inset;
+button,
+button > a {
+  color: #ffffff;
+}
+
+.btn--red {
+  color: var(--clr-delete-red);
+  background-color: #ffffff;
+  border: 1px solid var(--clr-delete-red);
+}
+
+.btn--red:hover {
+  color: #ffffff;
+  border: 1px solid var(--clr-delete-red);
+  background-color: var(--clr-delete-red);
+  transition: 0.3s ease-in-out;
+}
+
+/* ---------- [Invalid Input] ----------- */
+.invalid-input {
+  font-size: 0.88rem;
+  color: #f8606a;
+}
+
+/* ---------- [Main] ----------- */
+.main-sidebar-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.main-content {
+  position: relative;
+  top: var(--layout-header-height);
+  left: 0;
+  width: 100vw;
+  margin: 0;
+  padding: 3rem 2rem;
+  padding-bottom: calc(2rem + 60px);
+}
+
+.main-title {
+  margin: 0 0 2rem;
 }
 
 /* ---------- [Dialog] ----------- */
@@ -220,7 +264,7 @@ input:-webkit-autofill {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.363);
   z-index: 2;
 }
 
@@ -232,30 +276,10 @@ input:-webkit-autofill {
   background-color: #ffffff;
 }
 
-/* ---------- [Invalid Input] ----------- */
-.invalid-input {
-  font-size: 0.88rem;
-  color: #f8606a;
-}
-
-/* ---------- [Main] ----------- */
-.main-sidebar-wrapper {
-  display: flex;
-  width: 100%;
-}
-
-.main-content {
-  position: relative;
-  top: var(--layout-header-height);
-  left: 0;
-  width: 100vw;
-  margin: 0;
-  padding: 3rem 2rem;
-  padding-bottom: calc(2rem + 60px);
-}
-
-.main-title {
-  margin: 0 0 2rem;
+/* ---------- [Profile image - icon size] ----------- */
+.profile-icon {
+  max-width: 2rem;
+  border-radius: 50%;
 }
 
 /* ############## 3. Media Queries  ############# */
@@ -263,7 +287,13 @@ input:-webkit-autofill {
 
 @media (min-width: 520px) {
   html {
-    font-size: 17px;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 780px) {
+  html {
+    font-size: 16px;
   }
 }
 
