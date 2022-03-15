@@ -3,6 +3,8 @@ session_start();
 require '../../helper/redirector.php';
 include '../../helper/autoloader.php';
 $path = '../../../';
+
+$ranking = new \Controller\User;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,20 +26,21 @@ $path = '../../../';
           <main class="leaderboard--main main-content">
                <h2 class="leaderboard__title">Leaderboard</h2>
                <div class="leaderboard__podium-wrapper">
+                    <?php $topThree = $ranking->readTopThree(); ?>
                     <a class="leaderboard__podium leaderboard__podium--1 dialog" href="profile.php?id=#">
-                         <h3 class="leaderboard__podium-point">1123</h3>
+                         <h3 class="leaderboard__podium-point"><?php echo htmlspecialchars($topThree[0]['point']); ?></h3>
                          <img class="leaderboard__podium-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="">
-                         <p>Username</p>
+                         <p><?php echo htmlspecialchars($topThree[0]['username']); ?></p>
                     </a>
                     <a class="leaderboard__podium leaderboard__podium--2 dialog" href="profile.php?id=#">
-                         <h3 class="leaderboard__podium-point">1123</h3>
+                    <h3 class="leaderboard__podium-point"><?php echo htmlspecialchars($topThree[1]['point']); ?></h3>
                          <img class="leaderboard__podium-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="">
-                         <p>Username</p>
+                         <p><?php echo htmlspecialchars($topThree[1]['username']); ?></p>
                     </a>
                     <a class="leaderboard__podium leaderboard__podium--3 dialog" href="profile.php?id=#">
-                         <h3 class="leaderboard__podium-point">1123</h3>
+                    <h3 class="leaderboard__podium-point"><?php echo htmlspecialchars($topThree[2]['point']); ?></h3>
                          <img class="leaderboard__podium-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="">
-                         <p>Username</p>
+                         <p><?php echo htmlspecialchars($topThree[2]['username']); ?></p>
                     </a>
                </div>
                <div class="leaderboard__runner-up-wrapper">

@@ -82,4 +82,17 @@ class User extends \config\DbConn
      {
           
      }
+
+     protected function topThree()
+     {
+          $sql = "SELECT * FROM user
+                  WHERE `user_id` LIKE ?
+                  ORDER BY point DESC
+                  LIMIT 3";
+
+          $stmt = $this->executeQuery($sql, ['U%']);
+          $firstPlaceUser = $stmt->fetchAll();
+          return $firstPlaceUser;
+     }
+
 }
