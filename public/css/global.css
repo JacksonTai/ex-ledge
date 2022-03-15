@@ -282,6 +282,13 @@ button > a {
   border-radius: 50%;
 }
 
+/* ---------- [Up & Down vote] ----------- */
+.fa-arrow-up,
+.fa-arrow-down {
+  color: var(--clr-font-grey);
+  cursor: pointer;
+}
+
 /* ############## 3. Media Queries  ############# */
 /* Note: Font-size grow as the screen size grow. */
 

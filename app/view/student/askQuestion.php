@@ -19,7 +19,7 @@ $path = '../../../';
 
      <div class="main-sidebar-wrapper">
 
-          <?php include '../layout/sidebar.php' ?>
+          <?php include '../layout/sideNavbar.php' ?>
 
           <main class="ask-question--main main-content">
                <h2 class="ask-question__title main-title">Ask Question</h2>

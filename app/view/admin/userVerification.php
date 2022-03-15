@@ -18,7 +18,7 @@ $path = '../../../';
 
      <div class="main-sidebar-wrapper">
 
-          <?php include '../layout/sidebar.php' ?>
+          <?php include '../layout/sideNavbar.php' ?>
 
           <main class="user-verification--main main-content">
                <h2 class="user-verification__title main-title">User Verification</h2>

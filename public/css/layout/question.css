@@ -20,14 +20,9 @@
   max-width: 100%;
 }
 
-.layout__question-vote,
 .layout__question-point {
   color: var(--clr-font-grey);
   font-weight: 700;
-}
-
-.layout__question-vote:hover {
-  cursor: pointer;
 }
 
 .layout__question-header {
