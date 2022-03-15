@@ -11,6 +11,7 @@ $path = '../../../';
      <?php include '../../config/head.php' ?>
      <title>User | Ex-Ledge</title>
      <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/question.css">
+     <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/sidebar.css">
 </head>
 
 <body>
@@ -19,11 +20,14 @@ $path = '../../../';
 
      <div class="main-sidebar-wrapper">
 
-          <?php include '../layout/sidebar.php' ?>
+          <?php include '../layout/sideNavbar.php' ?>
 
           <main class="question--main main-content">
-               <h2 class="question__title main-title">Put 'question title' as title</h2>
+               <h2 class="question__title main-title">Question Title</h2>
+               
           </main>
+
+          <?php include '../layout/sidebar.php'; ?>
 
      </div>
 

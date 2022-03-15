@@ -21,7 +21,7 @@ $user = new Controller\User();
 
      <div class="main-sidebar-wrapper">
 
-          <?php include '../layout/sidebar.php' ?>
+          <?php include '../layout/sideNavbar.php' ?>
 
           <main class="profile--main main-content">
                <section class="profile__banner dialog">
