@@ -19,12 +19,12 @@ $path = '../../../';
 
      <div class="main-sidebar-wrapper">
 
-          <?php include '../layout/sidebar.php' ?>
+          <?php include '../layout/sideNavbar.php' ?>
 
           <main class="user--main main-content">
                <h2 class="user__title">Users</h2>
                <!-- <p><?= $_SESSION['userId']; ?></p> -->
-               
+
                <div class="user_dashboard">
                     <div class="user_container">
                          <div class="user_box">
@@ -84,7 +84,7 @@ $path = '../../../';
                               </div>
                          </div>
                     </div>
-                    
+
                </div>
                <div class="page-nav_container">
                     <div class="page_nav">
