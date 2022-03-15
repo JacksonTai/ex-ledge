@@ -38,7 +38,7 @@
   max-height: 100%;
   background-color: #ffffff;
   border-right: 1px solid #c5c1c1;
-  transition: all 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
 .layout-header__nav-list {
@@ -110,7 +110,7 @@
   height: 12%;
   width: 100%;
   background-color: #000000;
-  transition: all 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .open .layout-header__hamburger-bar:nth-child(1) {
@@ -196,7 +196,7 @@
   }
 
   .layout-header__btn {
-    transition: all 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
     margin: 0;
   }
 

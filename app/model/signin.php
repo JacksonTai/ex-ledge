@@ -45,18 +45,31 @@ class Signin extends \config\DbConn
           return $result;
      }
 
-     private function checkCredential()
+     protected function checkCredential($email = null, $password = null)
      {
+
           $sql = "SELECT * FROM user WHERE email = ?;";
 
-          $stmt = $this->executeQuery($sql, [$this->postData['email']]);
+          if (!$email && !$password) {
+               $stmt = $this->executeQuery($sql, [$this->postData['email']]);
 
-          $userInfo = $stmt->fetch();
+               $userInfo = $stmt->fetch();
 
-          if ($userInfo && password_verify($this->postData['password'], $userInfo['password'])) {
-               return $userInfo['user_id'];
-          } else {
-               $this->errMsg['invalidCredential'] = '&#9888 Incorrect email or password.';
+               if ($userInfo && password_verify($this->postData['password'], $userInfo['password'])) {
+                    return $userInfo['user_id'];
+               } else {
+                    $this->errMsg['invalidCredential'] = '&#9888 Incorrect email or password.';
+               }
+          }
+          if ($email && $password) {
+               $stmt = $this->executeQuery($sql, [$email]);
+
+               $userInfo = $stmt->fetch();
+
+               if ($userInfo && password_verify($password, $userInfo['password'])) {
+                    return true;
+               }
+               return false;
           }
      }
 }

@@ -144,4 +144,9 @@ class User extends \config\DbConn
           }
           return $userInfo;
      }
+
+     protected function deleteUser($userId)
+     {
+          
+     }
 }
