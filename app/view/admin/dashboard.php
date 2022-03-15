@@ -19,7 +19,7 @@ $path = '../../../';
 
     <div class="main-sidebar-wrapper">
 
-        <?php include '../layout/sidebar.php' ?>
+        <?php include '../layout/sideNavbar.php' ?>
 
         <main class="dashboard--main main-content">
             <h2 class="dashboard__title main-title">Admin Dashboard</h2>
