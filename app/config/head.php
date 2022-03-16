@@ -15,6 +15,6 @@ strpos($url, 'app/view') ? $headPath = '../../../public/' : $headPath = '';
 <link rel="shortcut icon" href="<?= $headPath ?>img/icons/logo.ico" type="image/x-icon">
 <link rel="stylesheet" href="<?= $headPath ?>css/global.css">
 <link rel="stylesheet" href="<?= $headPath ?>css/layout/header.css">
-<link rel="stylesheet" href="<?= $headPath ?>css/layout/sidebar.css">
+<link rel="stylesheet" href="<?= $headPath ?>css/layout/sideNavbar.css">
 <link rel="stylesheet" href="<?= $headPath ?>css/layout/footer.css">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

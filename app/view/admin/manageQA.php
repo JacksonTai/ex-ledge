@@ -18,7 +18,7 @@ $path = '../../../';
 
      <div class="main-sidebar-wrapper">
 
-          <?php include '../layout/sidebar.php' ?>
+          <?php include '../layout/sideNavbar.php' ?>
 
           <main class="manageQA--main main-content">
                <h2 class="manageQA__title main-title">Manage Q&A</h2>
