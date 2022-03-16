@@ -154,7 +154,6 @@ editProfileForm.addEventListener("submit", async function (e) {
     if (!errMsg) {
       window.location.href = "profile.php";
     } else {
-      console.log(errMsg);
       // Destruct the errMsg object.
       let { username, age, gender } = errMsg;
       let usernameErrMsg = document.querySelector(

@@ -82,24 +82,26 @@ class User extends \config\DbConn
      {
           $userData = $this->getUser($this->userId);
 
-          if ($userData['bio'] == '' && $postData['bio']) {
-               $sql = "INSERT INTO user_detail (`user_id`, bio)
-               VALUES (?, ?)";
-               $this->executeQuery($sql, [
-                    $this->userId,
-                    $postData['bio'],
-               ]);
-          }
-
-          if ($userData['bio'] != '') {
-               // Execute update of bio only if it's different from the current one.
-               if ($userData['bio'] != $postData['bio']) {
-                    $sql = "UPDATE user_detail SET bio = ? 
-                              WHERE `user_id` = ?;";
-                    $this->executeQuery($sql, [$postData['bio'], $this->userId]);
+          if (isset($postData['bio'])) {
+               if ($userData['bio'] == 7) {
+                    $sql = "INSERT INTO user_detail (`user_id`, bio)
+                    VALUES (?, ?)";
+                    $this->executeQuery($sql, [
+                         $this->userId,
+                         $postData['bio'],
+                    ]);
                }
-          }
 
+               if ($userData['bio'] != 7) {
+                    // Execute update of bio only if it's different from the current one.
+                    if ($userData['bio'] != $postData['bio']) {
+                         $sql = "UPDATE user_detail SET bio = ? 
+                                   WHERE `user_id` = ?;";
+                         $this->executeQuery($sql, [$postData['bio'], $this->userId]);
+                    }
+               }
+               return;
+          }
 
           $errMsg = ['username' => '', 'age' => '', 'gender' => ''];
 
