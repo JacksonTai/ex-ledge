@@ -1,9 +1,7 @@
 <?php
 
 namespace Model;
-
-include '../helper/autoloader.php';
-
+ 
 class Question extends \config\DbConn
 {
     private $postData = [];
@@ -33,7 +31,7 @@ class Question extends \config\DbConn
         session_start();
         $questionId = uniqid('Q');
         $sql = "INSERT INTO question
-                VALUES (?, ?, ?, ?, ?, ?);";
+                VALUES (?, ?, ?, ?, ?, ?, NOW());";
 
         $this->executeQuery($sql, [
             $questionId,
@@ -54,5 +52,14 @@ class Question extends \config\DbConn
                 $this->errMsg[$field] = '* ' . ucfirst($field) . ' is a required field';
             }
         }
+    }
+
+    protected function getQuestionCount($userId)
+    {
+        $sql = "SELECT COUNT(question_id) FROM question
+                   WHERE `user_id` = ?";
+        $stmt = $this->executeQuery($sql, [$userId]);
+        $result = $stmt->fetch();
+        return $result['COUNT(question_id)'];
     }
 }

@@ -38,6 +38,54 @@ function switchSection(section) {
     .classList.add(showSection);
 }
 
+/* -- Overview section -- */
+let aboutMeEditBtn = document.querySelector(".overview--about__edit-btn");
+let aboutMeContent = document.querySelector(".overview--about__content");
+let aboutMeInput = document.querySelector(".overview--about__bio-input");
+let aboutMeBtnContainer = document.querySelector(
+  ".overview--about__bio-btn-container"
+);
+let aboutMeCancelBtn = document.querySelector(
+  ".overview--about__bio-cancel-btn"
+);
+let aboutMeConfirmBtn = document.querySelector(
+  ".overview--about__bio-confirm-btn"
+);
+
+aboutMeEditBtn.addEventListener("click", () => {
+  aboutMeContent.style.display = "none";
+  aboutMeEditBtn.style.display = "none";
+  aboutMeInput.style.display = "block";
+  aboutMeBtnContainer.style.display = "flex";
+});
+
+aboutMeCancelBtn.addEventListener("click", hideEditField);
+aboutMeConfirmBtn.addEventListener("click", async function () {
+  if (aboutMeInput.value.trim()) {
+    try {
+      await fetch(`../../controller/user.php?bio=${aboutMeInput.value.trim()}`);
+
+      let res = await fetch(
+        `../../controller/user.php?userId=${aboutMeContent.dataset.userId}`
+      );
+      let data = await res.json();
+      if (data.bio) {
+        aboutMeContent.textContent = data.bio;
+      }
+      hideEditField();
+    } catch (e) {
+      console.log("Error: ", e);
+    }
+  }
+});
+
+function hideEditField() {
+  aboutMeContent.style.display = "block";
+  aboutMeEditBtn.style.display = "block";
+  aboutMeInput.style.display = "none";
+  aboutMeBtnContainer.style.display = "none";
+}
+
 /* -- Modal opening and closing -- */
 let editProfileBtn = document.querySelector(".profile__edit-btn");
 let deleteAccountBtn = document.querySelector(".profile__delete-btn");
@@ -87,6 +135,50 @@ function closeModal() {
   document.body.classList.remove("no-scroll");
   window.location.href = "profile.php";
 }
+
+/* -- Edit profile modal -- */
+let editProfileForm = document.querySelector(".edit-profile-form");
+editProfileForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  let formData = new FormData(this);
+
+  try {
+    let res = await fetch("../../controller/user.php", {
+      method: "POST",
+      body: formData,
+    });
+    let errMsg = await res.json();
+
+    // Redirect to profile page again once there is no error messages.
+    if (!errMsg) {
+      window.location.href = "profile.php";
+    } else {
+      console.log(errMsg);
+      // Destruct the errMsg object.
+      let { username, age, gender } = errMsg;
+      let usernameErrMsg = document.querySelector(
+        ".edit-profile__err-msg--username"
+      );
+      let ageErrMsg = document.querySelector(".edit-profile__err-msg--age");
+      let genderErrMsg = document.querySelector(
+        ".edit-profile__err-msg--gender"
+      );
+      usernameErrMsg.textContent = decodeEntity(username);
+      ageErrMsg.textContent = decodeEntity(age);
+      genderErrMsg.textContent = decodeEntity(gender);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+// Decode HTML entity code to use in JavaScript.
+const decodeEntity = function (entityCode) {
+  let textarea = document.createElement("textarea");
+  textarea.innerHTML = entityCode;
+  return textarea.value;
+};
 
 /* -- Delete account modal -- */
 let deleteAccountPassword = document.querySelector(

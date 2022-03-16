@@ -78,8 +78,83 @@ class User extends \config\DbConn
           return $userList;
      }
 
+     protected function updateUser($postData)
+     {
+          $userData = $this->getUser($this->userId);
+
+          if ($userData['bio'] == '' && $postData['bio']) {
+               $sql = "INSERT INTO user_detail (`user_id`, bio)
+               VALUES (?, ?)";
+               $this->executeQuery($sql, [
+                    $this->userId,
+                    $postData['bio'],
+               ]);
+          }
+
+          if ($userData['bio'] != '') {
+               // Execute update of bio only if it's different from the current one.
+               if ($userData['bio'] != $postData['bio']) {
+                    $sql = "UPDATE user_detail SET bio = ? 
+                              WHERE `user_id` = ?;";
+                    $this->executeQuery($sql, [$postData['bio'], $this->userId]);
+               }
+          }
+
+
+          $errMsg = ['username' => '', 'age' => '', 'gender' => ''];
+
+          // Validate username.
+          if (!preg_match("/^[a-z]{8,30}$/i", $postData['username'])) {
+               $errMsg['username'] = '&#9888; Invalid username.';
+          }
+
+          // Check if any input is empty.
+          foreach ($postData as $field => $data) {
+               if (empty(trim($data))) {
+                    $errMsg[$field] = '* ' . ucfirst($field) . ' is a required field';
+               }
+          }
+          if (!isset($postData['gender'])) {
+               $errMsg['gender'] = '* Please select your gender.';
+          }
+
+          if (array_filter($errMsg)) {
+               return $errMsg;
+          }
+
+          // Execute update of username only if it's different from the current one.
+          if ($userData['username'] != $postData['username']) {
+               $sql = "UPDATE user SET username = ?
+                         WHERE `user_id` = ?;";
+               $this->executeQuery($sql, [$postData['username'], $this->userId]);
+          }
+
+          // Check if user has set age and gender before.
+          if (isset($userData['age']) && isset($userData['gender'])) {
+
+               // Execute update of age and gender only if it's being changed.
+               if ($userData['age'] != $postData['age']) {
+                    $sql = "UPDATE user_detail SET age = ?
+                              WHERE `user_id` = ?;";
+                    $this->executeQuery($sql, [$postData['age'], $this->userId]);
+               }
+               if ($userData['gender'] != $postData['gender']) {
+                    $sql = "UPDATE user_detail SET gender = ?
+                              WHERE `user_id` = ?;";
+                    $this->executeQuery($sql, [$postData['gender'], $this->userId]);
+               }
+               return;
+          }
+          $sql = "INSERT INTO user_detail (`user_id`, gender, age)
+                    VALUES (?, ?, ?)";
+          $this->executeQuery($sql, [
+               $this->userId,
+               $postData['gender'],
+               $postData['age']
+          ]);
+     }
+
      protected function deleteUser($userId)
      {
-          
      }
 }

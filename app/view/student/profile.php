@@ -5,6 +5,7 @@ include '../../helper/autoloader.php';
 $path = '../../../';
 
 $user = new Controller\User();
+$question = new \Controller\Question();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +40,14 @@ $user = new Controller\User();
                               </div>
                          <?php endif; ?>
                          <div class="profile__banner-header">
-                              <?php $userInfo = $user->read($_SESSION['userId']); ?>
+                              <?php
+                              // if (isset($_GET['id'])) {
+                              //      $userInfo = $user->read($_GET['id']);
+                              // }
+                              // if (!isset($_GET['id'])) {
+                              $userInfo = $user->read($_SESSION['userId']);
+                              // }
+                              ?>
                               <img class="profile__img" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
                               <h2 class="profile__username">
                                    <?php echo htmlspecialchars($userInfo['username']); ?>
@@ -100,23 +108,30 @@ $user = new Controller\User();
                          <form class="edit-profile-form" method="POST">
                               <div class="edit-profile-form__item">
                                    <label for="username">Username</label>
+                                   <p class="edit-profile__err-msg--username invalid-input"></p>
                                    <input class="edit-profile__input" type="text" name="username" id="username" placeholder="Enter new username" value="<?php echo htmlspecialchars($userInfo['username']); ?>">
                               </div>
                               <div class="edit-profile-form__item">
                                    <label for="age">Age</label>
-                                   <input class="edit-profile__input" type="text" name="age" id="age" placeholder="Enter new age" value="<?php echo htmlspecialchars($userInfo['age'] ?? ''); ?>">
+                                   <p class="edit-profile__err-msg--age invalid-input"></p>
+                                   <input class="edit-profile__input" type="number" name="age" id="age" placeholder="Enter new age" value="<?php echo htmlspecialchars($userInfo['age'] ?? ''); ?>" min="13" max="100">
                               </div>
                               <div class="edit-profile-form__item">
                                    <label for="gender">Gender</label>
+                                   <p class="edit-profile__err-msg--gender invalid-input"></p>
                                    <select class="edit-profile__input" name="gender" id="gender">
                                         <?php if (!$userInfo['gender']) : ?>
                                              <option selected disabled>Select gender</option>
                                         <?php endif; ?>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+                                        <option value="Male" <?php if (isset($userInfo['gender']) && $userInfo['gender'] == 'Male') {
+                                                                      echo 'selected';
+                                                                 } ?>>Male</option>
+                                        <option value="Female" <?php if (isset($userInfo['gender']) && $userInfo['gender'] == 'Female') {
+                                                                      echo 'selected';
+                                                                 } ?>>Female</option>
                                    </select>
                               </div>
-                              <button class="edit-profile-form__btn">Update</button>
+                              <button class="edit-profile-form__btn" name="updateProfile" type="submit">Update</button>
                          </form>
                     </div>
                </div>
@@ -164,23 +179,47 @@ $user = new Controller\User();
                <!-- Section -->
                <section class="profile-section profile-section--overview profile-section-selected--flex">
                     <div class="profile-section__overview--about dialog">
-                         <h2>About</h2>
-                         <p>
-                              <?php echo htmlspecialchars($userInfo['bio'] ??
-                                   ucfirst($userInfo['username']) . "'s about me section is currently empty.")
+                         <div class="overview--about__header">
+                              <h2 class="overview--about__title">About</h2>
+                              <?php if (!isset($_GET['id'])) : ?>
+                                   <i class="overview--about__edit-btn fa-solid fa-pen-to-square"></i>
+                              <?php endif; ?>
+                         </div>
+                         <p class="overview--about__content" data-user-id="<?php echo htmlspecialchars($userInfo['user_id']); ?>">
+                              <?php
+                              if (!isset($userInfo['bio'])) {
+                                   if (!isset($_GET['id'])) {
+                                        echo 'Your';
+                                   }
+
+                                   if (isset($_GET['id'])) {
+                                        echo htmlspecialchars(ucfirst($userInfo['username']) . "'s");
+                                   }
+                                   echo ' about me section is currently empty.';
+                              }
+                              if (isset($userInfo['bio'])) {
+                                   echo htmlspecialchars($userInfo['bio']);
+                              }
                               ?>
                          </p>
+                         <textarea class="overview--about__bio-input" name="bio" placeholder="You can write about your sports or hobbies. People also talk about their favourite subjects to study."><?php echo htmlspecialchars($userInfo['bio']); ?></textarea>
+                         <div class="overview--about__bio-btn-container">
+                              <button class="overview--about__bio-cancel-btn">Cancel</button>
+                              <button class="overview--about__bio-confirm-btn">Confirm</button>
+                         </div>
                     </div>
                     <div class="profile-section__overview--stats dialog">
-                         <h2>Stats</h2>
-                         <p class="profile__content-label">
-                              <span>Reputation Point: </span>
+                         <h2 class="overview--stats__title">Stats</h2>
+                         <p class="profile__content">
+                              <span class="profile__content-label">Reputation Point: </span>
+                              <?php echo htmlspecialchars($userInfo['point']); ?>
                          </p>
-                         <p class="profile__content-label">
-                              <span>Questions: </span>
+                         <p class="profile__content">
+                              <span class="profile__content-label">Answer provided: </span>
                          </p>
-                         <p class="profile__content-label">
-                              <span>Answers: </span>
+                         <p class="profile__content">
+                              <span class="profile__content-label">Question asked: </span>
+                              <?php echo htmlspecialchars($question->questionCount($_SESSION['userId'])); ?>
                          </p>
                     </div>
                </section>

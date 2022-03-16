@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-if (!empty($_GET)) {
+if (!empty($_GET) || !empty($_POST)) {
      if (!isset($_GET['id'])) {
           session_start();
           include '../helper/autoloader.php';
@@ -26,10 +26,25 @@ class User extends \Model\User
           return $this->searchUser($searchTerm);
      }
 
+     public function update($postData)
+     {
+          return $this->updateUser($postData);
+     }
+
      public function delete($userId)
      {
           return $this->deleteUser($userId);
      }
+}
+
+if (isset($_POST['username'])) {
+     $user = new \Controller\User($_SESSION['userId']);
+     echo json_encode($user->update($_POST));
+}
+
+if (isset($_GET['bio'])) {
+     $user = new \Controller\User($_SESSION['userId']);
+     $user->update($_GET);
 }
 
 if (isset($_GET['searchTerm'])) {
