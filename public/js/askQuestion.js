@@ -28,7 +28,7 @@ questionForm.addEventListener("submit", async function (e) {
 
     // Waits for a response, and treat it as a json object
     let errMsg = await res.json();
-
+    
     // Redirect to user page once there is no error messages.
     if (!errMsg) {
       pop_up_success();

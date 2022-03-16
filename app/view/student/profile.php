@@ -5,7 +5,7 @@ include '../../helper/autoloader.php';
 $path = '../../../';
 
 $user = new Controller\User();
-$question = new \Controller\Question();
+$questions = new \Controller\Question();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +14,7 @@ $question = new \Controller\Question();
      <?php include '../../config/head.php' ?>
      <title>Profile | Ex-Ledge</title>
      <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/profile.css">
+     <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/question.css">
 </head>
 
 <body>
@@ -41,12 +42,12 @@ $question = new \Controller\Question();
                          <?php endif; ?>
                          <div class="profile__banner-header">
                               <?php
-                              // if (isset($_GET['id'])) {
-                              //      $userInfo = $user->read($_GET['id']);
-                              // }
-                              // if (!isset($_GET['id'])) {
-                              $userInfo = $user->read($_SESSION['userId']);
-                              // }
+                              if (isset($_GET['id'])) {
+                                   $userInfo = $user->read($_GET['id']);
+                              }
+                              if (!isset($_GET['id'])) {
+                                   $userInfo = $user->read($_SESSION['userId']);
+                              }
                               ?>
                               <img class="profile__img" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
                               <h2 class="profile__username">
@@ -191,7 +192,6 @@ $question = new \Controller\Question();
                                    if (!isset($_GET['id'])) {
                                         echo 'Your';
                                    }
-
                                    if (isset($_GET['id'])) {
                                         echo htmlspecialchars(ucfirst($userInfo['username']) . "'s");
                                    }
@@ -219,13 +219,18 @@ $question = new \Controller\Question();
                          </p>
                          <p class="profile__content">
                               <span class="profile__content-label">Question asked: </span>
-                              <?php echo htmlspecialchars($question->questionCount($_SESSION['userId'])); ?>
+                              <?php echo htmlspecialchars($questions->questionCount($_SESSION['userId'])); ?>
                          </p>
                     </div>
                </section>
 
                <section class="profile-section profile-section--question">
-
+                    <?php
+                    isset($_GET['id']) ? $userId = $_GET['id'] : $userId = $_SESSION['userId'];
+                    foreach ($questions->read($userId) as $question) {
+                         include '../layout/question.php';
+                    }
+                    ?>
                </section>
 
                <section class="profile-section profile-section--answer">

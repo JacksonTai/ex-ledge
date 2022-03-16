@@ -4,6 +4,7 @@
 
 .profile__banner {
   width: 100%;
+  margin-bottom: 2.5rem;
   padding: 0;
   background-color: #ffffff;
 }
@@ -164,6 +165,7 @@
 /* -- Section -- */
 .profile-section {
   display: none;
+  padding: 0rem 0 3rem;
 }
 
 .profile-section-selected {
@@ -175,8 +177,6 @@
 }
 
 .profile-section--overview {
-  margin-bottom: 3rem;
-  padding: 0;
   justify-content: space-between;
   flex-wrap: wrap;
 }
@@ -184,9 +184,10 @@
 .profile-section__overview--about,
 .profile-section__overview--stats {
   width: 100%;
-  margin: 2rem 0 0;
+  margin-bottom: 2rem;
   border-bottom: 5px solid var(--clr-primary);
 }
+ 
 
 .overview--about__title,
 .overview--stats__title {
@@ -227,6 +228,11 @@
 .overview--about__bio-cancel-btn {
   margin-right: 1rem;
   background-color: #b3b3b3;
+}
+
+.profile-section--question {
+  
+
 }
 
 /* Classes for JS DOM */

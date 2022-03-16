@@ -2,6 +2,10 @@
 
 namespace Controller;
 
+if (!empty($_GET) || !empty($_POST)) {
+    include '../../helper/autoloader.php';
+}
+
 class Question extends \Model\Question
 {
     public function __construct($postData = null)
@@ -16,9 +20,19 @@ class Question extends \Model\Question
         }
     }
 
+    public function read($criteria = null)
+    {
+        return $this->getQuestion($criteria);
+    }
+
     public function questionCount($userId = null)
     {
         return  $this->getQuestionCount($userId);
+    }
+
+    public function get_time($time_posted)
+    {
+        return $this->timestamp($time_posted);
     }
 }
 

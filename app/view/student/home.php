@@ -1,7 +1,10 @@
 <?php
 session_start();
 require '../../helper/redirector.php';
+include '../../helper/autoloader.php';
 $path = '../../../';
+
+$questions = new \Controller\Question();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +38,11 @@ $path = '../../../';
                 </div>
             </div>
             <div class="home__body">
-                <?php include '../layout/question.php'; ?>
+                <div class="home__question-container">
+                    <?php foreach ($questions->read() as $question) : ?>
+                        <?php include '../layout/question.php'; ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
             <nav class="home__main-nav">
                 <button class="home__main-nav-btn">
