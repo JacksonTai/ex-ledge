@@ -37,6 +37,12 @@
   display: none;
 }
 
+.profile__banner-header {
+  min-width: 20%;
+  max-width: 10rem;
+  margin: 0 2rem;
+}
+
 .profile__img {
   display: block;
   margin: 0 auto;
@@ -46,6 +52,7 @@
 .profile__username {
   text-align: center;
   margin: 1rem 0;
+  word-wrap: break-word;
 }
 
 .profile__banner-body {
@@ -193,11 +200,6 @@
     order: 1;
     margin-left: auto;
     align-self: flex-start;
-  }
-
-  .profile__banner-header {
-    min-width: 20%;
-    margin: 0 2rem;
   }
 
   .profile__banner-header,
