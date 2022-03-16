@@ -12,9 +12,9 @@ $questions = new \Controller\Question();
 <head>
     <?php include '../../config/head.php' ?>
     <title>Home | Ex-Ledge</title>
-    <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/home.css">
-    <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/question.css">
     <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/sidebar.css">
+    <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/question.css">
+    <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/home.css">
 </head>
 
 <body>
@@ -38,11 +38,11 @@ $questions = new \Controller\Question();
                 </div>
             </div>
             <div class="home__body">
-                <div class="home__question-container">
-                    <?php foreach ($questions->read() as $question) : ?>
-                        <?php include '../layout/question.php'; ?>
-                    <?php endforeach; ?>
-                </div>
+
+                <?php foreach ($questions->read() as $question) : ?>
+                    <?php include '../layout/question.php'; ?>
+                <?php endforeach; ?>
+
             </div>
             <nav class="home__main-nav">
                 <button class="home__main-nav-btn">

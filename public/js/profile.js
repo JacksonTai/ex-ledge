@@ -61,21 +61,22 @@ aboutMeEditBtn.addEventListener("click", () => {
 
 aboutMeCancelBtn.addEventListener("click", hideEditField);
 aboutMeConfirmBtn.addEventListener("click", async function () {
-  if (aboutMeInput.value.trim()) {
-    try {
-      await fetch(`../../controller/user.php?bio=${aboutMeInput.value.trim()}`);
+  try {
+    await fetch(`../../controller/user.php?bio=${aboutMeInput.value.trim()}`);
 
-      let res = await fetch(
-        `../../controller/user.php?userId=${aboutMeContent.dataset.userId}`
-      );
-      let data = await res.json();
-      if (data.bio) {
-        aboutMeContent.textContent = data.bio;
-      }
-      hideEditField();
-    } catch (e) {
-      console.log("Error: ", e);
+    let res = await fetch(
+      `../../controller/user.php?userId=${aboutMeContent.dataset.userId}`
+    );
+    let data = await res.json();
+
+    if (data.bio) {
+      aboutMeContent.textContent = data.bio;
+    } else {
+      aboutMeContent.textContent = "Your about me section is currently empty.";
     }
+    hideEditField();
+  } catch (e) {
+    console.log("Error: ", e);
   }
 });
 
@@ -184,6 +185,7 @@ let deleteAccountPassword = document.querySelector(
   ".modal__delete-account-password"
 );
 let deletAccountbtn = document.querySelector(".modal__delete-account-btn");
+let validPassword = false;
 
 deleteAccountPassword.addEventListener("input", async function () {
   deletAccountbtn.classList.add("modal__delete-account-btn--disabled");
@@ -194,8 +196,22 @@ deleteAccountPassword.addEventListener("input", async function () {
     );
     if (await res.json()) {
       deletAccountbtn.classList.remove("modal__delete-account-btn--disabled");
+      validPassword = true;
     }
   } catch (e) {
     console.log(e);
+  }
+});
+
+deletAccountbtn.addEventListener("click", async function () {
+  if (validPassword) {
+    try {
+      await fetch(
+        `../../controller/user.php?deleteId=${aboutMeContent.dataset.userId}`
+      );
+      window.location = "../../helper/logout.php";
+    } catch (e) {
+      window.location = "profile.php";
+    }
   }
 });

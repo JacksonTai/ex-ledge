@@ -83,20 +83,29 @@ class User extends \config\DbConn
           $userData = $this->getUser($this->userId);
 
           if (isset($postData['bio'])) {
-               if ($userData['bio'] == 7) {
-                    $sql = "INSERT INTO user_detail (`user_id`, bio)
-                    VALUES (?, ?)";
-                    $this->executeQuery($sql, [
-                         $this->userId,
-                         $postData['bio'],
-                    ]);
+               if (count($userData) == 7) {
+                    if ($postData['bio'] != '') {
+                         $sql = "INSERT INTO user_detail (`user_id`, bio) VALUES (?, ?)";
+                         $this->executeQuery($sql, [$this->userId, $postData['bio'],]);
+                    }
                }
+               if (count($userData) != 7) {
+                    if ($postData['bio'] == '') {
+                         /* Delete user_detail record if user pass empty bio while the gender and age 
+                            has never been set yet. */
+                         if (!$userData['gender'] && !$userData['age']) {
+                              $sql = "DELETE FROM user_detail WHERE `user_id` = ?";
+                              $this->executeQuery($sql, [$this->userId,]);
+                         } else {
+                              $sql = "UPDATE user_detail SET bio = ?  WHERE `user_id` = ?;";
+                              $this->executeQuery($sql, [null, $this->userId]);
+                         }
+                         return;
+                    }
 
-               if ($userData['bio'] != 7) {
                     // Execute update of bio only if it's different from the current one.
                     if ($userData['bio'] != $postData['bio']) {
-                         $sql = "UPDATE user_detail SET bio = ? 
-                                   WHERE `user_id` = ?;";
+                         $sql = "UPDATE user_detail SET bio = ?  WHERE `user_id` = ?;";
                          $this->executeQuery($sql, [$postData['bio'], $this->userId]);
                     }
                }
@@ -131,9 +140,8 @@ class User extends \config\DbConn
                $this->executeQuery($sql, [$postData['username'], $this->userId]);
           }
 
-          // Check if user has set age and gender before.
-          if (isset($userData['age']) && isset($userData['gender'])) {
-
+          // Check if user has set age or gender or bio before.
+          if (isset($userData['age']) || isset($userData['gender']) || isset($userData['bio'])) {
                // Execute update of age and gender only if it's being changed.
                if ($userData['age'] != $postData['age']) {
                     $sql = "UPDATE user_detail SET age = ?
@@ -158,5 +166,6 @@ class User extends \config\DbConn
 
      protected function deleteUser($userId)
      {
+          
      }
 }

@@ -153,7 +153,7 @@ $questions = new \Controller\Question();
                               <p class="modal__delete--txt">Please enter password to confirm.</p>
                               <input class="modal__delete-account-password" type="password" data-email="
                                    <?php echo htmlspecialchars($userInfo['email']); ?>" autocomplete="off">
-                              <button class="modal__delete-account-btn btn--red modal__delete-account-btn--disabled">Delete Account</button>
+                              <button class="modal__delete-account-btn btn--red modal__delete-account-btn--disabled">Yes, Delete my account.</button>
                          </div>
                     </div>
                </div>
@@ -202,7 +202,7 @@ $questions = new \Controller\Question();
                               }
                               ?>
                          </p>
-                         <textarea class="overview--about__bio-input" name="bio" placeholder="You can write about your sports or hobbies. People also talk about their favourite subjects to study."><?php echo htmlspecialchars($userInfo['bio']); ?></textarea>
+                         <textarea class="overview--about__bio-input" name="bio" placeholder="You can write about your sports or hobbies. People also talk about their favourite subjects to study."><?php echo htmlspecialchars($userInfo['bio'] ?? ''); ?></textarea>
                          <div class="overview--about__bio-btn-container">
                               <button class="overview--about__bio-cancel-btn">Cancel</button>
                               <button class="overview--about__bio-confirm-btn">Confirm</button>

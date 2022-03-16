@@ -33,7 +33,7 @@ class User extends \Model\User
 
      public function delete($userId)
      {
-          return $this->deleteUser($userId);
+          $this->deleteUser($userId);
      }
 }
 
@@ -57,4 +57,9 @@ if (isset($_GET['userId'])) {
      $user = new \Controller\User();
      $result = $user->read($_GET['userId']);
      echo json_encode($result);
+}
+
+if (isset($_GET['deleteId'])) {
+     $user = new \Controller\User();
+     $user->delete($_GET['deleteId']);
 }

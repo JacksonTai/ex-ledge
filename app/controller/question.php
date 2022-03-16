@@ -3,7 +3,11 @@
 namespace Controller;
 
 if (!empty($_GET) || !empty($_POST)) {
-    include '../../helper/autoloader.php';
+    if (isset($_GET['id'])) {
+        include '../../helper/autoloader.php';
+    } else {
+        include '../helper/autoloader.php';
+    }
 }
 
 class Question extends \Model\Question
