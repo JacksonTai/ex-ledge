@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2022 at 11:04 AM
+-- Generation Time: Mar 16, 2022 at 03:22 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -132,8 +132,8 @@ INSERT INTO `user` (`user_id`, `email`, `username`, `password`, `verification`, 
 CREATE TABLE `user_detail` (
   `user_id` varchar(20) NOT NULL,
   `nric_no` int(12) DEFAULT NULL,
-  `bio` varchar(3000) NOT NULL,
-  `gender` varchar(5) NOT NULL,
+  `bio` varchar(3000) DEFAULT NULL,
+  `gender` varchar(6) NOT NULL,
   `age` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
