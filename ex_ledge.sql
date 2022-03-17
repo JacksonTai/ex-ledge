@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2022 at 03:22 AM
+-- Generation Time: Mar 17, 2022 at 02:40 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `testing`
+-- Database: `ex_ledge`
 --
 
 -- --------------------------------------------------------
@@ -133,8 +133,8 @@ CREATE TABLE `user_detail` (
   `user_id` varchar(20) NOT NULL,
   `nric_no` int(12) DEFAULT NULL,
   `bio` varchar(3000) DEFAULT NULL,
-  `gender` varchar(6) NOT NULL,
-  `age` int(3) NOT NULL
+  `gender` varchar(6) DEFAULT NULL,
+  `age` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -204,16 +204,16 @@ ALTER TABLE `bookmark_question`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`comment_id`),
-  ADD KEY `fk_comment__user` (`user_id`),
-  ADD KEY `fk_comment__answer` (`reply_id`);
+  ADD KEY `fk_comment__question` (`reply_id`),
+  ADD KEY `fk_comment__user` (`user_id`);
 
 --
 -- Indexes for table `message`
 --
 ALTER TABLE `message`
   ADD PRIMARY KEY (`msg_id`),
-  ADD KEY `fk_message-outgoing__user` (`outgoing_msg_id`),
-  ADD KEY `fk_message-incoming__user` (`incoming_msg_id`);
+  ADD KEY `fk_message-incoming__user` (`incoming_msg_id`),
+  ADD KEY `fk_message-outgoing__user` (`outgoing_msg_id`);
 
 --
 -- Indexes for table `question`
@@ -263,69 +263,69 @@ ALTER TABLE `vote_question`
 -- Constraints for table `answer`
 --
 ALTER TABLE `answer`
-  ADD CONSTRAINT `fk_answer__question` FOREIGN KEY (`question_id`) REFERENCES `question` (`question_id`),
-  ADD CONSTRAINT `fk_answer__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_answer__question` FOREIGN KEY (`question_id`) REFERENCES `question` (`question_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_answer__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `bookmark_answer`
 --
 ALTER TABLE `bookmark_answer`
-  ADD CONSTRAINT `fk_bookmark_answer__answer` FOREIGN KEY (`answer_id`) REFERENCES `answer` (`answer_id`),
-  ADD CONSTRAINT `fk_bookmark_answer__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_bookmark_answer__answer` FOREIGN KEY (`answer_id`) REFERENCES `answer` (`answer_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_bookmark_answer__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `bookmark_question`
 --
 ALTER TABLE `bookmark_question`
-  ADD CONSTRAINT `fk_bookmark_question__question` FOREIGN KEY (`question_id`) REFERENCES `question` (`question_id`),
-  ADD CONSTRAINT `fk_bookmark_question__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_bookmark_question__question` FOREIGN KEY (`question_id`) REFERENCES `question` (`question_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_bookmark_question__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `fk_comment__answer` FOREIGN KEY (`reply_id`) REFERENCES `answer` (`answer_id`),
-  ADD CONSTRAINT `fk_comment__question` FOREIGN KEY (`reply_id`) REFERENCES `question` (`question_id`),
-  ADD CONSTRAINT `fk_comment__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_comment__answer` FOREIGN KEY (`reply_id`) REFERENCES `answer` (`answer_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_comment__question` FOREIGN KEY (`reply_id`) REFERENCES `question` (`question_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_comment__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `message`
 --
 ALTER TABLE `message`
-  ADD CONSTRAINT `fk_message-incoming__user` FOREIGN KEY (`incoming_msg_id`) REFERENCES `user` (`user_id`),
-  ADD CONSTRAINT `fk_message-outgoing__user` FOREIGN KEY (`outgoing_msg_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_message-incoming__user` FOREIGN KEY (`incoming_msg_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_message-outgoing__user` FOREIGN KEY (`outgoing_msg_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `question`
 --
 ALTER TABLE `question`
-  ADD CONSTRAINT `fk_question__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_question__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `user_detail`
 --
 ALTER TABLE `user_detail`
-  ADD CONSTRAINT `fk_user_detail__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_user_detail__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `verification_queue`
 --
 ALTER TABLE `verification_queue`
-  ADD CONSTRAINT `fk_verification_queue__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_verification_queue__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `vote_answer`
 --
 ALTER TABLE `vote_answer`
-  ADD CONSTRAINT `fk_vote_answer__answer` FOREIGN KEY (`answer_id`) REFERENCES `answer` (`answer_id`),
-  ADD CONSTRAINT `fk_vote_answer__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_vote_answer__answer` FOREIGN KEY (`answer_id`) REFERENCES `answer` (`answer_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_vote_answer__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `vote_question`
 --
 ALTER TABLE `vote_question`
-  ADD CONSTRAINT `fk_vote_question__question` FOREIGN KEY (`question_id`) REFERENCES `question` (`question_id`),
-  ADD CONSTRAINT `fk_vote_question__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_vote_question__question` FOREIGN KEY (`question_id`) REFERENCES `question` (`question_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_vote_question__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
