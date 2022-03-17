@@ -4,6 +4,7 @@
 
 .profile__banner {
   width: 100%;
+  margin-bottom: 2.5rem;
   padding: 0;
   background-color: #ffffff;
 }
@@ -24,7 +25,7 @@
 .profile__delete-btn {
   padding: 0;
   color: #000000;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   background-color: #ffffff;
 }
 
@@ -37,6 +38,12 @@
   display: none;
 }
 
+.profile__banner-header {
+  min-width: 20%;
+  max-width: 10rem;
+  margin: 0 2rem;
+}
+
 .profile__img {
   display: block;
   margin: 0 auto;
@@ -46,6 +53,7 @@
 .profile__username {
   text-align: center;
   margin: 1rem 0;
+  word-wrap: break-word;
 }
 
 .profile__banner-body {
@@ -58,6 +66,10 @@
 
 .profile__content-label {
   color: #757575;
+}
+
+.profile__content {
+  margin-bottom: 0.5rem;
 }
 
 .profile__banner-verify-link {
@@ -125,6 +137,16 @@
   margin: 2rem auto 0;
 }
 
+.verify-img {
+  margin-top: 1.5rem;
+  max-width: 100%;
+}
+
+.verify-message {
+  font-size: 0.95rem;
+  text-align: center;
+}
+
 .modal__content--delete-account {
   margin: 1rem;
 }
@@ -153,6 +175,7 @@
 /* -- Section -- */
 .profile-section {
   display: none;
+  padding: 0rem 0 3rem;
 }
 
 .profile-section-selected {
@@ -164,8 +187,6 @@
 }
 
 .profile-section--overview {
-  margin-bottom: 3rem;
-  padding: 0;
   justify-content: space-between;
   flex-wrap: wrap;
 }
@@ -173,10 +194,58 @@
 .profile-section__overview--about,
 .profile-section__overview--stats {
   width: 100%;
-  margin: 2rem 0 0;
+  margin-bottom: 2rem;
   border-bottom: 5px solid var(--clr-primary);
 }
+ 
 
+.overview--about__title,
+.overview--stats__title {
+  margin-bottom: 0.5rem;
+}
+
+.overview--about__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.overview--about__edit-btn,
+.overview--about__close-btn {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+/* .overview--about__close-btn,
+.overview--about__bio-input {
+  display: none;
+} */
+
+.overview--about__bio-input,
+.overview--about__bio-btn-container {
+  display: none;
+ 
+}
+
+.overview--about__bio-input {
+  min-height: 13rem;
+}
+
+.overview--about__bio-btn-container {
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.overview--about__bio-cancel-btn {
+  margin-right: 1rem;
+  background-color: #b3b3b3;
+}
+
+.profile-section--question {
+  
+
+}
+
+/* Classes for JS DOM */
 .no-scroll {
   overflow: hidden;
 }
@@ -193,11 +262,6 @@
     order: 1;
     margin-left: auto;
     align-self: flex-start;
-  }
-
-  .profile__banner-header {
-    min-width: 20%;
-    margin: 0 2rem;
   }
 
   .profile__banner-header,
