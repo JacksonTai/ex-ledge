@@ -21,7 +21,7 @@ $user = new Controller\User();
 
      <div class="main-sidebar-wrapper">
 
-          <?php include '../layout/sidebar.php' ?>
+          <?php include '../layout/sideNavbar.php' ?>
 
           <main class="chat--main main-content">
                <section class="chat-section__chat-area">

@@ -30,6 +30,11 @@ class User extends \Model\User
      {
           return $this->getMessagedUser($receiverId);
      }
+
+     public function delete($userId)
+     {
+          return $this->deleteUser($userId);
+     }
 }
 
 !empty($_POST) ? new \Controller\Message($_POST) : null;
