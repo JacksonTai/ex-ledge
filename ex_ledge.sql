@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2022 at 02:40 AM
+-- Generation Time: Mar 17, 2022 at 04:28 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -131,7 +131,7 @@ INSERT INTO `user` (`user_id`, `email`, `username`, `password`, `verification`, 
 
 CREATE TABLE `user_detail` (
   `user_id` varchar(20) NOT NULL,
-  `nric_no` int(12) DEFAULT NULL,
+  `nric_no` char(14) DEFAULT NULL,
   `bio` varchar(3000) DEFAULT NULL,
   `gender` varchar(6) DEFAULT NULL,
   `age` int(3) DEFAULT NULL
@@ -144,7 +144,7 @@ CREATE TABLE `user_detail` (
 --
 
 CREATE TABLE `verification_queue` (
-  `nric_no` int(12) NOT NULL,
+  `nric_no` char(14) NOT NULL,
   `user_id` varchar(20) NOT NULL,
   `full_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -238,7 +238,7 @@ ALTER TABLE `user_detail`
 -- Indexes for table `verification_queue`
 --
 ALTER TABLE `verification_queue`
-  ADD PRIMARY KEY (`nric_no`),
+  ADD PRIMARY KEY (`nric_no`,`user_id`),
   ADD KEY `fk_verification_queue__user` (`user_id`);
 
 --
