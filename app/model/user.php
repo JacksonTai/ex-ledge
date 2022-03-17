@@ -166,6 +166,7 @@ class User extends \config\DbConn
 
      protected function deleteUser($userId)
      {
-          
+          $sql = "DELETE FROM user WHERE `user_id` = ?";
+          $this->executeQuery($sql, [$userId]);
      }
 }
