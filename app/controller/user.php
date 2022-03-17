@@ -45,6 +45,16 @@ class User extends \Model\User
      {
           $this->deleteUser($userId);
      }
+
+     public function readTopThree()
+     {
+          return $this->topThree();
+     }
+
+     public function readTopTen()
+     {
+          return $this->topTen();
+     }
 }
 
 if (isset($_POST['fullName'], $_POST['nric'])) {

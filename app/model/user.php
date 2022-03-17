@@ -225,4 +225,31 @@ class User extends \config\DbConn
           $sql = "DELETE FROM user WHERE `user_id` = ?";
           $this->executeQuery($sql, [$userId]);
      }
+
+     protected function topThree()
+     {
+          // Printing users from rank 1 to 3.
+          $sql = "SELECT * FROM user
+                  WHERE `user_id` LIKE ?
+                  ORDER BY point DESC
+                  LIMIT 3";
+
+          $stmt = $this->executeQuery($sql, ['U%']);
+          $topThreeUsers = $stmt->fetchAll();
+          return $topThreeUsers;
+     }
+
+     protected function topTen()
+     {    
+          // Printing users from rank 4 to 10.
+          $sql = "SELECT * FROM user
+                  WHERE `user_id` LIKE ?
+                  ORDER BY point DESC
+                  LIMIT 3, 7";
+
+          $stmt = $this->executeQuery($sql, ['U%']);
+          $topTenUsers = $stmt->fetchAll();
+          return $topTenUsers;
+     }
+
 }
