@@ -138,9 +138,9 @@ class User extends \config\DbConn
                }
                if (count($userData) != 7) {
                     if ($postData['bio'] == '') {
-                         /* Delete user_detail record if user pass empty bio while the gender and age 
-                            has never been set yet. */
-                         if (!$userData['gender'] && !$userData['age']) {
+                         /* Delete user_detail record if user pass empty bio while the gender, age 
+                            and nric number has never been set yet. */
+                         if (!$userData['gender'] && !$userData['age'] && !$userData['nric_no']) {
                               $sql = "DELETE FROM user_detail WHERE `user_id` = ?";
                               $this->executeQuery($sql, [$this->userId,]);
                          } else {
