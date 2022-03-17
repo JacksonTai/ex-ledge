@@ -10,11 +10,13 @@ class Question extends \Model\Question
 {
     public function __construct($postData = null)
     {
-        $errMsg = parent::__construct($postData);
-        if (is_array($errMsg)) {
-            echo json_encode($errMsg);
-        } else {
-            echo json_encode(false);
+        if ($postData) {
+            $errMsg = parent::__construct($postData);
+            if (is_array($errMsg)) {
+                echo json_encode($errMsg);
+            } else {
+                echo json_encode(false);
+            }
         }
     }
 
