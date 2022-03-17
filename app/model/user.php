@@ -15,10 +15,13 @@ class User extends \config\DbConn
 
      protected function verifyUser($postData)
      {
+          // Trim all item in postData array.
+          $postData = array_map('trim', $postData);
+
           $errMsg = ['fullName' => '', 'nric' => ''];
 
           // Validate full name.
-          if (!preg_match("/^[a-z]$/i", $postData['fullName'])) {
+          if (!ctype_alpha($postData['fullName'])) {
                $errMsg['fullName'] = '&#9888; Invalid Full name.';
           }
 
