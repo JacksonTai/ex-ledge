@@ -17,6 +17,11 @@ class User extends \config\DbConn
      {
           $errMsg = ['fullName' => '', 'nric' => ''];
 
+          // Validate full name.
+          if (!preg_match("/^[a-z]$/i", $postData['fullName'])) {
+               $errMsg['fullName'] = '&#9888; Invalid Full name.';
+          }
+
           // Validate NRIC number.
           if (!preg_match("/^\d{6}-\d{2}-\d{4}$/", $postData['nric'])) {
                $errMsg['nric'] = '&#9888; Invalid NRIC number.';
@@ -26,6 +31,7 @@ class User extends \config\DbConn
           if (empty(trim($postData['fullName']))) {
                $errMsg['fullName'] = '* Full name is a required field.';
           }
+
           if (empty(trim($postData['nric']))) {
                $errMsg['nric'] = '* NRIC number is a required field.';
           }
