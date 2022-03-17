@@ -137,6 +137,37 @@ function closeModal() {
   window.location.href = "profile.php";
 }
 
+/* -- Verify account modal -- */
+let verifyAccountForm = document.querySelector(".verify-form");
+if (verifyAccountForm) {
+  verifyAccountForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    try {
+      let res = await fetch("../../controller/user.php", {
+        method: "POST",
+        body: formData,
+      });
+      let errMsg = await res.json();
+      // Redirect to profile page again once there is no error messages.
+      if (!errMsg) {
+        window.location.href = "profile.php";
+      } else {
+        let usernameErrMsg = document.querySelector(
+          ".verify-form__err-msg--full-name"
+        );
+        let ageErrMsg = document.querySelector(".verify-form__err-msg--nric");
+        usernameErrMsg.textContent = decodeEntity(errMsg.fullName);
+        ageErrMsg.textContent = decodeEntity(errMsg.nric);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  });
+}
+
 /* -- Edit profile modal -- */
 let editProfileForm = document.querySelector(".edit-profile-form");
 editProfileForm.addEventListener("submit", async function (e) {
@@ -187,6 +218,7 @@ let deleteAccountPassword = document.querySelector(
 let deletAccountbtn = document.querySelector(".modal__delete-account-btn");
 let validPassword = false;
 
+// Check if password is correct in real time.
 deleteAccountPassword.addEventListener("input", async function () {
   deletAccountbtn.classList.add("modal__delete-account-btn--disabled");
   try {
@@ -203,6 +235,7 @@ deleteAccountPassword.addEventListener("input", async function () {
   }
 });
 
+// Delete account process.
 deletAccountbtn.addEventListener("click", async function () {
   if (validPassword) {
     try {

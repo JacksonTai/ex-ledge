@@ -137,6 +137,16 @@
   margin: 2rem auto 0;
 }
 
+.verify-img {
+  margin-top: 1.5rem;
+  max-width: 100%;
+}
+
+.verify-message {
+  font-size: 0.95rem;
+  text-align: center;
+}
+
 .modal__content--delete-account {
   margin: 1rem;
 }

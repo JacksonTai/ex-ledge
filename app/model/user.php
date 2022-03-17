@@ -13,6 +13,53 @@ class User extends \config\DbConn
           $this->userId = $userId;
      }
 
+     protected function verifyUser($postData)
+     {
+          $errMsg = ['fullName' => '', 'nric' => ''];
+
+          // Validate NRIC number.
+          if (!preg_match("/^\d{6}-\d{2}-\d{4}$/", $postData['nric'])) {
+               $errMsg['nric'] = '&#9888; Invalid NRIC number.';
+          }
+
+          // Check if any input is empty.
+          if (empty(trim($postData['fullName']))) {
+               $errMsg['fullName'] = '* Full name is a required field.';
+          }
+          if (empty(trim($postData['nric']))) {
+               $errMsg['nric'] = '* NRIC number is a required field.';
+          }
+
+          // Check for duplicate NRIC number.
+          foreach ($this->getVerification() as $verification) {
+               if ($postData['nric'] == $verification['nric_no']) {
+                    $errMsg['nric'] = '* This NRIC number has been submitted or taken.';
+               }
+          }
+
+          if (array_filter($errMsg)) {
+               return $errMsg;
+          }
+
+          $sql = "INSERT INTO verification_queue VALUES (?, ?, ?)";
+          $this->executeQuery($sql, [$postData['nric'], $this->userId, $postData['fullName']]);
+     }
+
+     protected function getVerification($userId = null)
+     {
+          // Query for selecting specific user verification info.
+          if ($userId) {
+               $sql = "SELECT * FROM verification_queue WHERE `user_id` = ?";
+               $stmt = $this->executeQuery($sql, [$userId]);
+               return $stmt->fetch();
+          }
+
+          // Default query for selecting all verification info.
+          $sql = "SELECT * FROM verification_queue";
+          $stmt = $this->executeQuery($sql);
+          return $stmt->fetchAll();
+     }
+
      protected function getUser($userId)
      {
           if ($userId) {
@@ -122,7 +169,7 @@ class User extends \config\DbConn
           // Check if any input is empty.
           foreach ($postData as $field => $data) {
                if (empty(trim($data))) {
-                    $errMsg[$field] = '* ' . ucfirst($field) . ' is a required field';
+                    $errMsg[$field] = '* ' . ucfirst($field) . ' is a required field.';
                }
           }
           if (!isset($postData['gender'])) {

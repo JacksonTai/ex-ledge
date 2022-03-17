@@ -38,9 +38,11 @@ $questions = new \Controller\Question();
                 </div>
             </div>
             <div class="home__body">
-                <?php foreach ($questions->read() as $question) : ?>
-                    <?php include '../layout/question.php'; ?>
-                <?php endforeach; ?>
+                <?php
+                foreach ($questions->read() as $question) {
+                    include '../layout/question.php';
+                }
+                ?>
             </div>
             <nav class="home__main-nav">
                 <button class="home__main-nav-btn">

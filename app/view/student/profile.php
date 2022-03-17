@@ -161,19 +161,34 @@ $questions = new \Controller\Question();
                     <div class="modal modal--verify-account">
                          <header class="modal__header modal__header--verify-account">
                               <button class="modal__close-btn">&#10006;</button>
-                              <h2 class="modal__title">Verify Account</h2>
+                              <?php if ($user->readVerification($_SESSION['userId'])) : ?>
+                                   <h2 class="modal__title">
+                                        We know you have been waiting.
+                                   </h2>
+                              <?php else : ?>
+                                   <h2 class="modal__title">
+                                        Verify Account
+                                   </h2>
+                              <?php endif; ?>
                          </header>
-                         <form class="verify-form" method="POST">
-                              <div class="verify-form__item">
-                                   <label for="fullaName">Full Name (as per IC)</label>
-                                   <input class="verify__input" type="text" name="fullaName" id="fullaName" placeholder="Enter your full name">
-                              </div>
-                              <div class="verify-form__item">
-                                   <label for="NRIC">NRIC Number</label>
-                                   <input class="verify__input" type="text" name="NRIC" id="NRIC" placeholder="Enter your NRIC number">
-                              </div>
-                              <button class="verify-form__btn">Send Request</button>
-                         </form>
+                         <?php if ($user->readVerification($_SESSION['userId'])) : ?>
+                              <img class="verify-img" src="<?php echo $path; ?>public/img/verify.jpg" alt="">
+                              <p class="verify-message">Don't worry, during the waiting period you can still sign in and use your Ex-Ledge account normally.</p>
+                         <?php else : ?>
+                              <form class="verify-form" method="POST">
+                                   <div class="verify-form__item">
+                                        <label for="fullName">Full Name (as per IC)</label>
+                                        <p class="verify-form__err-msg verify-form__err-msg--full-name invalid-input"></p>
+                                        <input class="verify__input" type="text" name="fullName" id="fullName" placeholder="Enter your full name">
+                                   </div>
+                                   <div class="verify-form__item">
+                                        <label for="nric">NRIC Number (with hypens)</label>
+                                        <p class="verify-form__err-msg verify-form__err-msg--nric invalid-input"></p>
+                                        <input class="verify__input" type="text" name="nric" id="nric" placeholder="Enter your NRIC number" maxlength="14">
+                                   </div>
+                                   <button class="verify-form__btn">Send Request</button>
+                              </form>
+                         <?php endif; ?>
                     </div>
                </div>
 
