@@ -79,3 +79,33 @@
     height: fit-content;
   }
 }
+
+@media (max-width: 700px) {
+
+  .home__title {
+    display: none;
+  }
+
+  .button-header{
+    padding: 0 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .button-askQuestion,
+  .button-filter{
+    border-radius: 10px;
+    font-size: 12px;
+    height: 35px;
+  }
+
+  .button-askQuestion{
+    display: block;
+    width: 138px;
+  }
+
+  .button-filter{
+    width: 75px;
+  }
+}
