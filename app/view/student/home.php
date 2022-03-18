@@ -4,7 +4,7 @@ require '../../helper/redirector.php';
 include '../../helper/autoloader.php';
 $path = '../../../';
 
-$questions = new \Controller\Question;
+$questions = new \Controller\Question();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,9 +12,9 @@ $questions = new \Controller\Question;
 <head>
     <?php include '../../config/head.php' ?>
     <title>Home | Ex-Ledge</title>
-    <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/home.css">
-    <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/question.css">
     <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/sidebar.css">
+    <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/question.css">
+    <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/home.css">
 </head>
 
 <body>
@@ -38,7 +38,11 @@ $questions = new \Controller\Question;
                 </div>
             </div>
             <div class="home__body">
-                <?php include '../layout/question.php'; ?>
+                <?php
+                foreach ($questions->read() as $question) {
+                    include '../layout/question.php';
+                }
+                ?>
             </div>
             <nav class="home__main-nav">
                 <button class="home__main-nav-btn">

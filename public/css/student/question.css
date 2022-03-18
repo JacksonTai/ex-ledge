@@ -59,13 +59,7 @@
 }
 
 .question__post-answer-input {
-  width: 100%;
   min-height: 10rem;
-  padding: 1.5em;
-  font-size: 1rem;
-  background-color: #f5f5f5;
-  border: none;
-  border-radius: 0.5em;
 }
 
 .question__post-answer-btn {
