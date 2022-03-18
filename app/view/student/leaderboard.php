@@ -28,19 +28,19 @@ $user = new \Controller\User;
                <div class="leaderboard__podium-wrapper">
                     <?php $topThreeUsers = $user->readRank(3); ?>
                     <a class="leaderboard__podium leaderboard__podium--1 dialog" href="profile.php?id=<?php echo htmlspecialchars($topThreeUsers[0]['user_id']); ?>">
-                         <h3 class="leaderboard__podium-point"><?php echo htmlspecialchars($topThreeUsers[0]['point']); ?></h3>
+                         <h3 class="leaderboard__podium-point"><?php echo htmlspecialchars($topThreeUsers[0]['point'] ?? 'N/A'); ?></h3>
                          <img class="leaderboard__podium-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="">
-                         <p class="leaderboard-name"><?php echo htmlspecialchars($topThreeUsers[0]['username']); ?></p>
+                         <p class="leaderboard-name"><?php echo htmlspecialchars($topThreeUsers[0]['username'] ?? 'N/A'); ?></p>
                     </a>
                     <a class="leaderboard__podium leaderboard__podium--2 dialog" href="profile.php?id=<?php echo htmlspecialchars($topThreeUsers[1]['user_id']); ?>">
-                         <h3 class="leaderboard__podium-point"><?php echo htmlspecialchars($topThreeUsers[1]['point']); ?></h3>
+                         <h3 class="leaderboard__podium-point"><?php echo htmlspecialchars($topThreeUsers[1]['point'] ?? 'N/A'); ?></h3>
                          <img class="leaderboard__podium-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="">
-                         <p class="leaderboard-name"><?php echo htmlspecialchars($topThreeUsers[1]['username']); ?></p>
+                         <p class="leaderboard-name"><?php echo htmlspecialchars($topThreeUsers[1]['username'] ?? 'N/A'); ?></p>
                     </a>
                     <a class="leaderboard__podium leaderboard__podium--3 dialog" href="profile.php?id=<?php echo htmlspecialchars($topThreeUsers[2]['user_id']); ?>">
-                         <h3 class="leaderboard__podium-point"><?php echo htmlspecialchars($topThreeUsers[2]['point']); ?></h3>
+                         <h3 class="leaderboard__podium-point"><?php echo htmlspecialchars($topThreeUsers[2]['point'] ?? 'N/A'); ?></h3>
                          <img class="leaderboard__podium-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="">
-                         <p class="leaderboard-name"><?php echo htmlspecialchars($topThreeUsers[2]['username']); ?></p>
+                         <p class="leaderboard-name"><?php echo htmlspecialchars($topThreeUsers[2]['username'] ?? 'N/A'); ?></p>
                     </a>
                </div>
 
