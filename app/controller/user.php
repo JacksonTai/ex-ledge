@@ -21,14 +21,14 @@ class User extends \Model\User
           return $this->verifyUser($postData);
      }
 
-     public function readVerification($userId = null)
-     {
-          return $this->getVerification($userId);
-     }
-
      public function read($userId = null)
      {
           return $this->getUser($userId);
+     }
+
+     public function readVerification($userId = null)
+     {
+          return $this->getVerification($userId);
      }
 
      public function search($searchTerm)
@@ -52,6 +52,10 @@ class User extends \Model\User
      }
 }
 
+if (isset($_POST['fullName'], $_POST['nric'])) {
+     $user = new \Controller\User($_SESSION['userId']);
+     echo json_encode($user->verify($_POST));
+}
 
 if (isset($_GET['userId'])) {
      $user = new \Controller\User();
@@ -70,12 +74,6 @@ if (isset($_GET['senderId'])) {
           exit();
      }
      echo json_encode($user->readMessagedUser());
-}
-
-if (isset($_GET['searchTerm'])) {
-     $user = new \Controller\User($_SESSION['userId']);
-     $result = $user->search($_GET['searchTerm']);
-     print_r($result);
 }
 
 if (isset($_POST['username'])) {
