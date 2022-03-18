@@ -14,7 +14,6 @@ if (isset($_SESSION['userId'])) {
 
 // Path for images.
 strpos($url, 'app/view') ? $imgPath = '../../../public/img/icons/' : $imgPath = 'img/icons/';
-
 ?>
 
 <header class="layout-header">

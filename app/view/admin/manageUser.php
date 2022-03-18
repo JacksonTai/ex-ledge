@@ -18,7 +18,7 @@ $path = '../../../';
 
      <div class="main-sidebar-wrapper">
 
-          <?php include '../layout/sidebar.php' ?>
+          <?php include '../layout/sideNavbar.php' ?>
 
           <main class="manageUser--main main-content">
 

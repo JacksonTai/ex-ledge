@@ -4,7 +4,7 @@ require '../../helper/redirector.php';
 include '../../helper/autoloader.php';
 $path = '../../../';
 
-$questions = new \Controller\Question;
+$questions = new \Controller\Question();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +12,9 @@ $questions = new \Controller\Question;
 <head>
     <?php include '../../config/head.php' ?>
     <title>Home | Ex-Ledge</title>
-    <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/home.css">
+    <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/sidebar.css">
     <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/question.css">
+    <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/home.css">
 </head>
 
 <body>
@@ -22,7 +23,7 @@ $questions = new \Controller\Question;
 
     <div class="main-sidebar-wrapper">
 
-        <?php include '../layout/sidebar.php' ?>
+        <?php include '../layout/sideNavbar.php' ?>
 
         <main class="home--main main-content">
             <div class="home__header">
@@ -37,7 +38,11 @@ $questions = new \Controller\Question;
                 </div>
             </div>
             <div class="home__body">
-                <?php include '../layout/question.php'; ?>
+                <?php
+                foreach ($questions->read() as $question) {
+                    include '../layout/question.php';
+                }
+                ?>
             </div>
             <nav class="home__main-nav">
                 <button class="home__main-nav-btn">
@@ -50,39 +55,7 @@ $questions = new \Controller\Question;
             </nav>
         </main>
 
-        <aside class="home--sidebar">
-            <div class="home--sidebar__content home--sidebar__content--top-user dialog">
-                <h3 class="home--sidebar__content-title">Top Users</h3>
-                <a class="home--sidebar__top-user" href="profile.php?id=#">
-                    <img class="sidebar-top-user__profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
-                    <p class="sidebar-top-user__username">Username</p>
-                </a>
-                <a class="home--sidebar__top-user" href="profile.php?id=#">
-                    <img class="sidebar-top-user__profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
-                    <p class="sidebar-top-user__username">Username</p>
-                </a>
-                <a class="home--sidebar__top-user" href="profile.php?id=#">
-                    <img class="sidebar-top-user__profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
-                    <p class="sidebar-top-user__username">Username</p>
-                </a>
-                <a class="home--sidebar__top-user" href="profile.php?id=#">
-                    <img class="sidebar-top-user__profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
-                    <p class="sidebar-top-user__username">Username</p>
-                </a>
-                <a class="home--sidebar__top-user" href="profile.php?id=#">
-                    <img class="sidebar-top-user__profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
-                    <p class="sidebar-top-user__username">Username</p>
-                </a>
-            </div>
-            <div class="home--sidebar__content home--sidebar__content--hot-topic dialog">
-                <h3 class="home--sidebar__content-title">Hot Topics</h3>
-                <a class="home--sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
-                <a class="home--sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
-                <a class="home--sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
-                <a class="home--sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
-                <a class="home--sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
-            </div>
-        </aside>
+        <?php include '../layout/sidebar.php'; ?>
 
     </div>
 
