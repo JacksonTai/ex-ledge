@@ -22,8 +22,8 @@
 }
 
 .question__action-container {
+  flex-wrap: wrap;
   width: 100%;
-  max-width: 20rem;
   margin: 0.5rem 0;
 }
 
@@ -34,9 +34,17 @@
   color: var(--clr-font-grey);
 }
 
+.question__action:hover {
+  color: var(--clr-primary);
+}
+
 .question__action--vote {
   font-size: 1.2rem;
   font-weight: 700;
+}
+
+.question__action--vote:hover {
+  color: var(--clr-font-grey);
 }
 
 .question__point {
@@ -44,30 +52,51 @@
 }
 
 .question__action--comment,
-.question__action--bookmark {
+.question__action--bookmark,
+.question__action--ans {
   cursor: pointer;
 }
 
 .action--comment-icon,
-.action--bookmark-icon {
+.action--bookmark-icon,
+.action--ans-icon {
   margin-right: 0.5rem;
 }
 
+.question__add-comment-container {
+  /* display: none; */
+}
+
 .question__comment-container--question {
+  margin-top: 1rem;
   padding-top: 1em;
   border-top: 1px solid var(--clr-shadow-grey);
 }
 
-.question__post-answer-input {
+.question__post-ans-container {
+  display: none;
+}
+
+.question__post-ans-input {
   min-height: 10rem;
 }
 
-.question__post-answer-btn {
-  margin-top: 1rem;
-  margin-left: auto;
+.post-ans__btn-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.question__answer-num {
+.question__cancel-ans-btn {
+  background-color: #b3b3b3;
+}
+
+.question__add-comment-btn,
+.question__post-ans-btn {
+  margin-left: 1rem;
+}
+
+.question__ans-num {
   margin-bottom: 1.5rem;
   padding: 0.5em 0;
   font-weight: 700;
@@ -75,11 +104,11 @@
   border-bottom: 1px solid var(--clr-shadow-grey);
 }
 
-.question__answer-container {
+.question__ans-container {
   margin-bottom: 2rem;
 }
 
-.question__user--answer {
+.question__user--ans {
   margin-bottom: 0.5rem;
 }
 
@@ -92,12 +121,12 @@
   border-radius: 1em;
 }
 
-.question__answer,
+.question__ans,
 .question__comment-container {
   border-left: 1px solid var(--clr-shadow-grey);
 }
 
-.question__answer {
+.question__ans {
   margin-left: 0.8em;
   padding-left: 0.8em;
 }
@@ -109,4 +138,17 @@
 
 .question__user--comment {
   margin-bottom: 1.5rem;
+}
+
+/* Classes to be added by JS */
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.action-btn-click {
+  color: var(--clr-primary);
 }
