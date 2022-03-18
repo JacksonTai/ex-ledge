@@ -144,7 +144,7 @@ class User extends \config\DbConn
           }
 
           if ($top && $length) {
-               return array_slice($calcResult, $top - 1, $length);
+               return array_slice($calcResult, $top - 1, $length - $top + 1);
           }
 
           return $top ? array_slice($calcResult, 0, $top) : $calcResult;
