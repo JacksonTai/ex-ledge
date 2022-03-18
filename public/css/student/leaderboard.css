@@ -20,6 +20,7 @@
 
 .leaderboard__podium {
   flex-direction: column;
+  min-width: 13.5rem;
   margin: 1rem;
 }
 
@@ -67,6 +68,10 @@
   text-align: center;
 }
 
+.leaderboard__runner-up-field--user {
+  margin-left: 0.6rem;
+}
+
 .leaderboard__field--point {
   grid-column: 3 / 4;
 }
@@ -90,7 +95,8 @@
 .leaderboard__runner-up--img {
   margin: 0 0.6rem;
 }
-
+/* W: 216, H: 206.86 */
+/* W: 226.8, H: 217.2 */
 .leaderboard__runner-up-btn {
   width: fit-content;
   margin-left: auto;
@@ -104,10 +110,17 @@
 
 @media (min-width: 486px) {
   .leaderboard__podium {
-    margin: 1rem 0.87rem;
+    margin: 1rem 0.88rem;
   }
   .leaderboard__podium--1 {
-    font-size: 1.6rem;
+    min-width: 15.12rem;
+    min-height: 14.48rem;
+  }
+}
+
+@media (min-width: 520px) {
+  .leaderboard__podium {
+    margin: 1rem 0.7rem;
   }
 }
 
@@ -123,7 +136,10 @@
   }
 }
 
-@media (min-width: 954px) {
+@media (min-width: 938px) {
+  .leaderboard__podium {
+    margin: 1rem 1.5rem;
+  }
   .leaderboard__podium--2 {
     order: 0;
   }
