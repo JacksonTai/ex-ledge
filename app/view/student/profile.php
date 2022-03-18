@@ -5,6 +5,7 @@ include '../../helper/autoloader.php';
 $path = '../../../';
 
 $user = new Controller\User();
+$questions = new \Controller\Question();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +14,7 @@ $user = new Controller\User();
      <?php include '../../config/head.php' ?>
      <title>Profile | Ex-Ledge</title>
      <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/profile.css">
+     <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/question.css">
 </head>
 
 <body>
@@ -39,7 +41,14 @@ $user = new Controller\User();
                               </div>
                          <?php endif; ?>
                          <div class="profile__banner-header">
-                              <?php $userInfo = $user->read($_SESSION['userId']); ?>
+                              <?php
+                              if (isset($_GET['id'])) {
+                                   $userInfo = $user->read($_GET['id']);
+                              }
+                              if (!isset($_GET['id'])) {
+                                   $userInfo = $user->read($_SESSION['userId']);
+                              }
+                              ?>
                               <img class="profile__img" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
                               <h2 class="profile__username">
                                    <?php echo htmlspecialchars($userInfo['username']); ?>
@@ -100,23 +109,30 @@ $user = new Controller\User();
                          <form class="edit-profile-form" method="POST">
                               <div class="edit-profile-form__item">
                                    <label for="username">Username</label>
+                                   <p class="edit-profile__err-msg--username invalid-input"></p>
                                    <input class="edit-profile__input" type="text" name="username" id="username" placeholder="Enter new username" value="<?php echo htmlspecialchars($userInfo['username']); ?>">
                               </div>
                               <div class="edit-profile-form__item">
                                    <label for="age">Age</label>
-                                   <input class="edit-profile__input" type="text" name="age" id="age" placeholder="Enter new age" value="<?php echo htmlspecialchars($userInfo['age'] ?? ''); ?>">
+                                   <p class="edit-profile__err-msg--age invalid-input"></p>
+                                   <input class="edit-profile__input" type="number" name="age" id="age" placeholder="Enter new age" value="<?php echo htmlspecialchars($userInfo['age'] ?? ''); ?>" min="13" max="100">
                               </div>
                               <div class="edit-profile-form__item">
                                    <label for="gender">Gender</label>
+                                   <p class="edit-profile__err-msg--gender invalid-input"></p>
                                    <select class="edit-profile__input" name="gender" id="gender">
                                         <?php if (!$userInfo['gender']) : ?>
                                              <option selected disabled>Select gender</option>
                                         <?php endif; ?>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+                                        <option value="Male" <?php if (isset($userInfo['gender']) && $userInfo['gender'] == 'Male') {
+                                                                      echo 'selected';
+                                                                 } ?>>Male</option>
+                                        <option value="Female" <?php if (isset($userInfo['gender']) && $userInfo['gender'] == 'Female') {
+                                                                      echo 'selected';
+                                                                 } ?>>Female</option>
                                    </select>
                               </div>
-                              <button class="edit-profile-form__btn">Update</button>
+                              <button class="edit-profile-form__btn" name="updateProfile" type="submit">Update</button>
                          </form>
                     </div>
                </div>
@@ -137,7 +153,7 @@ $user = new Controller\User();
                               <p class="modal__delete--txt">Please enter password to confirm.</p>
                               <input class="modal__delete-account-password" type="password" data-email="
                                    <?php echo htmlspecialchars($userInfo['email']); ?>" autocomplete="off">
-                              <button class="modal__delete-account-btn btn--red modal__delete-account-btn--disabled">Delete Account</button>
+                              <button class="modal__delete-account-btn btn--red modal__delete-account-btn--disabled">Yes, Delete my account.</button>
                          </div>
                     </div>
                </div>
@@ -145,48 +161,91 @@ $user = new Controller\User();
                     <div class="modal modal--verify-account">
                          <header class="modal__header modal__header--verify-account">
                               <button class="modal__close-btn">&#10006;</button>
-                              <h2 class="modal__title">Verify Account</h2>
+                              <?php if ($user->readVerification($_SESSION['userId'])) : ?>
+                                   <h2 class="modal__title">
+                                        We know you have been waiting.
+                                   </h2>
+                              <?php else : ?>
+                                   <h2 class="modal__title">
+                                        Verify Account
+                                   </h2>
+                              <?php endif; ?>
                          </header>
-                         <form class="verify-form" method="POST">
-                              <div class="verify-form__item">
-                                   <label for="fullaName">Full Name (as per IC)</label>
-                                   <input class="verify__input" type="text" name="fullaName" id="fullaName" placeholder="Enter your full name">
-                              </div>
-                              <div class="verify-form__item">
-                                   <label for="NRIC">NRIC Number</label>
-                                   <input class="verify__input" type="text" name="NRIC" id="NRIC" placeholder="Enter your NRIC number">
-                              </div>
-                              <button class="verify-form__btn">Send Request</button>
-                         </form>
+                         <?php if ($user->readVerification($_SESSION['userId'])) : ?>
+                              <img class="verify-img" src="<?php echo $path; ?>public/img/verify.jpg" alt="">
+                              <p class="verify-message">Don't worry, during the waiting period you can still sign in and use your Ex-Ledge account normally.</p>
+                         <?php else : ?>
+                              <form class="verify-form" method="POST">
+                                   <div class="verify-form__item">
+                                        <label for="fullName">Full Name (as per IC)</label>
+                                        <p class="verify-form__err-msg verify-form__err-msg--full-name invalid-input"></p>
+                                        <input class="verify__input" type="text" name="fullName" id="fullName" placeholder="Enter your full name">
+                                   </div>
+                                   <div class="verify-form__item">
+                                        <label for="nric">NRIC Number (with hypens)</label>
+                                        <p class="verify-form__err-msg verify-form__err-msg--nric invalid-input"></p>
+                                        <input class="verify__input" type="text" name="nric" id="nric" placeholder="Enter your NRIC number" maxlength="14">
+                                   </div>
+                                   <button class="verify-form__btn">Send Request</button>
+                              </form>
+                         <?php endif; ?>
                     </div>
                </div>
 
                <!-- Section -->
                <section class="profile-section profile-section--overview profile-section-selected--flex">
                     <div class="profile-section__overview--about dialog">
-                         <h2>About</h2>
-                         <p>
-                              <?php echo htmlspecialchars($userInfo['bio'] ??
-                                   ucfirst($userInfo['username']) . "'s about me section is currently empty.")
+                         <div class="overview--about__header">
+                              <h2 class="overview--about__title">About</h2>
+                              <?php if (!isset($_GET['id'])) : ?>
+                                   <i class="overview--about__edit-btn fa-solid fa-pen-to-square"></i>
+                              <?php endif; ?>
+                         </div>
+                         <p class="overview--about__content" data-user-id="<?php echo htmlspecialchars($userInfo['user_id']); ?>">
+                              <?php
+                              if (!isset($userInfo['bio'])) {
+                                   if (!isset($_GET['id'])) {
+                                        echo 'Your';
+                                   }
+                                   if (isset($_GET['id'])) {
+                                        echo htmlspecialchars(ucfirst($userInfo['username']) . "'s");
+                                   }
+                                   echo ' about me section is currently empty.';
+                              }
+                              if (isset($userInfo['bio'])) {
+                                   echo htmlspecialchars($userInfo['bio']);
+                              }
                               ?>
                          </p>
+                         <textarea class="overview--about__bio-input" name="bio" placeholder="You can write about your sports or hobbies. People also talk about their favourite subjects to study."><?php echo htmlspecialchars($userInfo['bio'] ?? ''); ?></textarea>
+                         <div class="overview--about__bio-btn-container">
+                              <button class="overview--about__bio-cancel-btn">Cancel</button>
+                              <button class="overview--about__bio-confirm-btn">Confirm</button>
+                         </div>
                     </div>
                     <div class="profile-section__overview--stats dialog">
-                         <h2>Stats</h2>
-                         <p class="profile__content-label">
-                              <span>Reputation Point: </span>
+                         <h2 class="overview--stats__title">Stats</h2>
+                         <p class="profile__content">
+                              <span class="profile__content-label">Reputation Point: </span>
+                              <?php echo htmlspecialchars($userInfo['point']); ?>
                          </p>
-                         <p class="profile__content-label">
-                              <span>Questions: </span>
+                         <p class="profile__content">
+                              <span class="profile__content-label">Answer provided: </span>
                          </p>
-                         <p class="profile__content-label">
-                              <span>Answers: </span>
+                         <p class="profile__content">
+                              <span class="profile__content-label">Question asked: </span>
+                              <?php echo htmlspecialchars($questions->questionCount($_SESSION['userId'])); ?>
                          </p>
                     </div>
                </section>
 
                <section class="profile-section profile-section--question">
-
+                    <?php
+                    isset($_GET['id']) ? $userId = $_GET['id'] : $userId = $_SESSION['userId'];
+                    foreach ($questions->read($userId) as $question) {
+                         include '../layout/question.php';
+                    }
+                    ?>
                </section>
 
                <section class="profile-section profile-section--answer">

@@ -27,11 +27,11 @@ class Signup extends \config\DbConn
 
           if (array_filter($this->errMsg)) {
                return $this->errMsg;
-          } else {
-               $userId = $this->createUser();
-               session_start();
-               $_SESSION['userId'] = $userId;
           }
+
+          $userId = $this->createUser();
+          session_start();
+          $_SESSION['userId'] = $userId;
      }
 
      private function createUser()
