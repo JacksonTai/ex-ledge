@@ -12,7 +12,7 @@
           </h3>
      </div>
      <div class="layout__question-body">
-          <a href="question.php?id=<?php echo htmlspecialchars($question['user_id']); ?>">
+          <a href="question.php?id=<?php echo htmlspecialchars($question['question_id']); ?>">
                <p class="layout__question-content"><?php echo htmlspecialchars($question['content']); ?></p>
                <p class="layout__question-tag"><?php echo htmlspecialchars($question['tag']); ?></p>
           </a>

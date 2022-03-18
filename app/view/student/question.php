@@ -3,6 +3,12 @@ session_start();
 require '../../helper/redirector.php';
 include '../../helper/autoloader.php';
 $path = '../../../';
+
+$question = new \Controller\Question();
+if (isset($_GET['id'])) {
+     $questionInfo = $question->read($_GET['id'])[0];
+     $timestamp = $question->get_time($questionInfo['time_posted']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,32 +29,23 @@ $path = '../../../';
           <?php include '../layout/sideNavbar.php' ?>
 
           <main class="question--main main-content">
-               <h2 class="question__title main-title">What would you do when u okay so he said yes would go?</h2>
+               <h2 class="question__title main-title"><?php echo htmlspecialchars($questionInfo['title']); ?></h2>
                <div class="question__user">
                     <img class="question__user-profile-img" src="../../../public/img/profile1.jpg" alt="Profile Image">
                     <div class="question__user-info">
-                         <h3>Username</h3>
-                         <p>3 days ago</p>
+                         <h3><?php echo htmlspecialchars($questionInfo['username']); ?></h3>
+                         <p><?php echo htmlspecialchars($timestamp); ?></p>
                     </div>
                </div>
                <p class="question__content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo Lorem ipsum
-                    dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo Lorem ipsum
-                    dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    <?php echo htmlspecialchars($questionInfo['content']); ?>
                </p>
                <div class="question__action-container">
                     <div class="question__action question__action--vote">
                          <i class="fa-solid fa-arrow-up fa-lg"></i>
-                         <p class="question__point">1</p>
+                         <p class="question__point">
+                              <?php echo htmlspecialchars($questionInfo['point']); ?>
+                         </p>
                          <i class="fa-solid fa-arrow-down fa-lg"></i>
                     </div>
                     <div class="question__action question__action--comment">
@@ -81,7 +78,7 @@ $path = '../../../';
                     </div>
                </div>
                <div class="question__post-answer-container">
-                    <textarea class="question__post-answer-input" placeholder="Type here to answer 'username' ..."></textarea>
+                    <textarea class="question__post-answer-input" placeholder="Type here to answer <?php echo htmlspecialchars($questionInfo['username']); ?> ..."></textarea>
                     <button class="question__post-answer-btn">Post Answer</button>
                     <p class="question__answer-num">2 Answers</p>
                </div>
