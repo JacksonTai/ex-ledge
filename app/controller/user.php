@@ -36,6 +36,11 @@ class User extends \Model\User
           return $this->searchUser($searchTerm);
      }
 
+     public function readMessagedUser($receiverId = null)
+     {
+          return $this->getMessagedUser($receiverId);
+     }
+
      public function update($postData)
      {
           return $this->updateUser($postData);
@@ -47,16 +52,24 @@ class User extends \Model\User
      }
 }
 
-if (isset($_POST['fullName'], $_POST['nric'])) {
-     $user = new \Controller\User($_SESSION['userId']);
-     echo json_encode($user->verify($_POST));
-     // print_r($user->verify($_POST));
-}
 
 if (isset($_GET['userId'])) {
      $user = new \Controller\User();
-     $result = $user->read($_GET['userId']);
-     echo json_encode($result);
+     echo json_encode($user->read($_GET['userId']));
+}
+
+if (isset($_GET['searchTerm'])) {
+     $user = new \Controller\User($_SESSION['userId']);
+     echo json_encode($user->search($_GET['searchTerm']));
+}
+
+if (isset($_GET['senderId'])) {
+     $user = new \Controller\User($_GET['senderId']);
+     if (isset($_GET['receiverId'])) {
+          echo json_encode($user->readMessagedUser($_GET['receiverId']));
+          exit();
+     }
+     echo json_encode($user->readMessagedUser());
 }
 
 if (isset($_GET['searchTerm'])) {
