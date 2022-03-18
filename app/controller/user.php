@@ -16,14 +16,30 @@ class User extends \Model\User
           $userId ? parent::__construct($userId) : '';
      }
 
+     /* ######### CREATE ######### */
      public function verify($postData)
      {
           return $this->verifyUser($postData);
      }
 
+     /* ######### READ ######### */
      public function read($userId = null)
      {
           return $this->getUser($userId);
+     }
+
+     /**
+      * This function helps to read the users' rank.
+      * @param integer $top [optional]
+      *  - Gets specified top user.  
+      *  Example: getUserRank(5) will return top 5 user.
+      * @param integer $length [optional]
+      *  - Gets specified top user range.
+      *  Example: getUserRank(4, 10) will return top 4 until 10 user.
+      */
+     public function readRank($top = null, $length = null)
+     {
+          return $this->getUserRank($top, $length);
      }
 
      public function readVerification($userId = null)
@@ -36,6 +52,7 @@ class User extends \Model\User
           return $this->searchUser($searchTerm);
      }
 
+     /* ######### UPDATE ######### */
      public function readMessagedUser($receiverId = null)
      {
           return $this->getMessagedUser($receiverId);
@@ -46,17 +63,20 @@ class User extends \Model\User
           return $this->updateUser($postData);
      }
 
+     /* ######### DELETE ######### */
      public function delete($userId)
      {
           $this->deleteUser($userId);
      }
 }
 
+/* ######### CREATE ######### */
 if (isset($_POST['fullName'], $_POST['nric'])) {
      $user = new \Controller\User($_SESSION['userId']);
      echo json_encode($user->verify($_POST));
 }
 
+/* ######### READ ######### */
 if (isset($_GET['userId'])) {
      $user = new \Controller\User();
      echo json_encode($user->read($_GET['userId']));
@@ -67,15 +87,7 @@ if (isset($_GET['searchTerm'])) {
      echo json_encode($user->search($_GET['searchTerm']));
 }
 
-if (isset($_GET['senderId'])) {
-     $user = new \Controller\User($_GET['senderId']);
-     if (isset($_GET['receiverId'])) {
-          echo json_encode($user->readMessagedUser($_GET['receiverId']));
-          exit();
-     }
-     echo json_encode($user->readMessagedUser());
-}
-
+/* ######### UPDATE ######### */
 if (isset($_POST['username'])) {
      $user = new \Controller\User($_SESSION['userId']);
      echo json_encode($user->update($_POST));
@@ -86,6 +98,7 @@ if (isset($_GET['bio'])) {
      $user->update($_GET);
 }
 
+/* ######### DELETE ######### */
 if (isset($_GET['deleteId'])) {
      $user = new \Controller\User();
      $user->delete($_GET['deleteId']);
