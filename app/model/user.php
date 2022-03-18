@@ -13,6 +13,7 @@ class User extends \config\DbConn
           $this->userId = $userId;
      }
 
+     /* ######### CREATE ######### */
      protected function verifyUser($postData)
      {
           // Trim all item in postData array.
@@ -54,6 +55,7 @@ class User extends \config\DbConn
           $this->executeQuery($sql, [$postData['nric'], $this->userId, $postData['fullName']]);
      }
 
+     /* ######### READ ######### */
      protected function getVerification($userId = null)
      {
           // Query for selecting specific user verification info.
@@ -120,6 +122,34 @@ class User extends \config\DbConn
           }
      }
 
+     protected function getUserRank($top, $length)
+     {
+          $sql = "SELECT * FROM user
+                  WHERE `user_id` LIKE ?
+                  ORDER BY `point` DESC;";
+          $stmt = $this->executeQuery($sql, ['U%']);
+          $results = $stmt->fetchAll();
+
+          // Store the result that has shortened username. 
+          $calcResult = [];
+
+          // Shorten username that is longer than 8.
+          foreach ($results as $result) {
+               $calcUsername = $result['username'];
+
+               strlen($calcUsername) > 8 ? $calcUsername = substr($calcUsername, 0, 8) . '...' : null;
+
+               $result['username'] = $calcUsername;
+               array_push($calcResult, $result);
+          }
+
+          if ($top && $length) {
+               return array_slice($calcResult, $top - 1, $length);
+          }
+
+          return $top ? array_slice($calcResult, 0, $top) : $calcResult;
+     }
+
      protected function searchUser($searchTerm)
      {
           $sql = "SELECT * FROM user
@@ -134,6 +164,7 @@ class User extends \config\DbConn
           return $userList;
      }
 
+     /* ######### UPDATE ######### */
      protected function updateUser($postData)
      {
           $userData = $this->getUser($this->userId);
@@ -220,36 +251,10 @@ class User extends \config\DbConn
           ]);
      }
 
+     /* ######### DELETE ######### */
      protected function deleteUser($userId)
      {
-          $sql = "DELETE FROM user WHERE `user_id` = ?";
+          $sql = "DELETE FROM user WHERE `user_id` = ?;";
           $this->executeQuery($sql, [$userId]);
      }
-
-     protected function topThree()
-     {
-          // Printing users from rank 1 to 3.
-          $sql = "SELECT * FROM user
-                  WHERE `user_id` LIKE ?
-                  ORDER BY point DESC
-                  LIMIT 3";
-
-          $stmt = $this->executeQuery($sql, ['U%']);
-          $topThreeUsers = $stmt->fetchAll();
-          return $topThreeUsers;
-     }
-
-     protected function topTen()
-     {    
-          // Printing users from rank 4 to 10.
-          $sql = "SELECT * FROM user
-                  WHERE `user_id` LIKE ?
-                  ORDER BY point DESC
-                  LIMIT 3, 7";
-
-          $stmt = $this->executeQuery($sql, ['U%']);
-          $topTenUsers = $stmt->fetchAll();
-          return $topTenUsers;
-     }
-
 }
