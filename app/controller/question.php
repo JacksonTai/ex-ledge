@@ -7,11 +7,14 @@ if (!empty($_GET) || !empty($_POST)) {
         include '../../helper/autoloader.php';
     } else {
         include '../helper/autoloader.php';
+<<<<<<< HEAD
     }
 
     public function read()
     {
         return $this->getQuestion();
+=======
+>>>>>>> 3e0579af6723b829f2708b77c00cb1713f4d1103
     }
 }
 
