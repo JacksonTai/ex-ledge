@@ -12,7 +12,7 @@
           </h3>
      </div>
      <div class="layout__question-body">
-          <a href="question.php?id=<?php echo htmlspecialchars($question['user_id']); ?>">
+          <a href="../student/question.php?id=<?php echo htmlspecialchars($question['user_id']); ?>">
                <p class="layout__question-content"><?php echo htmlspecialchars($question['content']); ?></p>
                <p class="layout__question-tag"><?php echo htmlspecialchars($question['tag']); ?></p>
           </a>
@@ -22,7 +22,7 @@
                <img class="layout__question-profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
                <p class="layout__question-post-info">
                     <span class="layout__question-posted-by">Posted by</span>
-                    <a class="layout__question-username" href="profile.php?id=<?php echo htmlspecialchars($question['user_id']); ?>"><?php echo htmlspecialchars($question['username']); ?></a>
+                    <a class="layout__question-username" href="../student/profile.php?id=<?php echo htmlspecialchars($question['user_id']); ?>"><?php echo htmlspecialchars($question['username']); ?></a>
                     <span class="layout__question-posted-time"><?php echo htmlspecialchars($timestamp); ?></span>
                </p>
           </div>
