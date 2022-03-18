@@ -109,10 +109,16 @@
 
 @media (min-width: 486px) {
   .leaderboard__podium {
-    margin: 1rem 0.87rem;
+    margin: 1rem 0.88rem;
   }
   .leaderboard__podium--1 {
     font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 520px) {
+  .leaderboard__podium {
+    margin: 1rem 0.7rem;
   }
 }
 
@@ -128,7 +134,10 @@
   }
 }
 
-@media (min-width: 958px) {
+@media (min-width: 960px) {
+  .leaderboard__podium {
+    margin: 1rem 1.5rem;
+  }
   .leaderboard__podium--2 {
     order: 0;
   }
