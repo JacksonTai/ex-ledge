@@ -2,7 +2,7 @@
 
 namespace Model;
 
-include '../helper/autoloader.php';
+use PDOException;
 
 class Question extends \config\DbConn
 {
@@ -33,7 +33,7 @@ class Question extends \config\DbConn
         session_start();
         $questionId = uniqid('Q');
         $sql = "INSERT INTO question
-                VALUES (?, ?, ?, ?, ?, ?);";
+                VALUES (?, ?, ?, ?, ?, ?, NOW());";
 
         $this->executeQuery($sql, [
             $questionId,
@@ -54,5 +54,82 @@ class Question extends \config\DbConn
                 $this->errMsg[$field] = '* ' . ucfirst($field) . ' is a required field';
             }
         }
+    }
+
+    protected function getQuestion($criteria)
+    {
+        if ($criteria) {
+            // Query for selecting questions of specific user.
+            if ($criteria[0] == 'U') {
+                try {
+                    $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                INNER JOIN user u ON
+                                q.user_id = u.user_id
+                                WHERE q.user_id = ?;";
+                    $stmt = $this->executeQuery($sql, [$criteria]);
+                    return  $stmt->fetchAll();
+                } catch (PDOException $e) {
+                    die('Error: ' . $e->getMessage());
+                }
+            }
+        }
+
+        // Default query for selecting all questions.
+        try {
+            $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                    INNER JOIN user u ON
+                    q.user_id = u.user_id
+                    ORDER BY time_posted DESC;";
+            $stmt = $this->executeQuery($sql);
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            die('Error: ' . $e->getMessage());
+        }
+    }
+
+    protected function getQuestionCount($userId)
+    {
+        $sql = "SELECT COUNT(question_id) FROM question
+                   WHERE `user_id` = ?";
+        $stmt = $this->executeQuery($sql, [$userId]);
+        $result = $stmt->fetch();
+        return $result['COUNT(question_id)'];
+    }
+
+    protected function timestamp($datetime)
+    {
+        date_default_timezone_set("Asia/Singapore"); // Setting timezone (From E Heng: For some reason, my php does not follow my computer's time, so I set a timezone for it to work)
+        $datetime_now = new \DateTime; // Get current datetime in datetime format
+        $previous_datetime = new \DateTime($datetime); // Convert $datetime(which is extracted from MySQL database, to a datetime format)
+        $diff = $datetime_now->diff($previous_datetime); // Get difference between the current datetime and the previous datetime
+
+        $diff->w = floor($diff->d / 7); // To get the amount of weeks, floor the days from $diff by 7. Floor() works like round off.
+        $diff->d -= $diff->w * 7;
+
+        $string = array( //
+            'y' => 'year',
+            'm' => 'month',
+            'w' => 'week',
+            'd' => 'day',
+            'h' => 'hour',
+            'i' => 'minute',
+            's' => 'second',
+        );
+
+        // Setting up the sentence to display (Example: 2 weeks 2 days 2 minutes 3 seconds)
+        // $k is key value. For example, using the array above, $k = y,m,w,...
+        // $v is the value within the key value. For example, the $v of y in the array above equals to year.
+        foreach ($string as $k => &$v) {
+            if ($diff->$k) { // E Heng: Let me know if u dont understand this part, I will try my best to explain
+                $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+            } else {
+                unset($string[$k]);
+            }
+        }
+
+        // Slice the string to return 1 element starting from the 0th index (Example: If the sentence formed in the array was 2 days 2 minutes 3 seconds, it will just return 2 days)
+        $string = array_slice($string, 0, 1);
+        // Join the array elements with 'ago', If no array elements to be imploded, return the string 'just now'.
+        return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
 }

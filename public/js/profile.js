@@ -38,6 +38,55 @@ function switchSection(section) {
     .classList.add(showSection);
 }
 
+/* -- Overview section -- */
+let aboutMeEditBtn = document.querySelector(".overview--about__edit-btn");
+let aboutMeContent = document.querySelector(".overview--about__content");
+let aboutMeInput = document.querySelector(".overview--about__bio-input");
+let aboutMeBtnContainer = document.querySelector(
+  ".overview--about__bio-btn-container"
+);
+let aboutMeCancelBtn = document.querySelector(
+  ".overview--about__bio-cancel-btn"
+);
+let aboutMeConfirmBtn = document.querySelector(
+  ".overview--about__bio-confirm-btn"
+);
+
+aboutMeEditBtn.addEventListener("click", () => {
+  aboutMeContent.style.display = "none";
+  aboutMeEditBtn.style.display = "none";
+  aboutMeInput.style.display = "block";
+  aboutMeBtnContainer.style.display = "flex";
+});
+
+aboutMeCancelBtn.addEventListener("click", hideEditField);
+aboutMeConfirmBtn.addEventListener("click", async function () {
+  try {
+    await fetch(`../../controller/user.php?bio=${aboutMeInput.value.trim()}`);
+
+    let res = await fetch(
+      `../../controller/user.php?userId=${aboutMeContent.dataset.userId}`
+    );
+    let data = await res.json();
+
+    if (data.bio) {
+      aboutMeContent.textContent = data.bio;
+    } else {
+      aboutMeContent.textContent = "Your about me section is currently empty.";
+    }
+    hideEditField();
+  } catch (e) {
+    console.log("Error: ", e);
+  }
+});
+
+function hideEditField() {
+  aboutMeContent.style.display = "block";
+  aboutMeEditBtn.style.display = "block";
+  aboutMeInput.style.display = "none";
+  aboutMeBtnContainer.style.display = "none";
+}
+
 /* -- Modal opening and closing -- */
 let editProfileBtn = document.querySelector(".profile__edit-btn");
 let deleteAccountBtn = document.querySelector(".profile__delete-btn");
@@ -88,12 +137,88 @@ function closeModal() {
   window.location.href = "profile.php";
 }
 
+/* -- Verify account modal -- */
+let verifyAccountForm = document.querySelector(".verify-form");
+if (verifyAccountForm) {
+  verifyAccountForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    try {
+      let res = await fetch("../../controller/user.php", {
+        method: "POST",
+        body: formData,
+      });
+      let errMsg = await res.json();
+      // Redirect to profile page again once there is no error messages.
+      if (!errMsg) {
+        window.location.href = "profile.php";
+      } else {
+        let usernameErrMsg = document.querySelector(
+          ".verify-form__err-msg--full-name"
+        );
+        let ageErrMsg = document.querySelector(".verify-form__err-msg--nric");
+        usernameErrMsg.textContent = decodeEntity(errMsg.fullName);
+        ageErrMsg.textContent = decodeEntity(errMsg.nric);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  });
+}
+
+/* -- Edit profile modal -- */
+let editProfileForm = document.querySelector(".edit-profile-form");
+editProfileForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  let formData = new FormData(this);
+
+  try {
+    let res = await fetch("../../controller/user.php", {
+      method: "POST",
+      body: formData,
+    });
+    let errMsg = await res.json();
+
+    // Redirect to profile page again once there is no error messages.
+    if (!errMsg) {
+      window.location.href = "profile.php";
+    } else {
+      // Destruct the errMsg object.
+      let { username, age, gender } = errMsg;
+      let usernameErrMsg = document.querySelector(
+        ".edit-profile__err-msg--username"
+      );
+      let ageErrMsg = document.querySelector(".edit-profile__err-msg--age");
+      let genderErrMsg = document.querySelector(
+        ".edit-profile__err-msg--gender"
+      );
+      usernameErrMsg.textContent = decodeEntity(username);
+      ageErrMsg.textContent = decodeEntity(age);
+      genderErrMsg.textContent = decodeEntity(gender);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+// Decode HTML entity code to use in JavaScript.
+const decodeEntity = function (entityCode) {
+  let textarea = document.createElement("textarea");
+  textarea.innerHTML = entityCode;
+  return textarea.value;
+};
+
 /* -- Delete account modal -- */
 let deleteAccountPassword = document.querySelector(
   ".modal__delete-account-password"
 );
 let deletAccountbtn = document.querySelector(".modal__delete-account-btn");
+let validPassword = false;
 
+// Check if password is correct in real time.
 deleteAccountPassword.addEventListener("input", async function () {
   deletAccountbtn.classList.add("modal__delete-account-btn--disabled");
   try {
@@ -103,8 +228,23 @@ deleteAccountPassword.addEventListener("input", async function () {
     );
     if (await res.json()) {
       deletAccountbtn.classList.remove("modal__delete-account-btn--disabled");
+      validPassword = true;
     }
   } catch (e) {
     console.log(e);
+  }
+});
+
+// Delete account process.
+deletAccountbtn.addEventListener("click", async function () {
+  if (validPassword) {
+    try {
+      await fetch(
+        `../../controller/user.php?deleteId=${aboutMeContent.dataset.userId}`
+      );
+      window.location = "../../helper/logout.php";
+    } catch (e) {
+      window.location = "profile.php";
+    }
   }
 });
