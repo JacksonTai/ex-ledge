@@ -32,7 +32,7 @@ $user = new Controller\User();
                          <?php $userList = $user->read(); ?>
                          <?php foreach ($userList as $user) : ?>
                               <div class="user_box" id="<?php echo htmlspecialchars($user['user_id']) ?>" data-user-id=<?php echo htmlspecialchars($user['user_id']) ?>>
-                                   <a class="user_info" href="profile.php?id=#">
+                                   <a class="user_info" href="profile.php?id=<?php echo htmlspecialchars($user['user_id']); ?>">
                                         <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="user_img">
                                         <div class="user_info-detail">    
                                              <p class="user_name"><?php echo htmlspecialchars($user['username']) ?></p>
