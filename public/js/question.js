@@ -1,16 +1,17 @@
 /* -- Opening and closing of Add comment container -- */
-// let questionCommentContainer = document.querySelector(
-//   ".question__comment-container--question"
-// );
+let questionCommentContainer = document.querySelector(
+  ".question__comment-container--question"
+);
 
 // questionCommentContainer.addEventListener("click", () => {
 //   console.log(questionCommentContainer);
 // });
 
-// let commentActions = document.querySelectorAll(".question__action--comment");
-// for (let commentAction of commentActions) {
+let commentActions = document.querySelectorAll(".question__action--comment");
+for (let commentAction of commentActions) {
+  console.log(commentAction);
+}
 
-// }
 /* -- Opening and closing of post answer container -- */
 let postAnsContainer = document.querySelector(".question__post-ans-container");
 
@@ -26,5 +27,3 @@ function toggleAnsContainer() {
   ansAction.classList.toggle("action-btn-click");
   postAnsContainer.classList.toggle("show");
 }
-
-postAnsBtn.addEventListener('click', )

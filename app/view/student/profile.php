@@ -6,6 +6,7 @@ $path = '../../../';
 
 $user = new Controller\User();
 $questions = new \Controller\Question();
+$answer = new \Controller\Answer();  
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -8,6 +8,14 @@ class Answer extends \Model\Answer
      {
           $postData ? parent::__construct($postData) : '';
      }
-}
 
-!empty($_POST) ? new \Controller\Answer($_POST) : null;
+     public function read($criteria = null)
+     {
+          return $this->readAnswer($criteria);
+     }
+
+     public function answerCount($criteria)
+     {
+          return $this->getAnswerCount($criteria);
+     }
+}

@@ -15,8 +15,8 @@ class Answer extends \config\DbConn
      {
           if (!empty($postData)) {
                $this->postData = $postData;
-               $this->createAnswer();
-               header("location:../student/question.php?id=" . $postData['questionId']);
+               $answerId = $this->createAnswer();
+               header("location:../student/question.php?id=" . $postData['questionId'] . '#ans-' . $answerId);
           }
      }
 
@@ -32,5 +32,28 @@ class Answer extends \config\DbConn
                $this->postData['userId'],
                $this->postData['ansContent']
           ]);
+
+          return $answerId;
+     }
+
+     protected function readAnswer($criteria)
+     {
+          if ($criteria && $criteria[0] == 'Q') {
+               $sql = "SELECT * FROM answer a
+                         WHERE question_id = ?;";
+               $stmt = $this->executeQuery($sql, [$criteria]);
+               return $stmt->fetchAll();
+          }
+     }
+
+     protected function getAnswerCount($criteria)
+     {
+          if ($criteria && $criteria[0] == 'Q') {
+               $sql = "SELECT COUNT(answer_id) FROM answer a
+                         WHERE question_id = ?;";
+               $stmt = $this->executeQuery($sql, [$criteria]);
+               $result = $stmt->fetch();
+               return $result['COUNT(answer_id)'];
+          }
      }
 }
