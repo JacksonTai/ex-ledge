@@ -26,11 +26,14 @@ $user = new Controller\User();
           <main class="user-verification--main main-content">
                <h2 class="user-verification__title main-title">User Verification</h2>
 
-               <?php $userVerif = $user->readVerification(); ?>
+               <?php 
+               $userVerif = $user->readVerification(); 
+               $verifNo = 1;
+               ?>
                <?php foreach ($userVerif as $user) : ?>
                     <div class="user-verification-wrapper" id="<?php echo htmlspecialchars($user['user_id']) ?>" data-user-id=<?php echo htmlspecialchars($user['user_id']) ?>>
                          <div class="user-verification dialog">
-                              <h3 class="user-verification--no">1</h3>
+                              <h3 class="user-verification--no"><?php echo $verifNo++; ?></h3>
                               <div class="user-verification-content-container">
                                    <img class="user-verification--img profile-icon" src="../../../public/img/profile1.jpg" alt="">
                                    <div class="user-verification-content">
@@ -44,10 +47,12 @@ $user = new Controller\User();
                                         </p>
                                    </div>
                               </div>
-                              <div class="user-verification-btn-container">
-                                   <button class="user-verification-btn user-verification-btn--accept" type="submit" name="acceptVerif">Accept</button>
-                                   <button class="user-verification-btn user-verification-btn--reject">Reject</button>
-                              </div>
+                              <form action="" method="POST">
+                                   <div class="user-verification-btn-container">
+                                        <button class="user-verification-btn user-verification-btn--accept" type="accept" name="acceptVerif">Accept</button>
+                                        <button class="user-verification-btn user-verification-btn--reject" type="reject">Reject</button>
+                                   </div>
+                              </form>
                          </div>
                     </div>
                <?php endforeach; ?>
@@ -62,3 +67,19 @@ $user = new Controller\User();
 </body>
 
 </html>
+
+<?php
+
+// if(isset($_POST['accept'])) { 
+
+//      $book_name = $_POST['book_name'];
+//      $book_price = $_POST['book_price'];
+//      $book_format = $_POST['book_format'];
+//      $book_author = $_POST['book_author'];
+//      $book_quantity = $_POST['book_quantity'];
+//      $book_category = $_POST['book_category'];
+
+//      $result = mysqli_query($conn, "UPDATE user SET verification='1'");
+// }
+
+?>
