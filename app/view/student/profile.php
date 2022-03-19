@@ -6,7 +6,7 @@ $path = '../../../';
 
 $user = new Controller\User();
 $questions = new \Controller\Question();
-$answer = new \Controller\Answer();  
+$answer = new \Controller\Answer();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -178,12 +178,18 @@ $answer = new \Controller\Answer();
                          <?php else : ?>
                               <form class="verify-form" method="POST">
                                    <div class="verify-form__item">
-                                        <label for="fullName">Full Name (as per IC)</label>
+                                        <label for="fullName">
+                                             <i class="fa-solid fa-user-tie"></i>
+                                             Full Name (as per IC)
+                                        </label>
                                         <p class="verify-form__err-msg verify-form__err-msg--full-name invalid-input"></p>
                                         <input class="verify__input" type="text" name="fullName" id="fullName" placeholder="Enter your full name">
                                    </div>
                                    <div class="verify-form__item">
-                                        <label for="nric">NRIC Number (with hypens)</label>
+                                        <label for="nric">
+                                             <i class="fa-solid fa-id-card"></i>
+                                             NRIC Number (with hypens)
+                                        </label>
                                         <p class="verify-form__err-msg verify-form__err-msg--nric invalid-input"></p>
                                         <input class="verify__input" type="text" name="nric" id="nric" placeholder="Enter your NRIC number" maxlength="14">
                                    </div>

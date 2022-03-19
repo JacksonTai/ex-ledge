@@ -17,7 +17,6 @@
 .layout__question-body,
 .layout__question-footer {
   grid-column: 2 / -1;
-  max-width: 100%;
 }
 
 .layout__question-point {

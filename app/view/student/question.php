@@ -94,29 +94,34 @@ $user = new \Controller\User();
                     <?php endif; ?>
                </div>
 
-               <!-- Add comment for question -->
-               <div class="question__add-comment-container" data-comment-id="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
-                    <textarea class="question__add-comment-input" placeholder="Add a comment ..."></textarea>
-                    <div class="add-comment__btn-container" data-reply-id="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
-                         <button class=" question__cancel-comment-btn" type="button">Cancel</button>
-                         <button class="question__add-comment-btn">Add comment</button>
-                    </div>
-               </div>
-
                <!-- Post answer for question -->
                <?php if ($_SESSION['userId'] != $questionInfo['user_id']) : ?>
-                    <div class="question__post-ans-container">
-                         <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="POST">
-                              <textarea class="question__post-ans-input" name="ansContent" placeholder="Type here to answer <?php echo htmlspecialchars($questionInfo['username']); ?> ..."></textarea>
-                              <input type="hidden" name="userId" value="<?php echo htmlspecialchars($_SESSION['userId']); ?>">
-                              <input type="hidden" name="questionId" value="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
-                              <div class="post-ans__btn-container">
-                                   <button class="question__cancel-ans-btn" type="button">Cancel</button>
-                                   <button class="question__post-ans-btn" name="postAns" type="submit">Post Answer</button>
-                              </div>
-                         </form>
-                    </div>
+                    <form class="question__post-ans-form" action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="POST">
+                         <textarea class="question__post-ans-input" name="ansContent" placeholder="Type here to answer <?php echo htmlspecialchars($questionInfo['username']); ?> ..."></textarea>
+                         <input type="hidden" name="userId" value="<?php echo htmlspecialchars($_SESSION['userId']); ?>">
+                         <input type="hidden" name="questionId" value="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
+                         <div class="post-ans__btn-container">
+                              <button class="question__cancel-ans-btn" type="button">Cancel</button>
+                              <button class="question__post-ans-btn" name="postAns" type="submit">Post Answer</button>
+                         </div>
+                    </form>
                <?php endif; ?>
+
+               <!-- Comments of the question -->
+               <div class="question__comment-container--question">
+
+               </div>
+
+               <!-- Add comment for question -->
+               <form class="question__add-comment-form" data-comment-id="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
+                    <textarea class="question__add-comment-input" name="content" placeholder="Add a comment ..."></textarea>
+                    <input type="hidden" name="userId" value="<?php echo htmlspecialchars($_SESSION['userId']); ?>">
+                    <input type="hidden" name="replyId" value="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
+                    <div class="add-comment__btn-container" data-reply-id="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
+                         <button class=" question__cancel-comment-btn" type="button">Cancel</button>
+                         <button class="question__add-comment-btn" name="addComment" type="submit">Add comment</button>
+                    </div>
+               </form>
 
                <!-- Answer number -->
                <p class="question__ans-num">
@@ -174,36 +179,22 @@ $user = new \Controller\User();
                               </div>
                          </div>
 
-                         <!-- Add comment for answer -->
-                         <div class="question__add-comment-container" data-comment-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
-                              <textarea class="question__add-comment-input" placeholder="Add a comment ..."></textarea>
-                              <div class="add-comment__btn-container" data-reply-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
-                                   <button class="question__cancel-comment-btn" type="button">Cancel</button>
-                                   <button class="question__add-comment-btn">Add comment</button>
-                              </div>
+                         <!-- Comments of the answer -->
+                         <div class="question__comment-container--ans" data-ans-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
+
                          </div>
 
-                         <!-- Comments of the answer -->
-                         <div class="question__comment-container">
-                              <!-- <div class="question__user question__user--comment">
-                                   <img class="profile-icon" src="../../../public/img/profile1.jpg" alt="Profile Image">
-                                   <div class="question__user-info">
-                                        <h4>Username</h4>
-                                        <p class="question__comment">
-                                             I had a second degree stroke trying to read your answer
-                                        </p>
-                                   </div>
+                         <!-- Add comment for answer -->
+                         <form class="question__add-comment-form" data-comment-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
+                              <textarea class="question__add-comment-input" name="content" placeholder="Add a comment ..."></textarea>
+                              <input type="hidden" name="userId" value="<?php echo htmlspecialchars($_SESSION['userId']); ?>">
+                              <input type="hidden" name="replyId" value="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
+                              <div class="add-comment__btn-container" data-reply-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
+                                   <button class="question__cancel-comment-btn" type="button">Cancel</button>
+                                   <button class="question__add-comment-btn" name="addComment" type="submit">Add comment</button>
                               </div>
-                              <div class="question__user question__user--comment">
-                                   <img class="profile-icon" src="../../../public/img/profile1.jpg" alt="Profile Image">
-                                   <div class="question__user-info">
-                                        <h4>Username</h4>
-                                        <p class="question__comment">
-                                             I had a second degree stroke trying to read your answer
-                                        </p>
-                                   </div>
-                              </div> -->
-                         </div>
+                         </form>
+
                     </div>
 
                <?php endforeach; ?>

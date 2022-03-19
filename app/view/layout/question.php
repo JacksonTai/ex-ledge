@@ -20,12 +20,12 @@
                <?php echo htmlspecialchars($question['title']); ?>
           </h3>
      </div>
-     <div class="layout__question-body">
-          <a href="question.php?id=<?php echo htmlspecialchars($question['question_id']); ?>">
+     
+          <a  class="layout__question-body" href="question.php?id=<?php echo htmlspecialchars($question['question_id']); ?>">
                <p class="layout__question-content"><?php echo htmlspecialchars($question['content']); ?></p>
                <p class="layout__question-tag"><?php echo htmlspecialchars($question['tag']); ?></p>
           </a>
-     </div>
+     
      <div class="layout__question-footer">
           <div class="layout__question-poster">
                <img class="layout__question-profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
