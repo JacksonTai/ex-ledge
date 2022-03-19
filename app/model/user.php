@@ -22,7 +22,7 @@ class User extends \config\DbConn
           $errMsg = ['fullName' => '', 'nric' => ''];
 
           // Validate full name.
-          if (!ctype_alpha(str_replace(' ', '', $postData['fullName']))) {
+          if (!ctype_alpha(str_replace(' ', '',$postData['fullName'])) or count(explode(" ", $postData['fullName']))>2) {
                $errMsg['fullName'] = '&#9888; Invalid Full name.';
           }
 
