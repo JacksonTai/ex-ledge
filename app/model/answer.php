@@ -16,7 +16,7 @@ class Answer extends \config\DbConn
           if (!empty($postData)) {
                $this->postData = $postData;
                $answerId = $this->createAnswer();
-               header("location:../student/question.php?id=" . $postData['questionId'] . '#ans-' . $answerId);
+               header("location:../student/question.php?id=" . $postData['questionId'] . '#' . $answerId);
           }
      }
 

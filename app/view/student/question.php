@@ -4,14 +4,9 @@ require '../../helper/redirector.php';
 include '../../helper/autoloader.php';
 $path = '../../../';
 
-!empty($_POST) ? new \Controller\Answer($_POST) : null;
-
 $question = new \Controller\Question();
-if (isset($_GET['id'])) {
-     $questionInfo = $question->read($_GET['id'])[0];
-     $timestamp = $question->get_time($questionInfo['time_posted']);
-}
-$answer = new \Controller\Answer();
+$questionInfo = isset($_GET['id']) ? $question->read($_GET['id'])[0] : null;
+$answer = !empty($_POST) ? new \Controller\Answer($_POST) : new \Controller\Answer();
 $user = new \Controller\User();
 ?>
 <!DOCTYPE html>
@@ -33,19 +28,25 @@ $user = new \Controller\User();
           <?php include '../layout/sideNavbar.php' ?>
 
           <main class="question--main main-content">
+
+               <!-- Question Content -->
                <h2 class="question__title main-title"><?php echo htmlspecialchars($questionInfo['title']); ?></h2>
                <div class="question__user">
                     <img class="question__user-profile-img" src="../../../public/img/profile1.jpg" alt="Profile Image">
                     <div class="question__user-info">
                          <h3><?php echo htmlspecialchars($questionInfo['username']); ?></h3>
-                         <p><?php echo htmlspecialchars($timestamp); ?></p>
+                         <p>
+                              <?php echo htmlspecialchars($question->get_time($questionInfo['time_posted'])); ?>
+                         </p>
                     </div>
                </div>
                <p class="question__content">
                     <?php echo htmlspecialchars($questionInfo['content']); ?>
                </p>
+
+               <!-- Question Action -->
                <div class="question__action-container">
-                    <div class="question__action question__action--vote">
+                    <div class="question__action question__action--vote" data-vote-id="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
                          <i class="fa-solid fa-arrow-up fa-lg"></i>
                          <p class="question__point">
                               <?php echo htmlspecialchars($questionInfo['point']); ?>
@@ -56,13 +57,13 @@ $user = new \Controller\User();
                          <i class="action--comment-icon fa-solid fa-comment"></i>
                          <p>Comment</p>
                     </div>
-                    <div class="question__action question__action--bookmark">
+                    <div class="question__action question__action--bookmark" data-bookmark-id="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
                          <i class="action--bookmark-icon fa-solid fa-bookmark"></i>
                          <p>Bookmark</p>
                     </div>
                     <?php
                     $isAnswered = false;
-                    $viewAnsLink = '../student/question.php?id=' . $questionInfo['question_id'] . '#ans-';
+                    $viewAnsLink = '../student/question.php?id=' . $questionInfo['question_id'] . '#';
 
                     $answersInfo = $answer->read($questionInfo['question_id']);
 
@@ -92,13 +93,17 @@ $user = new \Controller\User();
                          <?php endif; ?>
                     <?php endif; ?>
                </div>
-               <div class="question__add-comment-container ">
+
+               <!-- Add comment for question -->
+               <div class="question__add-comment-container" data-comment-id="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
                     <textarea class="question__add-comment-input" placeholder="Add a comment ..."></textarea>
-                    <div class="add-comment__btn-container">
-                         <button class="question__cancel-comment-btn" type="button">Cancel</button>
+                    <div class="add-comment__btn-container" data-reply-id="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
+                         <button class=" question__cancel-comment-btn" type="button">Cancel</button>
                          <button class="question__add-comment-btn">Add comment</button>
                     </div>
                </div>
+
+               <!-- Post answer for question -->
                <?php if ($_SESSION['userId'] != $questionInfo['user_id']) : ?>
                     <div class="question__post-ans-container">
                          <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="POST">
@@ -112,6 +117,8 @@ $user = new \Controller\User();
                          </form>
                     </div>
                <?php endif; ?>
+
+               <!-- Answer number -->
                <p class="question__ans-num">
                     <?php
                     $answerNum = $answer->answerCount($questionInfo['question_id']);
@@ -124,10 +131,13 @@ $user = new \Controller\User();
                     }
                     ?>
                </p>
+
+               <!-- Answer of the question -->
                <?php $answersInfo = $answer->read($questionInfo['question_id']); ?>
                <?php foreach ($answersInfo as $answerInfo) : ?>
+
                     <?php $userInfo = $user->read($answerInfo['user_id']); ?>
-                    <div class="question__ans-container" id="ans-<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
+                    <div class="question__ans-container" id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
                          <div class="question__user question__user--ans">
                               <img class="profile-icon" src="../../../public/img/profile1.jpg" alt="Profile Image">
                               <div class="question__user-info">
@@ -144,30 +154,36 @@ $user = new \Controller\User();
                          <p class="question__ans">
                               <?php echo htmlspecialchars($answerInfo['content']); ?>
                          </p>
+
+                         <!-- Answer Action -->
                          <div class="question__action-container">
-                              <div class="question__action question__action--vote">
+                              <div class="question__action question__action--vote" data-vote-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
                                    <i class="fa-solid fa-arrow-up fa-lg"></i>
                                    <p class="question__point">
                                         <?php echo htmlspecialchars($answerInfo['point']); ?>
                                    </p>
                                    <i class="fa-solid fa-arrow-down fa-lg"></i>
                               </div>
-                              <div class="question__action question__action--comment">
+                              <div class="question__action question__action--comment" data-reply-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
                                    <i class="action--comment-icon fa-solid fa-comment"></i>
                                    <p>Comment</p>
                               </div>
-                              <div class="question__action question__action--bookmark">
+                              <div class="question__action question__action--bookmark" data-bookmark-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
                                    <i class="action--bookmark-icon fa-solid fa-bookmark"></i>
                                    <p>Bookmark</p>
                               </div>
                          </div>
-                         <div class="question__add-comment-container ">
+
+                         <!-- Add comment for answer -->
+                         <div class="question__add-comment-container" data-comment-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
                               <textarea class="question__add-comment-input" placeholder="Add a comment ..."></textarea>
-                              <div class="add-comment__btn-container">
+                              <div class="add-comment__btn-container" data-reply-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
                                    <button class="question__cancel-comment-btn" type="button">Cancel</button>
                                    <button class="question__add-comment-btn">Add comment</button>
                               </div>
                          </div>
+
+                         <!-- Comments of the answer -->
                          <div class="question__comment-container">
                               <!-- <div class="question__user question__user--comment">
                                    <img class="profile-icon" src="../../../public/img/profile1.jpg" alt="Profile Image">
@@ -189,6 +205,7 @@ $user = new \Controller\User();
                               </div> -->
                          </div>
                     </div>
+
                <?php endforeach; ?>
           </main>
 
