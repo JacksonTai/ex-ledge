@@ -13,8 +13,11 @@
 
           <div class="layout__question-button">
                <p class="layout__question-answer">12 Answer</p>
-               <p class="layout__question-remove">Remove</p>   
-          </div>          
+               <?php if ($_SESSION['userId'][0] == "A") { ?>
+                    <p class="layout__question-remove">Remove</p>
+               <?php } ?>     
+          </div>   
+
      </div>
      <div class="layout__question-body">
           <a href="../student/question.php?id=<?php echo htmlspecialchars($question['user_id']); ?>">
@@ -31,6 +34,8 @@
                     <span class="layout__question-posted-time"><?php echo htmlspecialchars($timestamp); ?></span>
                </p>
           </div>
-          <button class="layout__question-bookmark-btn" id="bookmark" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>">Bookmark</button>
+          <?php if ($_SESSION['userId'][0] == "U") { ?>
+               <button class="layout__question-bookmark-btn" id="bookmark" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>">Bookmark</button>
+          <?php } ?>
      </div>
 </article>

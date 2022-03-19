@@ -112,16 +112,26 @@
     margin: 0.5rem 0;
   }
 
+  .layout__question-title {
+    max-width: 60%;
+    margin: 0;
+  }
+
   .layout__question-answer {
     order: 1;
   }
 
-  .layout__question-title {
-    max-width: 75%;
-    margin: 0;
+  .layout__question-remove{
+    order: 2;
   }
 
   .layout__question-footer {
     flex-direction: row;
+  }
+}
+
+@media (max-width: 720px) {
+  .layout__question-title {
+    order: 3;
   }
 }
