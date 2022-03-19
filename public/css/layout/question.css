@@ -35,12 +35,24 @@
   margin: 0.5rem 0;
 }
 
+.layout__question-button{
+  display: flex;
+}
+
 .layout__question-answer {
-  max-width: fit-content;
   padding: 0.2em 1.5em;
   font-size: 0.9rem;
   color: #3d8f58;
   border: 1px solid #3d8f58;
+  border-radius: 0.8em;
+  margin-right: 1em;
+}
+
+.layout__question-remove {
+  padding: 0.2em 1.5em;
+  font-size: 0.9rem;
+  color: #FF0000;
+  border: 1px solid #FF0000;
   border-radius: 0.8em;
 }
 
