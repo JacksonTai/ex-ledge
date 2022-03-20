@@ -20,12 +20,12 @@
                <?php echo htmlspecialchars($question['title']); ?>
           </h3>
      </div>
-     
-          <a  class="layout__question-body" href="question.php?id=<?php echo htmlspecialchars($question['question_id']); ?>">
-               <p class="layout__question-content"><?php echo htmlspecialchars($question['content']); ?></p>
-               <p class="layout__question-tag"><?php echo htmlspecialchars($question['tag']); ?></p>
-          </a>
-     
+
+     <a class="layout__question-body" href="question.php?id=<?php echo htmlspecialchars($question['question_id']); ?>">
+          <p class="layout__question-content"><?php echo htmlspecialchars($question['content']); ?></p>
+          <p class="layout__question-tag"><?php echo htmlspecialchars($question['tag']); ?></p>
+     </a>
+
      <div class="layout__question-footer">
           <div class="layout__question-poster">
                <img class="layout__question-profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
@@ -35,6 +35,9 @@
                     <span class="layout__question-posted-time"><?php echo htmlspecialchars($timestamp); ?></span>
                </p>
           </div>
-          <button class="layout__question-bookmark-btn" id="bookmark" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>">Bookmark</button>
+          <div class="layout__question-bookmark" data-bookmark-id="<?php echo htmlspecialchars($question['question_id']); ?>">
+               <i class="question-bookmark-icon fa-solid fa-bookmark"></i>
+               <p>Bookmark</p>
+          </div>
      </div>
 </article>

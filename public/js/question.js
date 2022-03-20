@@ -84,11 +84,6 @@ let commentsContainerAn = document.querySelectorAll(
   ".question__comment-container--ans"
 );
 
-window.onload = async function () {
-  setQnComment();
-  setAnsComment();
-};
-
 /* -- Add comment -- */
 let questionCommentForm = document.querySelector(
   `form[data-comment-id=${url.searchParams.get("id")}]`
@@ -123,11 +118,11 @@ questionCommentForm.addEventListener("submit", async function (e) {
 });
 
 // Select all answers comment form by excluding the comment id of question Id.
-let answersCommentForm = document.querySelectorAll(
+let answerCommentForms = document.querySelectorAll(
   `form[data-comment-id]:not([data-comment-id="${url.searchParams.get("id")}"])`
 );
 
-for (let answerCommentForm of answersCommentForm) {
+for (let answerCommentForm of answerCommentForms) {
   answerCommentForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
@@ -191,3 +186,64 @@ if (ansAction && cancelAnsBtn) {
     }
   }
 }
+
+/* -- Add Bookmark -- */
+let bookmarkActions = document.querySelectorAll(".question__action--bookmark");
+
+for (let bookmarkAction of bookmarkActions) {
+  bookmarkAction.addEventListener("click", async function () {
+    bookmarkAction.classList.toggle("action-btn-click");
+
+    try {
+      await fetch(
+        `../../controller/bookmark.php?id=${this.dataset.bookmarkId}`
+      );
+   
+    } catch (e) {
+      console.log("Error: ", e);
+    }
+  });
+}
+
+/* -- Get Bookmark -- */
+async function getBookmark(criteria) {
+  try {
+    // let res = await fetch(
+    //   `../../controller/bookmark.php?criteria=U62340f519c9c5`
+    // );
+    let res = await fetch(`../../controller/bookmark.php?criteria=${criteria}`);
+    return await res.json();
+  } catch (e) {
+    console.log("Error: ", e);
+  }
+}
+
+async function setBookmark() {
+  try {
+    // Get user id.
+    let userIdRes = await fetch("../../helper/session.php");
+    let userId = await userIdRes.json();
+
+    // Store all bookmark Id record of the user.
+    let bookmarksId = [];
+
+    let bookmarks = await getBookmark(userId);
+    for (let bookmark of bookmarks) {
+      bookmarksId.push(bookmark.id);
+    }
+
+    for (let bookmarkAction of bookmarkActions) {
+      if (bookmarksId.includes(bookmarkAction.dataset.bookmarkId)) {
+        bookmarkAction.classList.toggle("action-btn-click");
+      }
+    }
+  } catch (e) {
+    console.log("Error", e);
+  }
+}
+
+window.onload = async function () {
+  setQnComment();
+  setAnsComment();
+  setBookmark();
+};

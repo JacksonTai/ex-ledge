@@ -86,9 +86,21 @@
   text-decoration: 1px underline var(--clr-link);
 }
 
-.layout__question-bookmark-btn {
+.layout__question-bookmark {
+  display: flex;
   width: fit-content;
   margin-top: 1rem;
+  margin-left: auto;
+  color: var(--clr-font-grey);
+  cursor: pointer;
+}
+
+.layout__question-bookmark:hover {
+  color: var(--clr-primary);
+}
+
+.question-bookmark-icon {
+  margin-right: 0.5rem;
 }
 
 @media (min-width: 720px) {
@@ -110,5 +122,10 @@
 
   .layout__question-footer {
     flex-direction: row;
+    align-items: center;
+  }
+
+  .layout__question-bookmark {
+    margin-top: 0;
   }
 }
