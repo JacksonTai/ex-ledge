@@ -6,7 +6,7 @@
           <i class="layout__question-vote fa-solid fa-arrow-down fa-lg down" id="down" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>"></i>
      </div>
      <div class="layout__question-header">
-          
+
           <h3 class="layout__question-title">
                <?php echo htmlspecialchars($question['title']); ?>
           </h3>
@@ -14,9 +14,9 @@
           <div class="layout__question-button">
                <p class="layout__question-answer">12 Answer</p>
                <?php if ($_SESSION['userId'][0] == "A") { ?>
-                    <p class="layout__question-remove">Remove</p>
-               <?php } ?>     
-          </div>   
+                    <button class="layout__question-remove-btn">Remove</button>
+               <?php } ?>
+          </div>
 
      </div>
      <div class="layout__question-body">
