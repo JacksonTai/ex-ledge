@@ -1,7 +1,8 @@
 <?php
 session_start();
+require '../../helper/redirector.php';
+include '../../helper/autoloader.php';
 $path = '../../../';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +28,6 @@ $path = '../../../';
                <div class="user_dashboard">
                     <div class="user_container" id="user_container"></div> 
                </div>
-               <div class="user_container_message" id = "user_container_message"></div> 
 
                <nav class="home__main-nav">
                     <button class="home__main-nav-btn">

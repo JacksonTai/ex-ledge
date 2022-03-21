@@ -72,6 +72,36 @@ class User extends \config\DbConn
           return $stmt->fetchAll();
      }
 
+     protected function loadData($limit, $start)
+     {
+          try {
+               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
+               $stmt = $this->executeQuery($sql, ['U%']);
+               $userInfos = $stmt->fetchAll();
+
+               // For each users inside of userInfos array, echo out the php coe below
+               foreach ($userInfos as $userInfo){
+                    
+                    echo 
+                         '<div class="user_box" id='.($userInfo['user_id']).' data-user-id='.($userInfo['user_id']).'>
+                              <a class="user_info" href="profile.php?id='.($userInfo['user_id']).'">
+                                   <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="user_img">
+                                   <div class="user_info-detail">    
+                                        <p class="user_name">'.($userInfo['username']).'</p>
+                                        <p class="RP">RP: '.($userInfo['point']).'</p>
+                                   </div>
+                              </a>
+                         </div>';                    
+                    
+               }
+
+
+
+          } catch (PDOException $e) {
+               die('Error: ' . $e->getMessage());
+          }          
+     }
+
      protected function getUser($userId)
      {
           if ($userId) {
