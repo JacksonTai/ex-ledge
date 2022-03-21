@@ -79,8 +79,7 @@ if (isset($_GET['userId'])) {
 
 if (isset($_GET['searchTerm'])) {
      $user = new \Controller\User($_SESSION['userId']);
-     $result = $user->search($_GET['searchTerm']);
-     print_r($result);
+     echo json_encode($user->search($_GET['searchTerm']));
 }
 
 /* ######### UPDATE ######### */
