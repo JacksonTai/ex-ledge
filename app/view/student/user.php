@@ -28,16 +28,6 @@ $path = '../../../';
                <div class="user_dashboard">
                     <div class="user_container" id="user_container"></div> 
                </div>
-
-               <nav class="home__main-nav">
-                    <button class="home__main-nav-btn">
-                         <a class="home__main-nav-link dialog" href="#">Back</a>
-                    </button>
-                    <p class="home__main-nav-page">1</p>
-                    <button class="home__main-nav-btn">
-                         <a class="home__main-nav-link dialog" href="#">Next</a>
-                    </button>
-               </nav>
           </main>
 
      </div>
