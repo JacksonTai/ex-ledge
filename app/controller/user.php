@@ -28,6 +28,11 @@ class User extends \Model\User
           return $this->getUser($userId);
      }
 
+     public function loadUsers($limit, $start)
+     {
+          return $this->loadData($limit, $start);
+     }     
+
      /**
       * This function helps to read the users' rank.
       * @param integer $top [optional]
@@ -75,6 +80,11 @@ if (isset($_POST['fullName'], $_POST['nric'])) {
 if (isset($_GET['userId'])) {
      $user = new \Controller\User();
      echo json_encode($user->read($_GET['userId']));
+}
+
+if (isset($_POST["limit"], $_POST["start"])){
+     $user = new \Controller\User();
+     return $user -> loadUsers($_POST["limit"], $_POST["start"]);
 }
 
 if (isset($_GET['searchTerm'])) {

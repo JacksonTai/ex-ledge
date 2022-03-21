@@ -9,7 +9,7 @@ body{
 	align-items: center;
 }
 .user_container{
-	margin-bottom: 4rem;
+	margin-bottom: 7rem;
 	width: 95%;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -51,25 +51,7 @@ body{
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 }
-.home__main-nav {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 8rem;
-}
-  
-.home__main-nav-btn {
-	padding: 0;
-	background-color: #ffffff;
-}
-  
-.home__main-nav-link {
-	padding: 0.7em 1.5em;
-	color: var(--clr-font-grey);
-}
-  
-.home__main-nav-page {
-	margin: 0 2rem;
-}
+
 
 @media (max-width: 1050px){
 	.user_box{
