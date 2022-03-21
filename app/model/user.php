@@ -22,7 +22,7 @@ class User extends \config\DbConn
           $errMsg = ['fullName' => '', 'nric' => ''];
 
           // Validate full name.
-          if (!ctype_alpha($postData['fullName'])) {
+          if (!ctype_alpha(str_replace(' ', '',$postData['fullName']))) {
                $errMsg['fullName'] = '&#9888; Invalid Full name.';
           }
 
@@ -52,7 +52,8 @@ class User extends \config\DbConn
           }
 
           $sql = "INSERT INTO verification_queue VALUES (?, ?, ?)";
-          $this->executeQuery($sql, [$postData['nric'], $this->userId, $postData['fullName']]);
+
+          $this->executeQuery($sql, [$postData['nric'], $this->userId, preg_replace("!\s+!", " ", $postData['fullName'])]);
      }
 
      /* ######### READ ######### */
