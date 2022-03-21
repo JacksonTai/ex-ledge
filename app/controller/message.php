@@ -2,28 +2,24 @@
 
 namespace Controller;
 
-if (!empty($_GET) || !empty($_POST)) {
+if (!empty($_GET)) {
      session_start();
      include '../helper/autoloader.php';
 }
 
 class Message extends \Model\Message
 {
-     public function __construct($postData = null)
+     public function __construct($data = null)
      {
-          $postData ? parent::__construct($postData) : '';
+          $data ? parent::__construct($data) : '';
      }
 
-     public function read($getData)
+     public function read()
      {
-          return $this->getMsg($getData);
      }
 }
 
-!empty($_POST) ? new \Controller\Message($_POST) : null;
-
-if (isset($_GET['senderId'], $_GET['receiverId'])) {
-     $msg = new \Controller\Message();
-     $result = $msg->read($_GET);
-     echo json_encode($result);
+if (!empty($_GET)) {
+     $user = new \Controller\User($_GET);
+     // echo json_encode();
 }

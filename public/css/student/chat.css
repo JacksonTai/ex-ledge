@@ -13,7 +13,7 @@
 
 .chat--main {
   max-height: 100vh;
-  min-width: 86vw;
+  /* min-width: 86vw;  THIS HAS BEEN CAUSING AN OVERFLOW ISSUE IN THE CHAT FRONTEND DESIGN */ 
 }
 
 /* -- Chatarea -- */
