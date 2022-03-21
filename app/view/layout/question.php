@@ -26,7 +26,7 @@
           </div>
      </div>
 
-     <a class="layout__question-body" href="question.php?id=<?php echo htmlspecialchars($question['question_id']); ?>">
+     <a class="layout__question-body" href="../student/question.php?id=<?php echo htmlspecialchars($question['question_id']); ?>">
           <p class="layout__question-content"><?php echo htmlspecialchars($question['content']); ?></p>
           <p class="layout__question-tag"><?php echo htmlspecialchars($question['tag']); ?></p>
      </a>
