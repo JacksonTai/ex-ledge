@@ -324,10 +324,10 @@ class User extends \config\DbConn
      {
           $userVerifData = $this->getUser($this->userId);
 
-          if(isset($postData['accept'])) 
+          if(isset($postData['verification'])) 
           {
-               $sql = "UPDATE user SET verification='1' WHERE `user_id` = $userVerifData;";
-               $this->executeQuery($sql, [$this->userId, $postData['verification'],]);
+               $sql = "UPDATE user SET verification='1' WHERE `user_id` = '$userVerifData'";
+               $this->executeQuery($sql);
           }
      }
 

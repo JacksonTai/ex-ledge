@@ -49,8 +49,8 @@ $user = new Controller\User();
                               </div>
                               <form action="" method="POST">
                                    <div class="user-verification-btn-container">
-                                        <button class="user-verification-btn user-verification-btn--accept" type="accept" name="acceptVerif">Accept</button>
-                                        <button class="user-verification-btn user-verification-btn--reject" type="reject">Reject</button>
+                                        <button class="user-verification-btn user-verification-btn--accept" >Accept</button>
+                                        <button class="user-verification-btn user-verification-btn--reject" >Reject</button>
                                    </div>
                               </form>
                          </div>
@@ -67,28 +67,3 @@ $user = new Controller\User();
 </body>
 
 </html>
-
-<!-- <?php
-// $servername = "localhost";
-// $username = "root";
-// $password = "";
-// $database = "ex_ledge";
-
-// $conn = mysqli_connect($servername, $username, $password, $database);
-
-// if (!$conn) {
-//      die("<script>alert('Connection Failed.')</script>");
-//  }
-
-// if(isset($_POST['accept'])) { 
-
-//      $result = mysqli_query($conn, "UPDATE user SET verification='1' WHERE user_id = '$user[user_id]'");
-
-//      if ($result) {
-//           echo "<script>pop_up_success()</script>"; 
-//      } else {
-//      echo "<script>alert('Something went wrong')</script>"; 
-//      }
-// }
-
-?> -->
