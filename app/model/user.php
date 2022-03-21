@@ -13,6 +13,7 @@ class User extends \config\DbConn
           $this->userId = $userId;
      }
 
+     /* ######### CREATE ######### */
      protected function verifyUser($postData)
      {
           // Trim all item in postData array.
@@ -21,7 +22,7 @@ class User extends \config\DbConn
           $errMsg = ['fullName' => '', 'nric' => ''];
 
           // Validate full name.
-          if (!ctype_alpha($postData['fullName'])) {
+          if (!ctype_alpha(str_replace(' ', '',$postData['fullName']))) {
                $errMsg['fullName'] = '&#9888; Invalid Full name.';
           }
 
@@ -51,9 +52,11 @@ class User extends \config\DbConn
           }
 
           $sql = "INSERT INTO verification_queue VALUES (?, ?, ?)";
-          $this->executeQuery($sql, [$postData['nric'], $this->userId, $postData['fullName']]);
+
+          $this->executeQuery($sql, [$postData['nric'], $this->userId, preg_replace("!\s+!", " ", $postData['fullName'])]);
      }
 
+     /* ######### READ ######### */
      protected function getVerification($userId = null)
      {
           // Query for selecting specific user verification info.
@@ -118,6 +121,34 @@ class User extends \config\DbConn
           } catch (PDOException $e) {
                die('Error: ' . $e->getMessage());
           }
+     }
+
+     protected function getUserRank($top, $length)
+     {
+          $sql = "SELECT * FROM user
+                  WHERE `user_id` LIKE ?
+                  ORDER BY `point` DESC;";
+          $stmt = $this->executeQuery($sql, ['U%']);
+          $results = $stmt->fetchAll();
+
+          // Store the result that has shortened username. 
+          $calcResult = [];
+
+          // Shorten username that is longer than 8.
+          foreach ($results as $result) {
+               $calcUsername = $result['username'];
+
+               strlen($calcUsername) > 8 ? $calcUsername = substr($calcUsername, 0, 8) . '...' : null;
+
+               $result['username'] = $calcUsername;
+               array_push($calcResult, $result);
+          }
+
+          if ($top && $length) {
+               return array_slice($calcResult, $top - 1, $length - $top + 1);
+          }
+
+          return $top ? array_slice($calcResult, 0, $top) : $calcResult;
      }
 
      protected function searchUser($searchTerm)
@@ -201,6 +232,7 @@ class User extends \config\DbConn
           return $userInfo;
      }
 
+     /* ######### UPDATE ######### */
      protected function updateUser($postData)
      {
           $userData = $this->getUser($this->userId);
@@ -287,9 +319,10 @@ class User extends \config\DbConn
           ]);
      }
 
+     /* ######### DELETE ######### */
      protected function deleteUser($userId)
      {
-          $sql = "DELETE FROM user WHERE `user_id` = ?";
+          $sql = "DELETE FROM user WHERE `user_id` = ?;";
           $this->executeQuery($sql, [$userId]);
      }
 }
