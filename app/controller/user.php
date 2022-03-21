@@ -58,6 +58,11 @@ class User extends \Model\User
           return $this->updateUser($postData);
      }
 
+     public function updateVerif($postData)
+     {
+          return $this->updateUserVerif($postData);
+     }
+
      /* ######### DELETE ######### */
      public function delete($userId)
      {

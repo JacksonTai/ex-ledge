@@ -68,18 +68,27 @@ $user = new Controller\User();
 
 </html>
 
-<?php
+<!-- <?php
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// $database = "ex_ledge";
+
+// $conn = mysqli_connect($servername, $username, $password, $database);
+
+// if (!$conn) {
+//      die("<script>alert('Connection Failed.')</script>");
+//  }
 
 // if(isset($_POST['accept'])) { 
 
-//      $book_name = $_POST['book_name'];
-//      $book_price = $_POST['book_price'];
-//      $book_format = $_POST['book_format'];
-//      $book_author = $_POST['book_author'];
-//      $book_quantity = $_POST['book_quantity'];
-//      $book_category = $_POST['book_category'];
+//      $result = mysqli_query($conn, "UPDATE user SET verification='1' WHERE user_id = '$user[user_id]'");
 
-//      $result = mysqli_query($conn, "UPDATE user SET verification='1'");
+//      if ($result) {
+//           echo "<script>pop_up_success()</script>"; 
+//      } else {
+//      echo "<script>alert('Something went wrong')</script>"; 
+//      }
 // }
 
-?>
+?> -->
