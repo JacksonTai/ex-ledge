@@ -1,10 +1,7 @@
 <?php
 session_start();
-require '../../helper/redirector.php';
-include '../../helper/autoloader.php';
 $path = '../../../';
 
-$user = new Controller\User();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +9,8 @@ $user = new Controller\User();
 <head>
      <?php include '../../config/head.php' ?>
      <title>User | Ex-Ledge</title>
-     <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/user.css?v=<?php echo time(); ?>">
+     <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/user.css?v=<?php echo time(); ?>">     	
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -27,23 +25,10 @@ $user = new Controller\User();
                <h2 class="user__title">Users</h2>
                
                <div class="user_dashboard">
-                    <div class="user_container"> 
-
-                         <?php $userList = $user->read(); ?>
-                         <?php foreach ($userList as $user) : ?>
-                              <div class="user_box" id="<?php echo htmlspecialchars($user['user_id']) ?>" data-user-id=<?php echo htmlspecialchars($user['user_id']) ?>>
-                                   <a class="user_info" href="profile.php?id=<?php echo htmlspecialchars($user['user_id']); ?>">
-                                        <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="user_img">
-                                        <div class="user_info-detail">    
-                                             <p class="user_name"><?php echo htmlspecialchars($user['username']) ?></p>
-                                             <p class="RP">RP: <?php echo $user['point'] ?></p>
-                                        </div>
-                                   </a>
-                              </div>
-                         <?php endforeach; ?>
-                         
-                    </div>  
+                    <div class="user_container" id="user_container"></div> 
                </div>
+               <div class="user_container_message" id = "user_container_message"></div> 
+
                <nav class="home__main-nav">
                     <button class="home__main-nav-btn">
                          <a class="home__main-nav-link dialog" href="#">Back</a>
@@ -60,6 +45,8 @@ $user = new Controller\User();
      <?php include '../layout/footer.php'; ?>
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
+     <script src="<?php echo $path; ?>public/js/loadData.js"></script>
+
 </body>
 
 </html>

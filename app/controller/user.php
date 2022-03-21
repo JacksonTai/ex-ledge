@@ -77,6 +77,7 @@ if (isset($_GET['userId'])) {
      echo json_encode($user->read($_GET['userId']));
 }
 
+
 if (isset($_GET['searchTerm'])) {
      $user = new \Controller\User($_SESSION['userId']);
      echo json_encode($user->search($_GET['searchTerm']));
