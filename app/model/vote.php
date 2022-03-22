@@ -9,6 +9,8 @@ class Vote extends \config\DbConn
      protected function __construct($postData)
      {
           $this->postData = $postData;
+
+          // Get previous vote of the question or answer.
           if ($postData['id'][0] == 'Q') {
                $prevVotes = $this->getPrevVote($postData['userId'], 'question');
           }
@@ -16,40 +18,40 @@ class Vote extends \config\DbConn
                $prevVotes = $this->getPrevVote($postData['userId'], 'answer');
           }
 
-          // Check if user has voted the same question or answer before.
           foreach ($prevVotes as $prevVote) {
 
-               if ($postData['id'][0] == 'Q' && $prevVote['question_id'] == $postData['id']) {
+               // Check if user has voted the same question or answer before.
+               if (($postData['id'][0] == 'Q' && $prevVote['question_id'] == $postData['id']) ||
+                    ($postData['id'][0] == 'A' && $prevVote['answer_id'] == $postData['id'])
+               ) {
 
-                    // Update previous vote type.
+                    // Update previous vote type if the value is different.
                     if ($prevVote['vote'] != $postData['voteType']) {
                          $this->updatePrevVote();
+
+                         // Update point for counter vote (from downvote to upvote with one click).
+                         $postData['voteType'] ? $this->updatePoint(2) : $this->updatePoint(-2);
+                         $this->updateUserPoint();
                          return;
                     }
 
                     // Delete previous vote.
                     $this->deletePrevVote();
-                    return;
-               }
 
-               if ($postData['id'][0] == 'A' && $prevVote['answer_id'] == $postData['id']) {
-
-                    // Update previous vote type.
-                    if ($prevVote['vote'] != $postData['voteType']) {
-                         $this->updatePrevVote();
-                         return;
-                    }
-
-                    // Delete previous vote.
-                    $this->deletePrevVote();
+                    // Update point for diselecting downvote or upvote.
+                    $postData['voteType'] ? $this->updatePoint(-1) : $this->updatePoint(1);
+                    $this->updateUserPoint();
                     return;
                }
           }
 
-          $this->createVote();
+          $this->createPrevVote();
+          // Update point for new downvote or upvote.
+          $postData['voteType'] ? $this->updatePoint(1) : $this->updatePoint(-1);
+          $this->updateUserPoint();
      }
 
-     protected function createVote()
+     protected function createPrevVote()
      {
           if ($this->postData['id'][0] == 'Q') {
                $sql = "INSERT INTO vote_question VALUES (?, ?, ?);";
@@ -74,6 +76,23 @@ class Vote extends \config\DbConn
           }
           $stmt = $this->executeQuery($sql, [$id]);
           return $stmt->fetch();
+     }
+
+     /**
+      * This function updates the point of question or answer.
+      * @param int $value  
+      */
+     private function updatePoint($value)
+     {
+          if ($this->postData['id'][0] == 'Q') {
+               $sql = "UPDATE question SET `point` = `point` + ? 
+                         WHERE question_id = ?";
+          }
+          if ($this->postData['id'][0] == 'A') {
+               $sql = "UPDATE answer SET `point` = `point` + ? 
+                         WHERE answer_id = ?";
+          }
+          $this->executeQuery($sql, [$value, $this->postData['id']]);
      }
 
      /**
@@ -111,7 +130,7 @@ class Vote extends \config\DbConn
           return $stmt->fetchAll();
      }
 
-     protected function updatePrevVote()
+     private function updatePrevVote()
      {
           if ($this->postData['id'][0] == 'Q') {
                $sql =  "UPDATE vote_question SET vote = ?
@@ -128,7 +147,20 @@ class Vote extends \config\DbConn
           ]);
      }
 
-     protected function deletePrevVote()
+     private function updateUserPoint()
+     {
+          // Get the detail of the question or answer poster using question ID.
+          $user = new \Controller\User();
+          $posterDetail = $user->read($this->postData['id']);
+
+          // Update the point of question or answer poster.
+          $poster = new \Controller\User($posterDetail['user_id']);
+          $posterPoint = $poster->readPoint($posterDetail['user_id']);
+
+          $poster->updatePoint($posterPoint);
+     }
+
+     private function deletePrevVote()
      {
           if ($this->postData['id'][0] == 'Q') {
                $sql =  "DELETE FROM vote_question  

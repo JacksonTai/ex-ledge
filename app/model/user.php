@@ -22,7 +22,7 @@ class User extends \config\DbConn
           $errMsg = ['fullName' => '', 'nric' => ''];
 
           // Validate full name.
-          if (!ctype_alpha(str_replace(' ', '',$postData['fullName']))) {
+          if (!ctype_alpha(str_replace(' ', '', $postData['fullName']))) {
                $errMsg['fullName'] = '&#9888; Invalid Full name.';
           }
 
@@ -80,50 +80,72 @@ class User extends \config\DbConn
                $userInfos = $stmt->fetchAll();
 
                // For each users inside of userInfos array, echo out the php coe below
-               foreach ($userInfos as $userInfo){
-                    
-                    echo 
-                         '<div class="user_box" id='.($userInfo['user_id']).' data-user-id='.($userInfo['user_id']).'>
-                              <a class="user_info" href="profile.php?id='.($userInfo['user_id']).'">
+               foreach ($userInfos as $userInfo) {
+
+                    echo
+                    '<div class="user_box" id=' . ($userInfo['user_id']) . ' data-user-id=' . ($userInfo['user_id']) . '>
+                              <a class="user_info" href="profile.php?id=' . ($userInfo['user_id']) . '">
                                    <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="user_img">
                                    <div class="user_info-detail">    
-                                        <p class="user_name">'.($userInfo['username']).'</p>
-                                        <p class="RP">RP: '.($userInfo['point']).'</p>
+                                        <p class="user_name">' . ($userInfo['username']) . '</p>
+                                        <p class="RP">RP: ' . ($userInfo['point']) . '</p>
                                    </div>
                               </a>
-                         </div>';                    
-                    
+                         </div>';
                }
-
-
-
           } catch (PDOException $e) {
                die('Error: ' . $e->getMessage());
-          }          
+          }
      }
 
-     protected function getUser($userId)
+     protected function getUser($criteria)
      {
-          if ($userId) {
+          if ($criteria) {
+
                // Query for selecting specific user based on the given user ID. 
-               try {
-                    $sql = "SELECT * FROM user WHERE `user_id` = ? AND `user_id` LIKE ?;";
-                    $stmt = $this->executeQuery($sql, [$userId, 'U%']);
-                    $userInfo = $stmt->fetch();
+               if ($criteria[0] == 'U') {
+                    try {
+                         $sql = "SELECT * FROM user WHERE `user_id` = ? AND `user_id` LIKE ?;";
+                         $stmt = $this->executeQuery($sql, [$criteria, 'U%']);
+                         $userInfo = $stmt->fetch();
 
-                    $sql = "SELECT * FROM user_detail WHERE `user_id` = ? AND `user_id` LIKE ?;";
-                    $stmt = $this->executeQuery($sql, [$userId, 'U%']);
-                    $userDetail = $stmt->fetch();
+                         $sql = "SELECT * FROM user_detail WHERE `user_id` = ? AND `user_id` LIKE ?;";
+                         $stmt = $this->executeQuery($sql, [$criteria, 'U%']);
+                         $userDetail = $stmt->fetch();
 
-                    /* Return a merged array of user detail and user record 
-                       if user detail exists. */
-                    if (is_array($userDetail)) {
-                         return array_merge($userInfo, $userDetail);
+                         /* Return a merged array of user detail and user record 
+                            if user detail exists. */
+                         if (is_array($userDetail)) {
+                              return array_merge($userInfo, $userDetail);
+                         }
+                         return $userInfo;
+                    } catch (PDOException $e) {
+                         die('Error: ' . $e->getMessage());
                     }
-                    return $userInfo;
-               } catch (PDOException $e) {
-                    die('Error: ' . $e->getMessage());
                }
+
+               // Query for selecting specific user based on the given question ID. 
+               if ($criteria[0] == 'Q') {
+                    try {
+                         $sql = "SELECT * FROM user u
+                                   INNER JOIN question q ON u.user_id = q.user_id
+                                   WHERE q.question_id = ? AND u.user_id LIKE ?;";
+                    } catch (PDOException $e) {
+                         die('Error: ' . $e->getMessage());
+                    }
+               }
+               // Query for selecting specific user based on the given answer ID. 
+               if ($criteria[0] == 'A') {
+                    try {
+                         $sql = "SELECT * FROM user u
+                                   INNER JOIN answer a ON u.user_id = a.user_id
+                                   WHERE a.answer_id = ? AND u.user_id LIKE ?;";
+                    } catch (PDOException $e) {
+                         die('Error: ' . $e->getMessage());
+                    }
+               }
+               $stmt = $this->executeQuery($sql, [$criteria, 'U%']);
+               return $stmt->fetch();
           }
 
 
@@ -134,7 +156,7 @@ class User extends \config\DbConn
                $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT 9";
                $stmt = $this->executeQuery($sql, ['U%']);
                $userInfos = $stmt->fetchAll();
-          
+
                foreach ($userInfos as $userInfo) {
                     try {
                          $sql = "SELECT * FROM user_detail WHERE `user_id` = ?;";
@@ -152,8 +174,7 @@ class User extends \config\DbConn
                return $result;
           } catch (PDOException $e) {
                die('Error: ' . $e->getMessage());
-          }               
-
+          }
      }
 
      protected function getUserRank($top, $length)
@@ -182,6 +203,23 @@ class User extends \config\DbConn
           }
 
           return $top ? array_slice($calcResult, 0, $top) : $calcResult;
+     }
+
+     protected function getUserPoint($userId)
+     {
+          // Get total points from answer posted by the user.
+          $sql = "SELECT SUM(`point`) AS `point` FROM answer 
+                    WHERE `user_id` = ? AND `user_id` LIKE ?;";
+          $stmt = $this->executeQuery($sql, [$userId, 'U%']);
+          $ansTotal = $stmt->fetch();
+
+          // Get total points from question posted by the user.
+          $sql = "SELECT SUM(`point`) AS `point` FROM question 
+                    WHERE `user_id` = ? AND `user_id` LIKE ?;";
+          $stmt = $this->executeQuery($sql, [$userId, 'U%']);
+          $questionTotal = $stmt->fetch();
+
+          return $ansTotal['point'] + $questionTotal['point'];
      }
 
      protected function searchUser($searchTerm)
@@ -266,7 +304,7 @@ class User extends \config\DbConn
      }
 
      /* ######### UPDATE ######### */
-     protected function updateUser($postData)
+     protected function updateUserDetail($postData)
      {
           $userData = $this->getUser($this->userId);
 
@@ -350,6 +388,13 @@ class User extends \config\DbConn
                $postData['gender'],
                $postData['age']
           ]);
+     }
+
+     protected function updateUserPoint($value)
+     {
+          $sql = "UPDATE user SET `point` = ? 
+                    WHERE `user_id`= ?";
+          $this->executeQuery($sql, [$value, $this->userId]);
      }
 
      /* ######### DELETE ######### */

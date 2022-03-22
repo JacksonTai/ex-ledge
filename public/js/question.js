@@ -247,10 +247,31 @@ let votesIcon = document.querySelectorAll(".vote-icon");
 for (let voteIcon of votesIcon) {
   voteIcon.addEventListener("click", function () {
     let id = this.parentElement.dataset.voteId;
+
+    let point = this.parentElement.children[1];
+    let pointNum = parseInt(point.textContent.trim());
+
+    let upvote = this.parentElement.children[0];
+    let downvote = this.parentElement.children[2];
+
     if (this.id == "upvote") {
+      if (voteIcon.classList.contains("upvote")) {
+        point.textContent = pointNum - 1;
+      } else if (downvote.classList.contains("downvote")) {
+        point.textContent = pointNum + 2;
+      } else {
+        point.textContent = pointNum + 1;
+      }
       updateVote(1, id);
     }
     if (this.id == "downvote") {
+      if (voteIcon.classList.contains("downvote")) {
+        point.textContent = pointNum + 1;
+      } else if (upvote.classList.contains("upvote")) {
+        point.textContent = pointNum - 2;
+      } else {
+        point.textContent = pointNum - 1;
+      }
       updateVote(0, id);
     }
   });

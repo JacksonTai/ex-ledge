@@ -23,15 +23,15 @@ class User extends \Model\User
      }
 
      /* ######### READ ######### */
-     public function read($userId = null)
+     public function read($criteria = null)
      {
-          return $this->getUser($userId);
+          return $this->getUser($criteria);
      }
 
      public function loadUsers($limit, $start)
      {
           return $this->loadData($limit, $start);
-     }     
+     }
 
      /**
       * This function helps to read the users' rank.
@@ -47,6 +47,11 @@ class User extends \Model\User
           return $this->getUserRank($top, $length);
      }
 
+     public function readPoint($userId)
+     {
+          return $this->getUserPoint($userId);
+     }
+
      public function readVerification($userId = null)
      {
           return $this->getVerification($userId);
@@ -58,9 +63,18 @@ class User extends \Model\User
      }
 
      /* ######### UPDATE ######### */
-     public function update($postData)
+     public function updateDetail($postData)
      {
-          return $this->updateUser($postData);
+          return $this->updateUserDetail($postData);
+     }
+
+     /**
+      * This function updates user point.
+      * @param integer $value  
+      */
+     public function updatePoint($value)
+     {
+          $this->updateUserPoint($value);
      }
 
      /* ######### DELETE ######### */
@@ -82,9 +96,9 @@ if (isset($_GET['userId'])) {
      echo json_encode($user->read($_GET['userId']));
 }
 
-if (isset($_POST["limit"], $_POST["start"])){
+if (isset($_POST["limit"], $_POST["start"])) {
      $user = new \Controller\User();
-     return $user -> loadUsers($_POST["limit"], $_POST["start"]);
+     return $user->loadUsers($_POST["limit"], $_POST["start"]);
 }
 
 if (isset($_GET['searchTerm'])) {
@@ -95,12 +109,12 @@ if (isset($_GET['searchTerm'])) {
 /* ######### UPDATE ######### */
 if (isset($_POST['username'])) {
      $user = new \Controller\User($_SESSION['userId']);
-     echo json_encode($user->update($_POST));
+     echo json_encode($user->updateDetail($_POST));
 }
 
 if (isset($_GET['bio'])) {
      $user = new \Controller\User($_SESSION['userId']);
-     $user->update($_GET);
+     $user->updateDetail($_GET);
 }
 
 /* ######### DELETE ######### */
