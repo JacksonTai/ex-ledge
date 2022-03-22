@@ -47,12 +47,10 @@ $user = new Controller\User();
                                         </p>
                                    </div>
                               </div>
-                              <form action="" method="POST">
-                                   <div class="user-verification-btn-container">
-                                        <button class="user-verification-btn user-verification-btn--accept" >Accept</button>
-                                        <button class="user-verification-btn user-verification-btn--reject" >Reject</button>
-                                   </div>
-                              </form>
+                              <div class="user-verification-btn-container">
+                                   <button class="user-verification-btn user-verification-btn--accept" >Accept</button>
+                                   <button class="user-verification-btn user-verification-btn--reject" >Reject</button>
+                              </div>
                          </div>
                     </div>
                <?php endforeach; ?>
