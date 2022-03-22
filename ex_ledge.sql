@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2022 at 04:28 AM
+-- Generation Time: Mar 22, 2022 at 02:37 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -204,8 +204,8 @@ ALTER TABLE `bookmark_question`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`comment_id`),
-  ADD KEY `fk_comment__question` (`reply_id`),
-  ADD KEY `fk_comment__user` (`user_id`);
+  ADD KEY `fk_comment__user` (`user_id`),
+  ADD KEY `fk_comment__answer` (`reply_id`);
 
 --
 -- Indexes for table `message`
@@ -284,8 +284,6 @@ ALTER TABLE `bookmark_question`
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `fk_comment__answer` FOREIGN KEY (`reply_id`) REFERENCES `answer` (`answer_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_comment__question` FOREIGN KEY (`reply_id`) REFERENCES `question` (`question_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_comment__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
