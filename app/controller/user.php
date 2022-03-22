@@ -4,8 +4,8 @@ namespace Controller;
 
 if (!empty($_GET) || !empty($_POST)) {
      if (!isset($_GET['id'])) {
-          session_start();
-          include '../helper/autoloader.php';
+          // session_start();
+          // include '../helper/autoloader.php';
      }
 }
 
@@ -58,10 +58,10 @@ class User extends \Model\User
           return $this->updateUser($postData);
      }
 
-     public function updateVerif($postData)
-     {
-          return $this->updateUserVerif($postData);
-     }
+     // public function updateVerif($postData)
+     // {
+     //      return $this->updateUserVerif($postData);
+     // }
 
      /* ######### DELETE ######### */
      public function delete($userId)

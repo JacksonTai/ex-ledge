@@ -320,16 +320,16 @@ class User extends \config\DbConn
      }
 
      // Update verification
-     protected function updateUserVerif($postData)
-     {
-          $userVerifData = $this->getUser($this->userId);
+     // protected function updateUserVerif($postData)
+     // {
+     //      $userVerifData = $this->getUser($this->userId);
 
-          if(isset($postData['verification'])) 
-          {
-               $sql = "UPDATE user SET verification='1' WHERE `user_id` = '$userVerifData'";
-               $this->executeQuery($sql);
-          }
-     }
+     //      if(isset($postData['verification'])) 
+     //      {
+     //           $sql = "UPDATE user SET verification='1' WHERE `user_id` = '$userVerifData'";
+     //           $this->executeQuery($sql);
+     //      }
+     // }
 
      /* ######### DELETE ######### */
      protected function deleteUser($userId)
