@@ -10,10 +10,10 @@ class Bookmark extends \config\DbConn
      {
           if (!empty($postData)) {
                $this->postData = $postData;
-               
+
                // Check if user has bookmark question or answer before. 
                $bookmarks = $this->readBookmark($postData['userId']);
-               
+
                foreach ($bookmarks as $bookmark) {
                     if ($postData['id'] == $bookmark['id']) {
                          $this->deleteBookmark($postData['id']);

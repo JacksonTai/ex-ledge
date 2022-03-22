@@ -47,11 +47,11 @@ $user = new \Controller\User();
                <!-- Question Action -->
                <div class="question__action-container">
                     <div class="question__action question__action--vote" data-vote-id="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
-                         <i class="fa-solid fa-arrow-up fa-lg"></i>
+                         <i class="vote-icon fa-solid fa-arrow-up fa-lg" id="upvote"></i>
                          <p class="question__point">
                               <?php echo htmlspecialchars($questionInfo['point']); ?>
                          </p>
-                         <i class="fa-solid fa-arrow-down fa-lg"></i>
+                         <i class="vote-icon fa-solid fa-arrow-down fa-lg" id="downvote"></i>
                     </div>
                     <div class="question__action question__action--comment" data-reply-id="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
                          <i class="action--comment-icon fa-solid fa-comment"></i>
@@ -163,11 +163,11 @@ $user = new \Controller\User();
                          <!-- Answer Action -->
                          <div class="question__action-container">
                               <div class="question__action question__action--vote" data-vote-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
-                                   <i class="fa-solid fa-arrow-up fa-lg"></i>
+                                   <i class="vote-icon fa-solid fa-arrow-up fa-lg" id="upvote"></i>
                                    <p class="question__point">
                                         <?php echo htmlspecialchars($answerInfo['point']); ?>
                                    </p>
-                                   <i class="fa-solid fa-arrow-down fa-lg"></i>
+                                   <i class="vote-icon fa-solid fa-arrow-down fa-lg" id="downvote"></i>
                               </div>
                               <div class="question__action question__action--comment" data-reply-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
                                    <i class="action--comment-icon fa-solid fa-comment"></i>

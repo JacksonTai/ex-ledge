@@ -169,6 +169,11 @@
   display: block;
 }
 
-.action-btn-click {
+.action-btn-click,
+.upvote {
   color: var(--clr-primary);
+}
+
+.downvote {
+  color: var(--clr-delete-red);
 }
