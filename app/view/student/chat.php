@@ -33,7 +33,7 @@ $user = new Controller\User();
                          <h2 class="chat-section__chatting-username"></h2>
                     </div>
                     <div class="chat-section__chat-box">
-                         <!-- <div class="chat-section__chat">
+                         <div class="chat-section__chat">
                               <p class="chat-section__chat-msg outgoing-msg">Hello, this is outgoing message.</p>
                          </div>
                          <div class="chat-section__chat">
@@ -94,24 +94,33 @@ $user = new Controller\User();
                                    Hello, this is outgoing message.
                                    Hello, this is outgoing message.
                               </p>
-                         </div> -->
+                         </div>
                     </div>
-                    <form class="chat-section__typing-form" autocomplete="off">
-                         <input class="chat-section__typing-box" type="text" name="msgContent" placeholder="Type your message here...">
-                         <button class="chat-section__send-msg-btn" data-sender-id="<?php echo htmlspecialchars($_SESSION['userId']) ?>">
-                              <i class=" chat-section__send-msg-icon fab fa-telegram-plane"></i>
+                    <div class="chat-section__typing-area">
+                         <input class="chat-section__typing-box" type="text" placeholder="Type your message here...">
+                         <button class="chat-section__send-msg-btn">
+                              <i class="chat-section__send-msg-icon fab fa-telegram-plane"></i>
                          </button>
-                    </form>
+                    </div>
                </section>
                <section class="chat-section__user-list">
                     <div class="chat-section__user-search-wrapper">
-                         <input class="chat-section__user-search-bar" type="text" placeholder="Search user" autocomplete="off">
-                         <button class="chat-section__user-search-btn" type="submit">
+                         <input class="chat-section__user-search-bar" type="text" name="user" id="" placeholder="Search user">
+                         <button class="chat-section__user-search-btn">
                               <i class="fas fa-search"></i>
                          </button>
                     </div>
                     <div class="chat-section__user-container">
-
+                         <?php $userList = $user->read(); ?>
+                         <?php foreach ($userList as $user) : ?>
+                              <div class="chat-section__user" id="<?php echo htmlspecialchars($user['user_id']) ?>" data-user-id=<?php echo htmlspecialchars($user['user_id']) ?>>
+                                   <img class="chat-section__user-img chat-profile-img" src="<?php echo $path; ?>public/img/profile1.jpg">
+                                   <div class="chat-section__user-content">
+                                        <p class="chat-section__username"><?php echo htmlspecialchars($user['username']) ?></p>
+                                        <p class="chat-section__user-msg">Hello</p>
+                                   </div>
+                              </div>
+                         <?php endforeach; ?>
                     </div>
                </section>
           </main>
