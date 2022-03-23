@@ -27,39 +27,6 @@ $user = new Controller\User();
 
                <h2 class="manageUser__title main-title">Manage User</h2>
                     <div class="card-container" id="user_container">
-                         <?php $userInfos = $user->read();?>
-                              <?php foreach ($userInfos as $userInfo) { ?>
-                                   <?php                          
-                                   if ($userInfo['verification'] == 0){
-                                        $verificationStatus = "UNVERIFIED";
-                                   } else {
-                                        $verificationStatus = "VERIFIED";
-                                   }?>
-                                   <div class="user-card">
-                                        <div class="user-card-content">
-                                             <img class="profile-picture" src="../../../public/img/profile.jpg" alt="Profile Image">
-                                             <div class="content-details">
-                                                  <p class="detail-title">User ID:</p>
-                                                  <p><?php echo htmlspecialchars($userInfo['user_id']); ?></p>
-                                             </div>
-                                             <div class="content-details">
-                                                  <p class="detail-title">Username: </p>
-                                                  <p><?php echo htmlspecialchars($userInfo['username']); ?></p>
-                                             </div>
-                                             <div class="content-details">
-                                                  <p class="detail-title">Email: </p>
-                                                  <p><?php echo htmlspecialchars($userInfo['email']); ?></p>
-                                             </div>
-                                             <div class="content-details">
-                                                  <p class="detail-title">Verification Status: </p>
-                                                  <p><?php echo htmlspecialchars($verificationStatus); ?></p>
-                                             </div>
-                                             <div class="ban-container">
-                                                  <button class="ban-button" id="banUser" data-user-id="<?php echo htmlspecialchars($userInfo['user_id']);?>">Ban</button>
-                                             </div>
-                                        </div>
-                                   </div>                         
-                              <?php } ?>
                     </div>                    
 
           </main>
@@ -70,6 +37,7 @@ $user = new Controller\User();
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
      <script src="<?php echo $path; ?>public/js/adminUser.js"></script>
+     <script src="<?php echo $path; ?>public/js/loadData.js"></script>
 
 </body>
 

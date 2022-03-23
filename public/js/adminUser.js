@@ -1,10 +1,10 @@
-let banButtons = document.querySelectorAll("#banUser");
+// let banButtons = document.querySelectorAll("#banUser");
 
-banButtons.forEach((banButton)=>{
-    banButton.addEventListener("click", ()=> {
-        confirmDeletion(banButton.dataset.userId);
-    })
-})
+// banButtons.forEach((banButton)=>{
+//     banButton.addEventListener("click", ()=> {
+//         confirmDeletion(banButton.dataset.userId);
+//     })
+// })
 
 function confirmDeletion(uid) {
     Swal.fire({
