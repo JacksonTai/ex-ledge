@@ -355,10 +355,8 @@ class User extends \config\DbConn
      //Update verification
      protected function updateUserVerif($userId)
      {
-          // $userVerifData = $this->getUser($this->userId);
-
-          $sql = "UPDATE user SET verification='1' WHERE `user_id` = ?;";
-          $this->executeQuery($sql, [$userId]);
+          $sql = "UPDATE user SET verification= ? WHERE `user_id` = ?;";
+          $this->executeQuery($sql, [1, $userId]);
 
           $sql_delete = "DELETE FROM verification_queue WHERE `user_id` = ?;";
           $this->executeQuery($sql_delete, [$userId]);
