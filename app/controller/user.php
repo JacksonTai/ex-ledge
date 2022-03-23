@@ -68,6 +68,12 @@ class User extends \Model\User
      {
           $this->deleteUser($userId);
      }
+
+     public function returnAdministrativeData()
+     {
+          return $this->returnAdminData();
+     }
+
 }
 
 /* ######### CREATE ######### */
@@ -108,3 +114,10 @@ if (isset($_GET['deleteId'])) {
      $user = new \Controller\User();
      $user->delete($_GET['deleteId']);
 }
+
+//if (isset($_GET['returnAdministrativeData'])) {
+//     $user = new \Controller\User();
+//     $user->returnAdministrativeData();
+
+//}
+

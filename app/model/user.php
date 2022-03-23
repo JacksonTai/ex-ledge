@@ -358,4 +358,29 @@ class User extends \config\DbConn
           $sql = "DELETE FROM user WHERE `user_id` = ?;";
           $this->executeQuery($sql, [$userId]);
      }
+
+     protected function returnAdminData(){
+          //desired outcome: returning an array with all data required
+          
+          //$sql = "select count(username) as users from `user`; select count(title) as questions from `question`;";
+
+          $resultData= array();
+
+          //since PDO::FETCH_ASSOC refuses to work i resort to this shitty hack
+          //i have standards and refuse to settle at something this shitty but im defeated at this point
+          //if theres a better solution, pls lmk
+
+          $totalusers= $this->executeQuery("select count(username) as users from `user`; select count(title) as questions from `question`")->fetchAll();
+          //how do you quantify "registered" vs "total" users anyway?
+          $totalregistered= $this->executeQuery("select count(username) as users from `user`; select count(title) as questions from `question`")->fetchAll();
+          $totalanswers= $this->executeQuery("select count(answer_id) as answers from `answer`")->fetchAll();
+          $totalquestions= $this->executeQuery("select count(title) as questions from `question`")->fetchAll();
+          
+          $resultData= array_merge($totalusers, $totalregistered, $totalanswers, $totalquestions);
+
+
+
+          return $resultData;
+
+     }
 }

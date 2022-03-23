@@ -1,7 +1,11 @@
 <?php
 session_start();
 require '../../helper/redirector.php';
+include '../../helper/autoloader.php';
+
 $path = '../../../';
+
+$admins= new \Controller\User();
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +18,7 @@ $path = '../../../';
 </head>
 
 <body>
+    <script src="<?php echo $path; ?>public/js/admindashDbInterfacer.js"></script>
 
     <?php include '../layout/header.php'; ?>
 
@@ -31,13 +36,13 @@ $path = '../../../';
                 </div>
                 <div class="panel-detail registered-users">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count">3089</p>
+                        <p class="panel-card-stat-count"><?php echo($admins->returnAdministrativeData())[0]['users']?></p>
                         <p class="panel-card-title">Registered user</p>
                     </div>
                 </div>
                 <div class="panel-detail total-users">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count">7890</p>
+                        <p class="panel-card-stat-count"><?php echo($admins->returnAdministrativeData())[1]['users']?></p>
                         <p class="panel-card-title">Total User</p>
                     </div>
                 </div>
@@ -50,13 +55,13 @@ $path = '../../../';
                 </div>
                 <div class="panel-detail total-ans">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count">591</p>
+                        <p class="panel-card-stat-count"><?php echo($admins->returnAdministrativeData())[2]['answers']?></p>
                         <p class="panel-card-title">Total Answers</p>
                     </div>
                 </div>
                 <div class="panel-detail total-questions">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count">743</p>
+                        <p class="panel-card-stat-count"><?php echo($admins->returnAdministrativeData())[3]['questions']?></p>
                         <p class="panel-card-title">Total Questions</p>
                     </div>
                 </div>
@@ -64,6 +69,8 @@ $path = '../../../';
         </main>
 
     </div>
+
+
 
     <?php include '../layout/footer.php'; ?>
 
