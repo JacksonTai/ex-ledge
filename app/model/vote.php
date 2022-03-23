@@ -31,7 +31,7 @@ class Vote extends \config\DbConn
 
                          // Update point for counter vote (from downvote to upvote with one click).
                          $postData['voteType'] ? $this->updatePoint(2) : $this->updatePoint(-2);
-                         $this->updateUserPoint();
+                         $this->updateUserPoint($postData['id']);
                          return;
                     }
 
@@ -40,7 +40,7 @@ class Vote extends \config\DbConn
 
                     // Update point for diselecting downvote or upvote.
                     $postData['voteType'] ? $this->updatePoint(-1) : $this->updatePoint(1);
-                    $this->updateUserPoint();
+                    $this->updateUserPoint($postData['id']);
                     return;
                }
           }
@@ -48,7 +48,7 @@ class Vote extends \config\DbConn
           $this->createPrevVote();
           // Update point for new downvote or upvote.
           $postData['voteType'] ? $this->updatePoint(1) : $this->updatePoint(-1);
-          $this->updateUserPoint();
+          $this->updateUserPoint($postData['id']);
      }
 
      protected function createPrevVote()
@@ -147,17 +147,22 @@ class Vote extends \config\DbConn
           ]);
      }
 
-     private function updateUserPoint()
+     /**
+      * This function read and set the user point.
+      * @param string $id  
+      * Answer or question ID
+      */
+     protected function updateUserPoint($id)
      {
-          // Get the detail of the question or answer poster using question ID.
+          // Get the detail of the question or answer poster using question or answer ID.
           $user = new \Controller\User();
-          $posterDetail = $user->read($this->postData['id']);
+          $posterDetail = $user->read($id);
 
-          // Update the point of question or answer poster.
+          // Get the total point of question or answer poster.
           $poster = new \Controller\User($posterDetail['user_id']);
           $posterPoint = $poster->readPoint($posterDetail['user_id']);
 
-          $poster->updatePoint($posterPoint);
+          $poster->setPoint($posterPoint);
      }
 
      private function deletePrevVote()

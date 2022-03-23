@@ -18,6 +18,16 @@ class Vote extends \Model\Vote
      {
           return $this->getPrevVote($userId, $voteFor, $id);
      }
+
+     /**
+      * This function read and set the user point.
+      * @param string $id  
+      * Answer or question ID
+      */
+     public function updatePoint($id)
+     {
+          $this->updateUserPoint($id);
+     }
 }
 
 if (isset($_GET['voteType'], $_GET['id'])) {

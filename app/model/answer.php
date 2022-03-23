@@ -77,21 +77,40 @@ class Answer extends \config\DbConn
 
      protected function updateAnswerStatus($answerId)
      {
-          // Get answer status and its question.
+          $vote = new \Controller\Vote();
+
+          // Get accepting answer's question.
           $answer = $this->readAnswer($answerId);
 
           $acceptedAns = $this->readAnswer($answer['question_id'], 1);
 
-          // Check if any other answer of the question has already been accepted.
+          // Check if there's any exsisting answer.
           if ($acceptedAns) {
-               $sql = "UPDATE answer SET `status` = ? WHERE answer_id = ?;";
-               $this->executeQuery($sql, [0, $acceptedAns['answer_id']]);
+               // If the user accept the same existing answer. 
+               if ($acceptedAns['answer_id'] == $answerId) {
+                    $sql = "UPDATE answer SET `status` = ?, `point` = `point` + ?
+                              WHERE answer_id = ?;";
+                    $this->executeQuery($sql, [0, -2, $answerId]);
+                    $vote->updatePoint($answerId);
+               }
+
+               // If the user accept another exsisting answer.
+               if ($acceptedAns['answer_id'] != $answerId) {
+                    $sql = "UPDATE answer SET `status` = ?, `point` = `point` + ?
+                              WHERE answer_id = ?;";
+                    $this->executeQuery($sql, [0, -2, $acceptedAns['answer_id']]);
+                    $vote->updatePoint($acceptedAns['answer_id']);
+               }
           }
 
-          $sql = "UPDATE answer SET `status` = ?
-                    WHERE answer_id = ?;";
+          // Only add the accepting answer point if it's not the previously accepted answer.
+          if (!$acceptedAns || $acceptedAns['answer_id'] != $answerId) {
+               $sql = "UPDATE answer SET `status` = ?, `point` = `point` + ?
+                         WHERE answer_id = ?;";
 
-          // Value of 1 will become true in boolean and vice versa for 0.
-          $this->executeQuery($sql, $answer['status'] ?  [0, $answerId] : [1, $answerId]);
+               // Status with value of 1 will become true in boolean and vice versa for 0.
+               $this->executeQuery($sql, $answer['status'] ?  [0, 2, $answerId] : [1, 2, $answerId]);
+               $vote->updatePoint($answerId);
+          }
      }
 }

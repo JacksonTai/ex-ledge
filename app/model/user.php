@@ -390,7 +390,7 @@ class User extends \config\DbConn
           ]);
      }
 
-     protected function updateUserPoint($value)
+     protected function setUserPoint($value)
      {
           $sql = "UPDATE user SET `point` = ? 
                     WHERE `user_id`= ?";

@@ -417,6 +417,16 @@ async function setBestAns() {
         bestAnswer.classList.add("show");
       }
     }
+    for (let acceptAction of acceptActions) {
+      if (acceptAction.classList.contains("action-btn-click")) {
+        acceptAction.classList.remove("action-btn-click");
+      }
+      if (
+        acceptAction.closest(".question__ans-container").id == data.answer_id
+      ) {
+        acceptAction.classList.add("action-btn-click");
+      }
+    }
   } catch (e) {
     console.log("Error: ", e);
   }
