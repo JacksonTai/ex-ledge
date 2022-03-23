@@ -75,7 +75,7 @@ class User extends \config\DbConn
      protected function loadData($limit, $start)
      {    
           try {
-               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT 12 OFFSET $start ";
+               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
                $stmt = $this->executeQuery($sql, ['U%']);
                $userInfos = $stmt->fetchAll();
 
