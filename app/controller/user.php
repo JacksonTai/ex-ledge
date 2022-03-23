@@ -4,8 +4,8 @@ namespace Controller;
 
 if (!empty($_GET) || !empty($_POST)) {
      if (!isset($_GET['id'])) {
-          // session_start();
-          // include '../helper/autoloader.php';
+          session_start();
+          include '../helper/autoloader.php';
      }
 }
 
@@ -58,15 +58,20 @@ class User extends \Model\User
           return $this->updateUser($postData);
      }
 
-     // public function updateVerif($postData)
-     // {
-     //      return $this->updateUserVerif($postData);
-     // }
+     public function updateVerif($userId)
+     {
+          $this->updateUserVerif($userId);
+     }
 
      /* ######### DELETE ######### */
      public function delete($userId)
      {
           $this->deleteUser($userId);
+     }
+
+     public function deleteVerif($userId)
+     {
+          $this->deleteUserVerif($userId);
      }
 }
 
@@ -102,4 +107,14 @@ if (isset($_GET['bio'])) {
 if (isset($_GET['deleteId'])) {
      $user = new \Controller\User();
      $user->delete($_GET['deleteId']);
+}
+
+if (isset($_GET['verifId'])) {
+     $user = new \Controller\User();
+     $user->updateVerif($_GET['verifId']);
+}
+
+if (isset($_GET['rejectverifId'])) {
+     $user = new \Controller\User();
+     $user->deleteVerif($_GET['rejectverifId']);
 }

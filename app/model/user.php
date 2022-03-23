@@ -319,22 +319,30 @@ class User extends \config\DbConn
           ]);
      }
 
-     // Update verification
-     // protected function updateUserVerif($postData)
-     // {
-     //      $userVerifData = $this->getUser($this->userId);
+     //Update verification
+     protected function updateUserVerif($userId)
+     {
+          // $userVerifData = $this->getUser($this->userId);
 
-     //      if(isset($postData['verification'])) 
-     //      {
-     //           $sql = "UPDATE user SET verification='1' WHERE `user_id` = '$userVerifData'";
-     //           $this->executeQuery($sql);
-     //      }
-     // }
+          $sql = "UPDATE user SET verification='1' WHERE `user_id` = ?;";
+          $this->executeQuery($sql, [$userId]);
+
+          $sql_delete = "DELETE FROM verification_queue WHERE `user_id` = ?;";
+          $this->executeQuery($sql_delete, [$userId]);
+          
+     }
 
      /* ######### DELETE ######### */
      protected function deleteUser($userId)
      {
           $sql = "DELETE FROM user WHERE `user_id` = ?;";
+          $this->executeQuery($sql, [$userId]);
+     }
+
+     //reject verification
+     protected function deleteUserVerif($userId)
+     {
+          $sql = "DELETE FROM verification_queue WHERE `user_id` = ?;";
           $this->executeQuery($sql, [$userId]);
      }
 }
