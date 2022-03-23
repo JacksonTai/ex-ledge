@@ -73,14 +73,12 @@ class User extends \config\DbConn
      }
 
      protected function loadData($limit, $start)
-     {
+     {    
           try {
-               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
+               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT 12 OFFSET $start ";
                $stmt = $this->executeQuery($sql, ['U%']);
                $userInfos = $stmt->fetchAll();
 
-
-               // For each users inside of userInfos array, echo out the php coe below
                foreach ($userInfos as $userInfo){
                     if ($_SESSION['userId'][0] == "A") {
                          if ($userInfo['verification'] == 0){
@@ -128,11 +126,10 @@ class User extends \config\DbConn
                     }                
                }
 
-
-
           } catch (PDOException $e) {
                die('Error: ' . $e->getMessage());
-          }          
+          }
+                   
      }
 
      protected function getUser($userId)
@@ -163,8 +160,7 @@ class User extends \config\DbConn
           // Default query for selecting all user's info and detail. 
           try {
                $result = [];
-               // Display the users in user dashbaord up to 9 in one page
-               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT 9";
+               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC";
                $stmt = $this->executeQuery($sql, ['U%']);
                $userInfos = $stmt->fetchAll();
           
