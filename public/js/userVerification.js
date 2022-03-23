@@ -10,7 +10,6 @@ for (let acceptBtn of acceptBtns) {
 }
 
 let rejectBtns = document.querySelectorAll('.user-verification-btn--reject');
-let rejectBtnContainer = document.querySelector('.user-verification-wrapper');
 
 for (let rejectBtn of rejectBtns) {
     rejectBtn.addEventListener('click', function () {
