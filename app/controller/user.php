@@ -28,7 +28,7 @@ class User extends \Model\User
           return $this->getUser($userId);
      }
 
-     public function loadUsers($limit = null, $start = null)
+     public function loadUsers($limit, $start)
      {
           return $this->loadData($limit, $start);
      }     
