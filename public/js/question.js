@@ -310,97 +310,97 @@ checkVerifStatus().then(() => {
         console.log("Error: ", e);
       }
     }
+  }
+});
 
-    // Select answer actions' vote by excluding the vote id of question Id.
-    let ansActionsVote = document.querySelectorAll(
-      `[data-vote-id]:not([data-vote-id="${url.searchParams.get("id")}"])`
+// Select answer actions' vote by excluding the vote id of question Id.
+let ansActionsVote = document.querySelectorAll(
+  `[data-vote-id]:not([data-vote-id="${url.searchParams.get("id")}"])`
+);
+
+let questionActionVote = document.querySelector(
+  `[data-vote-id=${url.searchParams.get("id")}]`
+);
+
+async function setQuestionPrevVote() {
+  try {
+    let res = await fetch(
+      `../../controller/vote.php?voteFor=question&id=${url.searchParams.get(
+        "id"
+      )}`
     );
+    let prevVote = await res.json();
+    let upvoteIcon = questionActionVote.children[0];
+    let downvoteIcon = questionActionVote.children[2];
 
-    let questionActionVote = document.querySelector(
-      `[data-vote-id=${url.searchParams.get("id")}]`
-    );
-
-    async function setQuestionPrevVote() {
-      try {
-        let res = await fetch(
-          `../../controller/vote.php?voteFor=question&id=${url.searchParams.get(
-            "id"
-          )}`
-        );
-        let prevVote = await res.json();
-        let upvoteIcon = questionActionVote.children[0];
-        let downvoteIcon = questionActionVote.children[2];
-
-        if (prevVote.question_id == url.searchParams.get("id")) {
-          if (prevVote.vote == 1) {
-            upvoteIcon.classList.add("upvote");
-            if (downvoteIcon.classList.contains("downvote")) {
-              downvoteIcon.classList.remove("downvote");
-            }
-          }
-          if (prevVote.vote == 0) {
-            downvoteIcon.classList.add("downvote");
-            if (upvoteIcon.classList.contains("upvote")) {
-              upvoteIcon.classList.remove("upvote");
-            }
-          }
-          return;
+    if (prevVote.question_id == url.searchParams.get("id")) {
+      if (prevVote.vote == 1) {
+        upvoteIcon.classList.add("upvote");
+        if (downvoteIcon.classList.contains("downvote")) {
+          downvoteIcon.classList.remove("downvote");
         }
+      }
+      if (prevVote.vote == 0) {
+        downvoteIcon.classList.add("downvote");
+        if (upvoteIcon.classList.contains("upvote")) {
+          upvoteIcon.classList.remove("upvote");
+        }
+      }
+      return;
+    }
 
-        // Remove upvote or downvote icon color if there's no previous vote.
+    // Remove upvote or downvote icon color if there's no previous vote.
+    if (upvoteIcon.classList.contains("upvote")) {
+      upvoteIcon.classList.remove("upvote");
+    }
+    if (downvoteIcon.classList.contains("downvote")) {
+      downvoteIcon.classList.remove("downvote");
+    }
+  } catch (e) {
+    console.log("Error: ", e);
+  }
+}
+
+async function setAnsPrevVote() {
+  try {
+    for (let ansActionVote of ansActionsVote) {
+      let upvoteIcon = ansActionVote.children[0];
+      let downvoteIcon = ansActionVote.children[2];
+
+      let res = await fetch(
+        `../../controller/vote.php?voteFor=answer&id=${ansActionVote.dataset.voteId}`
+      );
+      let prevVote = await res.json();
+
+      if (ansActionVote.dataset.voteId == prevVote.answer_id) {
+        if (prevVote.vote == 1) {
+          upvoteIcon.classList.add("upvote");
+          if (downvoteIcon.classList.contains("downvote")) {
+            downvoteIcon.classList.remove("downvote");
+          }
+        }
+        if (prevVote.vote == 0) {
+          downvoteIcon.classList.add("downvote");
+          if (upvoteIcon.classList.contains("upvote")) {
+            upvoteIcon.classList.remove("upvote");
+          }
+        }
+      }
+
+      // Remove upvote or downvote icon color if there's no previous vote.
+      if (ansActionVote.dataset.voteId != prevVote.answer_id) {
         if (upvoteIcon.classList.contains("upvote")) {
           upvoteIcon.classList.remove("upvote");
         }
         if (downvoteIcon.classList.contains("downvote")) {
           downvoteIcon.classList.remove("downvote");
         }
-      } catch (e) {
-        console.log("Error: ", e);
       }
     }
-
-    async function setAnsPrevVote() {
-      try {
-        for (let ansActionVote of ansActionsVote) {
-          let upvoteIcon = ansActionVote.children[0];
-          let downvoteIcon = ansActionVote.children[2];
-
-          let res = await fetch(
-            `../../controller/vote.php?voteFor=answer&id=${ansActionVote.dataset.voteId}`
-          );
-          let prevVote = await res.json();
-
-          if (ansActionVote.dataset.voteId == prevVote.answer_id) {
-            if (prevVote.vote == 1) {
-              upvoteIcon.classList.add("upvote");
-              if (downvoteIcon.classList.contains("downvote")) {
-                downvoteIcon.classList.remove("downvote");
-              }
-            }
-            if (prevVote.vote == 0) {
-              downvoteIcon.classList.add("downvote");
-              if (upvoteIcon.classList.contains("upvote")) {
-                upvoteIcon.classList.remove("upvote");
-              }
-            }
-          }
-
-          // Remove upvote or downvote icon color if there's no previous vote.
-          if (ansActionVote.dataset.voteId != prevVote.answer_id) {
-            if (upvoteIcon.classList.contains("upvote")) {
-              upvoteIcon.classList.remove("upvote");
-            }
-            if (downvoteIcon.classList.contains("downvote")) {
-              downvoteIcon.classList.remove("downvote");
-            }
-          }
-        }
-      } catch (e) {
-        console.log("Error: ", e);
-      }
-    }
+  } catch (e) {
+    console.log("Error: ", e);
   }
-});
+}
 
 /* -- Accept answer -- */
 let acceptActions = document.querySelectorAll(".question__action--accept");
