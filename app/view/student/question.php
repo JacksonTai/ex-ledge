@@ -160,7 +160,6 @@ $user = new \Controller\User();
                               <img class="profile-icon" src="../../../public/img/profile1.jpg" alt="Profile Image">
                               <div class="question__user-info">
                                    <h4><?php echo htmlspecialchars($userInfo['username']); ?></h4>
-                                   <p>3 days ago</p>
                               </div>
                               <div class="question__best-answer <?php echo $answerInfo['status'] ? 'show' : '' ?>">
                                    <i class="fa-solid fa-circle-check"></i>
