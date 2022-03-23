@@ -382,10 +382,51 @@ async function setAnsPrevVote() {
   }
 }
 
+/* -- Accept answer -- */
+let acceptActions = document.querySelectorAll(".question__action--accept");
+
+for (let acceptAction of acceptActions) {
+  acceptAction.addEventListener("click", async function () {
+    try {
+      let res = await fetch(
+        `../../controller/answer.php?acceptId=${this.dataset.acceptId}`
+      );
+      setBestAns();
+    } catch (e) {
+      console.log("Error: ", e);
+    }
+  });
+}
+
+async function setBestAns() {
+  try {
+    // Get best/accepted answer.
+    let res = await fetch(
+      `../../controller/answer.php?questionId=${url.searchParams.get(
+        "id"
+      )}&status=1`
+    );
+    let data = await res.json();
+
+    let bestAnswers = document.querySelectorAll(".question__best-answer");
+    for (let bestAnswer of bestAnswers) {
+      if (bestAnswer.classList.contains("show")) {
+        bestAnswer.classList.remove("show");
+      }
+      if (bestAnswer.closest(".question__ans-container").id == data.answer_id) {
+        bestAnswer.classList.add("show");
+      }
+    }
+  } catch (e) {
+    console.log("Error: ", e);
+  }
+}
+
 window.onload = () => {
   setQuestionPrevVote();
   setAnsPrevVote();
   setBookmark();
   setQnComment();
   setAnsComment();
+  setBestAns();
 };

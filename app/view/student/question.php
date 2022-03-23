@@ -62,6 +62,7 @@ $user = new \Controller\User();
                          <p>Bookmark</p>
                     </div>
                     <?php
+                    // Check if the user has already answer the question.
                     $isAnswered = false;
                     $viewAnsLink = '../student/question.php?id=' . $questionInfo['question_id'] . '#';
 
@@ -138,7 +139,19 @@ $user = new \Controller\User();
                </p>
 
                <!-- Answer of the question -->
-               <?php $answersInfo = $answer->read($questionInfo['question_id']); ?>
+               <?php
+               $answersInfo = $answer->read($questionInfo['question_id']);
+
+               foreach ($answersInfo as $key => $answerInfo) {
+                    if ($answerInfo['status']) {
+                         // Remove accepted answer from the array.
+                         unset($answersInfo[$key]);
+
+                         // Add the accepted answer as the first array item.
+                         array_unshift($answersInfo, $answerInfo);
+                    }
+               }
+               ?>
                <?php foreach ($answersInfo as $answerInfo) : ?>
 
                     <?php $userInfo = $user->read($answerInfo['user_id']); ?>
@@ -149,12 +162,10 @@ $user = new \Controller\User();
                                    <h4><?php echo htmlspecialchars($userInfo['username']); ?></h4>
                                    <p>3 days ago</p>
                               </div>
-                              <?php if ($answerInfo['status'] == 1) : ?>
-                                   <div class="question__best-answer">
-                                        <i class="fa-solid fa-circle-check"></i>
-                                        <span>Best Answer</span>
-                                   </div>
-                              <?php endif; ?>
+                              <div class="question__best-answer <?php echo $answerInfo['status'] ? 'show' : '' ?>">
+                                   <i class="fa-solid fa-circle-check"></i>
+                                   <span>Best Answer</span>
+                              </div>
                          </div>
                          <p class="question__ans">
                               <?php echo htmlspecialchars($answerInfo['content']); ?>
@@ -177,6 +188,12 @@ $user = new \Controller\User();
                                    <i class="action--bookmark-icon fa-solid fa-bookmark"></i>
                                    <p>Bookmark</p>
                               </div>
+                              <?php if ($_SESSION['userId'] == $questionInfo['user_id']) : ?>
+                                   <div class="question__action question__action--accept" data-accept-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
+                                        <i class="action--accept-icon fa-solid fa-circle-check"></i>
+                                        <p>Accept</p>
+                                   </div>
+                              <?php endif; ?>
                          </div>
 
                          <!-- Comments of the answer -->

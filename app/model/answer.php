@@ -36,13 +36,31 @@ class Answer extends \config\DbConn
           return $answerId;
      }
 
-     protected function readAnswer($criteria)
+     protected function readAnswer($criteria = null, $status = null)
      {
-          if ($criteria && $criteria[0] == 'Q') {
-               $sql = "SELECT * FROM answer a
-                         WHERE question_id = ?;";
-               $stmt = $this->executeQuery($sql, [$criteria]);
-               return $stmt->fetchAll();
+          if ($criteria) {
+               if ($criteria[0] == 'Q') {
+
+                    // Get accepted or rejected answer.
+                    if ($status) {
+                         $sql = "SELECT * FROM answer WHERE question_id = ?
+                                   AND `status` = ?;";
+                         $stmt = $this->executeQuery($sql, [$criteria, $status]);
+                         return $stmt->fetch();
+                    }
+
+                    // Get all answer of that specific question.
+                    $sql = "SELECT * FROM answer WHERE question_id = ?;";
+                    $stmt = $this->executeQuery($sql, [$criteria]);
+                    return $stmt->fetchAll();
+               }
+
+               // Get specific answer based on the given answer ID.
+               if ($criteria[0] == 'A') {
+                    $sql = "SELECT * FROM answer WHERE answer_id = ?;";
+                    $stmt = $this->executeQuery($sql, [$criteria]);
+                    return $stmt->fetch();
+               }
           }
      }
 
@@ -55,5 +73,25 @@ class Answer extends \config\DbConn
                $result = $stmt->fetch();
                return $result['COUNT(answer_id)'];
           }
+     }
+
+     protected function updateAnswerStatus($answerId)
+     {
+          // Get answer status and its question.
+          $answer = $this->readAnswer($answerId);
+
+          $acceptedAns = $this->readAnswer($answer['question_id'], 1);
+
+          // Check if any other answer of the question has already been accepted.
+          if ($acceptedAns) {
+               $sql = "UPDATE answer SET `status` = ? WHERE answer_id = ?;";
+               $this->executeQuery($sql, [0, $acceptedAns['answer_id']]);
+          }
+
+          $sql = "UPDATE answer SET `status` = ?
+                    WHERE answer_id = ?;";
+
+          // Value of 1 will become true in boolean and vice versa for 0.
+          $this->executeQuery($sql, $answer['status'] ?  [0, $answerId] : [1, $answerId]);
      }
 }

@@ -54,14 +54,16 @@
 .question__action--comment,
 .question__action--bookmark,
 .question__action--ans,
-.action__action--view-ans {
+.action__action--view-ans,
+.question__action--accept {
   cursor: pointer;
 }
 
 .action--comment-icon,
 .action--bookmark-icon,
 .action--ans-icon,
-.action--view-ans-icon {
+.action--view-ans-icon,
+.action--accept-icon {
   margin-right: 0.5rem;
 }
 
@@ -116,6 +118,7 @@
 }
 
 .question__best-answer {
+  display: none;
   margin-left: auto;
   padding: 0.3em 1em;
   background-color: #ebf9e9;
