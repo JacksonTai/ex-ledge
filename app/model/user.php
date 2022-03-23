@@ -107,7 +107,7 @@ class User extends \config\DbConn
                                              <p>'.$verificationStatus.'</p>
                                         </div>
                                         <div class="ban-container">
-                                             <button class="ban-button">Ban</button>
+                                             <button class="ban-button" id="banUser" data-user-id='.($userInfo['user_id']).'>Ban</button>
                                         </div>
                                    </div>
                               </div>';

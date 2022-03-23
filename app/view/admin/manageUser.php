@@ -29,6 +29,12 @@ $user = new Controller\User();
                     <div class="card-container" id="user_container">
                          <?php $userInfos = $user->read();?>
                               <?php foreach ($userInfos as $userInfo) { ?>
+                                   <?php                          
+                                   if ($userInfo['verification'] == 0){
+                                        $verificationStatus = "UNVERIFIED";
+                                   } else {
+                                        $verificationStatus = "VERIFIED";
+                                   }?>
                                    <div class="user-card">
                                         <div class="user-card-content">
                                              <img class="profile-picture" src="../../../public/img/profile.jpg" alt="Profile Image">
@@ -46,7 +52,7 @@ $user = new Controller\User();
                                              </div>
                                              <div class="content-details">
                                                   <p class="detail-title">Verification Status: </p>
-                                                  <p>UNVERIFIED</p>
+                                                  <p><?php echo htmlspecialchars($verificationStatus); ?></p>
                                              </div>
                                              <div class="ban-container">
                                                   <button class="ban-button" id="banUser" data-user-id="<?php echo htmlspecialchars($userInfo['user_id']);?>">Ban</button>
