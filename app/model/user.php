@@ -73,33 +73,63 @@ class User extends \config\DbConn
      }
 
      protected function loadData($limit, $start)
-     {
+     {    
           try {
                $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
                $stmt = $this->executeQuery($sql, ['U%']);
                $userInfos = $stmt->fetchAll();
 
-               // For each users inside of userInfos array, echo out the php coe below
                foreach ($userInfos as $userInfo){
-                    
-                    echo 
-                         '<div class="user_box" id='.($userInfo['user_id']).' data-user-id='.($userInfo['user_id']).'>
-                              <a class="user_info" href="profile.php?id='.($userInfo['user_id']).'">
-                                   <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="user_img">
-                                   <div class="user_info-detail">    
-                                        <p class="user_name">'.($userInfo['username']).'</p>
-                                        <p class="RP">RP: '.($userInfo['point']).'</p>
+                    if ($_SESSION['userId'][0] == "A") {
+                         if ($userInfo['verification'] == 0){
+                              $verificationStatus = "UNVERIFIED";
+                         } else {
+                              $verificationStatus = "VERIFIED";
+                         }
+                         echo
+                              '<div class="user-card">
+                                   <div class="user-card-content">
+                                        <img class="profile-picture" src="../../../public/img/profile.jpg" alt="Profile Image">
+                                        <div class="content-details">
+                                             <p class="detail-title">User ID:</p>
+                                             <p>'.($userInfo['user_id']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Username: </p>
+                                             <p>'.($userInfo['username']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Email: </p>
+                                             <p>'.($userInfo['email']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Verification Status: </p>
+                                             <p>'.$verificationStatus.'</p>
+                                        </div>
+                                        <div class="ban-container">
+                                             <button class="ban-button" id="banUser" onclick="confirmDeletion(\''  .($userInfo['user_id']). '\')">Ban</button>
+                                        </div>
                                    </div>
-                              </a>
-                         </div>';                    
-                    
+                              </div>';
+
+                    } else {
+                         echo 
+                              '<div class="user_box" id='.($userInfo['user_id']).' data-user-id='.($userInfo['user_id']).'>
+                                   <a class="user_info" href="profile.php?id='.($userInfo['user_id']).'">
+                                        <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="user_img">
+                                        <div class="user_info-detail">    
+                                             <p class="user_name">'.($userInfo['username']).'</p>
+                                             <p class="RP">RP: '.($userInfo['point']).'</p>
+                                        </div>
+                                   </a>
+                              </div>';                            
+                    }                
                }
-
-
 
           } catch (PDOException $e) {
                die('Error: ' . $e->getMessage());
-          }          
+          }
+                   
      }
 
      protected function getUser($userId)
@@ -130,8 +160,7 @@ class User extends \config\DbConn
           // Default query for selecting all user's info and detail. 
           try {
                $result = [];
-               // Display the users in user dashbaord up to 9 in one page
-               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT 9";
+               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC";
                $stmt = $this->executeQuery($sql, ['U%']);
                $userInfos = $stmt->fetchAll();
           
