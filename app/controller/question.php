@@ -45,6 +45,12 @@ class Question extends \Model\Question
     {
         return $this->loadData($limit, $start);
     }     
+
+    /* ######### DELETE ######### */
+    public function delete($questionId)
+    {
+        $this->deleteQuestion($questionId);
+    }
 }
 
 if (!empty($_POST)) {
@@ -55,7 +61,14 @@ if (!empty($_POST)) {
     null;
 }
 
+/* ######### READ ######### */
 if (isset($_POST["limit"], $_POST["start"])){
     $question = new \Controller\Question();
     return $question -> loadQuestions($_POST["limit"], $_POST["start"]);
+}
+
+/* ######### DELETE ######### */
+if (isset($_GET['deleteId'])) {
+    $user = new \Controller\Question();
+    $user->delete($_GET['deleteId']);
 }

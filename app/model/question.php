@@ -198,4 +198,11 @@ class Question extends \config\DbConn
             die('Error: ' . $e->getMessage());
         }
     }
+
+     /* ######### DELETE ######### */
+     protected function deleteQuestion($questionId)
+     {
+          $sql = "DELETE FROM question WHERE `question_id` = ?;";
+          $this->executeQuery($sql, [$questionId]);
+     }
 }
