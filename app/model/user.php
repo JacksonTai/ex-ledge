@@ -167,7 +167,6 @@ class User extends \config\DbConn
                          die('Error: ' . $e->getMessage());
                     }
                }
-
                // Query for selecting specific user based on the given answer ID. 
                if ($criteria[0] == 'A') {
                     try {
@@ -235,6 +234,23 @@ class User extends \config\DbConn
           }
 
           return $top ? array_slice($calcResult, 0, $top) : $calcResult;
+     }
+
+     protected function getUserPoint($userId)
+     {
+          // Get total points from answer posted by the user.
+          $sql = "SELECT SUM(`point`) AS `point` FROM answer 
+                    WHERE `user_id` = ? AND `user_id` LIKE ?;";
+          $stmt = $this->executeQuery($sql, [$userId, 'U%']);
+          $ansTotal = $stmt->fetch();
+
+          // Get total points from question posted by the user.
+          $sql = "SELECT SUM(`point`) AS `point` FROM question 
+                    WHERE `user_id` = ? AND `user_id` LIKE ?;";
+          $stmt = $this->executeQuery($sql, [$userId, 'U%']);
+          $questionTotal = $stmt->fetch();
+
+          return $ansTotal['point'] + $questionTotal['point'];
      }
 
      protected function searchUser($searchTerm)
@@ -319,7 +335,7 @@ class User extends \config\DbConn
      }
 
      /* ######### UPDATE ######### */
-     protected function updateUser($postData)
+     protected function updateUserDetail($postData)
      {
           $userData = $this->getUser($this->userId);
 
@@ -403,6 +419,13 @@ class User extends \config\DbConn
                $postData['gender'],
                $postData['age']
           ]);
+     }
+
+     protected function setUserPoint($value)
+     {
+          $sql = "UPDATE user SET `point` = ? 
+                    WHERE `user_id`= ?";
+          $this->executeQuery($sql, [$value, $this->userId]);
      }
 
      /* ######### DELETE ######### */

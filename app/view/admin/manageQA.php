@@ -5,6 +5,7 @@ require '../../helper/autoloader.php';
 $path = '../../../';
 
 $questions = new \Controller\Question();
+$answer = new \Controller\Answer();
 ?>
 <!DOCTYPE html>
 <html lang="en">

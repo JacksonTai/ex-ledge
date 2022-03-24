@@ -52,12 +52,14 @@ let aboutMeConfirmBtn = document.querySelector(
   ".overview--about__bio-confirm-btn"
 );
 
-aboutMeEditBtn.addEventListener("click", () => {
-  aboutMeContent.style.display = "none";
-  aboutMeEditBtn.style.display = "none";
-  aboutMeInput.style.display = "block";
-  aboutMeBtnContainer.style.display = "flex";
-});
+if (aboutMeEditBtn) {
+  aboutMeEditBtn.addEventListener("click", () => {
+    aboutMeContent.style.display = "none";
+    aboutMeEditBtn.style.display = "none";
+    aboutMeInput.style.display = "block";
+    aboutMeBtnContainer.style.display = "flex";
+  });
+}
 
 aboutMeCancelBtn.addEventListener("click", hideEditField);
 aboutMeConfirmBtn.addEventListener("click", async function () {

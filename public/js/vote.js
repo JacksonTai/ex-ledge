@@ -1,69 +1,83 @@
-/* -- Helper function -- */
-function styleVote(vote) {
-    let upVoteSelected = false, downVoteSelected = false;
+// let votesIcon = document.querySelectorAll(".vote-icon");
 
-    if (vote.id == 'up') {
-        vote.style.color = "var(--clr-primary)";
-        vote.nextElementSibling.nextElementSibling.style.color = "#9f9f9f";
-    }
-    if (vote.id == 'down') {
-        vote.style.color = "#FF5757";
-        vote.previousElementSibling.previousElementSibling.style.color = "#9f9f9f"
-    }
-  
-}
+// for (let voteIcon of votesIcon) {
+//   voteIcon.addEventListener("click", function () {
+//     let id = this.parentElement.dataset.voteId;
+//     if (this.id == "upvote") {
+//       updateVote(1, id);
+//     }
+//     if (this.id == "downvote") {
+//       updateVote(0, id);
+//     }
+//   });
+// }
 
+// async function updateVote(voteType, id) {
+//   try {
+//     await fetch(`../../controller/vote.php?voteType=${voteType}&id=${id}`);
 
-let upvotes = document.querySelectorAll("#up");
-for (let upvote of upvotes) {
-    upvote.addEventListener("click", ()=> {
-        updateVote(upvote.dataset.questionId, 1);
-        styleVote(upvote);
-    })
-}
+//     // Reset previous vote once the vote has been updated.
+//     if (id[0] == "Q") {
+//       setQuestionPrevVote();
+//     }
+//   } catch (e) {
+//     console.log("Error: ", e);
+//   }
+// }
 
-let downvotes = document.querySelectorAll("#down");
-for (let downvote of downvotes) {
-    downvote.addEventListener("click", ()=> {
-        updateVote(downvote.dataset.questionId, -1);
-        styleVote(downvote);
-    })
-}
+// // Select answer actions' vote by excluding the vote id of question Id.
+// let ansActionsVote = document.querySelectorAll(
+//   `[data-vote-id]:not([data-vote-id="${url.searchParams.get("id")}"])`
+// );
 
-async function updateVote(questionId, voteType) {
-    try {
-        await fetch(`../../controller/question.php?questionId=${questionId}&voteType=${voteType}`);
-    } catch(e) {
-        console.log(e);
-    }
-}
+// let questionActionVote = document.querySelector(
+//   `[data-vote-id=${url.searchParams.get("id")}]`
+// );
 
-async function readPoint(questionId) {
-    try {
-        let res = await fetch(`../../controller/question.php?p-questionId=${questionId}`);
-        let data = await res.json();
-        return data.point;
-    } catch(e) {
-        console.log(e);
-    }
-}
+// async function setQuestionPrevVote() {
+//   try {
+//     let res = await fetch(`../../controller/vote.php?voteFor=question`);
+//     let prevVotes = await res.json();
 
-async function readVote(questionId) {
-    try {
-        let res = await fetch(`../../controller/question.php?v-questionId=${questionId}`);
-        let data = await res.text();
-        return data.vote;
-    } catch(e) {
-        console.log(e);
-    }
-}
+//     let upvoteIcon = questionActionVote.children[0];
+//     let downvoteIcon = questionActionVote.children[2];
+//     for (let prevVote of prevVotes) {
+//       if (prevVote.question_id == url.searchParams.get("id")) {
+//         if (prevVote.vote == 1) {
+//           upvoteIcon.classList.add("upvote");
+//           if (downvoteIcon.classList.contains("downvote")) {
+//             downvoteIcon.classList.remove("downvote");
+//           }
+//         }
+//         if (prevVote.vote == 0) {
+//           downvoteIcon.classList.add("downvote");
+//           if (upvoteIcon.classList.contains("upvote")) {
+//             upvoteIcon.classList.remove("upvote");
+//           }
+//         }
+//         return;
+//       }
+//     }
+//     if (upvoteIcon.classList.contains("upvote")) {
+//       upvoteIcon.classList.remove("upvote");
+//     }
+//     if (downvoteIcon.classList.contains("downvote")) {
+//       downvoteIcon.classList.remove("downvote");
+//     }
+//   } catch (e) {
+//     console.log("Error: ", e);
+//   }
+// }
 
-let votes = document.querySelectorAll("#vote");
-setInterval(async function () {
-    
-    for(let vote of votes) {
-        let point = await readPoint(vote.dataset.questionId);
-        let prevVote = await readVote(vote.dataset.questionId);
-      d
-        vote.textContent = point;
-}}, 1000);
+// async function setAnsPrevVote() {
+//   try {
+//     let res = await fetch(`../../controller/vote.php?voteFor=answer`);
+//     return await res.text();
+//   } catch (e) {
+//     console.log("Error: ", e);
+//   }
+// }
+ 
+// window.onload = () => {
+//   setQuestionPrevVote();
+// };

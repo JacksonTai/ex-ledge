@@ -16,6 +16,7 @@ class Answer extends \Model\Answer
           $postData ? parent::__construct($postData) : '';
      }
 
+
      public function read($criteria = null, $status = null)
      {
           return $this->readAnswer($criteria, $status);
@@ -25,9 +26,20 @@ class Answer extends \Model\Answer
      {
           return $this->getAnswerCount($criteria);
      }
+
+     public function updateStatus($answerId)
+     {
+          return  $this->updateAnswerStatus($answerId);
+     }
 }
 
 if (isset($_GET['questionId'], $_GET['status'])) {
      $answer = new \Controller\Answer();
      echo json_encode($answer->read($_GET['questionId'], $_GET['status']));
+     // print_r json_encode
+}
+
+if (isset($_GET['acceptId'])) {
+     $answer = new \Controller\Answer();
+     print_r($answer->updateStatus($_GET['acceptId']));
 }
