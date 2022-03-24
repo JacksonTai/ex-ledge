@@ -6,6 +6,7 @@ if (!empty($_GET) || !empty($_POST)) {
     if (isset($_GET['id'])) {
         include '../../helper/autoloader.php';
     } else {
+        session_start();
         include '../helper/autoloader.php';
     }
 }
@@ -24,6 +25,7 @@ class Question extends \Model\Question
         }
     }
 
+    /* ######### READ ######### */
     public function read($criteria = null)
     {
         return $this->getQuestion($criteria);
@@ -38,6 +40,22 @@ class Question extends \Model\Question
     {
         return $this->timestamp($time_posted);
     }
+
+    public function loadQuestions($limit, $start)
+    {
+        return $this->loadData($limit, $start);
+    }     
 }
 
-!empty($_POST) ? new \Controller\Question($_POST) : null;
+if (!empty($_POST)) {
+    if (!isset($_POST["limit"], $_POST["start"])){
+        new \Controller\Question($_POST);
+    }
+} else {
+    null;
+}
+
+if (isset($_POST["limit"], $_POST["start"])){
+    $question = new \Controller\Question();
+    return $question -> loadQuestions($_POST["limit"], $_POST["start"]);
+}

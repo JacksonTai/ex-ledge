@@ -1,5 +1,5 @@
 // Pop Up Display to ask if admin wants to ban user
-function confirmDeletion(uid) {
+function confirmDeletion(qid) {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -10,22 +10,22 @@ function confirmDeletion(uid) {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-            banUser(uid);
+            banUser(qid);
           Swal.fire(
             'Deleted!',
-            'Account has been banned and deleted.',
+            'Question has been deleted.',
             'success'
           ).then(()=>{
-            window.location = "../../view/admin/manageUser.php";          
+            window.location = "../../view/admin/manageQA.php";          
           })
         }
       }) 
 }
 
 // Execute function
-async function banUser(userId) {
+async function banUser(questionId) {
     try {
-        await fetch(`../../controller/user.php?deleteId=${userId}`);
+        await fetch(`../../controller/question.php?deleteId=${questionId}`);
     } catch(e) {
         console.log(e);
     }

@@ -3,7 +3,6 @@ session_start();
 require '../../helper/redirector.php';
 include '../../helper/autoloader.php';
 $path = '../../../';
-$user = new Controller\User();
 ?>
 <!DOCTYPE html>
 <html lang="en">
