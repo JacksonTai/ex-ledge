@@ -18,12 +18,9 @@ $admins= new \Controller\User();
 </head>
 
 <body>
-    <script src="<?php echo $path; ?>public/js/admindashDbInterfacer.js"></script>
-
     <?php include '../layout/header.php'; ?>
 
     <div class="main-sidebar-wrapper">
-
         <?php include '../layout/sideNavbar.php' ?>
 
         <main class="dashboard--main main-content">
@@ -50,8 +47,10 @@ $admins= new \Controller\User();
 
             <div class="panel dialog">
                 <div class="panel-card-stats">
-                    <p class="panel-title">Total answered</p>
-                    <p class="panel-title-stat">79%</p>
+                    <p class="panel-title">Q/A ratio</p>
+                    <p class="panel-title-stat"><?php if($admins->returnAdministrativeData()[2]['answers']==0){echo("N/A");} 
+                    else {echo(substr($admins->returnAdministrativeData()[3]['questions']/$admins->returnAdministrativeData()[2]['answers'], 0, 4));}?>
+                    </p>
                 </div>
                 <div class="panel-detail total-ans">
                     <div class="panel-card-stats">
