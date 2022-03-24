@@ -197,7 +197,6 @@
   margin-bottom: 2rem;
   border-bottom: 5px solid var(--clr-primary);
 }
- 
 
 .overview--about__title,
 .overview--stats__title {
@@ -215,15 +214,9 @@
   cursor: pointer;
 }
 
-/* .overview--about__close-btn,
-.overview--about__bio-input {
-  display: none;
-} */
-
 .overview--about__bio-input,
 .overview--about__bio-btn-container {
   display: none;
- 
 }
 
 .overview--about__bio-input {
@@ -238,11 +231,6 @@
 .overview--about__bio-cancel-btn {
   margin-right: 1rem;
   background-color: #b3b3b3;
-}
-
-.profile-section--question {
-  
-
 }
 
 /* Classes for JS DOM */
