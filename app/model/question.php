@@ -61,18 +61,23 @@ class Question extends \config\DbConn
     protected function getQuestion($criteria)
     {
         if ($criteria) {
-            // Query for selecting questions of specific user.
-            if ($criteria[0] == 'U') {
-                try {
-                    $sql = "SELECT q.*, u.username, u.user_id FROM question q
-                                INNER JOIN user u ON
-                                q.user_id = u.user_id
+            try {
+                // Query for selecting questions of specific user.
+                if ($criteria[0] == 'U') {
+                    $sql = "SELECT *, q.point AS point, u.POINT AS u_point
+                                FROM question q INNER JOIN user u ON q.user_id = u.user_id
                                 WHERE q.user_id = ?;";
-                    $stmt = $this->executeQuery($sql, [$criteria]);
-                    return  $stmt->fetchAll();
-                } catch (PDOException $e) {
-                    die('Error: ' . $e->getMessage());
                 }
+                if ($criteria[0] == 'Q') {
+                    $sql = "SELECT *, q.point AS point, u.POINT AS u_point
+                                FROM question q INNER JOIN user u ON q.user_id = u.user_id
+                                WHERE q.question_id = ?;";
+                }
+
+                $stmt = $this->executeQuery($sql, [$criteria]);
+                return  $stmt->fetchAll();
+            } catch (PDOException $e) {
+                die('Error: ' . $e->getMessage());
             }
         }
 
