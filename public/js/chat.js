@@ -210,4 +210,4 @@ setInterval(() => {
 
   // Stop scrolling to bottom if user's cursor is focusing on the chat area.
   chatAreaFocus ? null : scrollToBottom();
-}, 350);
+}, 700);
