@@ -1,7 +1,9 @@
 <?php
 session_start();
 require '../../helper/redirector.php';
+include '../../helper/autoloader.php';
 $path = '../../../';
+$user = new Controller\User();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +12,7 @@ $path = '../../../';
      <?php include '../../config/head.php' ?>
      <title>Manage User | Ex-Ledge</title>
      <link rel="stylesheet" href="<?php echo $path; ?>public/css/admin/manageUser.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -23,185 +26,9 @@ $path = '../../../';
           <main class="manageUser--main main-content">
 
                <h2 class="manageUser__title main-title">Manage User</h2>
+                    <div class="card-container" id="user_container">
+                    </div>                    
 
-               <div class="card-container">
-                    <div class="user-card">
-                         <div class="user-card-content">
-                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
-                              <div class="content-details">
-                                   <p class="detail-title">User ID:</p>
-                                   <p>FNDKNSFLFND</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Username: </p>
-                                   <p>Mike Wazowski</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Email: </p>
-                                   <p>mikewazowski@gmail.com</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Verification Status: </p>
-                                   <p>UNVERIFIED</p>
-                              </div>
-                              <div class="ban-container">
-                                   <button class="ban-button">Ban</button>
-                              </div>
-                         </div>
-                    </div>
-
-                    <div class="user-card">
-                         <div class="user-card-content">
-                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
-                              <div class="content-details">
-                                   <p class="detail-title">User ID:</p>
-                                   <p>FNDKNSFLFND</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Username: </p>
-                                   <p>Mike Wazowski</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Email: </p>
-                                   <p>mikewazowski@gmail.com</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Verification Status: </p>
-                                   <p>UNVERIFIED</p>
-                              </div>
-                              <div class="ban-container">
-                                   <button class="ban-button">Ban</button>
-                              </div>
-                         </div>
-                    </div>
-
-                    <div class="user-card">
-                         <div class="user-card-content">
-                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
-                              <div class="content-details">
-                                   <p class="detail-title">User ID:</p>
-                                   <p>FNDKNSFLFND</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Username: </p>
-                                   <p>Mike Wazowski</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Email: </p>
-                                   <p>mikewazowski@gmail.com</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Verification Status: </p>
-                                   <p>UNVERIFIED</p>
-                              </div>
-                              <div class="ban-container">
-                                   <button class="ban-button">Ban</button>
-                              </div>
-                         </div>
-                    </div>
-
-                    <div class="user-card">
-                         <div class="user-card-content">
-                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
-                              <div class="content-details">
-                                   <p class="detail-title">User ID:</p>
-                                   <p>FNDKNSFLFND</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Username: </p>
-                                   <p>Mike Wazowski</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Email: </p>
-                                   <p>mikewazowski@gmail.com</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Verification Status: </p>
-                                   <p>UNVERIFIED</p>
-                              </div>
-                              <div class="ban-container">
-                                   <button class="ban-button">Ban</button>
-                              </div>
-                         </div>
-                    </div>
-
-                    <div class="user-card">
-                         <div class="user-card-content">
-                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
-                              <div class="content-details">
-                                   <p class="detail-title">User ID:</p>
-                                   <p>FNDKNSFLFND</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Username: </p>
-                                   <p>Mike Wazowski</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Email: </p>
-                                   <p>mikewazowski@gmail.com</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Verification Status: </p>
-                                   <p>UNVERIFIED</p>
-                              </div>
-                              <div class="ban-container">
-                                   <button class="ban-button">Ban</button>
-                              </div>
-                         </div>
-                    </div>
-
-                    <div class="user-card">
-                         <div class="card-content">
-                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
-                              <div class="content-details">
-                                   <p class="detail-title">User ID:</p>
-                                   <p>FNDKNSFLFND</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Username: </p>
-                                   <p>Mike Wazowski</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Email: </p>
-                                   <p>mikewazowski@gmail.com</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Verification Status: </p>
-                                   <p>UNVERIFIED</p>
-                              </div>
-                              <div class="ban-container">
-                                   <button class="ban-button">Ban</button>
-                              </div>
-                         </div>
-                    </div>
-
-                    <div class="user-card">
-                         <div class="user-card-content">
-                              <img class="profile-picture" src="<?php echo $path; ?>public/img/profile.jpg" alt="Profile Image">
-                              <div class="content-details">
-                                   <p class="detail-title">User ID:</p>
-                                   <p>FNDKNSFLFND</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Username: </p>
-                                   <p>Mike Wazowski</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Email: </p>
-                                   <p>mikewazowski@gmail.com</p>
-                              </div>
-                              <div class="content-details">
-                                   <p class="detail-title">Verification Status: </p>
-                                   <p>UNVERIFIED</p>
-                              </div>
-                              <div class="ban-container">
-                                   <button class="ban-button">Ban</button>
-                              </div>
-                         </div>
-                    </div>
-
-
-               </div>
           </main>
 
      </div>
@@ -209,6 +36,9 @@ $path = '../../../';
      <?php include '../layout/footer.php'; ?>
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
+     <script src="<?php echo $path; ?>public/js/adminUser.js"></script>
+     <script src="<?php echo $path; ?>public/js/loadUser.js"></script>
+
 </body>
 
 </html>
