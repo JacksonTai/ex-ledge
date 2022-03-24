@@ -6,25 +6,31 @@
           <i class="layout__question-vote fa-solid fa-arrow-down fa-lg down" id="down" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>"></i>
      </div>
      <div class="layout__question-header">
-
           <h3 class="layout__question-title">
                <?php echo htmlspecialchars($question['title']); ?>
           </h3>
-
           <div class="layout__question-button">
-               <p class="layout__question-answer">12 Answer</p>
+               <p class="layout__question-answer">
+                    <?php
+                    $answerNum = $answer->answerCount($question['question_id']);
+                    if ($answerNum > 1) {
+                         echo htmlspecialchars($answerNum . ' Answers');
+                    } else if ($answerNum == 0 || $answerNum == 1) {
+                         echo htmlspecialchars($answerNum . ' Answer');
+                    }
+                    ?>
+               </p>
                <?php if ($_SESSION['userId'][0] == "A") { ?>
                     <button class="layout__question-remove-btn">Remove</button>
                <?php } ?>
           </div>
+     </div>
 
-     </div>
-     <div class="layout__question-body">
-          <a href="../student/question.php?id=<?php echo htmlspecialchars($question['user_id']); ?>">
-               <p class="layout__question-content"><?php echo htmlspecialchars($question['content']); ?></p>
-               <p class="layout__question-tag"><?php echo htmlspecialchars($question['tag']); ?></p>
-          </a>
-     </div>
+     <a class="layout__question-body" href="../student/question.php?id=<?php echo htmlspecialchars($question['question_id']); ?>">
+          <p class="layout__question-content"><?php echo htmlspecialchars($question['content']); ?></p>
+          <p class="layout__question-tag"><?php echo htmlspecialchars($question['tag']); ?></p>
+     </a>
+
      <div class="layout__question-footer">
           <div class="layout__question-poster">
                <img class="layout__question-profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
@@ -35,7 +41,10 @@
                </p>
           </div>
           <?php if ($_SESSION['userId'][0] == "U") { ?>
-               <button class="layout__question-bookmark-btn" id="bookmark" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>">Bookmark</button>
+               <div class="layout__question-bookmark" data-bookmark-id="<?php echo htmlspecialchars($question['question_id']); ?>">
+                    <i class="question-bookmark-icon fa-solid fa-bookmark"></i>
+                    <p>Bookmark</p>
+               </div>
           <?php } ?>
      </div>
 </article>
