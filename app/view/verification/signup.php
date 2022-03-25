@@ -56,7 +56,7 @@
      <?php include '../layout/footer.php'; ?>
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
-     <script src="<?php echo $path; ?>public/js/signup.js"></script>
+     <script src="<?php echo $path; ?>public/js/verification/signup.js"></script>
 </body>
 
 </html>

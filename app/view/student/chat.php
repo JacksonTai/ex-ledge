@@ -119,7 +119,7 @@ $user = new Controller\User();
      </div>
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
-     <script src="<?php echo $path; ?>public/js/chat.js"></script>
+     <script src="<?php echo $path; ?>public/js/student/chat.js"></script>
 </body>
 
 </html>

@@ -52,7 +52,7 @@ $path = '../../../';
      <?php include '../layout/footer.php'; ?>
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
-     <script src="<?php echo $path; ?>public/js/askQuestion.js"></script>
+     <script src="<?php echo $path; ?>public/js/student/askQuestion.js"></script>
 </body>
 
 </html>
