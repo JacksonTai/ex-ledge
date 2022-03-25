@@ -3,8 +3,14 @@
 namespace Controller;
 
 if (!empty($_GET) || !empty($_POST)) {
-     session_start();
-     include '../helper/autoloader.php';
+     /* Avoid starting session and include autoloader again 
+        on pages that has specific URL headers. */
+     if ((isset($_GET['id']) && $_GET['id'][0] != 'U') ||
+          isset($_GET['criteria'])
+     ) {
+          session_start();
+          include '../helper/autoloader.php';
+     }
 }
 
 class Bookmark extends \Model\Bookmark
