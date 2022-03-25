@@ -47,8 +47,8 @@ $user = new Controller\User();
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
      <script src="<?php echo $path; ?>public/js/admin/searchUser.js"></script>
-     <!-- <script src="<?php echo $path; ?>public/js/admin/manageUser.js"></script>
-     <script src="<?php echo $path; ?>public/js/load/user.js"></script> -->
+     <script src="<?php echo $path; ?>public/js/admin/manageUser.js"></script>
+     <script src="<?php echo $path; ?>public/js/load/user.js"></script>
 
 </body>
 

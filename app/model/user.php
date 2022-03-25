@@ -308,7 +308,6 @@ class User extends \config\DbConn
                                    </div>
                               </div>';                    
                }
-
           }
           return $userInfo;
      }
