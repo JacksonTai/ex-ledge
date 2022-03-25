@@ -1,4 +1,7 @@
-<?php $timestamp = $questions->get_time($question['time_posted']); ?>
+<?php
+$questions = new \Controller\Question();
+$answer = new \Controller\Answer(); 
+$timestamp = $questions->get_time($question['time_posted']); ?>
 <article class="layout__question dialog">
      <div class="layout__question-vote-container">
           <i class="layout__question-vote fa-solid fa-arrow-up fa-lg up" id="up" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>"></i>
@@ -21,7 +24,7 @@
                     ?>
                </p>
                <?php if ($_SESSION['userId'][0] == "A") { ?>
-                    <button class="layout__question-remove-btn">Remove</button>
+                    <button class="layout__question-remove-btn" onclick="confirmDeletion('<?php echo htmlspecialchars($question['question_id']); ?>')">Remove</button>
                <?php } ?>
           </div>
      </div>
@@ -33,7 +36,7 @@
 
      <div class="layout__question-footer">
           <div class="layout__question-poster">
-               <img class="layout__question-profile-img profile-icon" src="<?php echo $path ?>public/img/profile1.jpg" alt="Profile Image">
+               <img class="layout__question-profile-img profile-icon" src="../../../public/img/profile1.jpg" alt="Profile Image">
                <p class="layout__question-post-info">
                     <span class="layout__question-posted-by">Posted by</span>
                     <a class="layout__question-username" href="../student/profile.php?id=<?php echo htmlspecialchars($question['user_id']); ?>"><?php echo htmlspecialchars($question['username']); ?></a>

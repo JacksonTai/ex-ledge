@@ -1,3 +1,4 @@
+
 // Pop Up Display to ask if admin wants to ban user
 function confirmDeletion(qid) {
     Swal.fire({

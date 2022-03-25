@@ -152,47 +152,8 @@ class Question extends \config\DbConn
             $stmt = $this->executeQuery($sql);
             $questionInfos = $stmt->fetchAll();
 
-            // I have to retype the whole code here as well rather than using the layout function
-            // I have looked for resources online to see how to reuse the layout, but couldnt not find a proper answer.
-            foreach ($questionInfos as $questionInfo) {
-                if ($_SESSION['userId'][0] == "A"){
-                    echo '
-                    <article class="layout__question dialog">
-                        <div class="layout__question-vote-container">
-                            <i class="layout__question-vote fa-solid fa-arrow-up fa-lg up" id="up" data-question-id='.($questionInfo['question_id']).'></i>
-                            <p class="layout__question-point" id="vote" data-question-id='.($questionInfo['question_id']).'>Ajax</p>
-                            <i class="layout__question-vote fa-solid fa-arrow-down fa-lg down" id="down" data-question-id='.($questionInfo['question_id']).'></i>
-                        </div>
-                        <div class="layout__question-header">
-                    
-                            <h3 class="layout__question-title">
-                                '.($questionInfo['title']).'
-                            </h3>
-                
-                            <div class="layout__question-button">
-                                <p class="layout__question-answer">12 Answer</p>
-                                <button class="layout__question-remove-btn" onclick="confirmDeletion(\''  .($questionInfo['question_id']). '\')">Remove</button>
-                            </div>
-                    
-                        </div>
-                        <div class="layout__question-body">
-                            <a href="../student/question.php?id='.($questionInfo['user_id']).'>
-                                <p class="layout__question-content">'.($questionInfo['content']).'</p>
-                                <p class="layout__question-tag">'.($questionInfo['tag']).'</p>
-                            </a>
-                        </div>
-                        <div class="layout__question-footer">
-                            <div class="layout__question-poster">
-                                <img class="layout__question-profile-img profile-icon" src="../../../public/img/profile1.jpg" alt="Profile Image">
-                                <p class="layout__question-post-info">
-                                    <span class="layout__question-posted-by">Posted by</span>
-                                    <a class="layout__question-username" href="../student/profile.php?id='.($questionInfo['user_id']).'">'.($questionInfo['username']).'</a>
-                                    <span class="layout__question-posted-time"><?php echo htmlspecialchars($timestamp); ?></span>
-                                </p>
-                            </div>
-                        </div>
-                    </article>';
-                }
+            foreach ($questionInfos as $question) {
+                include '../view/layout/question.php';                
             }
         } catch (PDOException $e) {
             die('Error: ' . $e->getMessage());
