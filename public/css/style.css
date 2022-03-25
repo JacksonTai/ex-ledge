@@ -104,6 +104,10 @@
     text-align: left;
   }
 
+  .section--home__title {
+    font-size: 2.5rem;
+  }
+
   .section--home-cta-btn {
     margin: 0;
   }

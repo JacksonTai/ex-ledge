@@ -31,8 +31,9 @@ $timestamp = $questions->get_time($question['time_posted']); ?>
 
      <a class="layout__question-body" href="../student/question.php?id=<?php echo htmlspecialchars($question['question_id']); ?>">
           <p class="layout__question-content"><?php echo htmlspecialchars($question['content']); ?></p>
-          <p class="layout__question-tag"><?php echo htmlspecialchars($question['tag']); ?></p>
      </a>
+     
+     <p class="layout__question-tag"><?php echo htmlspecialchars($question['tag']); ?></p>
 
      <div class="layout__question-footer">
           <div class="layout__question-poster">
