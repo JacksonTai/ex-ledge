@@ -5,7 +5,7 @@ $timestamp = $questions->get_time($question['time_posted']); ?>
 <article class="layout__question dialog">
      <div class="layout__question-vote-container">
           <i class="layout__question-vote fa-solid fa-arrow-up fa-lg up" id="up" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>"></i>
-          <p class="layout__question-point" id="vote" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>">Ajax</p>
+          <p class="layout__question-point" id="vote" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>"><?php echo htmlspecialchars($question['point']); ?></p>
           <i class="layout__question-vote fa-solid fa-arrow-down fa-lg down" id="down" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>"></i>
      </div>
      <div class="layout__question-header">
