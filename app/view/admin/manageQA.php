@@ -34,7 +34,7 @@ $path = '../../../';
      <?php include '../layout/footer.php'; ?>
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
-     <script src="<?php echo $path; ?>public/js/adminQuestion.js"></script>
+     <script src="<?php echo $path; ?>public/js/admin/manageQA.js"></script>
      <script src="<?php echo $path; ?>public/js/loadQuestion.js"></script>
 </body>
 

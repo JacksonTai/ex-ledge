@@ -269,7 +269,7 @@ $answer = new \Controller\Answer();
      <?php include '../layout/footer.php'; ?>
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
-     <script src="<?php echo $path; ?>public/js/profile.js"></script>
+     <script src="<?php echo $path; ?>public/js/student/profile.js"></script>
 </body>
 
 </html>

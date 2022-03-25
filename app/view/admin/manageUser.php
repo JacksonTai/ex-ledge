@@ -23,11 +23,8 @@ $path = '../../../';
           <?php include '../layout/sideNavbar.php' ?>
 
           <main class="manageUser--main main-content">
-
                <h2 class="manageUser__title main-title">Manage User</h2>
-                    <div class="card-container" id="user_container">
-                    </div>                    
-
+               <div class="card-container" id="user_container"></div>
           </main>
 
      </div>
@@ -35,8 +32,8 @@ $path = '../../../';
      <?php include '../layout/footer.php'; ?>
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
-     <script src="<?php echo $path; ?>public/js/adminUser.js"></script>
-     <script src="<?php echo $path; ?>public/js/loadUser.js"></script>
+     <script src="<?php echo $path; ?>public/js/admin/manageUser.js"></script>
+     <script src="<?php echo $path; ?>public/js/load/user.js"></script>
 
 </body>
 
