@@ -29,9 +29,9 @@ class Question extends \Model\Question
         return $this->getQuestion($criteria);
     }
 
-    public function questionCount($userId = null)
+    public function questionCount($criteria = null)
     {
-        return  $this->getQuestionCount($userId);
+        return  $this->getQuestionCount($criteria);
     }
 
     public function get_time($time_posted)

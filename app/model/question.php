@@ -92,13 +92,20 @@ class Question extends \config\DbConn
         }
     }
 
-    protected function getQuestionCount($userId)
+    protected function getQuestionCount($criteria)
     {
-        $sql = "SELECT COUNT(question_id) FROM question
-                   WHERE `user_id` = ?";
-        $stmt = $this->executeQuery($sql, [$userId]);
-        $result = $stmt->fetch();
-        return $result['COUNT(question_id)'];
+        if ($criteria) {
+            if ($criteria[0] == 'U') {
+                $sql = "SELECT COUNT(question_id) FROM question WHERE `user_id` = ?";
+                $stmt = $this->executeQuery($sql, [$criteria]);
+                $result = $stmt->fetch();
+                return $result['COUNT(question_id)'];
+            }
+        }
+
+        $sql = "SELECT COUNT(question_id) FROM question;";
+        $stmt = $this->executeQuery($sql);
+        return $stmt->fetch()['COUNT(question_id)'];
     }
 
     protected function timestamp($datetime)

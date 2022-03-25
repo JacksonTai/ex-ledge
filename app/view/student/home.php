@@ -29,7 +29,9 @@ $answer = new \Controller\Answer();
         <main class="home--main main-content">
             <div class="home__header">
                 <h2 class="home__header-title main-title">Question Asked:
-                    <span class="home__quetion-asked">1289</span>
+                    <span class="home__quetion-asked">
+                        <?php echo htmlspecialchars($questions->questionCount()); ?>
+                    </span>
                 </h2>
                 <div class="home__header-btn-container">
                     <button class="home__header-btn home__header-btn--filter dialog">Filter</button>
