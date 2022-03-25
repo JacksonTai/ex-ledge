@@ -223,7 +223,7 @@ $user = new \Controller\User();
      <?php include '../layout/footer.php'; ?>
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
-     <script src="<?php echo $path; ?>public/js/question.js"></script>
+     <script src="<?php echo $path; ?>public/js/student/question.js"></script>
 </body>
 
 </html>
