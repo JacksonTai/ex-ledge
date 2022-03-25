@@ -75,7 +75,7 @@ class Question extends \config\DbConn
                 }
 
                 $stmt = $this->executeQuery($sql, [$criteria]);
-                return  $stmt->fetchAll();
+                return $stmt->fetchAll();
             } catch (PDOException $e) {
                 die('Error: ' . $e->getMessage());
             }
@@ -108,6 +108,13 @@ class Question extends \config\DbConn
         $sql = "SELECT COUNT(question_id) FROM question;";
         $stmt = $this->executeQuery($sql);
         return $stmt->fetch()['COUNT(question_id)'];
+    }
+
+    protected function getHotQuestion()
+    {
+        $sql = "SELECT * FROM `question` ORDER BY  `point` DESC LIMIT 5";
+        $stmt = $this->executeQuery($sql);
+        return $stmt->fetchAll();   
     }
 
     protected function timestamp($datetime)
@@ -149,7 +156,7 @@ class Question extends \config\DbConn
 
     protected function loadData($limit, $start)
     {
-        try{
+        try {
             $sql = "SELECT q.*, u.username, u.user_id FROM question q
                     INNER JOIN user u ON
                     q.user_id = u.user_id
@@ -160,17 +167,17 @@ class Question extends \config\DbConn
             $questionInfos = $stmt->fetchAll();
 
             foreach ($questionInfos as $question) {
-                include '../view/layout/question.php';                
+                include '../view/layout/question.php';
             }
         } catch (PDOException $e) {
             die('Error: ' . $e->getMessage());
         }
     }
 
-     /* ######### DELETE ######### */
-     protected function deleteQuestion($questionId)
-     {
-          $sql = "DELETE FROM question WHERE `question_id` = ?;";
-          $this->executeQuery($sql, [$questionId]);
-     }
+    /* ######### DELETE ######### */
+    protected function deleteQuestion($questionId)
+    {
+        $sql = "DELETE FROM question WHERE `question_id` = ?;";
+        $this->executeQuery($sql, [$questionId]);
+    }
 }

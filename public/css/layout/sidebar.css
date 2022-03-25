@@ -56,6 +56,9 @@
 .layout-sidebar__hot-topic {
   display: block;
   margin-top: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--clr-link);
 }
 

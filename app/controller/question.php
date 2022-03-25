@@ -36,6 +36,11 @@ class Question extends \Model\Question
         return  $this->getQuestionCount($criteria);
     }
 
+    public function hotQuestion()
+    {
+        return  $this->getHotQuestion();
+    }
+
     public function get_time($time_posted)
     {
         return $this->timestamp($time_posted);
@@ -44,7 +49,7 @@ class Question extends \Model\Question
     public function loadQuestions($limit, $start)
     {
         return $this->loadData($limit, $start);
-    }     
+    }
 
     /* ######### DELETE ######### */
     public function delete($questionId)
@@ -54,7 +59,7 @@ class Question extends \Model\Question
 }
 
 if (!empty($_POST)) {
-    if (!isset($_POST["limit"], $_POST["start"])){
+    if (!isset($_POST["limit"], $_POST["start"])) {
         new \Controller\Question($_POST);
     }
 } else {
@@ -62,9 +67,9 @@ if (!empty($_POST)) {
 }
 
 /* ######### READ ######### */
-if (isset($_POST["limit"], $_POST["start"])){
+if (isset($_POST["limit"], $_POST["start"])) {
     $question = new \Controller\Question();
-    return $question -> loadQuestions($_POST["limit"], $_POST["start"]);
+    return $question->loadQuestions($_POST["limit"], $_POST["start"]);
 }
 
 /* ######### DELETE ######### */

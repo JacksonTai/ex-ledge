@@ -1,4 +1,7 @@
-<?php $user = new \Controller\User; ?>
+<?php
+$user = new \Controller\User;
+$question = new \Controller\Question();
+?>
 <aside class="layout-sidebar">
      <?php $url = $_SERVER['REQUEST_URI']; ?>
      <?php if (strpos($url, 'question')) : ?>
@@ -18,10 +21,10 @@
      </div>
      <div class="layout-sidebar__content layout-sidebar__content--hot-topic dialog">
           <h3 class="layout-sidebar__content-title">Hot Topics</h3>
-          <a class="layout-sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
-          <a class="layout-sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
-          <a class="layout-sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
-          <a class="layout-sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
-          <a class="layout-sidebar__hot-topic" href="question.php?id=#">What is Xyz?</a>
+          <?php foreach ($question->hotQuestion() as $hotQuestion) : ?>
+               <a class="layout-sidebar__hot-topic" href="question.php?id=<?php echo htmlspecialchars($hotQuestion['question_id']); ?>">
+                    <?php echo htmlspecialchars($hotQuestion['content']) ?>
+               </a>
+          <?php endforeach; ?>
      </div>
 </aside>
