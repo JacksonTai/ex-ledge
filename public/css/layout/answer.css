@@ -1,0 +1,74 @@
+.layout-answer {
+  width: 100%;
+  margin-bottom: 2.3rem;
+}
+
+.layout-answer__user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.layout-answer__user-info {
+  margin-left: 1em;
+}
+
+.layout-answer__best-answer {
+  display: none;
+  margin-left: auto;
+  padding: 0.3em 1em;
+  background-color: #ebf9e9;
+  color: #63b655;
+  border: 1px solid #63b655;
+  border-radius: 1em;
+}
+
+.layout-answer__action-container,
+.layout-answer__action {
+  display: flex;
+}
+
+.layout-answer__action-container {
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.layout-answer__action {
+  align-items: center;
+  margin-right: 1.5rem;
+  color: var(--clr-font-grey);
+}
+
+.layout-answer__action:hover {
+  color: var(--clr-primary);
+}
+
+.layout-answer__action--vote {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.layout-answer__action--vote:hover {
+  color: var(--clr-font-grey);
+}
+
+.layout-answer__point {
+  margin: 0 0.8rem;
+}
+
+.layout-answer__action--comment,
+.layout-answer__action--bookmark,
+.layout-answer__action--ans {
+  cursor: pointer;
+}
+
+.action--comment-icon,
+.action--bookmark-icon,
+.action--ans-icon {
+  margin-right: 0.5rem;
+}
+
+.show {
+  display: block;
+}

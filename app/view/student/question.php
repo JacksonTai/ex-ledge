@@ -142,6 +142,7 @@ $user = new \Controller\User();
                <?php
                $answersInfo = $answer->read($questionInfo['question_id']);
 
+               // Rearrange the accepted answer at the top.
                foreach ($answersInfo as $key => $answerInfo) {
                     if ($answerInfo['status']) {
                          // Remove accepted answer from the array.
@@ -223,7 +224,7 @@ $user = new \Controller\User();
      <?php include '../layout/footer.php'; ?>
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
-     <script src="<?php echo $path; ?>public/js/question.js"></script>
+     <script src="<?php echo $path; ?>public/js/student/question.js"></script>
 </body>
 
 </html>

@@ -186,7 +186,7 @@ if (ansAction && cancelAnsBtn) {
   }
 }
 
-/* -- Add Bookmark -- */
+/* -- Add and remove Bookmark -- */
 let bookmarkActions = document.querySelectorAll(".question__action--bookmark");
 
 for (let bookmarkAction of bookmarkActions) {
@@ -206,9 +206,6 @@ for (let bookmarkAction of bookmarkActions) {
 /* -- Get Bookmark -- */
 async function getBookmark(criteria) {
   try {
-    // let res = await fetch(
-    //   `../../controller/bookmark.php?criteria=U62340f519c9c5`
-    // );
     let res = await fetch(`../../controller/bookmark.php?criteria=${criteria}`);
     return await res.json();
   } catch (e) {
