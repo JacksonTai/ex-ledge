@@ -397,8 +397,13 @@ class User extends \config\DbConn
                $this->executeQuery($sql, [$postData['username'], $this->userId]);
           }
 
-          // Check if user has set age or gender or bio before.
-          if (isset($userData['age']) || isset($userData['gender']) || isset($userData['bio'])) {
+          // Check if user has set age/gender/bio before or having nric_no in records.
+          if (
+               isset($userData['nric_no']) ||
+               isset($userData['age']) ||
+               isset($userData['gender']) ||
+               isset($userData['bio'])
+          ) {
                // Execute update of age and gender only if it's being changed.
                if ($userData['age'] != $postData['age']) {
                     $sql = "UPDATE user_detail SET age = ?
