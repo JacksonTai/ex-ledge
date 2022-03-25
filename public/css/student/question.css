@@ -163,7 +163,7 @@
   border-left: 1px solid var(--clr-shadow-grey);
 }
 
-/* Classes to be added by JS */
+/* Classes for JS DOM manipulation */
 .hide {
   display: none;
 }

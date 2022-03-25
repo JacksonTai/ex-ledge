@@ -233,9 +233,34 @@
   background-color: #b3b3b3;
 }
 
-/* Classes for JS DOM */
-.no-scroll {
-  overflow: hidden;
+.bookmark-action-container,
+.bookmark__action {
+  display: flex;
+}
+
+.bookmark-action-container {
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 2rem;
+  padding: 0.6em 2em;
+}
+
+.bookmark__action {
+  align-items: center;
+  margin: 0.5rem 0;
+  margin-right: 1.5rem;
+  color: var(--clr-font-grey);
+  cursor: pointer;
+}
+
+.bookmark__action:hover {
+  color: var(--clr-primary);
+}
+
+.action--ans-icon,
+.action--question-icon {
+  margin-right: 0.5rem;
 }
 
 @media (min-width: 900px) {
@@ -304,4 +329,25 @@
   .profile__delete-txt {
     display: inline;
   }
+}
+
+/* Classes for JS DOM manipulation */
+.no-scroll {
+  overflow: hidden;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.action-btn-click {
+  color: var(--clr-primary);
+}
+
+.disabled {
+  pointer-events: none;
 }

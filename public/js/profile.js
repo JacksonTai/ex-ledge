@@ -38,7 +38,7 @@ function switchSection(section) {
     .classList.add(showSection);
 }
 
-/* -- Overview section -- */
+// Overview section
 let aboutMeEditBtn = document.querySelector(".overview--about__edit-btn");
 let aboutMeContent = document.querySelector(".overview--about__content");
 let aboutMeInput = document.querySelector(".overview--about__bio-input");
@@ -87,6 +87,66 @@ function hideEditField() {
   aboutMeEditBtn.style.display = "block";
   aboutMeInput.style.display = "none";
   aboutMeBtnContainer.style.display = "none";
+}
+
+// Bookmark section.
+let bookmarkQnContainer = document.querySelector(
+  ".bookmark-question-container"
+);
+let bookmarkAnsContainer = document.querySelector(".bookmark-answer-container");
+
+let bookmarkQnAction = document.querySelector(".bookmark__action--question");
+let bookmarkAnsAction = document.querySelector(".bookmark__action--ans");
+
+// Default bookmark action.
+bookmarkQnAction.classList.add("action-btn-click");
+bookmarkQnAction.classList.toggle("disabled");
+
+bookmarkQnAction.addEventListener("click", toggleBookmarkContainer);
+bookmarkAnsAction.addEventListener("click", toggleBookmarkContainer);
+
+function toggleBookmarkContainer() {
+  bookmarkAnsAction.classList.toggle("action-btn-click");
+  bookmarkQnAction.classList.toggle("action-btn-click");
+  bookmarkQnContainer.classList.toggle("hide");
+  bookmarkAnsContainer.classList.toggle("hide");
+  bookmarkQnAction.classList.toggle("disabled");
+  bookmarkAnsAction.classList.toggle("disabled");
+}
+
+// Get bookmark.
+async function getBookmark(criteria) {
+  try {
+    let res = await fetch(`../../controller/bookmark.php?criteria=${criteria}`);
+    return await res.json();
+  } catch (e) {
+    console.log("Error: ", e);
+  }
+}
+
+async function setBookmark() {
+  try {
+    // Get user id.
+    let userIdRes = await fetch("../../helper/session.php");
+    let userId = await userIdRes.json();
+
+    // Store all bookmark Id record of the user.
+    let bookmarksId = [];
+
+    let bookmarks = await getBookmark(userId);
+
+    for (let bookmark of bookmarks) {
+      bookmarksId.push(bookmark.id);
+    }
+
+    for (let bookmarkAction of bookmarkActions) {
+      if (bookmarksId.includes(bookmarkAction.dataset.bookmarkId)) {
+        bookmarkAction.classList.toggle("action-btn-click");
+      }
+    }
+  } catch (e) {
+    console.log("Error", e);
+  }
 }
 
 /* -- Modal opening and closing -- */

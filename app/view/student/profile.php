@@ -7,6 +7,7 @@ $path = '../../../';
 $user = new Controller\User();
 $questions = new \Controller\Question();
 $answer = new \Controller\Answer();
+$bookmark = new \Controller\Bookmark();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -270,7 +271,37 @@ $answer = new \Controller\Answer();
                </section>
 
                <section class="profile-section profile-section--bookmark">
+                    <div class="bookmark-action-container dialog">
+                         <div class="bookmark__action bookmark__action--question">
+                              <i class="action--question-icon fa-solid fa-circle-question"></i>
+                              <p>Question</p>
+                         </div>
+                         <div class="bookmark__action bookmark__action--ans">
+                              <i class="action--ans-icon fa-solid fa-pen"></i>
+                              <p>Answer</p>
+                         </div>
+                    </div>
+                    <div class="bookmark-question-container">
+                         <?php
+                         foreach ($bookmark->read($userId) as $userBookmark) {
+                              if ($userBookmark['id'][0] == 'Q') {
+                                   $question = $questions->read($userBookmark['id'])[0];
+                                   include '../../view/layout/question.php';
+                              }
+                         }
+                         ?>
+                    </div>
 
+                    <div class="bookmark-answer-container hide">
+                         <?php
+                         foreach ($bookmark->read($userId) as $userBookmark) {
+                              if ($userBookmark['id'][0] == 'A') {
+                                   $userAns = $answer->read($userBookmark['id']);
+                                   include '../../view/layout/answer.php';
+                              }
+                         }
+                         ?>
+                    </div>
                </section>
           </main>
 

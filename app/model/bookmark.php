@@ -28,11 +28,12 @@ class Bookmark extends \config\DbConn
      {
           if ($bookmarkId[0] == 'Q') {
                $sql = "INSERT INTO bookmark_question VALUES (?, ?);";
+               $this->executeQuery($sql, [$this->postData['userId'], $bookmarkId]);
           }
           if ($bookmarkId[0] == 'A') {
                $sql = "INSERT INTO bookmark_answer VALUES (?, ?);";
+               $this->executeQuery($sql, [$this->postData['userId'], $bookmarkId]);
           }
-          $this->executeQuery($sql, [$this->postData['userId'], $bookmarkId]);
      }
 
      protected function readBookmark($criteria)
