@@ -438,7 +438,8 @@ class User extends \config\DbConn
 
           $sql_delete = "DELETE FROM verification_queue WHERE `user_id` = ?;";
           $this->executeQuery($sql_delete, [$postData['verifId']]);
- 
+     }
+          
      protected function setUserPoint($value)
      {
           $sql = "UPDATE user SET `point` = ? 
