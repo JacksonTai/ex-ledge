@@ -22,7 +22,7 @@ class User extends \config\DbConn
           $errMsg = ['fullName' => '', 'nric' => ''];
 
           // Validate full name.
-          if (!ctype_alpha(str_replace(' ', '',$postData['fullName']))) {
+          if (!ctype_alpha(str_replace(' ', '', $postData['fullName']))) {
                $errMsg['fullName'] = '&#9888; Invalid Full name.';
           }
 
@@ -80,26 +80,21 @@ class User extends \config\DbConn
                $userInfos = $stmt->fetchAll();
 
                // For each users inside of userInfos array, echo out the php coe below
-               foreach ($userInfos as $userInfo){
-                    
-                    echo 
-                         '<div class="user_box" id='.($userInfo['user_id']).' data-user-id='.($userInfo['user_id']).'>
-                              <a class="user_info" href="profile.php?id='.($userInfo['user_id']).'">
+               foreach ($userInfos as $userInfo) {
+                    echo
+                    '<div class="user_box" id=' . ($userInfo['user_id']) . ' data-user-id=' . ($userInfo['user_id']) . '>
+                              <a class="user_info" href="profile.php?id=' . ($userInfo['user_id']) . '">
                                    <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="user_img">
                                    <div class="user_info-detail">    
-                                        <p class="user_name">'.($userInfo['username']).'</p>
-                                        <p class="RP">RP: '.($userInfo['point']).'</p>
+                                        <p class="user_name">' . ($userInfo['username']) . '</p>
+                                        <p class="RP">RP: ' . ($userInfo['point']) . '</p>
                                    </div>
                               </a>
-                         </div>';                    
-                    
+                         </div>';
                }
-
-
-
           } catch (PDOException $e) {
                die('Error: ' . $e->getMessage());
-          }          
+          }
      }
 
      protected function getUser($userId)
@@ -134,7 +129,7 @@ class User extends \config\DbConn
                $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT 9";
                $stmt = $this->executeQuery($sql, ['U%']);
                $userInfos = $stmt->fetchAll();
-          
+
                foreach ($userInfos as $userInfo) {
                     try {
                          $sql = "SELECT * FROM user_detail WHERE `user_id` = ?;";
@@ -152,8 +147,7 @@ class User extends \config\DbConn
                return $result;
           } catch (PDOException $e) {
                die('Error: ' . $e->getMessage());
-          }               
-
+          }
      }
 
      protected function getUserRank($top, $length)
@@ -323,8 +317,7 @@ class User extends \config\DbConn
 
           // Execute update of username only if it's different from the current one.
           if ($userData['username'] != $postData['username']) {
-               $sql = "UPDATE user SET username = ?
-                         WHERE `user_id` = ?;";
+               $sql = "UPDATE user SET username = ? WHERE `user_id` = ?;";
                $this->executeQuery($sql, [$postData['username'], $this->userId]);
           }
 
@@ -332,19 +325,16 @@ class User extends \config\DbConn
           if (isset($userData['age']) || isset($userData['gender']) || isset($userData['bio'])) {
                // Execute update of age and gender only if it's being changed.
                if ($userData['age'] != $postData['age']) {
-                    $sql = "UPDATE user_detail SET age = ?
-                              WHERE `user_id` = ?;";
+                    $sql = "UPDATE user_detail SET age = ? WHERE `user_id` = ?;";
                     $this->executeQuery($sql, [$postData['age'], $this->userId]);
                }
                if ($userData['gender'] != $postData['gender']) {
-                    $sql = "UPDATE user_detail SET gender = ?
-                              WHERE `user_id` = ?;";
+                    $sql = "UPDATE user_detail SET gender = ? WHERE `user_id` = ?;";
                     $this->executeQuery($sql, [$postData['gender'], $this->userId]);
                }
                return;
           }
-          $sql = "INSERT INTO user_detail (`user_id`, gender, age)
-                    VALUES (?, ?, ?)";
+          $sql = "INSERT INTO user_detail (`user_id`, gender, age) VALUES (?, ?, ?)";
           $this->executeQuery($sql, [
                $this->userId,
                $postData['gender'],
@@ -353,14 +343,25 @@ class User extends \config\DbConn
      }
 
      //Update verification
-     protected function updateUserVerif($userId)
+     protected function updateUserVerif($postData)
      {
-          $sql = "UPDATE user SET verification= ? WHERE `user_id` = ?;";
-          $this->executeQuery($sql, [1, $userId]);
+          $userData = $this->getUser($postData['verifId']);
+
+          // Check if user have any record for user detail.
+          if (count($userData) == 7) {
+               $sql = "INSERT INTO user_detail (`user_id`, nric_no) VALUES (?, ?);";
+               $this->executeQuery($sql, [$postData['verifId'], $postData['nricNo']]);
+          }
+          if (count($userData) != 7) {
+               $sql = "UPDATE user_detail SET nric_no = ? WHERE `user_id` = ?;";
+               $this->executeQuery($sql, [$postData['nricNo'], $postData['verifId']]);
+          }
+
+          $sql = "UPDATE user SET verification = ? WHERE `user_id` = ?;";
+          $this->executeQuery($sql, [1, $postData['verifId']]);
 
           $sql_delete = "DELETE FROM verification_queue WHERE `user_id` = ?;";
-          $this->executeQuery($sql_delete, [$userId]);
-          
+          $this->executeQuery($sql_delete, [$postData['verifId']]);
      }
 
      /* ######### DELETE ######### */

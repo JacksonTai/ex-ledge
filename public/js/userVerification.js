@@ -1,28 +1,30 @@
-let acceptBtns = document.querySelectorAll('.user-verification-btn--accept');
-let verifContainer = document.querySelector('.user-verification-wrapper');
+let acceptBtns = document.querySelectorAll(".user-verification-btn--accept");
 
 for (let acceptBtn of acceptBtns) {
-    acceptBtn.addEventListener('click', function () {
-        console.log(acceptBtn.parentElement.dataset.userId);
-        updateVerification(acceptBtn.parentElement.dataset.userId);
-        verifContainer.style.display = "none";
-    })
+  acceptBtn.addEventListener("click", function () {
+    updateVerification(acceptBtn.parentElement.dataset.userId);
+    acceptBtn.closest(".user-verification-wrapper").style.display = "none";
+  });
 }
 
-let rejectBtns = document.querySelectorAll('.user-verification-btn--reject');
+let rejectBtns = document.querySelectorAll(".user-verification-btn--reject");
 
 for (let rejectBtn of rejectBtns) {
-    rejectBtn.addEventListener('click', function () {
-        console.log(rejectBtn.parentElement.dataset.userId);
-        rejectVerification(rejectBtn.parentElement.dataset.userId);
-        verifContainer.style.display = "none";
-    })
+  rejectBtn.addEventListener("click", function () {
+    rejectVerification(rejectBtn.parentElement.dataset.userId);
+    rejectBtn.closest(".user-verification-wrapper").style.display = "none";
+  });
 }
 
-async function updateVerification (userId) {
-    await fetch(`../../controller/user.php?verifId=${userId}`);
+let nricNo = document.querySelector(".user-verification--nric-no");
+
+async function updateVerification(userId) {
+  await fetch(
+    `../../controller/user.php?verifId=${userId}&
+    nricNo=${nricNo.textContent.replace("NRIC:", "").trim()}`
+  );
 }
 
-async function rejectVerification (userId) {
-    await fetch(`../../controller/user.php?rejectverifId=${userId}`);
+async function rejectVerification(userId) {
+  await fetch(`../../controller/user.php?rejectverifId=${userId}`);
 }

@@ -31,7 +31,7 @@ class User extends \Model\User
      public function loadUsers($limit, $start)
      {
           return $this->loadData($limit, $start);
-     }     
+     }
 
      /**
       * This function helps to read the users' rank.
@@ -92,9 +92,9 @@ if (isset($_GET['userId'])) {
      echo json_encode($user->read($_GET['userId']));
 }
 
-if (isset($_POST["limit"], $_POST["start"])){
+if (isset($_POST["limit"], $_POST["start"])) {
      $user = new \Controller\User();
-     return $user -> loadUsers($_POST["limit"], $_POST["start"]);
+     return $user->loadUsers($_POST["limit"], $_POST["start"]);
 }
 
 if (isset($_GET['searchTerm'])) {
@@ -119,9 +119,9 @@ if (isset($_GET['deleteId'])) {
      $user->delete($_GET['deleteId']);
 }
 
-if (isset($_GET['verifId'])) {
+if (isset($_GET['verifId'], $_GET['nricNo'])) {
      $user = new \Controller\User();
-     $user->updateVerif($_GET['verifId']);
+     $user->updateVerif($_GET);
 }
 
 if (isset($_GET['rejectverifId'])) {

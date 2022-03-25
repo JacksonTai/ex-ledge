@@ -26,8 +26,8 @@ $user = new Controller\User();
           <main class="user-verification--main main-content">
                <h2 class="user-verification__title main-title">User Verification</h2>
 
-               <?php 
-               $userVerif = $user->readVerification(); 
+               <?php
+               $userVerif = $user->readVerification();
                $verifNo = 1;
                ?>
                <?php foreach ($userVerif as $user) : ?>
@@ -41,18 +41,18 @@ $user = new Controller\User();
                                              <span class="user-verification__label">Full name: </span>
                                              <?php echo htmlspecialchars($user['full_name']) ?>
                                         </p>
-                                        <p class="user-verification--ic-num">
+                                        <p class="user-verification--nric-no">
                                              <span class="user-verification__label">NRIC: </span>
                                              <?php echo htmlspecialchars($user['nric_no']) ?>
                                         </p>
                                    </div>
                               </div>
-                              
+
                               <div class="user-verification-btn-container" data-user-id="<?php echo htmlspecialchars($user['user_id']) ?>">
-                                   <button class="user-verification-btn user-verification-btn--accept" >Accept</button>
-                                   <button class="user-verification-btn user-verification-btn--reject" >Reject</button>
+                                   <button class="user-verification-btn user-verification-btn--accept">Accept</button>
+                                   <button class="user-verification-btn user-verification-btn--reject">Reject</button>
                               </div>
-                              
+
                          </div>
                     </div>
                <?php endforeach; ?>
@@ -65,7 +65,7 @@ $user = new Controller\User();
      <script src="<?php echo $path; ?>public/js/script.js"></script>
      <script src="<?php echo $path; ?>public/js/userVerification.js"></script>
 
-     
+
 </body>
 
 </html>
