@@ -5,11 +5,6 @@ namespace Model;
 class Answer extends \config\DbConn
 {
      private $postData = [];
-     private $errMsg = [
-          'title' => '',
-          'content' => '',
-          'tag' => '',
-     ];
 
      protected function __construct($postData)
      {
@@ -61,14 +56,28 @@ class Answer extends \config\DbConn
                     $stmt = $this->executeQuery($sql, [$criteria]);
                     return $stmt->fetch();
                }
+
+               // Select all answer posted by specific user.
+               if ($criteria[0] == 'U') {
+                    $sql = "SELECT * FROM answer WHERE user_id = ?;";
+                    $stmt = $this->executeQuery($sql, [$criteria]);
+                    return $stmt->fetchAll();
+               }
           }
      }
 
      protected function getAnswerCount($criteria)
      {
-          if ($criteria && $criteria[0] == 'Q') {
-               $sql = "SELECT COUNT(answer_id) FROM answer a
-                         WHERE question_id = ?;";
+          if ($criteria) {
+               if ($criteria[0] == 'Q') {
+                    $sql = "SELECT COUNT(answer_id) FROM answer a
+                              WHERE question_id = ?;";
+               }
+               if ($criteria[0] == 'U') {
+                    $sql = "SELECT COUNT(answer_id) FROM answer a
+                              WHERE `user_id` = ?;";
+               }
+
                $stmt = $this->executeQuery($sql, [$criteria]);
                $result = $stmt->fetch();
                return $result['COUNT(answer_id)'];

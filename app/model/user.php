@@ -129,7 +129,6 @@ class User extends \config\DbConn
           } catch (PDOException $e) {
                die('Error: ' . $e->getMessage());
           }
-                   
      }
 
      protected function getUser($criteria)
@@ -181,7 +180,6 @@ class User extends \config\DbConn
                $stmt = $this->executeQuery($sql, [$criteria, 'U%']);
                return $stmt->fetch();
           }
-
 
           // Default query for selecting all user's info and detail. 
           try {
