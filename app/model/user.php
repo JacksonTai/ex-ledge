@@ -269,13 +269,46 @@ class User extends \config\DbConn
           $users = $stmt->fetchAll();
           $userInfo = '';
           foreach ($users as $user) {
-               $userInfo .= '<div class="chat-section__user" id="' . $user['user_id'] . '" data-user-id=' . $user['user_id'] . '>
-                                   <img class="chat-section__user-img chat-profile-img" src="../../../public/img/profile1.jpg">
-                                   <div class="chat-section__user-content">
-                                        <p class="chat-section__username">' . $user['username'] . '</p>
-                                        <p class="chat-section__user-msg"></p>
+               if ($_SESSION['userId'][0] == "U"){
+                    $userInfo .= '<div class="chat-section__user" id="' . $user['user_id'] . '" data-user-id=' . $user['user_id'] . '>
+                                        <img class="chat-section__user-img chat-profile-img" src="../../../public/img/profile1.jpg">
+                                        <div class="chat-section__user-content">
+                                             <p class="chat-section__username">' . $user['username'] . '</p>
+                                             <p class="chat-section__user-msg"></p>
+                                        </div>
+                                   </div>';                    
+               } else {
+                    if ($user['verification'] == 0){
+                         $verificationStatus = "UNVERIFIED";
+                    } else {
+                         $verificationStatus = "VERIFIED";
+                    }
+                    $userInfo .='<div class="user-card">
+                                   <div class="user-card-content">
+                                        <img class="profile-picture" src="../../../public/img/profile.jpg" alt="Profile Image">
+                                        <div class="content-details">
+                                             <p class="detail-title">User ID:</p>
+                                             <p>'.($user['user_id']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Username: </p>
+                                             <p>'.($user['username']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Email: </p>
+                                             <p>'.($user['email']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Verification Status: </p>
+                                             <p>'.$verificationStatus.'</p>
+                                        </div>
+                                        <div class="ban-container">
+                                             <button class="ban-button" id="banUser" onclick="confirmDeletion(\''  .($user['user_id']). '\')">Ban</button>
+                                        </div>
                                    </div>
-                              </div>';
+                              </div>';                    
+               }
+
           }
           return $userInfo;
      }
