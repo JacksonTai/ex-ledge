@@ -1,3 +1,4 @@
+let url = new URL(window.location);
 /* -- Section view modification -- */
 let profileBannerBtns = document.querySelectorAll(
   ".profile__banner-navbar-btn"
@@ -114,7 +115,25 @@ function toggleBookmarkContainer() {
   bookmarkAnsAction.classList.toggle("disabled");
 }
 
-// Get bookmark.
+/* -- Add and remove answers' bookmark -- */
+let bookmarkAnsActions = document.querySelectorAll(
+  ".layout-answer__action--bookmark"
+);
+
+for (let bookmarkAnsAction of bookmarkAnsActions) {
+  bookmarkAnsAction.addEventListener("click", async function () {
+    bookmarkAnsAction.classList.toggle("action-btn-click");
+    try {
+      await fetch(
+        `../../controller/bookmark.php?id=${this.dataset.bookmarkId}`
+      );
+    } catch (e) {
+      console.log("Error: ", e);
+    }
+  });
+}
+
+// Get answers' bookmark.
 async function getBookmark(criteria) {
   try {
     let res = await fetch(`../../controller/bookmark.php?criteria=${criteria}`);
@@ -128,7 +147,11 @@ async function setBookmark() {
   try {
     // Get user id.
     let userIdRes = await fetch("../../helper/session.php");
-    let userId = await userIdRes.json();
+    let userIdData = await userIdRes.json();
+
+    let userId = url.searchParams.get("id")
+      ? url.searchParams.get("id")
+      : userIdData;
 
     // Store all bookmark Id record of the user.
     let bookmarksId = [];
@@ -139,13 +162,129 @@ async function setBookmark() {
       bookmarksId.push(bookmark.id);
     }
 
-    for (let bookmarkAction of bookmarkActions) {
-      if (bookmarksId.includes(bookmarkAction.dataset.bookmarkId)) {
-        bookmarkAction.classList.toggle("action-btn-click");
+    for (let bookmarkAnsAction of bookmarkAnsActions) {
+      if (bookmarksId.includes(bookmarkAnsAction.dataset.bookmarkId)) {
+        bookmarkAnsAction.classList.toggle("action-btn-click");
       }
     }
   } catch (e) {
     console.log("Error", e);
+  }
+}
+
+/* -- Vote -- */
+let ansAction = document.querySelector(".question__action--ans");
+var userIsVerified = false;
+
+async function checkVerifStatus() {
+  // Get user id.
+  let userIdRes = await fetch("../../helper/session.php");
+  let userId = await userIdRes.json();
+
+  // Get user info.
+  let res = await fetch(`../../controller/user.php?userId=${userId}`);
+  let userInfo = await res.json();
+
+  // Verification with value of 1 will result in true in boolean and vice versa for 0.
+  userIsVerified = parseInt(userInfo.verification) ? true : false;
+}
+
+// Wait for the checkVerifStatus async function to finish its update.
+checkVerifStatus().then(() => {
+  if (userIsVerified) {
+    let votesIcon = document.querySelectorAll(".vote-icon");
+
+    for (let voteIcon of votesIcon) {
+      voteIcon.addEventListener("click", function () {
+        let id = this.parentElement.dataset.voteId;
+
+        let point = this.parentElement.children[1];
+        let pointNum = parseInt(point.textContent.trim());
+
+        let upvote = this.parentElement.children[0];
+        let downvote = this.parentElement.children[2];
+
+        if (this.id == "upvote") {
+          if (voteIcon.classList.contains("upvote")) {
+            point.textContent = pointNum - 1;
+          } else if (downvote.classList.contains("downvote")) {
+            point.textContent = pointNum + 2;
+          } else {
+            point.textContent = pointNum + 1;
+          }
+          updateVote(1, id);
+        }
+        if (this.id == "downvote") {
+          if (voteIcon.classList.contains("downvote")) {
+            point.textContent = pointNum + 1;
+          } else if (upvote.classList.contains("upvote")) {
+            point.textContent = pointNum - 2;
+          } else {
+            point.textContent = pointNum - 1;
+          }
+          updateVote(0, id);
+        }
+      });
+    }
+
+    async function updateVote(voteType, id) {
+      try {
+        await fetch(`../../controller/vote.php?voteType=${voteType}&id=${id}`);
+
+        // Reset previous vote once the vote has been updated.
+        if (id[0] == "A") {
+          setAnsPrevVote();
+        }
+      } catch (e) {
+        console.log("Error: ", e);
+      }
+    }
+  }
+});
+
+// Select answer actions' vote by excluding the vote id of question Id.
+let ansActionsVote = document.querySelectorAll(
+  `[data-vote-id]:not([data-vote-id="${url.searchParams.get("id")}"])`
+);
+
+async function setAnsPrevVote() {
+  try {
+    for (let ansActionVote of ansActionsVote) {
+      let upvoteIcon = ansActionVote.children[0];
+      let downvoteIcon = ansActionVote.children[2];
+
+      let res = await fetch(
+        `../../controller/vote.php?voteFor=answer&id=${ansActionVote.dataset.voteId}`
+      );
+      let prevVote = await res.json();
+
+      if (ansActionVote.dataset.voteId == prevVote.answer_id) {
+        if (prevVote.vote == 1) {
+          upvoteIcon.classList.add("upvote");
+          if (downvoteIcon.classList.contains("downvote")) {
+            downvoteIcon.classList.remove("downvote");
+          }
+        }
+        if (prevVote.vote == 0) {
+          downvoteIcon.classList.add("downvote");
+          if (upvoteIcon.classList.contains("upvote")) {
+            upvoteIcon.classList.remove("upvote");
+          }
+        }
+      }
+
+      // Remove upvote or downvote icon color if there's no previous vote.
+      if (ansActionVote.dataset.voteId != prevVote.answer_id) {
+        if (upvoteIcon.classList.contains("upvote")) {
+          upvoteIcon.classList.remove("upvote");
+        }
+        if (downvoteIcon.classList.contains("downvote")) {
+          downvoteIcon.classList.remove("downvote");
+        }
+      }
+    }
+  } catch (e) {
+    console.log("Error: ", e);
   }
 }
 
@@ -310,3 +449,8 @@ deletAccountbtn.addEventListener("click", async function () {
     }
   }
 });
+
+window.onload = () => {
+  setBookmark();
+  setAnsPrevVote();
+};

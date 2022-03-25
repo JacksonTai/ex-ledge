@@ -12,7 +12,7 @@ if (isset($_SESSION['userId'])) {
     $logoPath = $_SERVER['PHP_SELF'];
 }
 
-if (isset($_GET)) {
+if (!empty($_GET)) {
     $logoPath = $_SERVER['REQUEST_URI'];
 }
 

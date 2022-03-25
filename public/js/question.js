@@ -186,7 +186,7 @@ if (ansAction && cancelAnsBtn) {
   }
 }
 
-/* -- Add Bookmark -- */
+/* -- Add and remove Bookmark -- */
 let bookmarkActions = document.querySelectorAll(".question__action--bookmark");
 
 for (let bookmarkAction of bookmarkActions) {

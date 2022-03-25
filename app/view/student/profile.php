@@ -15,9 +15,9 @@ $bookmark = new \Controller\Bookmark();
 <head>
      <?php include '../../config/head.php' ?>
      <title>Profile | Ex-Ledge</title>
-     <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/profile.css">
      <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/question.css">
      <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/answer.css">
+     <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/profile.css">
 </head>
 
 <body>
