@@ -46,7 +46,6 @@ $user = new Controller\User();
      <?php include '../layout/footer.php'; ?>
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
-     <script src="<?php echo $path; ?>public/js/admin/searchUser.js"></script>
      <script src="<?php echo $path; ?>public/js/admin/manageUser.js"></script>
      <script src="<?php echo $path; ?>public/js/load/user.js"></script>
 
