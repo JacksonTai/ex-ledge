@@ -72,12 +72,19 @@ class User extends \config\DbConn
           return $stmt->fetchAll();
      }
 
-     protected function loadData($limit, $start)
+     protected function loadData($limit, $start, $searchTerm)
      {    
           try {
-               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
-               $stmt = $this->executeQuery($sql, ['U%']);
-               $userInfos = $stmt->fetchAll();
+               if($searchTerm == ""){
+                    $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
+                    $stmt = $this->executeQuery($sql, ['U%']);
+                    $userInfos = $stmt->fetchAll();
+                    
+               } else {
+                    $sql = "SELECT * FROM user WHERE `user_id` LIKE ? AND `username` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
+                    $stmt = $this->executeQuery($sql, ['U%', '%' . $searchTerm . '%']);
+                    $userInfos = $stmt->fetchAll();                    
+               }
 
                foreach ($userInfos as $userInfo){
                     if ($_SESSION['userId'][0] == "A") {

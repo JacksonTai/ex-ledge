@@ -28,9 +28,9 @@ class User extends \Model\User
           return $this->getUser($criteria);
      }
 
-     public function loadUsers($limit, $start)
+     public function loadUsers($limit, $start, $username)
      {
-          return $this->loadData($limit, $start);
+          return $this->loadData($limit, $start, $username);
      }
 
      /**
@@ -102,9 +102,10 @@ if (isset($_GET['userId'])) {
      echo json_encode($user->read($_GET['userId']));
 }
 
-if (isset($_POST["limit"], $_POST["start"])) {
+if (isset($_POST["limit"], $_POST["start"], $_POST['searchTerm'])) {
      $user = new \Controller\User();
-     return $user->loadUsers($_POST["limit"], $_POST["start"]);
+     return $user->loadUsers($_POST["limit"], $_POST["start"], $_POST['searchTerm']);          
+
 }
 
 if (isset($_GET['searchTerm'])) {
