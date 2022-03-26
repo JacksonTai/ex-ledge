@@ -30,7 +30,7 @@ class Question extends \config\DbConn
     // Insert input into database
     protected function createQuestion()
     {
-        session_start();
+        //session_start();
         $questionId = uniqid('Q');
         $sql = "INSERT INTO question
                 VALUES (?, ?, ?, ?, ?, ?, NOW());";
@@ -56,6 +56,8 @@ class Question extends \config\DbConn
         }
     }
 
+
+    /* ######### READ ######### */
     protected function getQuestion($criteria)
     {
         if ($criteria) {
@@ -137,4 +139,31 @@ class Question extends \config\DbConn
         // Join the array elements with 'ago', If no array elements to be imploded, return the string 'just now'.
         return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
+
+    protected function loadData($limit, $start)
+    {
+        try{
+            $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                    INNER JOIN user u ON
+                    q.user_id = u.user_id
+                    ORDER BY time_posted DESC
+                    LIMIT $limit OFFSET $start;";
+
+            $stmt = $this->executeQuery($sql);
+            $questionInfos = $stmt->fetchAll();
+
+            foreach ($questionInfos as $question) {
+                include '../view/layout/question.php';                
+            }
+        } catch (PDOException $e) {
+            die('Error: ' . $e->getMessage());
+        }
+    }
+
+     /* ######### DELETE ######### */
+     protected function deleteQuestion($questionId)
+     {
+          $sql = "DELETE FROM question WHERE `question_id` = ?;";
+          $this->executeQuery($sql, [$questionId]);
+     }
 }

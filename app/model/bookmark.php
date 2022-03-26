@@ -28,11 +28,12 @@ class Bookmark extends \config\DbConn
      {
           if ($bookmarkId[0] == 'Q') {
                $sql = "INSERT INTO bookmark_question VALUES (?, ?);";
+               $this->executeQuery($sql, [$this->postData['userId'], $bookmarkId]);
           }
           if ($bookmarkId[0] == 'A') {
                $sql = "INSERT INTO bookmark_answer VALUES (?, ?);";
+               $this->executeQuery($sql, [$this->postData['userId'], $bookmarkId]);
           }
-          $this->executeQuery($sql, [$this->postData['userId'], $bookmarkId]);
      }
 
      protected function readBookmark($criteria)
@@ -46,15 +47,15 @@ class Bookmark extends \config\DbConn
                          WHERE `user_id` = ? AND question_id = ?;";
           }
           if ($criteria[0] == 'U') {
-               $sql = "SELECT answer_id id FROM bookmark_answer WHERE `user_id` = ?;";
-               $stmt = $this->executeQuery($sql, [$criteria]);
-               $bookmarkAns = $stmt->fetchAll();
-
                $sql = "SELECT question_id id FROM bookmark_question WHERE `user_id` = ?;";
                $stmt = $this->executeQuery($sql, [$criteria]);
                $bookmarkQn = $stmt->fetchAll();
 
-               return array_merge($bookmarkAns, $bookmarkQn);
+               $sql = "SELECT answer_id id FROM bookmark_answer WHERE `user_id` = ?;";
+               $stmt = $this->executeQuery($sql, [$criteria]);
+               $bookmarkAns = $stmt->fetchAll();
+
+               return array_merge($bookmarkQn, $bookmarkAns);
           }
           $stmt = $this->executeQuery($sql, [$this->postData['userId'], $criteria]);
           return $stmt->fetchAll();

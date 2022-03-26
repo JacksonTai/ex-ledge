@@ -32,7 +32,7 @@
     <?php include '../layout/footer.php'; ?>
 
     <script src="<?php echo $path; ?>public/js/script.js"></script>
-    <script src="<?php echo $path; ?>public/js/signin.js"></script>
+    <script src="<?php echo $path; ?>public/js/verification/signin.js"></script>
 </body>
 
 </html>
