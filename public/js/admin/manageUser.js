@@ -1,5 +1,5 @@
 /* -- User search bar -- */
-let userSearchBar = document.querySelector(".chat-section__user-search-bar");
+let userSearchBar = document.querySelector(".user-search-bar");
 let userContainer = document.querySelector("#user_container");
 
 userSearchBar.addEventListener("input", async function () {

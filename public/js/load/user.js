@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var limit = 12; // Set how many display to load
     var start = 0; // Set from which row in MySQL to start
-    var searchTerm = document.querySelector(".chat-section__user-search-bar").value;
+    var searchTerm = document.querySelector(".user-search-bar").value;
     var action = 'inactive'; // To determine if fetch request is running
     function load_user_data(limit, start, searchTerm)
     {
@@ -38,7 +38,7 @@ $(document).ready(function(){
     if(action == 'inactive')
     {
          action = 'active';
-         var searchTerm = document.querySelector(".chat-section__user-search-bar").value;
+         var searchTerm = document.querySelector(".user-search-bar").value;
          load_user_data(limit, start, searchTerm);
     }
     // If we scroll the page, function below will execute
@@ -48,7 +48,7 @@ $(document).ready(function(){
          {
               action = 'active';
               start = start + limit;
-              var searchTerm = document.querySelector(".chat-section__user-search-bar").value;
+              var searchTerm = document.querySelector(".user-search-bar").value;
               setTimeout(function(){
                    load_user_data(limit, start, searchTerm);
               }, 1000);

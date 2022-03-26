@@ -12,7 +12,6 @@ $user = new Controller\User();
 <head>
      <?php include '../../config/head.php' ?>
      <title>Manage User | Ex-Ledge</title>
-     <!-- <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/chat.css">      -->
      <link rel="stylesheet" href="<?php echo $path; ?>public/css/admin/manageUser.css">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
@@ -29,16 +28,13 @@ $user = new Controller\User();
           <main class="manageUser--main main-content">
                <h2 class="manageUser__title main-title">Manage User</h2>
 
-               <section class="chat-section__user-list">
-                    <div class="chat-section__user-search-wrapper">
-                         <input class="chat-section__user-search-bar" id="search_text" type="text" placeholder="Search user" autocomplete="off">
-                         <button class="chat-section__user-search-btn" type="submit">
-                              <i class="fas fa-search"></i>
-                         </button>
-                    </div>
-                    <div class="card-container" id="user_container"></div>                    
-               </section>
-               <!-- <div class="card-container" id="user_container"></div> -->
+               <div class="user-search-wrapper">
+                    <input class="user-search-bar" id="search_text" type="text" placeholder="Search user" autocomplete="off">
+                    <button class="user-search-btn" type="submit">
+                         <i class="fas fa-search"></i>
+                    </button>
+               </div>
+               <div class="card-container" id="user_container"></div>                    
           </main>
 
      </div>
