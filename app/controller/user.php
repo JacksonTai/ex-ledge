@@ -104,8 +104,7 @@ if (isset($_GET['userId'])) {
 
 if (isset($_POST["limit"], $_POST["start"], $_POST['searchTerm'])) {
      $user = new \Controller\User();
-     return $user->loadUsers($_POST["limit"], $_POST["start"], $_POST['searchTerm']);          
-
+     return $user->loadUsers($_POST["limit"], $_POST["start"], $_POST['searchTerm']);             
 }
 
 if (isset($_GET['searchTerm'])) {
