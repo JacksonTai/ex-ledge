@@ -169,6 +169,16 @@
   }
 }
 
+/* Classes for JS DOM manipulation */
+.action-btn-click,
+.upvote {
+  color: var(--clr-primary);
+}
+
+.downvote {
+  color: var(--clr-delete-red);
+}
+
 @media (max-width: 731px) {
   .layout__question-title {
     order: 3;
