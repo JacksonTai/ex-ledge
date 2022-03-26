@@ -27,6 +27,7 @@
     color: #acacac;
 }
 
+/* Main content */
 .card-container{
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(360px, 1fr) );
@@ -85,6 +86,12 @@
 .ban-button:hover{
     color: white;
     background-color: #ff0000;
+}
+
+/* Dynamic Loading Message */
+.card-container_message{
+    text-align: center;
+    margin-bottom: 2em;
 }
 
 /* JS styles for alert box */

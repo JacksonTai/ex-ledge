@@ -21,14 +21,12 @@ $(document).ready(function(){
 
                     if(data == '') // If url returns nothing
                     {     
-                         // NOTICE FROM E HENG: 
-                         // IF U WANT TO ADD SOMETHING HTML LIKE 'No more users', DO IT IN THIS BLOCK 
+                         $('.card-container_message').html("<h3>No more users</h3>")
                          action = 'active';
                     }
                     else
                     {
-                         // NOTICE FROM E HENG: 
-                         // IF U WANT TO ADD SOMETHING HTML LIKE 'Loading...', DO IT IN THIS BLOCK
+                         $('.card-container_message').html("<h3>Loading...</h3>")
                          action = 'inactive';
                     }
               }

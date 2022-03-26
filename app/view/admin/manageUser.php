@@ -34,7 +34,8 @@ $user = new Controller\User();
                          <i class="fas fa-search"></i>
                     </button>
                </div>
-               <div class="card-container" id="user_container"></div>                    
+               <div class="card-container" id="user_container"></div>
+               <div class="card-container_message"></div>                    
           </main>
 
      </div>
