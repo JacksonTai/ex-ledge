@@ -72,12 +72,19 @@ class User extends \config\DbConn
           return $stmt->fetchAll();
      }
 
-     protected function loadData($limit, $start)
+     protected function loadData($limit, $start, $searchTerm)
      {    
           try {
-               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
-               $stmt = $this->executeQuery($sql, ['U%']);
-               $userInfos = $stmt->fetchAll();
+               if($searchTerm == ""){
+                    $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
+                    $stmt = $this->executeQuery($sql, ['U%']);
+                    $userInfos = $stmt->fetchAll();
+                    
+               } else {
+                    $sql = "SELECT * FROM user WHERE `user_id` LIKE ? AND `username` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
+                    $stmt = $this->executeQuery($sql, ['U%', '%' . $searchTerm . '%']);
+                    $userInfos = $stmt->fetchAll();                    
+               }
 
                foreach ($userInfos as $userInfo){
                     if ($_SESSION['userId'][0] == "A") {
@@ -89,7 +96,7 @@ class User extends \config\DbConn
                          echo
                               '<div class="user-card">
                                    <div class="user-card-content">
-                                        <img class="profile-picture" src="../../../public/img/profile.jpg" alt="Profile Image">
+                                        <img class="profile-picture" src="../../../public/img/profile1.jpg" alt="Profile Image">
                                         <div class="content-details">
                                              <p class="detail-title">User ID:</p>
                                              <p>'.($userInfo['user_id']).'</p>
@@ -116,7 +123,7 @@ class User extends \config\DbConn
                          echo 
                               '<div class="user_box" id='.($userInfo['user_id']).' data-user-id='.($userInfo['user_id']).'>
                                    <a class="user_info" href="profile.php?id='.($userInfo['user_id']).'">
-                                        <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="user_img">
+                                        <img class="user_img" src="../../../public/img/profile1.jpg" alt="user_img">
                                         <div class="user_info-detail">    
                                              <p class="user_name">'.($userInfo['username']).'</p>
                                              <p class="RP">RP: '.($userInfo['point']).'</p>
@@ -269,13 +276,45 @@ class User extends \config\DbConn
           $users = $stmt->fetchAll();
           $userInfo = '';
           foreach ($users as $user) {
-               $userInfo .= '<div class="chat-section__user" id="' . $user['user_id'] . '" data-user-id=' . $user['user_id'] . '>
-                                   <img class="chat-section__user-img chat-profile-img" src="../../../public/img/profile1.jpg">
-                                   <div class="chat-section__user-content">
-                                        <p class="chat-section__username">' . $user['username'] . '</p>
-                                        <p class="chat-section__user-msg"></p>
+               if ($_SESSION['userId'][0] == "U"){
+                    $userInfo .= '<div class="chat-section__user" id="' . $user['user_id'] . '" data-user-id=' . $user['user_id'] . '>
+                                        <img class="chat-section__user-img chat-profile-img" src="../../../public/img/profile1.jpg">
+                                        <div class="chat-section__user-content">
+                                             <p class="chat-section__username">' . $user['username'] . '</p>
+                                             <p class="chat-section__user-msg"></p>
+                                        </div>
+                                   </div>';                    
+               } else {
+                    if ($user['verification'] == 0){
+                         $verificationStatus = "UNVERIFIED";
+                    } else {
+                         $verificationStatus = "VERIFIED";
+                    }
+                    $userInfo .='<div class="user-card">
+                                   <div class="user-card-content">
+                                        <img class="profile-picture" src="../../../public/img/profile.jpg" alt="Profile Image">
+                                        <div class="content-details">
+                                             <p class="detail-title">User ID:</p>
+                                             <p>'.($user['user_id']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Username: </p>
+                                             <p>'.($user['username']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Email: </p>
+                                             <p>'.($user['email']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Verification Status: </p>
+                                             <p>'.$verificationStatus.'</p>
+                                        </div>
+                                        <div class="ban-container">
+                                             <button class="ban-button" id="banUser" onclick="confirmDeletion(\''  .($user['user_id']). '\')">Ban</button>
+                                        </div>
                                    </div>
-                              </div>';
+                              </div>';                    
+               }
           }
           return $userInfo;
      }
