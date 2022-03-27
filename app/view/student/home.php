@@ -57,18 +57,18 @@ $answer = new \Controller\Answer();
                         </div>
                         <div class="home__filter-form-wrapper">
                             <div class="home__filter-form-item">
-                                <input type="checkbox" name="noAns" id="noAns">
+                                <input type="checkbox" name="noAns" id="noAns" <?php echo isset($_GET['noAns']) ? 'checked' : ''; ?>>
                                 <label for="noAns">No Answer</label>
                             </div>
                             <div class="home__filter-form-item">
-                                <input type="checkbox" name="noAcceptedAns" id="noAcceptedAns">
+                                <input type="checkbox" name="noAcceptedAns" id="noAcceptedAns" <?php echo isset($_GET['noAcceptedAns']) ? 'checked' : ''; ?>>
                                 <label for="noAcceptedAns">No Accepted Answer</label>
                             </div>
                         </div>
                         <div class="home__filter-form-wrapper">
                             <div class="home__filter-form-item">
-                                <input type="radio" name="sort" id="highestScore" value="highestScore">
-                                <label for="highestScore">Highest Score</label>
+                                <input type="radio" name="sort" id="mostUpvote" value="mostUpvote">
+                                <label for="mostUpvote">Most Upvoted</label>
                             </div>
                             <div class="home__filter-form-item">
                                 <input type="radio" name="sort" id="latest" value="latest" checked>
@@ -95,11 +95,23 @@ $answer = new \Controller\Answer();
 
                 $start = ($page > 1) ? ($page * 10) - 10 : 0;
 
-                // Check if the user has reach the end of the page.
-                $end = empty($questions->read(null, 10, $start)) ? true : false;
+                if (isset($_GET['search'])) {
+                    // Check if the user has reach the end of the page.
+                    $end = empty($questions->read($_GET, 10, $start)) ? true : false;
+                    foreach ($questions->read($_GET, 10, $start) as $question) {
+                        include '../layout/question.php';
+                        // print_r($question);
+                        // echo '<br>';
+                        // echo '<br>';
+                    }
+                }
 
-                foreach ($questions->read(null, 10, $start) as $question) {
-                    include '../layout/question.php';
+                if (!isset($_GET['search'])) {
+                    // Check if the user has reach the end of the page.
+                    $end = empty($questions->read(null, 10, $start)) ? true : false;
+                    foreach ($questions->read(null, 10, $start) as $question) {
+                        include '../layout/question.php';
+                    }
                 }
                 ?>
             </div>
