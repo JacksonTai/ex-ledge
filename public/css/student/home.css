@@ -40,6 +40,17 @@
   margin-top: 3rem;
 }
 
+.home__end-title,
+.home__end-img {
+  display: block;
+  margin: 1.5rem auto;
+  text-align: center;
+}
+
+.home__end-img{
+ max-width: 20rem;
+}
+
 .home__main-nav {
   display: flex;
   justify-content: center;
@@ -108,4 +119,11 @@
   .button-filter{
     width: 75px;
   }
+}
+
+/* Classes for JS DOM manipulation */
+.disabled {
+  pointer-events: none;
+  background-color: #fafafa;
+  opacity: 0.5;
 }

@@ -3,7 +3,7 @@
 namespace Controller;
 
 if (!empty($_GET) || !empty($_POST)) {
-    if (isset($_GET['id'])) {
+    if (isset($_GET['id']) || isset($_GET['page'])) {
         include '../../helper/autoloader.php';
     } else {
         session_start();
@@ -26,9 +26,9 @@ class Question extends \Model\Question
     }
 
     /* ######### READ ######### */
-    public function read($criteria = null)
+    public function read($criteria = null, $limit = null, $start = null)
     {
-        return $this->getQuestion($criteria);
+        return $this->getQuestion($criteria, $limit, $start);
     }
 
     public function questionCount($criteria = null)

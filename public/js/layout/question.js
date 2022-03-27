@@ -110,7 +110,62 @@ checkVerifStatus().then(() => {
   }
 });
 
+/* -- Add and remove Bookmark -- */
+let layoutQuestionBookmarks = document.querySelectorAll(
+  ".layout__question-bookmark"
+);
+
+for (let layoutQuestionBookmark of layoutQuestionBookmarks) {
+  layoutQuestionBookmark.addEventListener("click", async function () {
+    layoutQuestionBookmark.classList.toggle("action-btn-click");
+
+    try {
+      await fetch(
+        `../../controller/bookmark.php?id=${this.dataset.bookmarkId}`
+      );
+    } catch (e) {
+      console.log("Error: ", e);
+    }
+  });
+}
+
+/* -- Get Bookmark -- */
+async function getBookmark(criteria) {
+  try {
+    let res = await fetch(`../../controller/bookmark.php?criteria=${criteria}`);
+    return await res.json();
+  } catch (e) {
+    console.log("Error: ", e);
+  }
+}
+
+async function setBookmark() {
+  try {
+    // Get user id.
+    let userIdRes = await fetch("../../helper/session.php");
+    let userId = await userIdRes.json();
+
+    // Store all bookmark Id record of the user.
+    let bookmarksId = [];
+
+    let bookmarks = await getBookmark(userId);
+
+    for (let bookmark of bookmarks) {
+      bookmarksId.push(bookmark.id);
+    }
+
+    for (let layoutQuestionBookmark of layoutQuestionBookmarks) {
+      if (bookmarksId.includes(layoutQuestionBookmark.dataset.bookmarkId)) {
+        layoutQuestionBookmark.classList.toggle("action-btn-click");
+      }
+    }
+  } catch (e) {
+    console.log("Error", e);
+  }
+}
+
 window.onload = () => {
+  setBookmark();
   setQuestionPrevVote();
   checkVerifStatus();
 };

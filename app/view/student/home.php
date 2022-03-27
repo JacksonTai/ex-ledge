@@ -42,18 +42,41 @@ $answer = new \Controller\Answer();
             </div>
             <div class="home__body">
                 <?php
-                foreach ($questions->read() as $question) {
+                $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                $start = ($page > 1) ? ($page * 10) - 10 : 0;
+                $end = empty($questions->read(null, 10, $start)) ? true : false;
+                foreach ($questions->read(null, 10, $start) as $question) {
                     include '../layout/question.php';
                 }
                 ?>
             </div>
+
+            <?php if ($end) : ?>
+                <h3 class="home__end-title">Looks like you've reached the end.</h3>
+                <img class="home__end-img" src="../../../public/img/homeEmptyState.jpg" alt="">
+            <?php endif; ?>
+
             <nav class="home__main-nav">
                 <button class="home__main-nav-btn">
-                    <a class="home__main-nav-link dialog" href="<?php echo $_SERVER['PHP_SELF'] . '?page=#'; ?>">Back</a>
+                    <a class="home__main-nav-link dialog <?php echo ($page == 1) ? 'disabled' : '';  ?>" href="
+                    <?php
+                    $prevPage = $page;
+                    $prevPage = ($prevPage > 2) ? '?page=' . $prevPage -= 1 : '';
+                    echo $_SERVER['PHP_SELF'] . $prevPage;
+                    ?>
+                    ">Back
+                    </a>
                 </button>
-                <p class="home__main-nav-page">1</p>
-                <button class="home__main-nav-btn">
-                    <a class="home__main-nav-link dialog" href="<?php echo $_SERVER['PHP_SELF'] . '?page=#'; ?>">Next</a>
+
+                <p class="home__main-nav-page"><?php echo $page; ?></p>
+                <button class="home__main-nav-btn <?php echo $end ? 'disabled' : ''; ?>">
+                    <a class="home__main-nav-link dialog" href="
+                    <?php
+                    $nextPage = $page;
+                    echo $_SERVER['PHP_SELF'] . '?page=' . $nextPage += 1;
+                    ?>
+                    ">Next
+                    </a>
                 </button>
             </nav>
         </main>

@@ -58,7 +58,7 @@ class Question extends \config\DbConn
 
 
     /* ######### READ ######### */
-    protected function getQuestion($criteria)
+    protected function getQuestion($criteria, $limit, $start)
     {
         if ($criteria) {
             try {
@@ -73,7 +73,6 @@ class Question extends \config\DbConn
                                 FROM question q INNER JOIN user u ON q.user_id = u.user_id
                                 WHERE q.question_id = ?;";
                 }
-
                 $stmt = $this->executeQuery($sql, [$criteria]);
                 return $stmt->fetchAll();
             } catch (PDOException $e) {
@@ -81,14 +80,16 @@ class Question extends \config\DbConn
             }
         }
 
-        // Default query for selecting all questions.
+        // Default query for selecting all questions based on limit and offset value.
         try {
-            $sql = "SELECT q.*, u.username, u.user_id FROM question q
-                    INNER JOIN user u ON
-                    q.user_id = u.user_id
-                    ORDER BY time_posted DESC;";
-            $stmt = $this->executeQuery($sql);
-            return $stmt->fetchAll();
+            if (isset($limit, $start)) {
+                $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                            INNER JOIN user u ON
+                            q.user_id = u.user_id
+                            ORDER BY time_posted DESC LIMIT $limit OFFSET $start";
+                $stmt = $this->executeQuery($sql);
+                return $stmt->fetchAll();
+            }
         } catch (PDOException $e) {
             die('Error: ' . $e->getMessage());
         }
@@ -114,7 +115,7 @@ class Question extends \config\DbConn
     {
         $sql = "SELECT * FROM `question` ORDER BY  `point` DESC LIMIT 5";
         $stmt = $this->executeQuery($sql);
-        return $stmt->fetchAll();   
+        return $stmt->fetchAll();
     }
 
     protected function timestamp($datetime)
