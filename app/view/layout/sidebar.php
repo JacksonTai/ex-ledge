@@ -23,7 +23,7 @@ $question = new \Controller\Question();
           <h3 class="layout-sidebar__content-title">Hot Topics</h3>
           <?php foreach ($question->hotQuestion() as $hotQuestion) : ?>
                <a class="layout-sidebar__hot-topic" href="question.php?id=<?php echo htmlspecialchars($hotQuestion['question_id']); ?>">
-                    <?php echo htmlspecialchars($hotQuestion['content']) ?>
+                    <?php echo htmlspecialchars($hotQuestion['title']) ?>
                </a>
           <?php endforeach; ?>
      </div>

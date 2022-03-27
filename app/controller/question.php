@@ -5,7 +5,8 @@ namespace Controller;
 if (!empty($_GET) || !empty($_POST)) {
     if (isset($_GET['id']) || isset($_GET['page'])) {
         include '../../helper/autoloader.php';
-    } else {
+    }
+    if (isset($_GET['deleteId']) || isset($_POST["limit"], $_POST["start"])) {
         session_start();
         include '../helper/autoloader.php';
     }

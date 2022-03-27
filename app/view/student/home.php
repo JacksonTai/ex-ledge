@@ -40,11 +40,64 @@ $answer = new \Controller\Answer();
                     </button>
                 </div>
             </div>
+            <div class="home__filter-container dialog hide">
+                <h3>Filter Question By: </h3>
+                <form class="home__filter-form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="GET">
+                    <div class="home__filter-content-container">
+                        <div class="home__filter-form-wrapper">
+                            <div class="home__filter-form-item">
+                                <input type="radio" name="search" id="keyword" value="keyword">
+                                <label for="keyword">Keywords</label>
+                            </div>
+                            <div class="home__filter-form-item">
+                                <input type="radio" name="search" id="tag" value="tag" checked>
+                                <label for="tag">Tags</label>
+                            </div>
+                            <input type="text" name="searchTxt" placeholder="e.g. Keywords or Tags">
+                        </div>
+                        <div class="home__filter-form-wrapper">
+                            <div class="home__filter-form-item">
+                                <input type="checkbox" name="noAns" id="noAns">
+                                <label for="noAns">No Answer</label>
+                            </div>
+                            <div class="home__filter-form-item">
+                                <input type="checkbox" name="noAcceptedAns" id="noAcceptedAns">
+                                <label for="noAcceptedAns">No Accepted Answer</label>
+                            </div>
+                        </div>
+                        <div class="home__filter-form-wrapper">
+                            <div class="home__filter-form-item">
+                                <input type="radio" name="sort" id="highestScore" value="highestScore">
+                                <label for="highestScore">Highest Score</label>
+                            </div>
+                            <div class="home__filter-form-item">
+                                <input type="radio" name="sort" id="latest" value="latest" checked>
+                                <label for="latest">Latest</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="home__filter-btn-container">
+                        <button class="home__cancel-filter-btn" type="button">Cancel</button>
+                        <button class="home__apply-filter-btn" type="submit">Apply</button>
+                    </div>
+                </form>
+            </div>
             <div class="home__body">
                 <?php
+                // Check for filters URL parameters.
+                $filters = isset($_GET['search']) ? '?search=' . $_GET['search'] : '?';
+                $filters .= isset($_GET['searchTxt']) && $_GET['searchTxt'] != '' ? '&searchTxt=' . $_GET['searchTxt'] : '';
+                $filters .= isset($_GET['noAns']) ? '&noAns=' . $_GET['noAns'] : '';
+                $filters .= isset($_GET['noAcceptedAns']) ? '&noAcceptedAns=' . $_GET['noAcceptedAns'] : '';
+                $filters .= isset($_GET['sort']) ? '&sort=' . $_GET['sort'] . '&' : '';
+
                 $page = isset($_GET['page']) ? $_GET['page'] : 1;
+
                 $start = ($page > 1) ? ($page * 10) - 10 : 0;
+
+                // Check if the user has reach the end of the page.
                 $end = empty($questions->read(null, 10, $start)) ? true : false;
+
                 foreach ($questions->read(null, 10, $start) as $question) {
                     include '../layout/question.php';
                 }
@@ -53,27 +106,26 @@ $answer = new \Controller\Answer();
 
             <?php if ($end) : ?>
                 <h3 class="home__end-title">Looks like you've reached the end.</h3>
-                <img class="home__end-img" src="../../../public/img/homeEmptyState.jpg" alt="">
+                <img class="home__end-img" src="<?php echo $path; ?>public/img/homeEmptyState.jpg" alt="">
             <?php endif; ?>
 
             <nav class="home__main-nav">
-                <button class="home__main-nav-btn">
-                    <a class="home__main-nav-link dialog <?php echo ($page == 1) ? 'disabled' : '';  ?>" href="
+                <button class="home__main-nav-btn <?php echo ($page == 1) ? 'disabled' : '';  ?>">
+                    <a class="home__main-nav-link dialog" href="
                     <?php
                     $prevPage = $page;
-                    $prevPage = ($prevPage > 2) ? '?page=' . $prevPage -= 1 : '';
-                    echo $_SERVER['PHP_SELF'] . $prevPage;
+                    $prevPage = ($prevPage > 2) ? 'page=' . $prevPage -= 1 : '';
+                    echo $_SERVER['PHP_SELF'] . $filters . $prevPage;
                     ?>
                     ">Back
                     </a>
                 </button>
-
                 <p class="home__main-nav-page"><?php echo $page; ?></p>
                 <button class="home__main-nav-btn <?php echo $end ? 'disabled' : ''; ?>">
                     <a class="home__main-nav-link dialog" href="
                     <?php
                     $nextPage = $page;
-                    echo $_SERVER['PHP_SELF'] . '?page=' . $nextPage += 1;
+                    echo $_SERVER['PHP_SELF'] . $filters . 'page=' . $nextPage += 1;
                     ?>
                     ">Next
                     </a>
@@ -89,6 +141,7 @@ $answer = new \Controller\Answer();
 
     <script src="<?php echo $path; ?>public/js/script.js"></script>
     <script src="<?php echo $path; ?>public/js/layout/question.js"></script>
+    <script src="<?php echo $path; ?>public/js/student/home.js"></script>
 </body>
 
 </html>

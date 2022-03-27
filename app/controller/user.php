@@ -3,7 +3,14 @@
 namespace Controller;
 
 if (!empty($_GET) || !empty($_POST)) {
-     if (!isset($_GET['id']) && !isset($_GET['page'])) {
+     if (
+          !isset($_GET['search']) &&
+          !isset($_GET['searchTxt']) &&
+          !isset($_GET['noAns']) &&
+          !isset($_GET['noAcceptedAns']) &&
+          !isset($_GET['sort']) &&
+          !isset($_GET['id']) && !isset($_GET['page'])
+     ) {
           session_start();
           include '../helper/autoloader.php';
      }
