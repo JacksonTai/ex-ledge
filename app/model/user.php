@@ -73,66 +73,63 @@ class User extends \config\DbConn
      }
 
      protected function loadData($limit, $start, $searchTerm)
-     {    
+     {
           try {
-               if($searchTerm == ""){
+               if ($searchTerm == "") {
                     $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
                     $stmt = $this->executeQuery($sql, ['U%']);
                     $userInfos = $stmt->fetchAll();
-                    
                } else {
                     $sql = "SELECT * FROM user WHERE `user_id` LIKE ? AND `username` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
                     $stmt = $this->executeQuery($sql, ['U%', '%' . $searchTerm . '%']);
-                    $userInfos = $stmt->fetchAll();                    
+                    $userInfos = $stmt->fetchAll();
                }
 
-               foreach ($userInfos as $userInfo){
+               foreach ($userInfos as $userInfo) {
                     if ($_SESSION['userId'][0] == "A") {
-                         if ($userInfo['verification'] == 0){
+                         if ($userInfo['verification'] == 0) {
                               $verificationStatus = "UNVERIFIED";
                          } else {
                               $verificationStatus = "VERIFIED";
                          }
                          echo
-                              '<div class="user-card">
+                         '<div class="user-card">
                                    <div class="user-card-content">
                                         <img class="profile-picture" src="../../../public/img/profile1.jpg" alt="Profile Image">
                                         <div class="content-details">
                                              <p class="detail-title">User ID:</p>
-                                             <p>'.($userInfo['user_id']).'</p>
+                                             <p>' . ($userInfo['user_id']) . '</p>
                                         </div>
                                         <div class="content-details">
                                              <p class="detail-title">Username: </p>
-                                             <p>'.($userInfo['username']).'</p>
+                                             <p>' . ($userInfo['username']) . '</p>
                                         </div>
                                         <div class="content-details">
                                              <p class="detail-title">Email: </p>
-                                             <p>'.($userInfo['email']).'</p>
+                                             <p>' . ($userInfo['email']) . '</p>
                                         </div>
                                         <div class="content-details">
                                              <p class="detail-title">Verification Status: </p>
-                                             <p>'.$verificationStatus.'</p>
+                                             <p>' . $verificationStatus . '</p>
                                         </div>
                                         <div class="ban-container">
-                                             <button class="ban-button" id="banUser" onclick="confirmDeletion(\''  .($userInfo['user_id']). '\')">Ban</button>
+                                             <button class="ban-button" id="banUser" onclick="confirmDeletion(\''  . ($userInfo['user_id']) . '\')">Ban</button>
                                         </div>
                                    </div>
                               </div>';
-
                     } else {
-                         echo 
-                              '<div class="user_box" id='.($userInfo['user_id']).' data-user-id='.($userInfo['user_id']).'>
-                                   <a class="user_info" href="profile.php?id='.($userInfo['user_id']).'">
+                         echo
+                         '<div class="user_box" id=' . ($userInfo['user_id']) . ' data-user-id=' . ($userInfo['user_id']) . '>
+                                   <a class="user_info" href="profile.php?id=' . ($userInfo['user_id']) . '">
                                         <img class="user_img" src="../../../public/img/profile1.jpg" alt="user_img">
                                         <div class="user_info-detail">    
-                                             <p class="user_name">'.($userInfo['username']).'</p>
-                                             <p class="RP">RP: '.($userInfo['point']).'</p>
+                                             <p class="user_name">' . ($userInfo['username']) . '</p>
+                                             <p class="RP">RP: ' . ($userInfo['point']) . '</p>
                                         </div>
                                    </a>
-                              </div>';                            
-                    }                
+                              </div>';
+                    }
                }
-
           } catch (PDOException $e) {
                die('Error: ' . $e->getMessage());
           }
@@ -276,44 +273,44 @@ class User extends \config\DbConn
           $users = $stmt->fetchAll();
           $userInfo = '';
           foreach ($users as $user) {
-               if ($_SESSION['userId'][0] == "U"){
+               if ($_SESSION['userId'][0] == "U") {
                     $userInfo .= '<div class="chat-section__user" id="' . $user['user_id'] . '" data-user-id=' . $user['user_id'] . '>
                                         <img class="chat-section__user-img chat-profile-img" src="../../../public/img/profile1.jpg">
                                         <div class="chat-section__user-content">
                                              <p class="chat-section__username">' . $user['username'] . '</p>
                                              <p class="chat-section__user-msg"></p>
                                         </div>
-                                   </div>';                    
+                                   </div>';
                } else {
-                    if ($user['verification'] == 0){
+                    if ($user['verification'] == 0) {
                          $verificationStatus = "UNVERIFIED";
                     } else {
                          $verificationStatus = "VERIFIED";
                     }
-                    $userInfo .='<div class="user-card">
+                    $userInfo .= '<div class="user-card">
                                    <div class="user-card-content">
                                         <img class="profile-picture" src="../../../public/img/profile.jpg" alt="Profile Image">
                                         <div class="content-details">
                                              <p class="detail-title">User ID:</p>
-                                             <p>'.($user['user_id']).'</p>
+                                             <p>' . ($user['user_id']) . '</p>
                                         </div>
                                         <div class="content-details">
                                              <p class="detail-title">Username: </p>
-                                             <p>'.($user['username']).'</p>
+                                             <p>' . ($user['username']) . '</p>
                                         </div>
                                         <div class="content-details">
                                              <p class="detail-title">Email: </p>
-                                             <p>'.($user['email']).'</p>
+                                             <p>' . ($user['email']) . '</p>
                                         </div>
                                         <div class="content-details">
                                              <p class="detail-title">Verification Status: </p>
-                                             <p>'.$verificationStatus.'</p>
+                                             <p>' . $verificationStatus . '</p>
                                         </div>
                                         <div class="ban-container">
-                                             <button class="ban-button" id="banUser" onclick="confirmDeletion(\''  .($user['user_id']). '\')">Ban</button>
+                                             <button class="ban-button" id="banUser" onclick="confirmDeletion(\''  . ($user['user_id']) . '\')">Ban</button>
                                         </div>
                                    </div>
-                              </div>';                    
+                              </div>';
                }
           }
           return $userInfo;
@@ -371,6 +368,24 @@ class User extends \config\DbConn
                }
           }
           return $userInfo;
+     }
+
+     protected function getUserCount($criteria = null)
+     {
+          if ($criteria && $criteria == 'verified') {
+               $sql = "SELECT count(`user_id`) AS result FROM user
+                         WHERE `user_id` LIKE ? 
+                         AND `verification` = ?;";
+               return $this->executeQuery($sql, ['U%', 1])->fetch()['result'];
+          }
+          $sql = "SELECT count(`user_id`) AS result FROM user 
+                    WHERE `user_id` LIKE ?;";
+          return $this->executeQuery($sql, ['U%'])->fetch()['result'];
+     }
+
+     protected function getVerifiedRatio()
+     {
+          return round(($this->getUserCount('verified') / $this->getUserCount()) * 100) . '%';
      }
 
      /* ######### UPDATE ######### */
@@ -482,13 +497,12 @@ class User extends \config\DbConn
           $sql_delete = "DELETE FROM verification_queue WHERE `user_id` = ?;";
           $this->executeQuery($sql_delete, [$postData['verifId']]);
      }
-          
+
      protected function setUserPoint($value)
      {
           $sql = "UPDATE user SET `point` = ? 
                     WHERE `user_id`= ?";
           $this->executeQuery($sql, [$value, $this->userId]);
- 
      }
 
      /* ######### DELETE ######### */
@@ -496,31 +510,6 @@ class User extends \config\DbConn
      {
           $sql = "DELETE FROM user WHERE `user_id` = ?;";
           $this->executeQuery($sql, [$userId]);
-     }
-
-     protected function returnAdminData(){
-          //desired outcome: returning an array with all data required
-          
-          //$sql = "select count(username) as users from `user`; select count(title) as questions from `question`;";
-
-          $resultData= array();
-
-          //since PDO::FETCH_ASSOC refuses to work i resort to this shitty hack
-          //i have standards and refuse to settle at something this shitty but im defeated at this point
-          //if theres a better solution, pls lmk
-
-          $totalusers= $this->executeQuery("select count(username) as users from `user`; select count(title) as questions from `question`")->fetchAll();
-          //how do you quantify "registered" vs "total" users anyway?
-          $totalregistered= $this->executeQuery("select count(username) as users from `user`; select count(title) as questions from `question`")->fetchAll();
-          $totalanswers= $this->executeQuery("select count(answer_id) as answers from `answer`")->fetchAll();
-          $totalquestions= $this->executeQuery("select count(title) as questions from `question`")->fetchAll();
-          
-          $resultData= array_merge($totalusers, $totalregistered, $totalanswers, $totalquestions);
-
-
-
-          return $resultData;
-
      }
 
      //reject verification

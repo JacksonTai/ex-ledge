@@ -68,6 +68,16 @@ class User extends \Model\User
           return $this->searchUser($searchTerm);
      }
 
+     public function userCount($criteria = null)
+     {
+          return $this->getUserCount($criteria);
+     }
+
+     public function verifiedRatio()
+     {
+          return $this->getVerifiedRatio();
+     }
+
      /* ######### UPDATE ######### */
      public function updateDetail($postData)
      {
@@ -98,12 +108,6 @@ class User extends \Model\User
      {
           $this->deleteUserVerif($userId);
      }
-
-     public function returnAdministrativeData()
-     {
-          return $this->returnAdminData();
-     }
-
 }
 
 /* ######### CREATE ######### */
@@ -120,7 +124,7 @@ if (isset($_GET['userId'])) {
 
 if (isset($_POST["limit"], $_POST["start"], $_POST['searchTerm'])) {
      $user = new \Controller\User();
-     return $user->loadUsers($_POST["limit"], $_POST["start"], $_POST['searchTerm']);             
+     return $user->loadUsers($_POST["limit"], $_POST["start"], $_POST['searchTerm']);
 }
 
 if (isset($_GET['searchTerm'])) {
@@ -154,10 +158,3 @@ if (isset($_GET['rejectverifId'])) {
      $user = new \Controller\User();
      $user->deleteVerif($_GET['rejectverifId']);
 }
-
-//if (isset($_GET['returnAdministrativeData'])) {
-//     $user = new \Controller\User();
-//     $user->returnAdministrativeData();
-
-//}
-
