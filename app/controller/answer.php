@@ -4,7 +4,7 @@ namespace Controller;
 
 if (!empty($_GET) || !empty($_POST)) {
      if (!isset($_GET['id'])) {
-          if (!isset($_POST["limit"], $_POST["start"])){
+          if (!isset($_POST["limit"], $_POST["start"])) {
                session_start();
                include '../helper/autoloader.php';
           }
@@ -18,15 +18,19 @@ class Answer extends \Model\Answer
           $postData ? parent::__construct($postData) : '';
      }
 
-
      public function read($criteria = null, $status = null)
      {
           return $this->readAnswer($criteria, $status);
      }
 
-     public function answerCount($criteria)
+     public function answerCount($criteria = null)
      {
           return $this->getAnswerCount($criteria);
+     }
+
+     public function accepted()
+     {
+          return $this->getAcceptedAns();
      }
 
      public function updateStatus($answerId)

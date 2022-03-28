@@ -5,7 +5,9 @@ include '../../helper/autoloader.php';
 
 $path = '../../../';
 
-$admins = new \Controller\User();
+$admin = new \Controller\User();
+$question = new \Controller\Question();
+$answer = new \Controller\Answer();
 ?>
 
 <!DOCTYPE html>
@@ -29,17 +31,17 @@ $admins = new \Controller\User();
             <div class="panel dialog">
                 <div class="panel-card-stats">
                     <p class="panel-title">Verified Ratio</p>
-                    <p class="panel-title-stat"><?php echo htmlspecialchars($admins->verifiedRatio()); ?></p>
+                    <p class="panel-title-stat"><?php echo htmlspecialchars($admin->verifiedRatio()); ?></p>
                 </div>
                 <div class="panel-detail verified-users">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($admins->userCount('verified')); ?></p>
+                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($admin->userCount('verified')); ?></p>
                         <p class="panel-card-title">Verified user</p>
                     </div>
                 </div>
                 <div class="panel-detail total-users">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($admins->userCount()); ?></p>
+                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($admin->userCount()); ?></p>
                         <p class="panel-card-title">Total User</p>
                     </div>
                 </div>
@@ -47,30 +49,18 @@ $admins = new \Controller\User();
 
             <div class="panel dialog">
                 <div class="panel-card-stats">
-                    <p class="panel-title">Q/A Ratio</p>
-                    <p class="panel-title-stat">
-                        <?php
-                        // if ($admins->returnAdministrativeData()[2]['answers'] == 0) {
-                        //     echo ("N/A");
-                        // } else {
-                        //     echo (substr($admins->returnAdministrativeData()[3]['questions'] / $admins->returnAdministrativeData()[2]['answers'], 0, 4));
-                        // } 
-                        ?>
-                    </p>
+                    <p class="panel-title">Accepted Ratio</p>
+                    <p class="panel-title-stat"><?php echo htmlspecialchars($answer->accepted()); ?></p>
                 </div>
                 <div class="panel-detail total-ans">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count">
-                            <?php ?>
-                        </p>
-                        <p class="panel-card-title">Total Answers</p>
+                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($answer->answerCount(1)); ?></p>
+                        <p class="panel-card-title">Accepted Answers</p>
                     </div>
                 </div>
                 <div class="panel-detail total-questions">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count">
-                            <?php   ?>
-                        </p>
+                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($question->questionCount()); ?></p>
                         <p class="panel-card-title">Total Questions</p>
                     </div>
                 </div>
