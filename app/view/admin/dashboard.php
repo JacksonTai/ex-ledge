@@ -28,19 +28,21 @@ $admins= new \Controller\User();
 
             <div class="panel dialog">
                 <div class="panel-card-stats">
-                    <p class="panel-title">Total visits</p>
-                    <p class="panel-title-stat">12089</p>
+                    <p class="panel-title">Verified ratio</p>
+                    <p class="panel-title-stat"><?php if($admins->returnAdministrativeData()[0]['users']==0){echo("N/A");} 
+                    else {echo(substr($admins->returnAdministrativeData()[0]['users']/$admins->returnAdministrativeData()[1]['users'], 0, 4));}?>
+                    </p>
                 </div>
                 <div class="panel-detail registered-users">
                     <div class="panel-card-stats">
                         <p class="panel-card-stat-count"><?php echo($admins->returnAdministrativeData())[0]['users']?></p>
-                        <p class="panel-card-title">Registered user</p>
+                        <p class="panel-card-title">Verified users</p>
                     </div>
                 </div>
                 <div class="panel-detail total-users">
                     <div class="panel-card-stats">
                         <p class="panel-card-stat-count"><?php echo($admins->returnAdministrativeData())[1]['users']?></p>
-                        <p class="panel-card-title">Total User</p>
+                        <p class="panel-card-title">Total users</p>
                     </div>
                 </div>
             </div>
