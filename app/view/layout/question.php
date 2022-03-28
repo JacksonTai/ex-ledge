@@ -1,12 +1,12 @@
 <?php
 $questions = new \Controller\Question();
-$answer = new \Controller\Answer(); 
+$answer = new \Controller\Answer();
 $timestamp = $questions->get_time($question['time_posted']); ?>
 <article class="layout__question dialog">
-     <div class="layout__question-vote-container">
-          <i class="layout__question-vote fa-solid fa-arrow-up fa-lg up" id="up" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>"></i>
-          <p class="layout__question-point" id="vote" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>"><?php echo htmlspecialchars($question['point']); ?></p>
-          <i class="layout__question-vote fa-solid fa-arrow-down fa-lg down" id="down" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>"></i>
+     <div class="layout__question-vote-container" data-question-id="<?php echo htmlspecialchars($question['question_id']); ?>">
+          <i class="layout__question-vote fa-solid fa-arrow-up fa-lg up" id="upvote"></i>
+          <p class="layout__question-point" id="vote"><?php echo htmlspecialchars($question['point']); ?></p>
+          <i class="layout__question-vote fa-solid fa-arrow-down fa-lg down" id="downvote"></i>
      </div>
      <div class="layout__question-header">
           <h3 class="layout__question-title">
@@ -31,8 +31,9 @@ $timestamp = $questions->get_time($question['time_posted']); ?>
 
      <a class="layout__question-body" href="../student/question.php?id=<?php echo htmlspecialchars($question['question_id']); ?>">
           <p class="layout__question-content"><?php echo htmlspecialchars($question['content']); ?></p>
-          <p class="layout__question-tag"><?php echo htmlspecialchars($question['tag']); ?></p>
      </a>
+
+     <p class="layout__question-tag"><?php echo htmlspecialchars($question['tag']); ?></p>
 
      <div class="layout__question-footer">
           <div class="layout__question-poster">

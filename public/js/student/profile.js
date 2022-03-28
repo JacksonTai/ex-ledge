@@ -148,7 +148,7 @@ async function setBookmark() {
     // Get user id.
     let userIdRes = await fetch("../../helper/session.php");
     let userId = await userIdRes.json();
-
+ 
     // Store all bookmark Id record of the user.
     let bookmarksId = [];
     
@@ -448,7 +448,5 @@ deletAccountbtn.addEventListener("click", async function () {
   }
 });
 
-window.onload = () => {
-  setBookmark();
-  setAnsPrevVote();
-};
+setBookmark();
+setAnsPrevVote();

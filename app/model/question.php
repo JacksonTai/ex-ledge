@@ -58,51 +58,324 @@ class Question extends \config\DbConn
 
 
     /* ######### READ ######### */
-    protected function getQuestion($criteria)
+    protected function getQuestion($criteria, $limit, $start)
     {
         if ($criteria) {
             try {
-                // Query for selecting questions of specific user.
-                if ($criteria[0] == 'U') {
-                    $sql = "SELECT *, q.point AS point, u.POINT AS u_point
+                if (!is_array($criteria)) {
+                    // Query for selecting questions of specific user.
+                    if ($criteria[0] == 'U') {
+                        $sql = "SELECT *, q.point AS point, u.POINT AS u_point
                                 FROM question q INNER JOIN user u ON q.user_id = u.user_id
                                 WHERE q.user_id = ?;";
-                }
-                if ($criteria[0] == 'Q') {
-                    $sql = "SELECT *, q.point AS point, u.POINT AS u_point
+                    }
+                    if ($criteria[0] == 'Q') {
+                        $sql = "SELECT *, q.point AS point, u.POINT AS u_point
                                 FROM question q INNER JOIN user u ON q.user_id = u.user_id
                                 WHERE q.question_id = ?;";
+                    }
+                    $stmt = $this->executeQuery($sql, [$criteria]);
+                    return $stmt->fetchAll();
                 }
 
-                $stmt = $this->executeQuery($sql, [$criteria]);
-                return  $stmt->fetchAll();
+                // Filter question.
+                if (is_array($criteria) && isset($limit, $start)) {
+
+                    /* ========================================= Latest ========================================= */
+                    if (isset($_GET['sort']) && $_GET['sort'] == 'latest') {
+
+                        // User entered search text for tags or keywords.
+                        if (isset($_GET['searchTxt']) && $_GET['searchTxt'] != '') {
+
+                            // User searched question based on tags.
+                            if ($_GET['search'] == 'tag') {
+                                /* User searched question that has no answer or 
+                                   no answer and accepted answer based on tags. */
+                                if (isset($_GET['noAns']) || isset($_GET['noAns'], $_GET['noAcceptedAns'])) {
+                                    $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                                INNER JOIN user u ON
+                                                q.user_id = u.user_id
+                                                WHERE q.question_id NOT IN (SELECT question_id FROM answer)
+                                                AND q.tag = ?
+                                                ORDER BY q.time_posted DESC
+                                                LIMIT $limit OFFSET $start;";
+                                    $stmt = $this->executeQuery($sql, [$_GET['searchTxt']]);
+                                    return $stmt->fetchAll();
+                                }
+
+                                // User searched question that has no accepted answer based on tags.
+                                if (isset($_GET['noAcceptedAns'])) {
+                                    $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                                INNER JOIN user u ON
+                                                q.user_id = u.user_id
+                                                WHERE q.question_id NOT IN (SELECT question_id FROM answer WHERE `status` = 1)
+                                                AND q.tag = ?
+                                                ORDER BY q.time_posted DESC
+                                                LIMIT $limit OFFSET $start;";
+                                    $stmt = $this->executeQuery($sql, [$_GET['searchTxt']]);
+                                    return $stmt->fetchAll();
+                                }
+
+                                $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                            INNER JOIN user u ON q.user_id = u.user_id
+                                            WHERE q.tag = ?
+                                            ORDER BY time_posted DESC 
+                                            LIMIT $limit OFFSET $start;";
+                                $stmt = $this->executeQuery($sql, [$_GET['searchTxt']]);
+                                return $stmt->fetchAll();
+                            }
+
+                            // User searched question based on keywords.
+                            if ($_GET['search'] == 'keyword') {
+                                /* User searched question that has no answer or 
+                                   no answer and accepted answer based on keywords. */
+                                if (isset($_GET['noAns']) || isset($_GET['noAns'], $_GET['noAcceptedAns'])) {
+                                    $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                                INNER JOIN user u ON
+                                                q.user_id = u.user_id
+                                                WHERE q.question_id NOT IN (SELECT question_id FROM answer)
+                                                AND q.content LIKE ? OR q.title LIKE ?
+                                                ORDER BY q.time_posted DESC
+                                                LIMIT $limit OFFSET $start;";
+                                    $stmt = $this->executeQuery($sql, [
+                                        '%' . $_GET['searchTxt'] . '%',
+                                        '%' . $_GET['searchTxt'] . '%'
+                                    ]);
+                                    return $stmt->fetchAll();
+                                }
+
+                                // User searched question that has no accepted answer based on keywords.
+                                if (isset($_GET['noAcceptedAns'])) {
+                                    $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                                INNER JOIN user u ON
+                                                q.user_id = u.user_id
+                                                WHERE q.question_id NOT IN (SELECT question_id FROM answer WHERE `status` = 1)
+                                                AND q.content LIKE ? OR q.title LIKE ?
+                                                ORDER BY q.time_posted DESC 
+                                                LIMIT $limit OFFSET $start;";
+                                    $stmt = $this->executeQuery($sql, [
+                                        '%' . $_GET['searchTxt'] . '%',
+                                        '%' . $_GET['searchTxt'] . '%'
+                                    ]);
+                                    return $stmt->fetchAll();
+                                }
+
+                                $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                            INNER JOIN user u ON q.user_id = u.user_id
+                                            WHERE q.content LIKE ? OR q.title LIKE ?
+                                            ORDER BY time_posted DESC 
+                                            LIMIT $limit OFFSET $start;";
+                                $stmt = $this->executeQuery($sql, [
+                                    '%' . $_GET['searchTxt'] . '%',
+                                    '%' . $_GET['searchTxt'] . '%'
+                                ]);
+                                return $stmt->fetchAll();
+                            }
+                        }
+
+                        // User didn't enter any search text for tags or keywords.
+                        if (isset($_GET['searchTxt']) && $_GET['searchTxt'] == '') {
+                            // User search all questions that has no answers or no answer and accepted answer.
+                            if (isset($_GET['noAns']) || isset($_GET['noAns'], $_GET['noAcceptedAns'])) {
+                                $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                            INNER JOIN user u ON
+                                            q.user_id = u.user_id
+                                            WHERE q.question_id NOT IN (SELECT question_id FROM answer)
+                                            ORDER BY q.time_posted DESC
+                                            LIMIT $limit OFFSET $start;";
+                                $stmt = $this->executeQuery($sql);
+                                return $stmt->fetchAll();
+                            }
+
+                            // User search all questions that has no accepted answers.
+                            if (isset($_GET['noAcceptedAns'])) {
+                                $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                            INNER JOIN user u ON
+                                            q.user_id = u.user_id
+                                            WHERE q.question_id NOT IN (SELECT question_id FROM answer WHERE `status` = 1)
+                                            ORDER BY q.time_posted DESC
+                                            LIMIT $limit OFFSET $start;";
+                                $stmt = $this->executeQuery($sql);
+                                return $stmt->fetchAll();
+                            }
+
+                            $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                        INNER JOIN user u ON q.user_id = u.user_id
+                                        ORDER BY time_posted DESC
+                                        LIMIT $limit OFFSET $start;";
+                            $stmt = $this->executeQuery($sql);
+                            return $stmt->fetchAll();
+                        }
+                    }
+
+                    /* ========================================= Most Upvoted ========================================= */
+                    if (isset($_GET['sort']) && $_GET['sort'] == 'mostUpvote') {
+
+                        // User entered search text for tags or keywords.
+                        if (isset($_GET['searchTxt']) && $_GET['searchTxt'] != '') {
+
+                            // User searched question based on tags.
+                            if ($_GET['search'] == 'tag') {
+                                /* User searched question that has no answer or 
+                                    no answer and accepted answer based on tags. */
+                                if (isset($_GET['noAns']) || isset($_GET['noAns'], $_GET['noAcceptedAns'])) {
+                                    $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                                INNER JOIN user u ON
+                                                q.user_id = u.user_id
+                                                WHERE q.question_id NOT IN (SELECT question_id FROM answer)
+                                                AND q.tag = ?
+                                                ORDER BY q.point DESC
+                                                LIMIT $limit OFFSET $start;";
+                                    $stmt = $this->executeQuery($sql, [$_GET['searchTxt']]);
+                                    return $stmt->fetchAll();
+                                }
+
+                                // User searched question that has no accepted answer based on tags.
+                                if (isset($_GET['noAcceptedAns'])) {
+                                    $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                                INNER JOIN user u ON
+                                                q.user_id = u.user_id
+                                                WHERE q.question_id NOT IN (SELECT question_id FROM answer WHERE `status` = 1)
+                                                AND q.tag = ?
+                                                ORDER BY q.point DESC
+                                                LIMIT $limit OFFSET $start;";
+                                    $stmt = $this->executeQuery($sql, [$_GET['searchTxt']]);
+                                    return $stmt->fetchAll();
+                                }
+
+                                $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                            INNER JOIN user u ON q.user_id = u.user_id
+                                            WHERE q.tag = ?
+                                            ORDER BY q.point DESC 
+                                            LIMIT $limit OFFSET $start;";
+                                $stmt = $this->executeQuery($sql, [$_GET['searchTxt']]);
+                                return $stmt->fetchAll();
+                            }
+
+                            // User searched question based on keywords.
+                            if ($_GET['search'] == 'keyword') {
+                                /* User searched question that has no answer or 
+                                    no answer and accepted answer based on keywords. */
+                                if (isset($_GET['noAns']) || isset($_GET['noAns'], $_GET['noAcceptedAns'])) {
+                                    $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                                INNER JOIN user u ON
+                                                q.user_id = u.user_id
+                                                WHERE q.question_id NOT IN (SELECT question_id FROM answer)
+                                                AND q.content LIKE ? OR q.title LIKE ?
+                                                ORDER BY q.point DESC
+                                                LIMIT $limit OFFSET $start;";
+                                    $stmt = $this->executeQuery($sql, [
+                                        '%' . $_GET['searchTxt'] . '%',
+                                        '%' . $_GET['searchTxt'] . '%'
+                                    ]);
+                                    return $stmt->fetchAll();
+                                }
+
+                                // User searched question that has no accepted answer based on keywords.
+                                if (isset($_GET['noAcceptedAns'])) {
+                                    $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                                INNER JOIN user u ON
+                                                q.user_id = u.user_id
+                                                WHERE q.question_id NOT IN (SELECT question_id FROM answer WHERE `status` = 1)
+                                                AND q.content LIKE ? OR q.title LIKE ?
+                                                ORDER BY q.point DESC 
+                                                LIMIT $limit OFFSET $start;";
+                                    $stmt = $this->executeQuery($sql, [
+                                        '%' . $_GET['searchTxt'] . '%',
+                                        '%' . $_GET['searchTxt'] . '%'
+                                    ]);
+                                    return $stmt->fetchAll();
+                                }
+
+                                $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                            INNER JOIN user u ON q.user_id = u.user_id
+                                            WHERE q.content LIKE ? OR q.title LIKE ?
+                                            ORDER BY q.point DESC 
+                                            LIMIT $limit OFFSET $start;";
+                                $stmt = $this->executeQuery($sql, [
+                                    '%' . $_GET['searchTxt'] . '%',
+                                    '%' . $_GET['searchTxt'] . '%'
+                                ]);
+                                return $stmt->fetchAll();
+                            }
+                        }
+
+                        // User didn't enter any search text for tags or keywords.
+                        if (isset($_GET['searchTxt']) && $_GET['searchTxt'] == '') {
+                            // User search all questions that has no answers or no answer and accepted answer.
+                            if (isset($_GET['noAns']) || isset($_GET['noAns'], $_GET['noAcceptedAns'])) {
+                                $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                            INNER JOIN user u ON
+                                            q.user_id = u.user_id
+                                            WHERE q.question_id NOT IN (SELECT question_id FROM answer)
+                                            ORDER BY q.point DESC
+                                            LIMIT $limit OFFSET $start;";
+                                $stmt = $this->executeQuery($sql);
+                                return $stmt->fetchAll();
+                            }
+
+                            // User search all questions that has no accepted answers.
+                            if (isset($_GET['noAcceptedAns'])) {
+                                $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                            INNER JOIN user u ON
+                                            q.user_id = u.user_id
+                                            WHERE q.question_id NOT IN (SELECT question_id FROM answer WHERE `status` = 1)
+                                            ORDER BY q.point DESC
+                                            LIMIT $limit OFFSET $start;";
+                                $stmt = $this->executeQuery($sql);
+                                return $stmt->fetchAll();
+                            }
+
+                            $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                                        INNER JOIN user u ON q.user_id = u.user_id
+                                        ORDER BY q.point DESC
+                                        LIMIT $limit OFFSET $start;";
+                            $stmt = $this->executeQuery($sql);
+                            return $stmt->fetchAll();
+                        }
+                    }
+                }
             } catch (PDOException $e) {
                 die('Error: ' . $e->getMessage());
             }
         }
 
-        // Default query for selecting all questions.
+        // Default query for selecting all questions based on limit and offset value.
         try {
-            $sql = "SELECT q.*, u.username, u.user_id FROM question q
-                    INNER JOIN user u ON
-                    q.user_id = u.user_id
-                    ORDER BY time_posted DESC;";
-            $stmt = $this->executeQuery($sql);
-            return $stmt->fetchAll();
+            if (isset($limit, $start)) {
+                $sql = "SELECT q.*, u.username, u.user_id FROM question q
+                            INNER JOIN user u ON
+                            q.user_id = u.user_id
+                            ORDER BY time_posted DESC LIMIT $limit OFFSET $start";
+                $stmt = $this->executeQuery($sql);
+                return $stmt->fetchAll();
+            }
         } catch (PDOException $e) {
             die('Error: ' . $e->getMessage());
         }
     }
 
-    protected function getQuestionCount($userId)
+    protected function getQuestionCount($criteria)
     {
-        if ($userId) {
-            $sql = "SELECT COUNT(question_id) AS result FROM question
-                        WHERE `user_id` = ?;";
-            return $this->executeQuery($sql, [$userId])->fetch()['result'];
+        if ($criteria) {
+            if ($criteria[0] == 'U') {
+                $sql = "SELECT COUNT(question_id) FROM question WHERE `user_id` = ?";
+                $stmt = $this->executeQuery($sql, [$criteria]);
+                $result = $stmt->fetch();
+                return $result['COUNT(question_id)'];
+            }
         }
-        $sql = "SELECT COUNT(question_id) AS result FROM question;";
-        return $this->executeQuery($sql)->fetch()['result'];
+
+        $sql = "SELECT COUNT(question_id) FROM question;";
+        $stmt = $this->executeQuery($sql);
+        return $stmt->fetch()['COUNT(question_id)'];
+    }
+
+    protected function getHotQuestion()
+    {
+        $sql = "SELECT * FROM `question` ORDER BY  `point` DESC LIMIT 5";
+        $stmt = $this->executeQuery($sql);
+        return $stmt->fetchAll();
     }
 
     protected function timestamp($datetime)

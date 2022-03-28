@@ -8,7 +8,7 @@
 }
 
 .layout__question-vote-container {
-  grid-row: 1 / 3;
+  grid-row: 1 / 4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,6 +17,10 @@
 .layout__question-body,
 .layout__question-footer {
   grid-column: 2 / -1;
+}
+
+.layout__question-body {
+  display: grid;
 }
 
 .layout__question-point {
@@ -34,7 +38,7 @@
   margin: 0.5rem 0;
 }
 
-.layout__question-button{
+.layout__question-button {
   display: flex;
   align-items: center;
 }
@@ -54,16 +58,24 @@
 .layout__question-remove-btn {
   padding: 0.2em 1.5em;
   font-size: 0.9rem;
-  color: #FF0000;
+  color: #ff0000;
   background-color: #ffffff;
-  border: 1px solid #FF0000;
+  border: 1px solid #ff0000;
   border-radius: 0.8em;
   transition: 0.3s ease-in-out;
 }
 
 .layout__question-remove-btn:hover {
   color: #ffffff;
-  background-color: #FF0000;
+  background-color: #ff0000;
+}
+
+.layout__question-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .layout__question-tag {
@@ -143,7 +155,7 @@
     order: 1;
   }
 
-  .layout__question-remove-btn{
+  .layout__question-remove-btn {
     order: 2;
   }
 
@@ -155,6 +167,16 @@
   .layout__question-bookmark {
     margin-top: 0;
   }
+}
+
+/* Classes for JS DOM manipulation */
+.action-btn-click,
+.upvote {
+  color: var(--clr-primary);
+}
+
+.downvote {
+  color: var(--clr-delete-red);
 }
 
 @media (max-width: 731px) {
