@@ -3,6 +3,8 @@ session_start();
 require '../../helper/redirector.php';
 include '../../helper/autoloader.php';
 $path = '../../../';
+$user = new Controller\User();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,9 +24,18 @@ $path = '../../../';
 
           <?php include '../layout/sideNavbar.php' ?>
 
+          
           <main class="manageUser--main main-content">
                <h2 class="manageUser__title main-title">Manage User</h2>
+
+               <div class="user-search-wrapper">
+                    <input class="user-search-bar" id="search_text" type="text" placeholder="Search user" autocomplete="off">
+                    <button class="user-search-btn" type="submit">
+                         <i class="fas fa-search"></i>
+                    </button>
+               </div>
                <div class="card-container" id="user_container"></div>
+               <div class="card-container_message"></div>                    
           </main>
 
      </div>

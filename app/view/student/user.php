@@ -28,6 +28,8 @@ $path = '../../../';
                <div class="user_dashboard">
                     <div class="user_container" id="user_container"></div>
                </div>
+
+               <div class="card-container_message"></div>                                  
           </main>
 
      </div>
