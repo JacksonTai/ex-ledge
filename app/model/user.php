@@ -22,7 +22,7 @@ class User extends \config\DbConn
           $errMsg = ['fullName' => '', 'nric' => ''];
 
           // Validate full name.
-          if (!ctype_alpha(str_replace(' ', '',$postData['fullName']))) {
+          if (!ctype_alpha(str_replace(' ', '', $postData['fullName']))) {
                $errMsg['fullName'] = '&#9888; Invalid Full name.';
           }
 
@@ -72,69 +72,129 @@ class User extends \config\DbConn
           return $stmt->fetchAll();
      }
 
-     protected function loadData($limit, $start)
-     {
+     protected function loadData($limit, $start, $searchTerm)
+     {    
           try {
-               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
-               $stmt = $this->executeQuery($sql, ['U%']);
-               $userInfos = $stmt->fetchAll();
-
-               // For each users inside of userInfos array, echo out the php coe below
-               foreach ($userInfos as $userInfo){
+               if($searchTerm == ""){
+                    $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
+                    $stmt = $this->executeQuery($sql, ['U%']);
+                    $userInfos = $stmt->fetchAll();
                     
-                    echo 
-                         '<div class="user_box" id='.($userInfo['user_id']).' data-user-id='.($userInfo['user_id']).'>
-                              <a class="user_info" href="profile.php?id='.($userInfo['user_id']).'">
-                                   <img class="user_img" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=231" alt="user_img">
-                                   <div class="user_info-detail">    
-                                        <p class="user_name">'.($userInfo['username']).'</p>
-                                        <p class="RP">RP: '.($userInfo['point']).'</p>
-                                   </div>
-                              </a>
-                         </div>';                    
-                    
+               } else {
+                    $sql = "SELECT * FROM user WHERE `user_id` LIKE ? AND `username` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
+                    $stmt = $this->executeQuery($sql, ['U%', '%' . $searchTerm . '%']);
+                    $userInfos = $stmt->fetchAll();                    
                }
 
+               foreach ($userInfos as $userInfo){
+                    if ($_SESSION['userId'][0] == "A") {
+                         if ($userInfo['verification'] == 0){
+                              $verificationStatus = "UNVERIFIED";
+                         } else {
+                              $verificationStatus = "VERIFIED";
+                         }
+                         echo
+                              '<div class="user-card">
+                                   <div class="user-card-content">
+                                        <img class="profile-picture" src="../../../public/img/profile1.jpg" alt="Profile Image">
+                                        <div class="content-details">
+                                             <p class="detail-title">User ID:</p>
+                                             <p>'.($userInfo['user_id']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Username: </p>
+                                             <p>'.($userInfo['username']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Email: </p>
+                                             <p>'.($userInfo['email']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Verification Status: </p>
+                                             <p>'.$verificationStatus.'</p>
+                                        </div>
+                                        <div class="ban-container">
+                                             <button class="ban-button" id="banUser" onclick="confirmDeletion(\''  .($userInfo['user_id']). '\')">Ban</button>
+                                        </div>
+                                   </div>
+                              </div>';
 
+                    } else {
+                         echo 
+                              '<div class="user_box" id='.($userInfo['user_id']).' data-user-id='.($userInfo['user_id']).'>
+                                   <a class="user_info" href="profile.php?id='.($userInfo['user_id']).'">
+                                        <img class="user_img" src="../../../public/img/profile1.jpg" alt="user_img">
+                                        <div class="user_info-detail">    
+                                             <p class="user_name">'.($userInfo['username']).'</p>
+                                             <p class="RP">RP: '.($userInfo['point']).'</p>
+                                        </div>
+                                   </a>
+                              </div>';                            
+                    }                
+               }
 
           } catch (PDOException $e) {
                die('Error: ' . $e->getMessage());
-          }          
+          }
      }
 
-     protected function getUser($userId)
+     protected function getUser($criteria)
      {
-          if ($userId) {
+          if ($criteria) {
+
                // Query for selecting specific user based on the given user ID. 
-               try {
-                    $sql = "SELECT * FROM user WHERE `user_id` = ? AND `user_id` LIKE ?;";
-                    $stmt = $this->executeQuery($sql, [$userId, 'U%']);
-                    $userInfo = $stmt->fetch();
+               if ($criteria[0] == 'U') {
+                    try {
+                         $sql = "SELECT * FROM user WHERE `user_id` = ? AND `user_id` LIKE ?;";
+                         $stmt = $this->executeQuery($sql, [$criteria, 'U%']);
+                         $userInfo = $stmt->fetch();
 
-                    $sql = "SELECT * FROM user_detail WHERE `user_id` = ? AND `user_id` LIKE ?;";
-                    $stmt = $this->executeQuery($sql, [$userId, 'U%']);
-                    $userDetail = $stmt->fetch();
+                         $sql = "SELECT * FROM user_detail WHERE `user_id` = ? AND `user_id` LIKE ?;";
+                         $stmt = $this->executeQuery($sql, [$criteria, 'U%']);
+                         $userDetail = $stmt->fetch();
 
-                    /* Return a merged array of user detail and user record 
-                       if user detail exists. */
-                    if (is_array($userDetail)) {
-                         return array_merge($userInfo, $userDetail);
+                         /* Return a merged array of user detail and user record 
+                            if user detail exists. */
+                         if (is_array($userDetail)) {
+                              return array_merge($userInfo, $userDetail);
+                         }
+                         return $userInfo;
+                    } catch (PDOException $e) {
+                         die('Error: ' . $e->getMessage());
                     }
-                    return $userInfo;
-               } catch (PDOException $e) {
-                    die('Error: ' . $e->getMessage());
                }
-          }
 
+               // Query for selecting specific user based on the given question ID. 
+               if ($criteria[0] == 'Q') {
+                    try {
+                         $sql = "SELECT * FROM user u
+                                   INNER JOIN question q ON u.user_id = q.user_id
+                                   WHERE q.question_id = ? AND u.user_id LIKE ?;";
+                    } catch (PDOException $e) {
+                         die('Error: ' . $e->getMessage());
+                    }
+               }
+               // Query for selecting specific user based on the given answer ID. 
+               if ($criteria[0] == 'A') {
+                    try {
+                         $sql = "SELECT * FROM user u
+                                   INNER JOIN answer a ON u.user_id = a.user_id
+                                   WHERE a.answer_id = ? AND u.user_id LIKE ?;";
+                    } catch (PDOException $e) {
+                         die('Error: ' . $e->getMessage());
+                    }
+               }
+               $stmt = $this->executeQuery($sql, [$criteria, 'U%']);
+               return $stmt->fetch();
+          }
 
           // Default query for selecting all user's info and detail. 
           try {
                $result = [];
-               // Display the users in user dashbaord up to 9 in one page
-               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT 9";
+               $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC";
                $stmt = $this->executeQuery($sql, ['U%']);
                $userInfos = $stmt->fetchAll();
-          
+
                foreach ($userInfos as $userInfo) {
                     try {
                          $sql = "SELECT * FROM user_detail WHERE `user_id` = ?;";
@@ -152,8 +212,7 @@ class User extends \config\DbConn
                return $result;
           } catch (PDOException $e) {
                die('Error: ' . $e->getMessage());
-          }               
-
+          }
      }
 
      protected function getUserRank($top, $length)
@@ -184,6 +243,23 @@ class User extends \config\DbConn
           return $top ? array_slice($calcResult, 0, $top) : $calcResult;
      }
 
+     protected function getUserPoint($userId)
+     {
+          // Get total points from answer posted by the user.
+          $sql = "SELECT SUM(`point`) AS `point` FROM answer 
+                    WHERE `user_id` = ? AND `user_id` LIKE ?;";
+          $stmt = $this->executeQuery($sql, [$userId, 'U%']);
+          $ansTotal = $stmt->fetch();
+
+          // Get total points from question posted by the user.
+          $sql = "SELECT SUM(`point`) AS `point` FROM question 
+                    WHERE `user_id` = ? AND `user_id` LIKE ?;";
+          $stmt = $this->executeQuery($sql, [$userId, 'U%']);
+          $questionTotal = $stmt->fetch();
+
+          return $ansTotal['point'] + $questionTotal['point'];
+     }
+
      protected function searchUser($searchTerm)
      {
           $sql = "SELECT * FROM user 
@@ -200,13 +276,45 @@ class User extends \config\DbConn
           $users = $stmt->fetchAll();
           $userInfo = '';
           foreach ($users as $user) {
-               $userInfo .= '<div class="chat-section__user" id="' . $user['user_id'] . '" data-user-id=' . $user['user_id'] . '>
-                                   <img class="chat-section__user-img chat-profile-img" src="../../../public/img/profile1.jpg">
-                                   <div class="chat-section__user-content">
-                                        <p class="chat-section__username">' . $user['username'] . '</p>
-                                        <p class="chat-section__user-msg"></p>
+               if ($_SESSION['userId'][0] == "U"){
+                    $userInfo .= '<div class="chat-section__user" id="' . $user['user_id'] . '" data-user-id=' . $user['user_id'] . '>
+                                        <img class="chat-section__user-img chat-profile-img" src="../../../public/img/profile1.jpg">
+                                        <div class="chat-section__user-content">
+                                             <p class="chat-section__username">' . $user['username'] . '</p>
+                                             <p class="chat-section__user-msg"></p>
+                                        </div>
+                                   </div>';                    
+               } else {
+                    if ($user['verification'] == 0){
+                         $verificationStatus = "UNVERIFIED";
+                    } else {
+                         $verificationStatus = "VERIFIED";
+                    }
+                    $userInfo .='<div class="user-card">
+                                   <div class="user-card-content">
+                                        <img class="profile-picture" src="../../../public/img/profile.jpg" alt="Profile Image">
+                                        <div class="content-details">
+                                             <p class="detail-title">User ID:</p>
+                                             <p>'.($user['user_id']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Username: </p>
+                                             <p>'.($user['username']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Email: </p>
+                                             <p>'.($user['email']).'</p>
+                                        </div>
+                                        <div class="content-details">
+                                             <p class="detail-title">Verification Status: </p>
+                                             <p>'.$verificationStatus.'</p>
+                                        </div>
+                                        <div class="ban-container">
+                                             <button class="ban-button" id="banUser" onclick="confirmDeletion(\''  .($user['user_id']). '\')">Ban</button>
+                                        </div>
                                    </div>
-                              </div>';
+                              </div>';                    
+               }
           }
           return $userInfo;
      }
@@ -266,7 +374,7 @@ class User extends \config\DbConn
      }
 
      /* ######### UPDATE ######### */
-     protected function updateUser($postData)
+     protected function updateUserDetail($postData)
      {
           $userData = $this->getUser($this->userId);
 
@@ -328,8 +436,13 @@ class User extends \config\DbConn
                $this->executeQuery($sql, [$postData['username'], $this->userId]);
           }
 
-          // Check if user has set age or gender or bio before.
-          if (isset($userData['age']) || isset($userData['gender']) || isset($userData['bio'])) {
+          // Check if user has set age/gender/bio before or having nric_no in records.
+          if (
+               isset($userData['nric_no']) ||
+               isset($userData['age']) ||
+               isset($userData['gender']) ||
+               isset($userData['bio'])
+          ) {
                // Execute update of age and gender only if it's being changed.
                if ($userData['age'] != $postData['age']) {
                     $sql = "UPDATE user_detail SET age = ?
@@ -350,6 +463,13 @@ class User extends \config\DbConn
                $postData['gender'],
                $postData['age']
           ]);
+     }
+
+     protected function setUserPoint($value)
+     {
+          $sql = "UPDATE user SET `point` = ? 
+                    WHERE `user_id`= ?";
+          $this->executeQuery($sql, [$value, $this->userId]);
      }
 
      /* ######### DELETE ######### */

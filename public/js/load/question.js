@@ -2,10 +2,10 @@ $(document).ready(function(){
     var limit = 12; // Set how many display to load
     var start = 0; // Set from which row in MySQL to start
     var action = 'inactive'; // To determine if fetch request is running
-    function load_user_data(limit, start)
+    function load_question_data(limit, start)
     {
          $.ajax({
-              url:"../../controller/user.php", // Page in which we will be sending our request
+              url:"../../controller/question.php", // Page in which we will be sending our request
               method: "POST", // Im not getting info back, I am posting my request to the url above, and getting the reply I want constantly
               data:{limit:limit, start:start}, //The data that will be sent to URL.
 
@@ -16,7 +16,7 @@ $(document).ready(function(){
               success:function(data)
               {
                    // Add what was returned from the url into the user_container id
-                   $('#user_container').append(data);
+                   $('#question_container').append(data);
 
                    if(data == '') // If url returns nothing
                    {     
@@ -37,17 +37,17 @@ $(document).ready(function(){
     if(action == 'inactive')
     {
          action = 'active';
-         load_user_data(limit, start);
+         load_question_data(limit, start);
     }
     // If we scroll the page, function below will execute
     $(window).scroll(function(){
          // Check if height of scroll position + height of window is higher than the heigh of user container
-         if($(window).scrollTop() + $(window).height() > $("#user_container").height() && action == 'inactive')
+         if($(window).scrollTop() + $(window).height() > $("#question_container").height() && action == 'inactive')
          {
               action = 'active';
               start = start + limit;
               setTimeout(function(){
-                   load_user_data(limit, start);
+                load_question_data(limit, start);
               }, 1000);
          }
     });
