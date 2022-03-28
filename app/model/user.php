@@ -86,53 +86,51 @@ class User extends \config\DbConn
                     $userInfos = $stmt->fetchAll();                    
                }
 
-               foreach ($userInfos as $userInfo){
+               foreach ($userInfos as $userInfo) {
                     if ($_SESSION['userId'][0] == "A") {
-                         if ($userInfo['verification'] == 0){
+                         if ($userInfo['verification'] == 0) {
                               $verificationStatus = "UNVERIFIED";
                          } else {
                               $verificationStatus = "VERIFIED";
                          }
                          echo
-                              '<div class="user-card">
+                         '<div class="user-card">
                                    <div class="user-card-content">
                                         <img class="profile-picture" src="../../../public/img/profile1.jpg" alt="Profile Image">
                                         <div class="content-details">
                                              <p class="detail-title">User ID:</p>
-                                             <p>'.($userInfo['user_id']).'</p>
+                                             <p>' . ($userInfo['user_id']) . '</p>
                                         </div>
                                         <div class="content-details">
                                              <p class="detail-title">Username: </p>
-                                             <p>'.($userInfo['username']).'</p>
+                                             <p>' . ($userInfo['username']) . '</p>
                                         </div>
                                         <div class="content-details">
                                              <p class="detail-title">Email: </p>
-                                             <p>'.($userInfo['email']).'</p>
+                                             <p>' . ($userInfo['email']) . '</p>
                                         </div>
                                         <div class="content-details">
                                              <p class="detail-title">Verification Status: </p>
-                                             <p>'.$verificationStatus.'</p>
+                                             <p>' . $verificationStatus . '</p>
                                         </div>
                                         <div class="ban-container">
-                                             <button class="ban-button" id="banUser" onclick="confirmDeletion(\''  .($userInfo['user_id']). '\')">Ban</button>
+                                             <button class="ban-button" id="banUser" onclick="confirmDeletion(\''  . ($userInfo['user_id']) . '\')">Ban</button>
                                         </div>
                                    </div>
                               </div>';
-
                     } else {
                          echo 
                               '<div class="user_box" id='.($userInfo['user_id']).' data-user-id='.($userInfo['user_id']).'>
                                    <a class="user_info" href="profile.php?id='.($userInfo['user_id']).'">
                                         <img class="user_img" src="../../../public/img/profile1.jpg" alt="user_img">
                                         <div class="user_info-detail">    
-                                             <p class="user_name">'.($userInfo['username']).'</p>
-                                             <p class="RP">RP: '.($userInfo['point']).'</p>
+                                             <p class="user_name">' . ($userInfo['username']) . '</p>
+                                             <p class="RP">RP: ' . ($userInfo['point']) . '</p>
                                         </div>
                                    </a>
-                              </div>';                            
-                    }                
+                              </div>';
+                    }
                }
-
           } catch (PDOException $e) {
                die('Error: ' . $e->getMessage());
           }

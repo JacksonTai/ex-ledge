@@ -311,6 +311,7 @@ $bookmark = new \Controller\Bookmark();
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
      <script src="<?php echo $path; ?>public/js/student/profile.js"></script>
+     <script src="<?php echo $path; ?>public/js/layout/question.js"></script>
 </body>
 
 </html>
