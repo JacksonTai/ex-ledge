@@ -429,8 +429,7 @@ class User extends \config\DbConn
 
           // Execute update of username only if it's different from the current one.
           if ($userData['username'] != $postData['username']) {
-               $sql = "UPDATE user SET username = ?
-                         WHERE `user_id` = ?;";
+               $sql = "UPDATE user SET username = ? WHERE `user_id` = ?;";
                $this->executeQuery($sql, [$postData['username'], $this->userId]);
           }
 
@@ -443,19 +442,16 @@ class User extends \config\DbConn
           ) {
                // Execute update of age and gender only if it's being changed.
                if ($userData['age'] != $postData['age']) {
-                    $sql = "UPDATE user_detail SET age = ?
-                              WHERE `user_id` = ?;";
+                    $sql = "UPDATE user_detail SET age = ? WHERE `user_id` = ?;";
                     $this->executeQuery($sql, [$postData['age'], $this->userId]);
                }
                if ($userData['gender'] != $postData['gender']) {
-                    $sql = "UPDATE user_detail SET gender = ?
-                              WHERE `user_id` = ?;";
+                    $sql = "UPDATE user_detail SET gender = ? WHERE `user_id` = ?;";
                     $this->executeQuery($sql, [$postData['gender'], $this->userId]);
                }
                return;
           }
-          $sql = "INSERT INTO user_detail (`user_id`, gender, age)
-                    VALUES (?, ?, ?)";
+          $sql = "INSERT INTO user_detail (`user_id`, gender, age) VALUES (?, ?, ?)";
           $this->executeQuery($sql, [
                $this->userId,
                $postData['gender'],
@@ -463,17 +459,47 @@ class User extends \config\DbConn
           ]);
      }
 
+     //Update verification
+     protected function updateUserVerif($postData)
+     {
+          $userData = $this->getUser($postData['verifId']);
+
+          // Check if user have any record for user detail.
+          if (count($userData) == 7) {
+               $sql = "INSERT INTO user_detail (`user_id`, nric_no) VALUES (?, ?);";
+               $this->executeQuery($sql, [$postData['verifId'], $postData['nricNo']]);
+          }
+          if (count($userData) != 7) {
+               $sql = "UPDATE user_detail SET nric_no = ? WHERE `user_id` = ?;";
+               $this->executeQuery($sql, [$postData['nricNo'], $postData['verifId']]);
+          }
+
+          $sql = "UPDATE user SET verification = ? WHERE `user_id` = ?;";
+          $this->executeQuery($sql, [1, $postData['verifId']]);
+
+          $sql_delete = "DELETE FROM verification_queue WHERE `user_id` = ?;";
+          $this->executeQuery($sql_delete, [$postData['verifId']]);
+     }
+          
      protected function setUserPoint($value)
      {
           $sql = "UPDATE user SET `point` = ? 
                     WHERE `user_id`= ?";
           $this->executeQuery($sql, [$value, $this->userId]);
+ 
      }
 
      /* ######### DELETE ######### */
      protected function deleteUser($userId)
      {
           $sql = "DELETE FROM user WHERE `user_id` = ?;";
+          $this->executeQuery($sql, [$userId]);
+     }
+
+     //reject verification
+     protected function deleteUserVerif($userId)
+     {
+          $sql = "DELETE FROM verification_queue WHERE `user_id` = ?;";
           $this->executeQuery($sql, [$userId]);
      }
 }
