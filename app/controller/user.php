@@ -83,10 +83,20 @@ class User extends \Model\User
           $this->setUserPoint($value);
      }
 
+     public function updateVerif($userId)
+     {
+          $this->updateUserVerif($userId);
+     }
+
      /* ######### DELETE ######### */
      public function delete($userId)
      {
           $this->deleteUser($userId);
+     }
+
+     public function deleteVerif($userId)
+     {
+          $this->deleteUserVerif($userId);
      }
 }
 
@@ -127,4 +137,14 @@ if (isset($_GET['bio'])) {
 if (isset($_GET['deleteId'])) {
      $user = new \Controller\User();
      $user->delete($_GET['deleteId']);
+}
+
+if (isset($_GET['verifId'], $_GET['nricNo'])) {
+     $user = new \Controller\User();
+     $user->updateVerif($_GET);
+}
+
+if (isset($_GET['rejectverifId'])) {
+     $user = new \Controller\User();
+     $user->deleteVerif($_GET['rejectverifId']);
 }
