@@ -35,14 +35,15 @@ $answer = new \Controller\Answer();
                 </div>
                 <div class="panel-detail verified-users">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($admin->userCount('verified')); ?></p>
-                        <p class="panel-card-title">Verified user</p>
+                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($admin->userCount()); ?></p>
+                        <p class="panel-card-title">Total User</p>
+
                     </div>
                 </div>
                 <div class="panel-detail total-users">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($admin->userCount()); ?></p>
-                        <p class="panel-card-title">Total User</p>
+                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($admin->userCount('verified')); ?></p>
+                        <p class="panel-card-title">Verified user</p>
                     </div>
                 </div>
             </div>
@@ -54,14 +55,15 @@ $answer = new \Controller\Answer();
                 </div>
                 <div class="panel-detail total-ans">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($answer->answerCount(1)); ?></p>
-                        <p class="panel-card-title">Accepted Answers</p>
+                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($question->questionCount()); ?></p>
+                        <p class="panel-card-title">Total Questions</p>
                     </div>
                 </div>
                 <div class="panel-detail total-questions">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($question->questionCount()); ?></p>
-                        <p class="panel-card-title">Total Questions</p>
+                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($answer->answerCount(1)); ?></p>
+                        <p class="panel-card-title">Accepted Answers</p>
+
                     </div>
                 </div>
             </div>
