@@ -71,7 +71,7 @@ class User extends \config\DbConn
           $stmt = $this->executeQuery($sql);
           return $stmt->fetchAll();
      }
-
+ 
      protected function loadData($limit, $start, $searchTerm)
      {
           try {

@@ -33,6 +33,10 @@ class User extends \Model\User
           return $this->loadData($limit, $start, $username);
      }
 
+     public function returnAdministrativeData(){
+          return $this->returnAdminData();
+     }
+
      /**
       * This function return the users' rank.
       * @param integer $top [optional]

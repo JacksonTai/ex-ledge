@@ -7,9 +7,8 @@ $path = '../../../';
 
 $admin = new \Controller\User();
 $question = new \Controller\Question();
-$answer = new \Controller\Answer();
+$answer = new \Controller\Answer(); 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +36,6 @@ $answer = new \Controller\Answer();
                     <div class="panel-card-stats">
                         <p class="panel-card-stat-count"><?php echo htmlspecialchars($admin->userCount()); ?></p>
                         <p class="panel-card-title">Total User</p>
-
                     </div>
                 </div>
                 <div class="panel-detail total-users">
@@ -63,7 +61,6 @@ $answer = new \Controller\Answer();
                     <div class="panel-card-stats">
                         <p class="panel-card-stat-count"><?php echo htmlspecialchars($answer->answerCount(1)); ?></p>
                         <p class="panel-card-title">Accepted Answers</p>
-
                     </div>
                 </div>
             </div>
