@@ -32,6 +32,10 @@
   margin-left: 2rem;
 }
 
+.user-verification__label{
+  font-weight: bold;
+}
+
 .user-verification-btn {
   width: fit-content;
   height: fit-content;
