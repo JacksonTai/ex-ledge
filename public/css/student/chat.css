@@ -177,7 +177,8 @@
   color: #acacac;
 }
 
-.outgoing-msg{
+.outgoing-msg,
+.incoming-msg{
   word-break: break-all;
 }
 
