@@ -26,7 +26,7 @@ class Bookmark extends \Model\Bookmark
      }
 }
 
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) && $_SESSION['userId'][0] == 'U') {
      $_GET['userId'] = $_SESSION['userId'];
      $bookmark = new \Controller\Bookmark($_GET);
 }

@@ -3,7 +3,14 @@
 namespace Controller;
 
 if (!empty($_GET) || !empty($_POST)) {
-     if (!isset($_GET['id'])) {
+     if (
+          !isset($_GET['search']) &&
+          !isset($_GET['searchTxt']) &&
+          !isset($_GET['noAns']) &&
+          !isset($_GET['noAcceptedAns']) &&
+          !isset($_GET['sort']) &&
+          !isset($_GET['id']) && !isset($_GET['page'])
+     ) {
           session_start();
           include '../helper/autoloader.php';
      }
@@ -31,10 +38,6 @@ class User extends \Model\User
      public function loadUsers($limit, $start, $username)
      {
           return $this->loadData($limit, $start, $username);
-     }
-
-     public function returnAdministrativeData(){
-          return $this->returnAdminData();
      }
 
      /**
@@ -70,6 +73,16 @@ class User extends \Model\User
      public function search($searchTerm)
      {
           return $this->searchUser($searchTerm);
+     }
+
+     public function userCount($criteria = null)
+     {
+          return $this->getUserCount($criteria);
+     }
+
+     public function verifiedRatio()
+     {
+          return $this->getVerifiedRatio();
      }
 
      /* ######### UPDATE ######### */
@@ -118,7 +131,7 @@ if (isset($_GET['userId'])) {
 
 if (isset($_POST["limit"], $_POST["start"], $_POST['searchTerm'])) {
      $user = new \Controller\User();
-     return $user->loadUsers($_POST["limit"], $_POST["start"], $_POST['searchTerm']);             
+     return $user->loadUsers($_POST["limit"], $_POST["start"], $_POST['searchTerm']);
 }
 
 if (isset($_GET['searchTerm'])) {

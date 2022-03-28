@@ -57,6 +57,14 @@
   margin: 0 0.8rem;
 }
 
+.layout-answer__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
 .layout-answer__action--comment,
 .layout-answer__action--bookmark,
 .layout-answer__action--ans {

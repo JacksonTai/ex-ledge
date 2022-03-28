@@ -3,9 +3,14 @@
 namespace Controller;
 
 if (!empty($_GET) || !empty($_POST)) {
-    if (isset($_GET['id'])) {
+    if (isset($_GET['id']) || isset($_GET['page'])) {
         include '../../helper/autoloader.php';
-    } else {
+    }
+    if (
+        isset($_GET['deleteId']) ||
+        isset($_POST['content']) ||
+        isset($_POST["limit"], $_POST["start"])
+    ) {
         session_start();
         include '../helper/autoloader.php';
     }
@@ -26,14 +31,19 @@ class Question extends \Model\Question
     }
 
     /* ######### READ ######### */
-    public function read($criteria = null)
+    public function read($criteria = null, $limit = null, $start = null)
     {
-        return $this->getQuestion($criteria);
+        return $this->getQuestion($criteria, $limit, $start);
     }
 
-    public function questionCount($userId = null)
+    public function questionCount($criteria = null)
     {
-        return  $this->getQuestionCount($userId);
+        return  $this->getQuestionCount($criteria);
+    }
+
+    public function hotQuestion()
+    {
+        return  $this->getHotQuestion();
     }
 
     public function get_time($time_posted)
@@ -44,7 +54,7 @@ class Question extends \Model\Question
     public function loadQuestions($limit, $start)
     {
         return $this->loadData($limit, $start);
-    }     
+    }
 
     /* ######### DELETE ######### */
     public function delete($questionId)
@@ -54,7 +64,7 @@ class Question extends \Model\Question
 }
 
 if (!empty($_POST)) {
-    if (!isset($_POST["limit"], $_POST["start"])){
+    if (!isset($_POST["limit"], $_POST["start"])) {
         new \Controller\Question($_POST);
     }
 } else {
@@ -62,9 +72,9 @@ if (!empty($_POST)) {
 }
 
 /* ######### READ ######### */
-if (isset($_POST["limit"], $_POST["start"])){
+if (isset($_POST["limit"], $_POST["start"])) {
     $question = new \Controller\Question();
-    return $question -> loadQuestions($_POST["limit"], $_POST["start"]);
+    return $question->loadQuestions($_POST["limit"], $_POST["start"]);
 }
 
 /* ######### DELETE ######### */
