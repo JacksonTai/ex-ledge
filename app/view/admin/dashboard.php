@@ -1,9 +1,14 @@
 <?php
 session_start();
 require '../../helper/redirector.php';
-$path = '../../../';
-?>
+include '../../helper/autoloader.php';
 
+$path = '../../../';
+
+$admin = new \Controller\User();
+$question = new \Controller\Question();
+$answer = new \Controller\Answer(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,11 +19,9 @@ $path = '../../../';
 </head>
 
 <body>
-
     <?php include '../layout/header.php'; ?>
 
     <div class="main-sidebar-wrapper">
-
         <?php include '../layout/sideNavbar.php' ?>
 
         <main class="dashboard--main main-content">
@@ -26,44 +29,46 @@ $path = '../../../';
 
             <div class="panel dialog">
                 <div class="panel-card-stats">
-                    <p class="panel-title">Total visits</p>
-                    <p class="panel-title-stat">12089</p>
+                    <p class="panel-title">Verified Ratio</p>
+                    <p class="panel-title-stat"><?php echo htmlspecialchars($admin->verifiedRatio()); ?></p>
                 </div>
-                <div class="panel-detail registered-users">
+                <div class="panel-detail verified-users">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count">3089</p>
-                        <p class="panel-card-title">Registered user</p>
+                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($admin->userCount()); ?></p>
+                        <p class="panel-card-title">Total User</p>
                     </div>
                 </div>
                 <div class="panel-detail total-users">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count">7890</p>
-                        <p class="panel-card-title">Total User</p>
+                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($admin->userCount('verified')); ?></p>
+                        <p class="panel-card-title">Verified user</p>
                     </div>
                 </div>
             </div>
 
             <div class="panel dialog">
                 <div class="panel-card-stats">
-                    <p class="panel-title">Total answered</p>
-                    <p class="panel-title-stat">79%</p>
+                    <p class="panel-title">Accepted Ratio</p>
+                    <p class="panel-title-stat"><?php echo htmlspecialchars($answer->accepted()); ?></p>
                 </div>
                 <div class="panel-detail total-ans">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count">591</p>
-                        <p class="panel-card-title">Total Answers</p>
+                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($question->questionCount()); ?></p>
+                        <p class="panel-card-title">Total Questions</p>
                     </div>
                 </div>
                 <div class="panel-detail total-questions">
                     <div class="panel-card-stats">
-                        <p class="panel-card-stat-count">743</p>
-                        <p class="panel-card-title">Total Questions</p>
+                        <p class="panel-card-stat-count"><?php echo htmlspecialchars($answer->answerCount(1)); ?></p>
+                        <p class="panel-card-title">Accepted Answers</p>
                     </div>
                 </div>
             </div>
         </main>
 
     </div>
+
+
 
     <?php include '../layout/footer.php'; ?>
 

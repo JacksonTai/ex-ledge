@@ -26,7 +26,7 @@
   box-shadow: 2.04px 4.08px 10.87px rgba(0, 0, 0, 0.25);
 }
 
-.registered-users {
+.verified-users {
   background-color: rgba(222, 241, 255, 1);
   color: rgba(84, 184, 255, 1);
   left: 10em;
@@ -97,7 +97,7 @@
     width: 100vw;
   }
 
-  .registered-users {
+  .verified-users {
     left: 2em;
   }
 

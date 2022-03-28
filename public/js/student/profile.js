@@ -151,16 +151,18 @@ async function setBookmark() {
  
     // Store all bookmark Id record of the user.
     let bookmarksId = [];
+    
+    if (userId[0] == "U") {
+      let bookmarks = await getBookmark(userId);
 
-    let bookmarks = await getBookmark(userId);
+      for (let bookmark of bookmarks) {
+        bookmarksId.push(bookmark.id);
+      }
 
-    for (let bookmark of bookmarks) {
-      bookmarksId.push(bookmark.id);
-    }
-
-    for (let bookmarkAnsAction of bookmarkAnsActions) {
-      if (bookmarksId.includes(bookmarkAnsAction.dataset.bookmarkId)) {
-        bookmarkAnsAction.classList.toggle("action-btn-click");
+      for (let bookmarkAnsAction of bookmarkAnsActions) {
+        if (bookmarksId.includes(bookmarkAnsAction.dataset.bookmarkId)) {
+          bookmarkAnsAction.classList.toggle("action-btn-click");
+        }
       }
     }
   } catch (e) {

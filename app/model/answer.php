@@ -66,22 +66,30 @@ class Answer extends \config\DbConn
           }
      }
 
-     protected function getAnswerCount($criteria)
+     protected function getAnswerCount($criteria = null)
      {
           if ($criteria) {
-               if ($criteria[0] == 'Q') {
-                    $sql = "SELECT COUNT(answer_id) FROM answer a
+               if (is_string($criteria) && $criteria[0] == 'Q') {
+                    $sql = "SELECT COUNT(answer_id) AS result FROM answer a
                               WHERE question_id = ?;";
                }
-               if ($criteria[0] == 'U') {
-                    $sql = "SELECT COUNT(answer_id) FROM answer a
+               if (is_string($criteria) && $criteria[0] == 'U') {
+                    $sql = "SELECT COUNT(answer_id) AS result FROM answer a
                               WHERE `user_id` = ?;";
                }
-
-               $stmt = $this->executeQuery($sql, [$criteria]);
-               $result = $stmt->fetch();
-               return $result['COUNT(answer_id)'];
+               if ($criteria == 1) {
+                    $sql = "SELECT COUNT(answer_id) AS result FROM answer a
+                              WHERE `status` = ?;";
+               }
+               return $this->executeQuery($sql, [$criteria])->fetch()['result'];
           }
+          $sql = "SELECT COUNT(answer_id) AS result FROM answer;";
+          return $this->executeQuery($sql)->fetch()['result'];
+     }
+
+     protected function getAcceptedAns()
+     {
+          return round(($this->getAnswerCount(1) / $this->getAnswerCount()) * 100) . '%';
      }
 
      protected function updateAnswerStatus($answerId)

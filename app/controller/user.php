@@ -80,6 +80,16 @@ class User extends \Model\User
           return $this->getMessagedUser($receiverId);
      }
 
+     public function userCount($criteria = null)
+     {
+          return $this->getUserCount($criteria);
+     }
+
+     public function verifiedRatio()
+     {
+          return $this->getVerifiedRatio();
+     }
+
      /* ######### UPDATE ######### */
      public function updateDetail($postData)
      {
@@ -126,7 +136,7 @@ if (isset($_GET['userId'])) {
 
 if (isset($_POST["limit"], $_POST["start"], $_POST['searchTerm'])) {
      $user = new \Controller\User();
-     return $user->loadUsers($_POST["limit"], $_POST["start"], $_POST['searchTerm']);             
+     return $user->loadUsers($_POST["limit"], $_POST["start"], $_POST['searchTerm']);
 }
 
 if (isset($_GET['searchTerm'])) {
