@@ -71,19 +71,18 @@ class User extends \config\DbConn
           $stmt = $this->executeQuery($sql);
           return $stmt->fetchAll();
      }
-
+ 
      protected function loadData($limit, $start, $searchTerm)
-     {    
+     {
           try {
-               if($searchTerm == ""){
+               if ($searchTerm == "") {
                     $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
                     $stmt = $this->executeQuery($sql, ['U%']);
                     $userInfos = $stmt->fetchAll();
-                    
                } else {
                     $sql = "SELECT * FROM user WHERE `user_id` LIKE ? AND `username` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
                     $stmt = $this->executeQuery($sql, ['U%', '%' . $searchTerm . '%']);
-                    $userInfos = $stmt->fetchAll();                    
+                    $userInfos = $stmt->fetchAll();
                }
 
                foreach ($userInfos as $userInfo) {
@@ -119,9 +118,9 @@ class User extends \config\DbConn
                                    </div>
                               </div>';
                     } else {
-                         echo 
-                              '<div class="user_box" id='.($userInfo['user_id']).' data-user-id='.($userInfo['user_id']).'>
-                                   <a class="user_info" href="profile.php?id='.($userInfo['user_id']).'">
+                         echo
+                         '<div class="user_box" id=' . ($userInfo['user_id']) . ' data-user-id=' . ($userInfo['user_id']) . '>
+                                   <a class="user_info" href="profile.php?id=' . ($userInfo['user_id']) . '">
                                         <img class="user_img" src="../../../public/img/profile1.jpg" alt="user_img">
                                         <div class="user_info-detail">    
                                              <p class="user_name">' . ($userInfo['username']) . '</p>
@@ -274,44 +273,44 @@ class User extends \config\DbConn
           $users = $stmt->fetchAll();
           $userInfo = '';
           foreach ($users as $user) {
-               if ($_SESSION['userId'][0] == "U"){
+               if ($_SESSION['userId'][0] == "U") {
                     $userInfo .= '<div class="chat-section__user" id="' . $user['user_id'] . '" data-user-id=' . $user['user_id'] . '>
                                         <img class="chat-section__user-img chat-profile-img" src="../../../public/img/profile1.jpg">
                                         <div class="chat-section__user-content">
                                              <p class="chat-section__username">' . $user['username'] . '</p>
                                              <p class="chat-section__user-msg"></p>
                                         </div>
-                                   </div>';                    
+                                   </div>';
                } else {
-                    if ($user['verification'] == 0){
+                    if ($user['verification'] == 0) {
                          $verificationStatus = "UNVERIFIED";
                     } else {
                          $verificationStatus = "VERIFIED";
                     }
-                    $userInfo .='<div class="user-card">
+                    $userInfo .= '<div class="user-card">
                                    <div class="user-card-content">
                                         <img class="profile-picture" src="../../../public/img/profile.jpg" alt="Profile Image">
                                         <div class="content-details">
                                              <p class="detail-title">User ID:</p>
-                                             <p>'.($user['user_id']).'</p>
+                                             <p>' . ($user['user_id']) . '</p>
                                         </div>
                                         <div class="content-details">
                                              <p class="detail-title">Username: </p>
-                                             <p>'.($user['username']).'</p>
+                                             <p>' . ($user['username']) . '</p>
                                         </div>
                                         <div class="content-details">
                                              <p class="detail-title">Email: </p>
-                                             <p>'.($user['email']).'</p>
+                                             <p>' . ($user['email']) . '</p>
                                         </div>
                                         <div class="content-details">
                                              <p class="detail-title">Verification Status: </p>
-                                             <p>'.$verificationStatus.'</p>
+                                             <p>' . $verificationStatus . '</p>
                                         </div>
                                         <div class="ban-container">
-                                             <button class="ban-button" id="banUser" onclick="confirmDeletion(\''  .($user['user_id']). '\')">Ban</button>
+                                             <button class="ban-button" id="banUser" onclick="confirmDeletion(\''  . ($user['user_id']) . '\')">Ban</button>
                                         </div>
                                    </div>
-                              </div>';                    
+                              </div>';
                }
           }
           return $userInfo;
@@ -369,6 +368,24 @@ class User extends \config\DbConn
                }
           }
           return $userInfo;
+     }
+
+     protected function getUserCount($criteria = null)
+     {
+          if ($criteria && $criteria == 'verified') {
+               $sql = "SELECT count(`user_id`) AS result FROM user
+                         WHERE `user_id` LIKE ? 
+                         AND `verification` = ?;";
+               return $this->executeQuery($sql, ['U%', 1])->fetch()['result'];
+          }
+          $sql = "SELECT count(`user_id`) AS result FROM user 
+                    WHERE `user_id` LIKE ?;";
+          return $this->executeQuery($sql, ['U%'])->fetch()['result'];
+     }
+
+     protected function getVerifiedRatio()
+     {
+          return round(($this->getUserCount('verified') / $this->getUserCount()) * 100) . '%';
      }
 
      /* ######### UPDATE ######### */
@@ -480,13 +497,12 @@ class User extends \config\DbConn
           $sql_delete = "DELETE FROM verification_queue WHERE `user_id` = ?;";
           $this->executeQuery($sql_delete, [$postData['verifId']]);
      }
-          
+
      protected function setUserPoint($value)
      {
           $sql = "UPDATE user SET `point` = ? 
                     WHERE `user_id`= ?";
           $this->executeQuery($sql, [$value, $this->userId]);
- 
      }
 
      /* ######### DELETE ######### */
