@@ -45,15 +45,21 @@ $answer = new \Controller\Answer();
                 <form class="home__filter-form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="GET">
                     <div class="home__filter-content-container">
                         <div class="home__filter-form-wrapper">
+                            <?php
+                            // Default search type.
+                            if (!isset($_GET['search'])) {
+                                $_GET['search'] = 'tag';
+                            }
+                            ?>
                             <div class="home__filter-form-item">
-                                <input type="radio" name="search" id="keyword" value="keyword">
+                                <input type="radio" name="search" id="keyword" value="keyword" <?php echo ($_GET['search'] == 'keyword')  ? 'checked' : ''; ?>>
                                 <label for="keyword">Keywords</label>
                             </div>
                             <div class="home__filter-form-item">
-                                <input type="radio" name="search" id="tag" value="tag" checked>
+                                <input type="radio" name="search" id="tag" value="tag" <?php echo ($_GET['search'] == 'tag')  ? 'checked' : ''; ?>>
                                 <label for="tag">Tags</label>
                             </div>
-                            <input type="text" name="searchTxt" placeholder="e.g. Keywords or Tags">
+                            <input type="text" name="searchTxt" placeholder="e.g. Keywords or Tags" value="<?php echo isset($_GET['searchTxt']) ? $_GET['searchTxt'] : ''; ?>">
                         </div>
                         <div class="home__filter-form-wrapper">
                             <div class="home__filter-form-item">
@@ -66,12 +72,18 @@ $answer = new \Controller\Answer();
                             </div>
                         </div>
                         <div class="home__filter-form-wrapper">
+                            <?php
+                            // Default sort type.
+                            if (!isset($_GET['sort'])) {
+                                $_GET['sort'] = 'latest';
+                            }
+                            ?>
                             <div class="home__filter-form-item">
-                                <input type="radio" name="sort" id="mostUpvote" value="mostUpvote">
+                                <input type="radio" name="sort" id="mostUpvote" value="mostUpvote" <?php echo ($_GET['sort'] == 'mostUpvote')  ? 'checked' : ''; ?>>
                                 <label for="mostUpvote">Most Upvoted</label>
                             </div>
                             <div class="home__filter-form-item">
-                                <input type="radio" name="sort" id="latest" value="latest" checked>
+                                <input type="radio" name="sort" id="latest" value="latest" <?php echo ($_GET['sort'] == 'latest')  ? 'checked' : ''; ?>>
                                 <label for="latest">Latest</label>
                             </div>
                         </div>
@@ -86,7 +98,7 @@ $answer = new \Controller\Answer();
                 <?php
                 // Check for filters URL parameters.
                 $filters = isset($_GET['search']) ? '?search=' . $_GET['search'] : '?';
-                $filters .= isset($_GET['searchTxt']) && $_GET['searchTxt'] != '' ? '&searchTxt=' . $_GET['searchTxt'] : '';
+                $filters .= isset($_GET['searchTxt']) ? '&searchTxt=' . $_GET['searchTxt'] : '';
                 $filters .= isset($_GET['noAns']) ? '&noAns=' . $_GET['noAns'] : '';
                 $filters .= isset($_GET['noAcceptedAns']) ? '&noAcceptedAns=' . $_GET['noAcceptedAns'] : '';
                 $filters .= isset($_GET['sort']) ? '&sort=' . $_GET['sort'] . '&' : '';

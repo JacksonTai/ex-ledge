@@ -37,6 +37,7 @@
 }
 
 .home__header-btn--filter:hover {
+  transition: 0.3s ease-in-out;
   background-color: var(--clr-primary);
   color: #ffffff;
 }
