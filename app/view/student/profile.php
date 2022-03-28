@@ -6,6 +6,8 @@ $path = '../../../';
 
 $user = new Controller\User();
 $questions = new \Controller\Question();
+$answer = new \Controller\Answer();
+$bookmark = new \Controller\Bookmark();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +15,9 @@ $questions = new \Controller\Question();
 <head>
      <?php include '../../config/head.php' ?>
      <title>Profile | Ex-Ledge</title>
-     <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/profile.css">
      <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/question.css">
+     <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/answer.css">
+     <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/profile.css">
 </head>
 
 <body>
@@ -177,12 +180,18 @@ $questions = new \Controller\Question();
                          <?php else : ?>
                               <form class="verify-form" method="POST">
                                    <div class="verify-form__item">
-                                        <label for="fullName">Full Name (as per IC)</label>
+                                        <label for="fullName">
+                                             <i class="fa-solid fa-user-tie"></i>
+                                             Full Name (as per IC)
+                                        </label>
                                         <p class="verify-form__err-msg verify-form__err-msg--full-name invalid-input"></p>
                                         <input class="verify__input" type="text" name="fullName" id="fullName" placeholder="Enter your full name">
                                    </div>
                                    <div class="verify-form__item">
-                                        <label for="nric">NRIC Number (with hypens)</label>
+                                        <label for="nric">
+                                             <i class="fa-solid fa-id-card"></i>
+                                             NRIC Number (with hypens)
+                                        </label>
                                         <p class="verify-form__err-msg verify-form__err-msg--nric invalid-input"></p>
                                         <input class="verify__input" type="text" name="nric" id="nric" placeholder="Enter your NRIC number" maxlength="14">
                                    </div>
@@ -192,11 +201,16 @@ $questions = new \Controller\Question();
                     </div>
                </div>
 
+               <?php
+               // Check if the user is viewing own or other's profile page.
+               isset($_GET['id']) ? $userId = $_GET['id'] : $userId = $_SESSION['userId'];
+               ?>
+
                <!-- Section -->
                <section class="profile-section profile-section--overview profile-section-selected--flex">
                     <div class="profile-section__overview--about dialog">
                          <div class="overview--about__header">
-                              <h2 class="overview--about__title">About</h2>
+                              <h3 class="overview--about__title">About</h3>
                               <?php if (!isset($_GET['id'])) : ?>
                                    <i class="overview--about__edit-btn fa-solid fa-pen-to-square"></i>
                               <?php endif; ?>
@@ -224,24 +238,24 @@ $questions = new \Controller\Question();
                          </div>
                     </div>
                     <div class="profile-section__overview--stats dialog">
-                         <h2 class="overview--stats__title">Stats</h2>
+                         <h3 class="overview--stats__title">Stats</h3>
                          <p class="profile__content">
                               <span class="profile__content-label">Reputation Point: </span>
                               <?php echo htmlspecialchars($userInfo['point']); ?>
                          </p>
                          <p class="profile__content">
                               <span class="profile__content-label">Answer provided: </span>
+                              <?php echo htmlspecialchars($answer->answerCount($userId)); ?>
                          </p>
                          <p class="profile__content">
                               <span class="profile__content-label">Question asked: </span>
-                              <?php echo htmlspecialchars($questions->questionCount($_SESSION['userId'])); ?>
+                              <?php echo htmlspecialchars($questions->questionCount($userId)); ?>
                          </p>
                     </div>
                </section>
 
                <section class="profile-section profile-section--question">
                     <?php
-                    isset($_GET['id']) ? $userId = $_GET['id'] : $userId = $_SESSION['userId'];
                     foreach ($questions->read($userId) as $question) {
                          include '../layout/question.php';
                     }
@@ -249,11 +263,45 @@ $questions = new \Controller\Question();
                </section>
 
                <section class="profile-section profile-section--answer">
-
+                    <?php
+                    foreach ($answer->read($userId) as $userAns) {
+                         include '../../view/layout/answer.php';
+                    }
+                    ?>
                </section>
 
                <section class="profile-section profile-section--bookmark">
+                    <div class="bookmark-action-container dialog">
+                         <div class="bookmark__action bookmark__action--question">
+                              <i class="action--question-icon fa-solid fa-circle-question"></i>
+                              <p>Question</p>
+                         </div>
+                         <div class="bookmark__action bookmark__action--ans">
+                              <i class="action--ans-icon fa-solid fa-pen"></i>
+                              <p>Answer</p>
+                         </div>
+                    </div>
+                    <div class="bookmark-question-container">
+                         <?php
+                         foreach ($bookmark->read($userId) as $userBookmark) {
+                              if ($userBookmark['id'][0] == 'Q') {
+                                   $question = $questions->read($userBookmark['id'])[0];
+                                   include '../../view/layout/question.php';
+                              }
+                         }
+                         ?>
+                    </div>
 
+                    <div class="bookmark-answer-container hide">
+                         <?php
+                         foreach ($bookmark->read($userId) as $userBookmark) {
+                              if ($userBookmark['id'][0] == 'A') {
+                                   $userAns = $answer->read($userBookmark['id']);
+                                   include '../../view/layout/answer.php';
+                              }
+                         }
+                         ?>
+                    </div>
                </section>
           </main>
 
@@ -262,7 +310,7 @@ $questions = new \Controller\Question();
      <?php include '../layout/footer.php'; ?>
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
-     <script src="<?php echo $path; ?>public/js/profile.js"></script>
+     <script src="<?php echo $path; ?>public/js/student/profile.js"></script>
 </body>
 
 </html>

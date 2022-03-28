@@ -12,6 +12,10 @@ if (isset($_SESSION['userId'])) {
     $logoPath = $_SERVER['PHP_SELF'];
 }
 
+if (!empty($_GET)) {
+    $logoPath = $_SERVER['REQUEST_URI'];
+}
+
 // Path for images.
 strpos($url, 'app/view') ? $imgPath = '../../../public/img/icons/' : $imgPath = 'img/icons/';
 ?>
