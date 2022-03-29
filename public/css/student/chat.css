@@ -177,6 +177,11 @@
   color: #acacac;
 }
 
+.outgoing-msg,
+.incoming-msg{
+  word-break: break-all;
+}
+
 /* -- Classes to be added on HTML element through JS -- */
 .hide-chat-element {
   display: none;

@@ -33,68 +33,7 @@ $user = new Controller\User();
                          <h2 class="chat-section__chatting-username"></h2>
                     </div>
                     <div class="chat-section__chat-box">
-                         <!-- <div class="chat-section__chat">
-                              <p class="chat-section__chat-msg outgoing-msg">Hello, this is outgoing message.</p>
-                         </div>
-                         <div class="chat-section__chat">
-                              <img class="chat-setion__user-msg-img chat-profile-img" src="../../../public/img/profile1.jpg">
-                              <p class="chat-section__chat-msg incoming-msg">Hello, this is incoming message.</p>
-                         </div>
-                         <div class="chat-section__chat">
-                              <p class="chat-section__chat-msg outgoing-msg">Hello, this is outgoing message.</p>
-                         </div>
-                         <div class="chat-section__chat">
-                              <p class="chat-section__chat-msg outgoing-msg">Hello, this is outgoing message.</p>
-                         </div>
-                         <div class="chat-section__chat">
-                              <p class="chat-section__chat-msg outgoing-msg">Hello, this is outgoing message.</p>
-                         </div>
-                         <div class="chat-section__chat">
-                              <p class="chat-section__chat-msg outgoing-msg">Hello, this is outgoing message.</p>
-                         </div>
-                         <div class="chat-section__chat">
-                              <img class="chat-setion__user-msg-img chat-profile-img" src="../../../public/img/profile1.jpg">
-                              <p class="chat-section__chat-msg incoming-msg">Hello, this is incoming message.</p>
-                         </div>
-                         <div class="chat-section__chat">
-                              <p class="chat-section__chat-msg outgoing-msg">Hello, this is outgoing message.</p>
-                         </div>
-                         <div class="chat-section__chat">
-                              <img class="chat-setion__user-msg-img chat-profile-img" src="../../../public/img/profile1.jpg">
-                              <p class="chat-section__chat-msg incoming-msg">Hello, this is incoming message.</p>
-                         </div>
-                         <div class="chat-section__chat">
-                              <img class="chat-setion__user-msg-img chat-profile-img" src="../../../public/img/profile1.jpg">
-                              <p class="chat-section__chat-msg incoming-msg">Hello, this is incoming message.</p>
-                         </div>
-                         <div class="chat-section__chat">
-                              <img class="chat-setion__user-msg-img chat-profile-img" src="../../../public/img/profile1.jpg">
-                              <p class="chat-section__chat-msg incoming-msg">Hello, this is incoming message.</p>
-                         </div>
-                         <div class="chat-section__chat">
-                              <p class="chat-section__chat-msg outgoing-msg">Hello, this is outgoing message.</p>
-                         </div>
-                         <div class="chat-section__chat">
-                              <p class="chat-section__chat-msg outgoing-msg">
-                                   Hello, this is outgoing message.
-                                   Hello, this is outgoing message.
-                                   Hello, this is outgoing message.
-                                   Hello, this is outgoing message.
-                                   Hello, this is outgoing message.
-                                   Hello, this is outgoing message.
-                              </p>
-                         </div>
-                         <div class="chat-section__chat">
-                              <img class="chat-setion__user-msg-img chat-profile-img" src="../../../public/img/profile1.jpg">
-                              <p class="chat-section__chat-msg incoming-msg">
-                                   Hello, this is outgoing message.
-                                   Hello, this is outgoing message.
-                                   Hello, this is outgoing message.
-                                   Hello, this is outgoing message.
-                                   Hello, this is outgoing message.
-                                   Hello, this is outgoing message.
-                              </p>
-                         </div> -->
+
                     </div>
                     <form class="chat-section__typing-form" autocomplete="off">
                          <input class="chat-section__typing-box" type="text" name="msgContent" placeholder="Type your message here...">
