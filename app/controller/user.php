@@ -75,6 +75,11 @@ class User extends \Model\User
           return $this->searchUser($searchTerm);
      }
 
+     public function readMessagedUser($receiverId = null)
+     {
+          return $this->getMessagedUser($receiverId);
+     }
+
      public function userCount($criteria = null)
      {
           return $this->getUserCount($criteria);
@@ -137,6 +142,15 @@ if (isset($_POST["limit"], $_POST["start"], $_POST['searchTerm'])) {
 if (isset($_GET['searchTerm'])) {
      $user = new \Controller\User($_SESSION['userId']);
      echo json_encode($user->search($_GET['searchTerm']));
+}
+
+if (isset($_GET['senderId'])) {
+     $user = new \Controller\User($_GET['senderId']);
+     if (isset($_GET['receiverId'])) {
+          echo json_encode($user->readMessagedUser($_GET['receiverId']));
+          exit();
+     }
+     echo json_encode($user->readMessagedUser());
 }
 
 /* ######### UPDATE ######### */

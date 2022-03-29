@@ -1,4 +1,14 @@
-/* -- Helper function -- */
+const url = new URL(window.location);
+const originalUrl = url.href.split("?")[0];
+let userList = document.querySelector(".chat-section__user-list");
+let chattingUsername = document.querySelector(
+  ".chat-section__chatting-username"
+);
+let chatBackBtn = document.querySelector(".chat-section__back-btn");
+let chatArea = document.querySelector(".chat-section__chat-area");
+let chatBox = document.querySelector(".chat-section__chat-box");
+
+/* ==================== Helper function ==================== */
 // Scroll chatbox to the bottom.
 function scrollToBottom() {
   chatBox.scrollTop = chatBox.scrollHeight;
@@ -12,58 +22,81 @@ function showChatArea() {
   chatArea.classList.add("display-chat-element");
 }
 
-// Get and return user data in json format by using user ID.
-async function getUserData(userId) {
+// Get and return data from the given sources.
+async function getData(url) {
   try {
-    const res = await fetch(`../../controller/user.php?userId=${userId}`);
+    let res = await fetch(url);
     return await res.json();
   } catch (e) {
     console.log("Error: ", e);
   }
 }
 
-// Style chat box and user list.
-async function styleChat(user) {
-  for (let user of users) {
-    if (user.classList.contains("user-selected")) {
-      user.classList.remove("user-selected");
-    }
-  }
-  if (!user.classList.contains("user-selected")) {
-    user.classList.add("user-selected");
-  }
+// Comprehensive helper to update page status when user is being clicked.
+async function updateStatus(user) {
+  // Set URL parameter with the value of selected user ID.
+  url.searchParams.set("id", user.dataset.userId);
+  window.history.replaceState({}, "", url);
 
-  let userData = await getUserData(user.dataset.userId);
-  let chattingUsername = document.querySelector(
-    ".chat-section__chatting-username"
+  // Update chatting username in header of chat area.
+  let userData = await getData(
+    `../../controller/user.php?userId=${user.dataset.userId}`
   );
-
   chattingUsername.textContent = "";
   chattingUsername.append(userData.username);
+
+  // Open chat area in small screen size when page URL parameter has user ID.
+  window.innerWidth < 1245 ? showChatArea() : "";
 }
 
-/* -- Responsive handling -- */
-const url = new URL(window.location);
-const originalUrl = url.href.split("?")[0];
-let userList = document.querySelector(".chat-section__user-list");
-let users = document.querySelectorAll(".chat-section__user");
-let chatBackBtn = document.querySelector(".chat-section__back-btn");
-let chatArea = document.querySelector(".chat-section__chat-area");
-let chatBox = document.querySelector(".chat-section__chat-box");
+// Add chatting messages to chat box.
+async function addMsg() {
+  let msgInfos = await getData(
+    `../../controller/message.php?
+    senderId=${sendMsgBtn.dataset.senderId}&
+    receiverId=${url.searchParams.get("id")}`
+  );
+  chatBox.innerHTML = msgInfos;
+}
 
-window.onload = () => {
+// Add previously messaged user.
+async function addPreviousMessagedUser() {
+  let previousMessagedUsers = await getData(
+    `../../controller/user.php?
+    senderId=${sendMsgBtn.dataset.senderId}&
+    receiverId=${url.searchParams.get("id")}`
+  );
+  userContainer.innerHTML = previousMessagedUsers;
+
+  // Add event listener for messaged user in user container.
+  for (let user of userContainer.children) {
+    user.addEventListener("click", () => {
+      updateStatus(user);
+    });
+  }
+}
+
+/* ==================== Responsive handling ==================== */
+window.onload = async function () {
   // Scroll the chatbox to bottom once page is being loaded or reloaded.
   scrollToBottom();
+
+  addPreviousMessagedUser();
 
   if (url.href.includes("id")) {
     // Keep chat area opened in small screen size when page URL parameter has user ID.
     window.innerWidth < 1245 ? showChatArea() : null;
 
+    addMsg();
+
     // Style when page URL parameter has user ID.
-    for (let user of users) {
-      if (user.dataset.userId == url.searchParams.get("id")) {
-        styleChat(user);
-      }
+    let userData = await getData(
+      `../../controller/user.php?userId=${url.searchParams.get("id")}`
+    );
+
+    if (userData) {
+      chattingUsername.textContent = "";
+      chattingUsername.append(userData.username);
     }
   }
 };
@@ -74,7 +107,6 @@ window.onresize = () => {
   }
   if (window.innerWidth < 1245) {
     url.href.includes("id") ? showChatArea() : null;
- 
   }
 };
 
@@ -82,26 +114,42 @@ chatBackBtn.addEventListener("click", () => {
   // Show user list and hide chat area.
   userList.classList.remove("hide-chat-element");
   chatArea.classList.remove("display-chat-element");
+
   if (url.href.includes("id")) {
     // Remove URL parameter and replace it with the page original URL.
     url.searchParams.delete("id");
     window.history.replaceState({}, "", originalUrl);
+
+    chattingUsername.textContent = "";
   }
 });
 
-for (let user of users) {
-  user.addEventListener("click", function () {
-    // Set URL parameter with the value of selected user ID.
-    url.searchParams.set("id", this.dataset.userId);
-    window.history.replaceState({}, "", url);
+/* -- User search bar -- */
+let userSearchBar = document.querySelector(".chat-section__user-search-bar");
+let userContainer = document.querySelector(".chat-section__user-container");
 
-    // Open chat area in small screen size when page URL parameter has user ID.
-    window.innerWidth < 1245 ? showChatArea() : "";
+userSearchBar.addEventListener("input", async function () {
+  if (this.value.trim()) {
+    // Use helper function to get users search result.
+    let searchingUser = await getData(
+      `../../controller/user.php?searchTerm=${this.value.trim()}`
+    );
+    userContainer.innerHTML = searchingUser;
+    for (let user of userContainer.children) {
+      user.addEventListener("click", () => {
+        updateStatus(user);
+        // Clear search bar input once searching user is clicked.
+        addPreviousMessagedUser();
+        userSearchBar.value = "";
+      });
+    }
+  } else {
+    addPreviousMessagedUser();
+  }
+});
 
-    styleChat(this);
-  });
-}
-/* ========================= CODE BELOW THIS LINE IS STILL IN PROGRESS ============================= */
+/* -- Message handling -- */
+let typingForm = document.querySelector(".chat-section__typing-form");
 let typingBox = document.querySelector(".chat-section__typing-box");
 let sendMsgBtn = document.querySelector(".chat-section__send-msg-btn");
 
@@ -112,24 +160,54 @@ typingBox.addEventListener("input", function () {
   }
 });
 
-sendMsgBtn.addEventListener("click", () => {
-  console.log(typingBox.value);
-});
+typingForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-/* -- User search bar -- */
-let userSearchBar = document.querySelector(".chat-section__user-search-bar");
-let userContainer = document.querySelector(".chat-section__user-container");
+  if (typingBox.value.trim()) {
+    let formData = new FormData(this);
+    formData.append("senderId", sendMsgBtn.dataset.senderId);
+    formData.append("receiverId", url.searchParams.get("id"));
 
-userSearchBar.addEventListener("input", async function () {
-  try {
-    const res = await fetch(
-      `../../controller/user.php?searchTerm=${this.value}`
-    );
+    try {
+      await fetch("../../controller/message.php", {
+        method: "POST",
+        body: formData,
+      });
 
-    let userList = await res.text();
-    console.log(userList);
-    // userContainer.append(userList);
-  } catch (e) {
-    console.log("Error: ", e);
+      // Disable send message button when message is being sent.
+      if (sendMsgBtn.classList.contains("chat-typed")) {
+        sendMsgBtn.classList.remove("chat-typed");
+      }
+
+      // Clear typing box when message is being sent.
+      if (typingBox.value) {
+        typingBox.value = "";
+      }
+      addPreviousMessagedUser();
+      scrollToBottom();
+    } catch (e) {
+      console.log("Error: ", e);
+    }
   }
 });
+
+let chatAreaFocus = false;
+chatArea.addEventListener("mouseenter", () => {
+  chatAreaFocus = true;
+});
+chatArea.addEventListener("mouseleave", () => {
+  chatAreaFocus = false;
+});
+
+setInterval(() => {
+  // Constantly updating new messages within specify time interval.
+  addMsg();
+
+  // Stop updating user in user container if the user is searching for other user.
+  if (!userSearchBar.value) {
+    addPreviousMessagedUser();
+  }
+
+  // Stop scrolling to bottom if user's cursor is focusing on the chat area.
+  chatAreaFocus ? null : scrollToBottom();
+}, 700);
