@@ -40,10 +40,19 @@ class User extends \config\DbConn
                $errMsg['nric'] = '* NRIC number is a required field.';
           }
 
-          // Check for duplicate NRIC number.
+          // Check for duplicate NRIC number in verification queue.
           foreach ($this->getVerification() as $verification) {
                if ($postData['nric'] == $verification['nric_no']) {
-                    $errMsg['nric'] = '* This NRIC number has been submitted or taken.';
+                    $errMsg['nric'] = '* This NRIC number has been submitted.';
+               }
+          }
+
+          // Check for existing NRIC number.
+          $sql = "SELECT * FROM user_detail WHERE nric_no IS NOT NULL;";
+          $stmt = $this->executeQuery($sql);
+          foreach ($stmt->fetchAll() as $userDetail) {
+               if ($postData['nric'] == $userDetail['nric_no']) {
+                    $errMsg['nric'] = '* This NRIC number has been taken.';
                }
           }
 
@@ -51,8 +60,7 @@ class User extends \config\DbConn
                return $errMsg;
           }
 
-          $sql = "INSERT INTO verification_queue VALUES (?, ?, ?)";
-
+          $sql = "INSERT INTO verification_queue VALUES (?, ?, ?);";
           $this->executeQuery($sql, [$postData['nric'], $this->userId, preg_replace("!\s+!", " ", $postData['fullName'])]);
      }
 
@@ -61,7 +69,7 @@ class User extends \config\DbConn
      {
           // Query for selecting specific user verification info.
           if ($userId) {
-               $sql = "SELECT * FROM verification_queue WHERE `user_id` = ?";
+               $sql = "SELECT * FROM verification_queue WHERE `user_id` = ?;";
                $stmt = $this->executeQuery($sql, [$userId]);
                return $stmt->fetch();
           }
@@ -71,16 +79,23 @@ class User extends \config\DbConn
           $stmt = $this->executeQuery($sql);
           return $stmt->fetchAll();
      }
- 
+
      protected function loadData($limit, $start, $searchTerm)
      {
           try {
                if ($searchTerm == "") {
-                    $sql = "SELECT * FROM user WHERE `user_id` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
+                    $sql = "SELECT * FROM user 
+                              WHERE `user_id` LIKE ? 
+                              ORDER BY username ASC 
+                              LIMIT $limit OFFSET $start;";
                     $stmt = $this->executeQuery($sql, ['U%']);
                     $userInfos = $stmt->fetchAll();
                } else {
-                    $sql = "SELECT * FROM user WHERE `user_id` LIKE ? AND `username` LIKE ? ORDER BY username ASC LIMIT $limit OFFSET $start ";
+                    $sql = "SELECT * FROM user 
+                              WHERE `user_id` LIKE ? 
+                              AND `username` LIKE ? 
+                              ORDER BY username ASC 
+                              LIMIT $limit OFFSET $start;";
                     $stmt = $this->executeQuery($sql, ['U%', '%' . $searchTerm . '%']);
                     $userInfos = $stmt->fetchAll();
                }
