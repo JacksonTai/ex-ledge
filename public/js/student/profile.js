@@ -463,7 +463,7 @@ function confirmDeletion(qid) {
       banUser(qid);
       Swal.fire("Deleted!", "Question has been deleted.", "success").then(
         () => {
-          window.location = "../../view/student/home.php";
+          window.location = "../../view/student/profile.php";
         }
       );
     }
