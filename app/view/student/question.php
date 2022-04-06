@@ -57,10 +57,6 @@ $user = new \Controller\User();
                          <i class="action--comment-icon fa-solid fa-comment"></i>
                          <p>Comment</p>
                     </div>
-                    <div class="question__action question__action--bookmark" data-bookmark-id="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
-                         <i class="action--bookmark-icon fa-solid fa-bookmark"></i>
-                         <p>Bookmark</p>
-                    </div>
                     <?php if ($_SESSION['userId'] == $questionInfo['user_id']) : ?>
                          <a class="question__action question__action--edit" href="<?php echo htmlspecialchars("editQuestion.php?id=" . $questionInfo['question_id']); ?>">
                               <i class="action--edit-icon fa-solid fa-edit"></i>
@@ -71,6 +67,10 @@ $user = new \Controller\User();
                               <p>Delete</p>
                          </div>
                     <?php endif; ?>
+                    <div class="question__action question__action--bookmark" data-bookmark-id="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
+                         <i class="action--bookmark-icon fa-solid fa-bookmark"></i>
+                         <p>Bookmark</p>
+                    </div>
                     <?php
                     // Check if the user has already answer the question.
                     $isAnswered = false;
