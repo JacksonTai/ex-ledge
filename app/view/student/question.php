@@ -184,6 +184,16 @@ $user = new \Controller\User();
                                    <i class="action--comment-icon fa-solid fa-comment"></i>
                                    <p>Comment</p>
                               </div>
+                              <?php if ($_SESSION['userId'] == $answerInfo['user_id']) : ?>
+                                   <a class="question__action question__action--edit" href="<?php echo htmlspecialchars("editQuestion.php?id=" . $questionInfo['question_id']); ?>">
+                                        <i class="action--edit-icon fa-solid fa-edit"></i>
+                                        <p>Edit</p>
+                                   </a>
+                                   <div class="question__action question__action--delete" onclick="confirmDeletion('<?php echo htmlspecialchars($questionInfo['question_id']); ?>')">
+                                        <i class="action--delete-icon fa-solid fa-trash-can"></i>
+                                        <p>Delete</p>
+                                   </div>
+                              <?php endif; ?>
                               <div class="question__action question__action--bookmark" data-bookmark-id="<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
                                    <i class="action--bookmark-icon fa-solid fa-bookmark"></i>
                                    <p>Bookmark</p>
