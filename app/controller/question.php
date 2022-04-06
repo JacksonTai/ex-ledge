@@ -63,13 +63,9 @@ class Question extends \Model\Question
     }
 }
 
-if (!empty($_POST)) {
-    if (!isset($_POST["limit"], $_POST["start"])) {
-        new \Controller\Question($_POST);
-    }
-} else {
+!empty($_POST) && !isset($_POST["limit"], $_POST["start"]) ?
+    new \Controller\Question($_POST) :
     null;
-}
 
 /* ######### READ ######### */
 if (isset($_POST["limit"], $_POST["start"])) {

@@ -1,4 +1,4 @@
-.ask-question--main {
+.edit-question--main {
   padding: 3rem 5rem 10rem;
 }
 
@@ -8,7 +8,7 @@
 
 /* Phone resolution styles */
 @media (max-width: 510px) {
-  .ask-question--main {
+  .edit-question--main {
     padding: 3rem 2rem 8rem;
   }
 

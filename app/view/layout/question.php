@@ -44,11 +44,19 @@ $timestamp = $questions->get_time($question['time_posted']); ?>
                     <span class="layout__question-posted-time"><?php echo htmlspecialchars($timestamp); ?></span>
                </p>
           </div>
-          <?php if ($_SESSION['userId'][0] == "U") { ?>
-               <div class="layout__question-bookmark" data-bookmark-id="<?php echo htmlspecialchars($question['question_id']); ?>">
-                    <i class="question-bookmark-icon fa-solid fa-bookmark"></i>
-                    <p>Bookmark</p>
-               </div>
-          <?php } ?>
+          <div class="layout__question-action-continer">
+               <?php if ($_SESSION['userId'] == $question['user_id']) : ?>
+                    <a class="layout__question-edit" href="<?php echo htmlspecialchars("editQuestion.php?id=" . $question['question_id']); ?>">
+                         <i class="question-edit-icon fa-solid fa-edit"></i>
+                         <p>Edit</p>
+                    </a>
+               <?php endif; ?>
+               <?php if ($_SESSION['userId'][0] == "U") : ?>
+                    <div class="layout__question-bookmark" data-bookmark-id="<?php echo htmlspecialchars($question['question_id']); ?>">
+                         <i class="question-bookmark-icon fa-solid fa-bookmark"></i>
+                         <p>Bookmark</p>
+                    </div>
+               <?php endif; ?>
+          </div>
      </div>
 </article>
