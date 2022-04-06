@@ -128,6 +128,7 @@
   margin-top: 1rem;
 }
 
+.layout__question-delete,
 .layout__question-edit,
 .layout__question-bookmark {
   display: flex;
@@ -136,6 +137,7 @@
   cursor: pointer;
 }
 
+.layout__question-delete,
 .layout__question-edit {
   margin-right: 1rem;
 }
@@ -145,6 +147,11 @@
   color: var(--clr-primary);
 }
 
+.layout__question-delete:hover {
+  color: var(--clr-delete-red);
+}
+
+.question-delete-icon,
 .question-edit-icon,
 .question-bookmark-icon {
   margin-right: 0.5rem;

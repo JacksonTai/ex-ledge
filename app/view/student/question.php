@@ -63,9 +63,13 @@ $user = new \Controller\User();
                     </div>
                     <?php if ($_SESSION['userId'] == $questionInfo['user_id']) : ?>
                          <a class="question__action question__action--edit" href="<?php echo htmlspecialchars("editQuestion.php?id=" . $questionInfo['question_id']); ?>">
-                              <i class="action--bookmark-icon fa-solid fa-edit"></i>
+                              <i class="action--edit-icon fa-solid fa-edit"></i>
                               <p>Edit</p>
                          </a>
+                         <div class="question__action question__action--delete" onclick="confirmDeletion('<?php echo htmlspecialchars($questionInfo['question_id']); ?>')">
+                              <i class="action--delete-icon fa-solid fa-trash-can"></i>
+                              <p>Delete</p>
+                         </div>
                     <?php endif; ?>
                     <?php
                     // Check if the user has already answer the question.

@@ -50,6 +50,10 @@ $timestamp = $questions->get_time($question['time_posted']); ?>
                          <i class="question-edit-icon fa-solid fa-edit"></i>
                          <p>Edit</p>
                     </a>
+                    <div class="layout__question-delete" onclick="confirmDeletion('<?php echo htmlspecialchars($question['question_id']); ?>')">
+                         <i class="question-delete-icon fa-solid fa-trash-can"></i>
+                         <p>Delete</p>
+                    </div>
                <?php endif; ?>
                <?php if ($_SESSION['userId'][0] == "U") : ?>
                     <div class="layout__question-bookmark" data-bookmark-id="<?php echo htmlspecialchars($question['question_id']); ?>">
