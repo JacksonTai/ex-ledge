@@ -130,4 +130,10 @@ class Answer extends \config\DbConn
                $vote->updatePoint($answerId);
           }
      }
+
+     protected function deleteAnswer($deleteId)
+     {
+          $sql = "DELETE FROM answer WHERE `answer_id` = ?;";
+          $this->executeQuery($sql, [$deleteId]);
+     }
 }

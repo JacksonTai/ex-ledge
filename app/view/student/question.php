@@ -189,7 +189,7 @@ $user = new \Controller\User();
                                         <i class="action--edit-icon fa-solid fa-edit"></i>
                                         <p>Edit</p>
                                    </a>
-                                   <div class="question__action question__action--delete" onclick="confirmDeletion('<?php echo htmlspecialchars($questionInfo['question_id']); ?>')">
+                                   <div class="question__action question__action--delete" onclick="confirmDeletion('<?php echo htmlspecialchars($answerInfo['answer_id']); ?>')">
                                         <i class="action--delete-icon fa-solid fa-trash-can"></i>
                                         <p>Delete</p>
                                    </div>

@@ -459,3 +459,44 @@ window.onload = () => {
   setAnsComment();
   setBestAns();
 };
+
+// Pop Up Display to ask if user wants to delete question, answer or comment.
+function confirmDeletion(id) {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      let deleteUrl = null;
+      if (id[0] == "Q") {
+        deleteUrl = `../../controller/question.php?deleteId=${id}`;
+      }
+      if (id[0] == "A") {
+        deleteUrl = `../../controller/answer.php?deleteId=${id}`;
+      }
+      if (id[0] == "C") {
+        deleteUrl = `../../controller/comment.php?deleteId=${id}`;
+      }
+      deletes(deleteUrl);
+      Swal.fire("Deleted!", "Question has been deleted.", "success").then(
+        () => {
+          window.location = `../../view/student/question.php?id=${url.searchParams.get("id")}`;
+        }
+      );
+    }
+  });
+}
+
+// Execute function
+async function deletes(deleteUrl) {
+  try {
+    await fetch(deleteUrl);
+  } catch (e) {
+    console.log(e);
+  }
+}
