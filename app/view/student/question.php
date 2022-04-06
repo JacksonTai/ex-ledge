@@ -61,6 +61,12 @@ $user = new \Controller\User();
                          <i class="action--bookmark-icon fa-solid fa-bookmark"></i>
                          <p>Bookmark</p>
                     </div>
+                    <?php if ($_SESSION['userId'] == $questionInfo['user_id']) : ?>
+                         <a class="question__action question__action--edit" href="<?php echo htmlspecialchars("editQuestion.php?id=" . $questionInfo['question_id']); ?>">
+                              <i class="action--bookmark-icon fa-solid fa-edit"></i>
+                              <p>Edit</p>
+                         </a>
+                    <?php endif; ?>
                     <?php
                     // Check if the user has already answer the question.
                     $isAnswered = false;
