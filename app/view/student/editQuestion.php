@@ -3,8 +3,6 @@ session_start();
 require '../../helper/redirector.php';
 include '../../helper/autoloader.php';
 $path = '../../../';
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
