@@ -92,6 +92,12 @@ class Answer extends \config\DbConn
           return round(($this->getAnswerCount(1) / $this->getAnswerCount()) * 100) . '%';
      }
 
+     protected function updateAnswer($postData)
+     {
+          $sql = "UPDATE answer SET content = ? WHERE answer_id = ?;";
+          $this->executeQuery($sql, [$postData['content'], $postData['answerId']]);
+     }
+
      protected function updateAnswerStatus($answerId)
      {
           $vote = new \Controller\Vote();
@@ -129,5 +135,11 @@ class Answer extends \config\DbConn
                $this->executeQuery($sql, $answer['status'] ?  [0, 2, $answerId] : [1, 2, $answerId]);
                $vote->updatePoint($answerId);
           }
+     }
+
+     protected function deleteAnswer($deleteId)
+     {
+          $sql = "DELETE FROM answer WHERE `answer_id` = ?;";
+          $this->executeQuery($sql, [$deleteId]);
      }
 }

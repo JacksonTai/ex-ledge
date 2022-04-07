@@ -25,6 +25,16 @@
                <i class="action--comment-icon fa-solid fa-comment"></i>
                <p>Comment</p>
           </a>
+          <?php if ($_SESSION['userId'] == $userAns['user_id']) : ?>
+               <a class="layout-answer__action layout-answer__action--edit" href="<?php echo htmlspecialchars("editAnswer.php?id=" . $userAns['answer_id']); ?>">
+                    <i class="action--edit-icon fa-solid fa-edit"></i>
+                    <p>Edit</p>
+               </a>
+               <div class="layout-answer__action layout-answer__action--delete" onclick="confirmDeletion('<?php echo htmlspecialchars($userAns['question_id']); ?>')">
+                    <i class="action--delete-icon fa-solid fa-trash-can"></i>
+                    <p>Delete</p>
+               </div>
+          <?php endif; ?>
           <div class="layout-answer__action layout-answer__action--bookmark" data-bookmark-id="<?php echo htmlspecialchars($userAns['answer_id']); ?>">
                <i class="action--bookmark-icon fa-solid fa-bookmark"></i>
                <p>Bookmark</p>

@@ -448,8 +448,8 @@ deletAccountbtn.addEventListener("click", async function () {
   }
 });
 
-// Pop Up Display to ask if user wants to delete question.
-function confirmDeletion(qid) {
+// Pop Up Display to ask if user wants to delete question, answer or comment.
+function confirmDeletion(id) {
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -460,20 +460,38 @@ function confirmDeletion(qid) {
     confirmButtonText: "Yes, delete it!",
   }).then((result) => {
     if (result.isConfirmed) {
-      banUser(qid);
-      Swal.fire("Deleted!", "Question has been deleted.", "success").then(
-        () => {
-          window.location = "../../view/student/profile.php";
+      let deleteUrl = null;
+      let item = null;
+      if (id[0] == "Q") {
+        deleteUrl = `../../controller/question.php?deleteId=${id}`;
+        item = "Question";
+      }
+      if (id[0] == "A") {
+        deleteUrl = `../../controller/answer.php?deleteId=${id}`;
+        item = "Answer";
+      }
+      if (id[0] == "C") {
+        deleteUrl = `../../controller/comment.php?deleteId=${id}`;
+        item = "Comment";
+      }
+      deletes(deleteUrl);
+      Swal.fire("Deleted!", `${item} has been deleted.`, "success").then(() => {
+        if (item == "Question") {
+          window.location = "../../view/student/home.php";
+        } else {
+          window.location = `../../view/student/question.php?id=${url.searchParams.get(
+            "id"
+          )}`;
         }
-      );
+      });
     }
   });
 }
 
 // Execute function
-async function banUser(questionId) {
+async function deletes(deleteUrl) {
   try {
-    await fetch(`../../controller/question.php?deleteId=${questionId}`);
+    await fetch(deleteUrl);
   } catch (e) {
     console.log(e);
   }
