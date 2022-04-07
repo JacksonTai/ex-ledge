@@ -6,8 +6,8 @@ if (!empty($_GET) || !empty($_POST)) {
      if (
           isset($_GET['acceptId']) ||
           isset($_GET['status']) ||
-          isset($_GET['questionId']) || 
-          isset($_GET['deleteId']) 
+          isset($_GET['questionId']) ||
+          isset($_GET['deleteId'])
      ) {
           session_start();
           include '../helper/autoloader.php';
@@ -34,6 +34,11 @@ class Answer extends \Model\Answer
      public function accepted()
      {
           return $this->getAcceptedAns();
+     }
+
+     public function update($postData)
+     {
+          $this->updateAnswer($postData);
      }
 
      public function updateStatus($answerId)

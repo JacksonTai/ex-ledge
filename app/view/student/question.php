@@ -35,9 +35,7 @@ $user = new \Controller\User();
                     <img class="question__user-profile-img" src="../../../public/img/profile1.jpg" alt="Profile Image">
                     <div class="question__user-info">
                          <h3><?php echo htmlspecialchars($questionInfo['username']); ?></h3>
-                         <p>
-                              <?php echo htmlspecialchars($question->get_time($questionInfo['time_posted'])); ?>
-                         </p>
+                         <p><?php echo htmlspecialchars($question->get_time($questionInfo['time_posted'])); ?></p>
                     </div>
                </div>
                <p class="question__content">
@@ -97,7 +95,7 @@ $user = new \Controller\User();
 
                <!-- Post answer for question -->
                <?php if ($_SESSION['userId'] != $questionInfo['user_id']) : ?>
-                    <form class="question__post-ans-form" action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="POST">
+                    <form class="question__post-ans-form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . "?id=" . $questionInfo['question_id']) ?>" method="POST">
                          <textarea class="question__post-ans-input" name="ansContent" placeholder="Type here to answer <?php echo htmlspecialchars($questionInfo['username']); ?> ..."></textarea>
                          <input type="hidden" name="userId" value="<?php echo htmlspecialchars($_SESSION['userId']); ?>">
                          <input type="hidden" name="questionId" value="<?php echo htmlspecialchars($questionInfo['question_id']); ?>">
@@ -185,7 +183,7 @@ $user = new \Controller\User();
                                    <p>Comment</p>
                               </div>
                               <?php if ($_SESSION['userId'] == $answerInfo['user_id']) : ?>
-                                   <a class="question__action question__action--edit" href="<?php echo htmlspecialchars("editQuestion.php?id=" . $questionInfo['question_id']); ?>">
+                                   <a class="question__action question__action--edit-ans" href="../student/editAnswer.php?id=<?php echo htmlspecialchars($answerInfo['answer_id']); ?>">
                                         <i class="action--edit-icon fa-solid fa-edit"></i>
                                         <p>Edit</p>
                                    </a>

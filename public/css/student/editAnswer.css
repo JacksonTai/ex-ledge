@@ -1,0 +1,21 @@
+.edit-question__post-ans-input {
+  min-height: 20rem;
+}
+
+.edit-ans__btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.edit-question__back-btn {
+  margin-right: 1rem;
+  padding: 0;
+  background-color: #b3b3b3;
+  color: #ffffff;
+}
+
+.edit-question__back-link {
+  display: block;
+  padding: 0.5em 2em;
+}

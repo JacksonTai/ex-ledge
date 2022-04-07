@@ -92,6 +92,12 @@ class Answer extends \config\DbConn
           return round(($this->getAnswerCount(1) / $this->getAnswerCount()) * 100) . '%';
      }
 
+     protected function updateAnswer($postData)
+     {
+          $sql = "UPDATE answer SET content = ? WHERE answer_id = ?;";
+          $this->executeQuery($sql, [$postData['content'], $postData['answerId']]);
+     }
+
      protected function updateAnswerStatus($answerId)
      {
           $vote = new \Controller\Vote();
