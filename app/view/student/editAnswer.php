@@ -8,7 +8,7 @@ $answer = new \Controller\Answer();
 $ansInfo = isset($_GET['id']) ? $answer->read($_GET['id']) : null;
 if (!empty($_POST)) {
      $answer->update($_POST);
-     header("location:../student/question.php?id=" . $ansInfo[0]['question_id']);
+     header("location:../student/question.php?id=" . $ansInfo[0]['question_id'] . "#" . $ansInfo[0]['answer_id']);
 }
 ?>
 <!DOCTYPE html>
