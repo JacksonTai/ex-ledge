@@ -21,8 +21,11 @@ class Question extends \config\DbConn
 
             if (array_filter($this->errMsg)) {
                 return $this->errMsg;
-            } else {
+            }
+            if ($postData['action'] == 'create') {
                 $this->createQuestion();
+            } else if ($postData['action'] == 'update') {
+                $this->updateQuestion($postData['questionId']);
             }
         }
     }
@@ -30,14 +33,13 @@ class Question extends \config\DbConn
     // Insert input into database
     protected function createQuestion()
     {
-        //session_start();
         $questionId = uniqid('Q');
         $sql = "INSERT INTO question
                 VALUES (?, ?, ?, ?, ?, ?, NOW());";
 
         $this->executeQuery($sql, [
             $questionId,
-            $_SESSION['userId'],
+            $this->postData['userId'],
             $this->postData['title'],
             $this->postData['content'],
             $this->postData['tag'],
@@ -50,12 +52,11 @@ class Question extends \config\DbConn
     {
         foreach ($this->postData as $field => $data) {
             // Check if any input is empty.
-            if (empty(trim($data))) {
+            if (empty(trim($data)) && $field != "questionId") {
                 $this->errMsg[$field] = '* ' . ucfirst($field) . ' is a required field';
             }
         }
     }
-
 
     /* ######### READ ######### */
     protected function getQuestion($criteria, $limit, $start)
@@ -433,6 +434,19 @@ class Question extends \config\DbConn
         } catch (PDOException $e) {
             die('Error: ' . $e->getMessage());
         }
+    }
+
+    /* ######### UPDATE ######### */
+    protected function updateQuestion($questionId)
+    {
+        $sql = "UPDATE question SET title = ?, content = ?, tag = ?
+                    WHERE question_id = ?;";
+        $this->executeQuery($sql, [
+            $this->postData['title'],
+            $this->postData['content'],
+            $this->postData['tag'],
+            $questionId
+        ]);
     }
 
     /* ######### DELETE ######### */

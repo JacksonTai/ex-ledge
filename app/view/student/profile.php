@@ -38,7 +38,7 @@ $bookmark = new \Controller\Bookmark();
                                         <span class="profile__edit-txt">Edit Profile</span>
                                    </button>
                                    <button class="profile__delete-btn">
-                                        <i class="fa-solid fa-trash"></i>
+                                        <i class="fa-solid fa-trash-can"></i>
                                         <span class="profile__delete-txt">Delete Account</span>
                                    </button>
                               </div>
