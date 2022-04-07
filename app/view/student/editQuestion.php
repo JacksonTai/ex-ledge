@@ -3,14 +3,16 @@ session_start();
 require '../../helper/redirector.php';
 include '../../helper/autoloader.php';
 $path = '../../../';
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
      <?php include '../../config/head.php' ?>
-     <title>Ask Question | Ex-Ledge</title>
-     <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/askQuestion.css">
+     <title>Edit Question | Ex-Ledge</title>
+     <link rel="stylesheet" href="<?php echo $path; ?>public/css/student/editQuestion.css">
      <link rel="stylesheet" href="<?php echo $path; ?>public/css/layout/questionForm.css">
 </head>
 
@@ -22,8 +24,8 @@ $path = '../../../';
 
           <?php include '../layout/sideNavbar.php' ?>
 
-          <main class="ask-question--main main-content">
-               <h2 class="ask-question__title main-title">Ask Question</h2>
+          <main class="edit-question--main main-content">
+               <h2 class="edit-question__title main-title">Edit Question</h2>
                <?php include '../layout/questionForm.php' ?>
           </main>
 
@@ -32,8 +34,8 @@ $path = '../../../';
      <?php include '../layout/footer.php'; ?>
 
      <script src="<?php echo $path; ?>public/js/script.js"></script>
-     <script src="<?php echo $path; ?>public/js/student/askQuestion.js"></script>
      <script src="<?php echo $path; ?>public/js/layout/questionForm.js"></script>
+     <script src="<?php echo $path; ?>public/js/student/editQuestion.js"></script>
 </body>
 
 </html>

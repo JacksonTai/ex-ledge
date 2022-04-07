@@ -248,7 +248,7 @@ let commentsContainerAn = document.querySelectorAll(
 let questionCommentForm = document.querySelector(
   `form[data-comment-id=${url.searchParams.get("id")}]`
 );
- 
+
 questionCommentForm.addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -327,23 +327,29 @@ function confirmDeletion(id) {
   }).then((result) => {
     if (result.isConfirmed) {
       let deleteUrl = null;
+      let item = null;
       if (id[0] == "Q") {
         deleteUrl = `../../controller/question.php?deleteId=${id}`;
+        item = "Question";
       }
       if (id[0] == "A") {
         deleteUrl = `../../controller/answer.php?deleteId=${id}`;
+        item = "Answer";
       }
       if (id[0] == "C") {
         deleteUrl = `../../controller/comment.php?deleteId=${id}`;
+        item = "Comment";
       }
       deletes(deleteUrl);
-      Swal.fire("Deleted!", "Question has been deleted.", "success").then(
-        () => {
+      Swal.fire("Deleted!", `${item} has been deleted.`, "success").then(() => {
+        if (item == "Question") {
+          window.location = "../../view/student/home.php";
+        } else {
           window.location = `../../view/student/question.php?id=${url.searchParams.get(
             "id"
           )}`;
         }
-      );
+      });
     }
   });
 }

@@ -3,7 +3,7 @@ function pop_up_success() {
   Swal.fire({
     icon: "success",
     title: "Success",
-    text: "Question Successfully Posted!",
+    text: "Question Successfully Edited!",
     showDenyButton: false,
     showCancelButton: false,
     confirmButtonText: '<p class="alert_text">Continue</p>',

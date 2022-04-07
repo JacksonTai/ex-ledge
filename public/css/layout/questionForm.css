@@ -1,0 +1,73 @@
+.panel {
+  width: 100%;
+}
+
+.input-header {
+  font-weight: bold;
+  font-size: 25px;
+  margin-bottom: 0.5em;
+}
+
+.input-box {
+  width: 100%;
+  padding: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #6f6f6f;
+}
+
+.content {
+  height: 210px;
+}
+
+.btn-container {
+  position: relative;
+  padding: 0 2.5em 2em 2.5em;
+}
+
+.post_question_btn {
+  border-radius: 13px;
+  font-weight: bold;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+/* JS styles for alert box */
+.swal2-styled.swal2-confirm {
+  background-color: #0066ff;
+}
+
+.alert_text {
+  color: white;
+}
+
+.swal2-popup .swal2-styled:focus {
+  box-shadow: none !important;
+}
+
+.swal2-html-container {
+  font-family: "montserrat-medium";
+}
+
+/* Phone resolution styles */
+@media (max-width: 510px) {
+  ::placeholder {
+    font-size: 15px;
+  }
+
+  .tag {
+    margin-bottom: 2em;
+  }
+
+  .input-header {
+    font-size: 20px;
+  }
+
+  .content {
+    height: 240px;
+  }
+
+  .post_question_btn {
+    font-size: 13px;
+  }
+}

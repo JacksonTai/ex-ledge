@@ -39,7 +39,7 @@
 }
 
 .question__action--delete:hover {
- color: var(--clr-delete-red); 
+  color: var(--clr-delete-red);
 }
 
 .question__action--vote {
