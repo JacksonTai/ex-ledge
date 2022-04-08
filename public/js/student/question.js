@@ -320,17 +320,35 @@ for (let answerCommentForm of answerCommentForms) {
   });
 }
 
-function setCommentAction(id) {
-  // console.log(id);
-  // let deleteCommmentBtns = document.querySelectorAll(
-  //   ".question__delete-comment"
-  // );
-  // for (let deleteCommmentBtn of deleteCommmentBtns) {
-  //   deleteCommmentBtn.addEventListener("click", () => {
-  //     console.log(deleteCommmentBtn);
-  //   });
-  // }
-  // console.log(deleteCommmentBtns);
+function toggleEditArea(id) {
+  let editArea = document.querySelector(
+    `.question__comment-edit-area[data-comment-id=${id}]`
+  );
+  let comment = document.querySelector(
+    `.question__comment[data-comment-id=${id}]`
+  );
+  let commentAction = document.querySelector(
+    `.question__comment-action[data-comment-id=${id}]`
+  );
+  comment.classList.toggle("hide");
+  commentAction.classList.toggle("hide");
+  editArea.classList.toggle("show");
+}
+
+async function saveComment(id) {
+  let editBox = document.querySelector(
+    `.question__comment-edit-box[data-comment-id=${id}]`
+  );
+  try {
+    await fetch(
+      `../../controller/comment.php?id=${id}&content=${editBox.value}`
+    );
+    toggleEditArea(id);
+    setQnComment();
+    setAnsComment();
+  } catch (e) {
+    console.log("Error: ", e);
+  }
 }
 
 // Pop Up Display to ask if user wants to delete question, answer or comment.

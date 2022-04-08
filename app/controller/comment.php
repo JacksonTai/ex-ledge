@@ -19,9 +19,9 @@ class Comment extends \Model\Comment
           return $this->readComment($criteria, $userId);
      }
 
-     public function update($content, $commentId)
+     public function update($commentId, $content)
      {
-          $this->updateComment($content, $commentId);
+          $this->updateComment($commentId, $content);
      }
 
      public function delete($commentId)
@@ -35,6 +35,11 @@ class Comment extends \Model\Comment
 if (isset($_GET['replyId'])) {
      $comment = new \Controller\Comment();
      echo json_encode($comment->read($_GET['replyId'], $_GET['userId']));
+}
+
+if (isset($_GET['id'], $_GET['content'])) {
+     $comment = new \Controller\Comment();
+     $comment->update($_GET['id'], $_GET['content']);
 }
 
 if (isset($_GET['deleteId'])) {
