@@ -14,9 +14,19 @@ class Comment extends \Model\Comment
           $postData ? parent::__construct($postData) : '';
      }
 
-     public function read($criteria)
+     public function read($criteria, $userId)
      {
-          return $this->readComment($criteria);
+          return $this->readComment($criteria, $userId);
+     }
+
+     public function update($commentId, $content)
+     {
+          $this->updateComment($commentId, $content);
+     }
+
+     public function delete($commentId)
+     {
+          $this->deleteComment($commentId);
      }
 }
 
@@ -24,5 +34,15 @@ class Comment extends \Model\Comment
 
 if (isset($_GET['replyId'])) {
      $comment = new \Controller\Comment();
-     echo json_encode($comment->read($_GET['replyId']));
+     echo json_encode($comment->read($_GET['replyId'], $_GET['userId']));
+}
+
+if (isset($_GET['id'], $_GET['content'])) {
+     $comment = new \Controller\Comment();
+     $comment->update($_GET['id'], $_GET['content']);
+}
+
+if (isset($_GET['deleteId'])) {
+     $comment = new \Controller\Comment();
+     $comment->delete($_GET['deleteId']);
 }

@@ -210,7 +210,13 @@ function toggleCommentForm(dataset) {
 /* -- Get comment -- */
 async function getComment($replyId) {
   try {
-    let res = await fetch(`../../controller/comment.php?replyId=${$replyId}`);
+    // Get user id.
+    let userIdRes = await fetch("../../helper/session.php");
+    let userId = await userIdRes.json();
+
+    let res = await fetch(
+      `../../controller/comment.php?replyId=${$replyId}&userId=${userId}`
+    );
     return await res.json();
   } catch (e) {
     console.log("Error: ", e);
@@ -312,6 +318,37 @@ for (let answerCommentForm of answerCommentForms) {
 
     toggleCommentForm(this.dataset.commentId);
   });
+}
+
+function toggleEditArea(id) {
+  let editArea = document.querySelector(
+    `.question__comment-edit-area[data-comment-id=${id}]`
+  );
+  let comment = document.querySelector(
+    `.question__comment[data-comment-id=${id}]`
+  );
+  let commentAction = document.querySelector(
+    `.question__comment-action[data-comment-id=${id}]`
+  );
+  comment.classList.toggle("hide");
+  commentAction.classList.toggle("hide");
+  editArea.classList.toggle("show");
+}
+
+async function saveComment(id) {
+  let editBox = document.querySelector(
+    `.question__comment-edit-box[data-comment-id=${id}]`
+  );
+  try {
+    await fetch(
+      `../../controller/comment.php?id=${id}&content=${editBox.value}`
+    );
+    toggleEditArea(id);
+    setQnComment();
+    setAnsComment();
+  } catch (e) {
+    console.log("Error: ", e);
+  }
 }
 
 // Pop Up Display to ask if user wants to delete question, answer or comment.
