@@ -210,7 +210,13 @@ function toggleCommentForm(dataset) {
 /* -- Get comment -- */
 async function getComment($replyId) {
   try {
-    let res = await fetch(`../../controller/comment.php?replyId=${$replyId}`);
+    // Get user id.
+    let userIdRes = await fetch("../../helper/session.php");
+    let userId = await userIdRes.json();
+
+    let res = await fetch(
+      `../../controller/comment.php?replyId=${$replyId}&userId=${userId}`
+    );
     return await res.json();
   } catch (e) {
     console.log("Error: ", e);
@@ -312,6 +318,19 @@ for (let answerCommentForm of answerCommentForms) {
 
     toggleCommentForm(this.dataset.commentId);
   });
+}
+
+function setCommentAction(id) {
+  // console.log(id);
+  // let deleteCommmentBtns = document.querySelectorAll(
+  //   ".question__delete-comment"
+  // );
+  // for (let deleteCommmentBtn of deleteCommmentBtns) {
+  //   deleteCommmentBtn.addEventListener("click", () => {
+  //     console.log(deleteCommmentBtn);
+  //   });
+  // }
+  // console.log(deleteCommmentBtns);
 }
 
 // Pop Up Display to ask if user wants to delete question, answer or comment.

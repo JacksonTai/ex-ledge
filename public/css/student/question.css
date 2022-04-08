@@ -16,6 +16,10 @@
   margin-left: 1em;
 }
 
+.question__user-info--comment {
+  width: 100%;
+}
+
 .question__action-container,
 .question__action {
   display: flex;
@@ -169,6 +173,30 @@
   padding-left: 0.8em;
   padding: 0.5em 0.8em;
   border-left: 1px solid var(--clr-shadow-grey);
+}
+
+.question__comment {
+  min-width: 100%;
+}
+
+.question__comment-action {
+  margin-top: 0.5rem;
+}
+
+.question__edit-comment,
+.question__delete-comment {
+  cursor: pointer;
+}
+
+.question__edit-comment {
+  margin-right: 0.6rem;
+  color: #828282;
+  text-decoration: 1px underline #828282;
+}
+
+.question__delete-comment {
+  color: var(--clr-delete-red);
+  text-decoration: 1px underline var(--clr-delete-red);
 }
 
 /* Classes for JS DOM manipulation */
