@@ -304,7 +304,7 @@ class User extends \config\DbConn
                     }
                     $userInfo .= '<div class="user-card">
                                    <div class="user-card-content">
-                                        <img class="profile-picture" src="../../../public/img/profile.jpg" alt="Profile Image">
+                                        <img class="profile-picture" src="../../../public/img/profile1.jpg" alt="Profile Image">
                                         <div class="content-details">
                                              <p class="detail-title">User ID:</p>
                                              <p>' . ($user['user_id']) . '</p>
